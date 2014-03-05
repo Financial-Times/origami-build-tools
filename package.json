@@ -11,7 +11,7 @@
   "engines": {
     "node": ">= 0.8.0"
   },
-  "devDependencies": {
+  "dependencies": {
     "async": "^0.2.10",
     "colors": "^0.6.2"
   }
