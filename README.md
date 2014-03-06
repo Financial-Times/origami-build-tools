@@ -1,6 +1,6 @@
 # origami-build-tools
 
-Standardised build tools for Origami components.
+Standardised build tools for Origami modules.
 
 ## Installation
 
@@ -35,4 +35,20 @@ This will do the following:
         * Check the SASS outputs no CSS by default
         * Check the SASS outputs some CSS with `$<module-name>-is-silent` set to false
 * __Build JS__:
-    * ___Run Browserify__ on `main.js` (if it exists), with `debowerify` and `brfs` transforms
+    * __Run Browserify__ on `main.js` (if it exists), with `debowerify` and `brfs` transforms
+
+
+## Travis CI build configuration
+
+If your module has no other tests, then your Travis build can configured with just one file:
+
+`.travis.yml`:
+
+    language: node_js
+    node_js:
+      - "0.10"
+    before_install:
+      - npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master
+      - origami-build-tools install
+    script:
+      - origami-build-tools test
