@@ -14,6 +14,9 @@
   "dependencies": {
     "async": "^0.2.10",
     "colors": "^0.6.2",
-    "findit": "^1.1.1"
+    "findit": "^1.1.1",
+    "debowerify": "^0.6.0",
+    "brfs": "^1.0.0",
+    "browserify": "^3.32.0"
   }
 }
