@@ -20,10 +20,15 @@ Install all dependencies:
 
 * __Install the SASS Ruby gem__ (if your module has a `main.scss` in its root)
 * __Install Bower__ globally
-* __Install Grunt CLI__ globally
-* __Install Browserify__ globally
 * __Run npm install__ (if your module has a `package.json` in its root)
 * __Run bower install__ (if your module has a `bower.json` in its root)
+
+### build
+
+* Compile `main.scss` (if it exists and is listed in `bower.json` main)
+* Browserify `main.js` (if it exists and is listed in `bower.json` main)
+ 
+Generated files are placed in a /build folder. These files should not be committed to the module repo.
 
 ### test
 
