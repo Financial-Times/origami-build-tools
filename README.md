@@ -78,6 +78,13 @@ Config file format:
         }
     }
 
+## Watching
+
+Any of the above commands can be run with the switch `--watch` to automatically re-run the command when files change.
+
+Example:
+
+    origami-build-tools demo /demos/src/config.json --local --watch
 
 ## Travis CI build configuration
 

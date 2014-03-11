@@ -20,6 +20,7 @@
     "browserify": "^3.32.0",
     "minimist": "0.0.8",
     "node.extend": "^1.0.9",
-    "mustache": "^0.8.1"
+    "mustache": "^0.8.1",
+    "gaze": "^0.5.1"
   }
 }
