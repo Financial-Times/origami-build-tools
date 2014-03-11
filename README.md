@@ -34,7 +34,7 @@ Generated files are placed in a /build folder. These files should not be committ
 
 Runs `build`, and then also runs basic standard tests on the module:
 
-* __SASS__ If your SASS contains a `$&lt;module-name&gt;-is-silent` variable, then also:
+* __SASS__ If your SASS contains a `$<module-name>-is-silent` variable, then also:
     * Check the SASS outputs no CSS by default
     * Check the SASS outputs some CSS with `$<module-name>-is-silent` set to false
 
@@ -76,7 +76,7 @@ Config file format:
 
 ## Watching
 
-Any of the above commands can be run with the switch `--watch` to automatically re-run the command when files change.
+The commands `build`, `test` and `demo` can be run with the switch `--watch` to automatically re-run when files change.
 
 Example:
 
