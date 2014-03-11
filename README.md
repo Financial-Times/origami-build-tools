@@ -21,7 +21,7 @@ Install all dependencies:
 * __Install the SASS Ruby gem__ (if your module has a `main.scss` in its root)
 * __Install Bower__ globally
 * __Run npm install__ (if your module has a `package.json` in its root)
-* __Run bower install__ (if your module has a `bower.json` in its root)
+* __Run bower install__
 
 ### build
 
@@ -32,15 +32,11 @@ Generated files are placed in a /build folder. These files should not be committ
 
 ### test
 
-Run basic standard tests on the module:
+Runs `build`, and then also runs basic standard tests on the module:
 
-* __SASS compilation__:
-    * Basic compile of `main.scss` (if it exists)
-    * If your SASS contains a `$<module-name>-is-silent` variable, then also:
-        * Check the SASS outputs no CSS by default
-        * Check the SASS outputs some CSS with `$<module-name>-is-silent` set to false
-* __Build JS__:
-    * __Run Browserify__ on `main.js` (if it exists), with `debowerify` and `brfs` transforms
+* __SASS__ If your SASS contains a `$&lt;module-name&gt;-is-silent` variable, then also:
+    * Check the SASS outputs no CSS by default
+    * Check the SASS outputs some CSS with `$<module-name>-is-silent` set to false
 
 ### demo
 
