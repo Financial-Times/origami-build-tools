@@ -21,6 +21,7 @@
     "minimist": "0.0.8",
     "node.extend": "^1.0.9",
     "mustache": "^0.8.1",
-    "gaze": "^0.5.1"
+    "gaze": "^0.5.1",
+    "moment": "^2.5.1"
   }
 }
