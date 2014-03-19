@@ -21,7 +21,7 @@ Install all dependencies:
 * __Install the SASS Ruby gem__ (if your module has a `main.scss` in its root)
 * __Install Bower__ globally
 * __Run npm install__ (if your module has a `package.json` in its root)
-* __Run bower install__
+* __Run bower install__ (using both the Origami Registry and the default Bower registry to resolve dependencies)
 
 ### build
 
@@ -73,6 +73,8 @@ Config file format:
             }
         }
     }
+
+The `demos` property of your `origami.json` file will be updated - either to list the demo files that have been created (if built for the buildservice), or emptied (if built for local).
 
 ## Watching
 
