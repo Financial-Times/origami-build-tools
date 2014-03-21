@@ -55,12 +55,28 @@ Example:
 
     origami-build-tool demo demos/config.json --local
 
-Config file format:
+#### Demo config file
+
+The demo config file tells origami-build-tools what demo files to build. It has two main properties:
+
+* `options`: configuration to apply to all demos (unless overridden for a specific demo)
+* `demos`: list of demos to build, keyed by the output HTML file name
+
+Options, and individual demos, can have the following properties:
+
+* `template`: The mustache template to render.
+* `sass`: The SASS file to compile.
+* `js`: The JS file to build with Browserify.
+* `data`: Data to pass to the mustache template.
+* `bodyClasses`: String. CSS classes to set on the body.
+
+Example:
 
     {
         "options": {
             "sass": "demos/src/demo.scss",
-            "data": "demos/src/data.json"
+            "data": "demos/src/data.json",
+            "bodyClasses": "o-hoverable-on"
         },
         "demos": {
             "demo1": {
