@@ -4,6 +4,11 @@ Standardised build tools for Origami modules.
 
 ## Installation
 
+You should already have the following installed:
+
+* Node JS (with NPM)
+* Ruby
+
     npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master
 
 ## Usage
