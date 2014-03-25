@@ -9,7 +9,8 @@ You should already have the following installed:
 * Node JS (with NPM)
 * Ruby
 
-    npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master
+
+`npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master`
 
 ## Usage
 
@@ -23,8 +24,8 @@ Where `<command>` is one of:
 
 Install all dependencies:
 
-* __Install the SASS Ruby gem__ (if your module has a `main.scss` in its root)
-* __Install Bower__ globally
+* __Install the SASS Ruby gem__ (if your module has a `main.scss` in its root, and the gem is not already installed)
+* __Install Bower__ globally (if it's not already installed)
 * __Run npm install__ (if your module has a `package.json` in its root)
 * __Run bower install__ (using both the Origami Registry and the default Bower registry to resolve dependencies)
 
@@ -96,6 +97,8 @@ Example:
     }
 
 The `demos` property of your `origami.json` file will be updated - either to list the demo files that have been created (if built for the buildservice), or emptied (if built for local).
+
+Demo CSS and JS will be built with sourcemaps.
 
 ## Watching
 
