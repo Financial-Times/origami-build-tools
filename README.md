@@ -48,18 +48,24 @@ Runs `build`, and then also runs basic standard tests on the module:
 
 Parameters:
 
-* `<config file>`: The path to the demo config file.
+* `<config file>`: The path to the demo config file. Default: `demos/src/config.json`
 
 Switches:
 
 * `--local` asset paths will be for the local filesystem
-* `--buildservice` assets paths will be for the Origami build service
+* `--buildservice` (default) assets paths will be for the Origami build service
 
 Build static demo pages from demo source files, according to a spec in a config JSON file.
 
-Example:
+#### Examples
 
-    origami-build-tool demo demos/config.json --local
+Building demos for buildservice, using default config file location:
+
+    origami-build-tool demo
+
+Building demos for local development, using custom config file location:
+
+    origami-build-tool demo demos/demo-config.json --local
 
 #### Demo config file
 
