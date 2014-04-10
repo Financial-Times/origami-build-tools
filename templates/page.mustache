@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<!--[if IE 7]>         <html class="no-js o-useragent-ie7{{oHoverClass}}"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js o-useragent-ie8{{oHoverClass}}"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js{{oHoverClass}}"> <!--<![endif]-->
+<!--[if IE 7]>         <html class="no-js o-useragent-ie7 o-hoverable-on"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js o-useragent-ie8 o-hoverable-on"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js o-hoverable-on"> <!--<![endif]-->
 <head>
     <meta charset="utf-8" />
     <title>{{oDemoTitle}}</title>
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    <style>
-    body {
-        margin: 0;
-    }
-    </style>
+    <style>body { margin: 0; }.demo-js .o--if-nojs { display: none; }</style>
     {{{oDemoStyle}}}
 </head>
 <body class="{{oDemoBodyClasses}}">
+    <script>(function(d) {var b = d.getElementsByTagName('body')[0];b.className = b.className + ' demo-js';})(document);</script>
     {{{oDemoMessage}}}
     {{{oDemoTpl}}}
     {{{oDemoScript}}}
