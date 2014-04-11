@@ -84,23 +84,25 @@ Options, and individual demos, can have the following properties:
 
 Example:
 
-    {
-        "options": {
-            "sass": "demos/src/demo.scss",
-            "data": "demos/src/data.json",
-            "bodyClasses": "o-hoverable-on"
+```json
+{
+    "options": {
+        "sass": "demos/src/demo.scss",
+        "data": "demos/src/data.json",
+        "bodyClasses": "o-hoverable-on"
+    },
+    "demos": {
+        "demo1": {
+            "template": "demos/src/demo1.mustache",
+            "js": "demos/src/demo1.js"
         },
-        "demos": {
-            "demo1": {
-                "template": "demos/src/demo1.mustache",
-                "js": "demos/src/demo1.js"
-            },
-            "demo2": {
-                "template": "demos/src/demo2.mustache",
-                "js": "demos/src/demo2.js"
-            }
+        "demo2": {
+            "template": "demos/src/demo2.mustache",
+            "js": "demos/src/demo2.js"
         }
     }
+}
+```
 
 The `demos` property of your `origami.json` file will be updated - either to list the demo files that have been created (if built for the buildservice), or emptied (if built for local).
 
@@ -120,11 +122,13 @@ If your module has no other tests, then your Travis build can configured with ju
 
 `.travis.yml`:
 
-    language: node_js
-    node_js:
-      - "0.10"
-    before_install:
-      - npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master
-      - origami-build-tools install
-    script:
-      - origami-build-tools test
+```yaml
+language: node_js
+node_js:
+  - "0.10"
+before_install:
+  - npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master
+  - origami-build-tools install
+script:
+  - origami-build-tools test
+```
