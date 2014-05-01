@@ -4,7 +4,13 @@ Standardised build tools for Origami modules.
 
 ## Installation
 
-    npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master
+You should already have the following installed:
+
+* Node JS (with NPM)
+* Ruby
+
+
+`npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master`
 
 ## Usage
 
@@ -18,10 +24,10 @@ Where `<command>` is one of:
 
 Install all dependencies:
 
-* __Install the SASS Ruby gem__ (if your module has a `main.scss` in its root)
-* __Install Bower__ globally
+* __Install the SASS Ruby gem__ (if your module has a `main.scss` in its root, and the gem is not already installed)
+* __Install Bower__ globally (if it's not already installed)
 * __Run npm install__ (if your module has a `package.json` in its root)
-* __Run bower install__
+* __Run bower install__ (using both the Origami Registry and the default Bower registry to resolve dependencies)
 
 ### build
 
@@ -42,37 +48,65 @@ Runs `build`, and then also runs basic standard tests on the module:
 
 Parameters:
 
-* `<config file>`: The path to the demo config file.
+* `<config file>`: The path to the demo config file. Default: `demos/src/config.json`
 
 Switches:
 
 * `--local` asset paths will be for the local filesystem
-* `--buildservice` assets paths will be for the Origami build service
+* `--buildservice` (default) assets paths will be for the Origami build service
 
 Build static demo pages from demo source files, according to a spec in a config JSON file.
 
+#### Examples
+
+Building demos for buildservice, using default config file location:
+
+    origami-build-tool demo
+
+Building demos for local development, using custom config file location:
+
+    origami-build-tool demo demos/demo-config.json --local
+
+#### Demo config file
+
+The demo config file tells origami-build-tools what demo files to build. It has two main properties:
+
+* `options`: configuration to apply to all demos (unless overridden for a specific demo)
+* `demos`: list of demos to build, keyed by the output HTML file name
+
+Options, and individual demos, can have the following properties:
+
+* `template`: The mustache template to render.
+* `sass`: The SASS file to compile.
+* `js`: The JS file to build with Browserify.
+* `data`: Data to pass to the mustache template.
+* `bodyClasses`: String. CSS classes to set on the body.
+
 Example:
 
-    origami-build-tool demo demos/config.json --local
-
-Config file format:
-
-    {
-        "options": {
-            "sass": "demos/src/demo.scss",
-            "data": "demos/src/data.json"
+```json
+{
+    "options": {
+        "sass": "demos/src/demo.scss",
+        "data": "demos/src/data.json",
+        "bodyClasses": "o-hoverable-on"
+    },
+    "demos": {
+        "demo1": {
+            "template": "demos/src/demo1.mustache",
+            "js": "demos/src/demo1.js"
         },
-        "demos": {
-            "demo1": {
-                "template": "demos/src/demo1.mustache",
-                "js": "demos/src/demo1.js"
-            },
-            "demo2": {
-                "template": "demos/src/demo2.mustache",
-                "js": "demos/src/demo2.js"
-            }
+        "demo2": {
+            "template": "demos/src/demo2.mustache",
+            "js": "demos/src/demo2.js"
         }
     }
+}
+```
+
+The `demos` property of your `origami.json` file will be updated - either to list the demo files that have been created (if built for the buildservice), or emptied (if built for local).
+
+Demo CSS and JS will be built with sourcemaps.
 
 ## Watching
 
@@ -88,11 +122,13 @@ If your module has no other tests, then your Travis build can configured with ju
 
 `.travis.yml`:
 
-    language: node_js
-    node_js:
-      - "0.10"
-    before_install:
-      - npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master
-      - origami-build-tools install
-    script:
-      - origami-build-tools test
+```yaml
+language: node_js
+node_js:
+  - "0.10"
+before_install:
+  - npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master
+  - origami-build-tools install
+script:
+  - origami-build-tools test
+```
