@@ -22,7 +22,7 @@
     "mustache": "^0.8.1",
     "gaze": "^0.5.1",
     "moment": "^2.5.1",
-    "textrequireify": "git+http://git.svc.ft.com:8080/scm/ot/textrequireify.git"
+    "textrequireify": "git+http://git.svc.ft.com:8080/scm/ot/textrequireify.git",
     "json-file-plus": "^0.2.3",
     "semver": "^2.2.1",
     "which": "^1.0.5"
