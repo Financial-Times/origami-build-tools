@@ -16,12 +16,12 @@
     "colors": "^0.6.2",
     "findit": "^1.1.1",
     "debowerify": "^0.6.0",
-    "brfs": "^1.0.0",
-    "browserify": "^3.32.0",
+    "browserify": "~3.44.2",
     "minimist": "0.0.8",
     "node.extend": "^1.0.9",
     "mustache": "^0.8.1",
     "gaze": "^0.5.1",
-    "moment": "^2.5.1"
+    "moment": "^2.5.1",
+    "textrequireify": "git+http://git.svc.ft.com:8080/scm/ot/textrequireify.git"
   }
 }
