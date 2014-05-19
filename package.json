@@ -15,7 +15,7 @@
     "async": "^0.2.10",
     "colors": "^0.6.2",
     "findit": "^1.1.1",
-    "debowerify": "^0.6.0",
+    "debowerify": "^0.7.0",
     "browserify": "~3.44.2",
     "minimist": "0.0.8",
     "node.extend": "^1.0.9",
