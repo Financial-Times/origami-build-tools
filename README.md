@@ -54,12 +54,13 @@ Switches:
 
 * `--local` asset paths will be for the local filesystem
 * `--buildservice` (default) assets paths will be for the Origami build service
+* `--updateorigami` The `demos` property of your `origami.json` file will be updated - to list the demo files that have been created.
 
 Build static demo pages from demo source files, according to a spec in a config JSON file.
 
 #### Examples
 
-Building demos for buildservice, using default config file location:
+Building demos for build service, using default config file location:
 
     origami-build-tool demo
 
@@ -69,7 +70,7 @@ Building demos for local development, using custom config file location:
 
 #### Demo config file
 
-The demo config file tells origami-build-tools what demo files to build. It has two main properties:
+The demo config file tells __origami-build-tools__ what demo files to build. It has two main properties:
 
 * `options`: configuration to apply to all demos (unless overridden for a specific demo)
 * `demos`: list of demos to build, keyed by the output HTML file name
@@ -81,6 +82,8 @@ Options, and individual demos, can have the following properties:
 * `js`: The JS file to build with Browserify.
 * `data`: Data to pass to the mustache template.
 * `bodyClasses`: String. CSS classes to set on the body.
+* `expanded`: (default: `true`) Whether the demo should be shown in expanded form in the [Registry](registry.origami.ft.com).
+* `description`: Optional explanation of the purpose of the demo.
 
 Example:
 
@@ -91,20 +94,22 @@ Example:
         "data": "demos/src/data.json",
         "bodyClasses": "o-hoverable-on"
     },
-    "demos": {
-        "demo1": {
+    "demos": [
+        {
+            "name": "demo1",
             "template": "demos/src/demo1.mustache",
             "js": "demos/src/demo1.js"
         },
-        "demo2": {
+        {
+            "name": "demo2",
             "template": "demos/src/demo2.mustache",
-            "js": "demos/src/demo2.js"
+            "js": "demos/src/demo2.js",
+            "expanded": false,
+            "description": "Demo of obscure but realistic scenario."
         }
-    }
+    ]
 }
 ```
-
-The `demos` property of your `origami.json` file will be updated - either to list the demo files that have been created (if built for the buildservice), or emptied (if built for local).
 
 Demo CSS and JS will be built with sourcemaps.
 
