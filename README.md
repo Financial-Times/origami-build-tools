@@ -54,12 +54,13 @@ Switches:
 
 * `--local` asset paths will be for the local filesystem
 * `--buildservice` (default) assets paths will be for the Origami build service
+* `--updateorigami` The `demos` property of your `origami.json` file will be updated - to list the demo files that have been created.
 
 Build static demo pages from demo source files, according to a spec in a config JSON file.
 
 #### Examples
 
-Building demos for buildservice, using default config file location:
+Building demos for build service, using default config file location:
 
     origami-build-tool demo
 
@@ -69,7 +70,7 @@ Building demos for local development, using custom config file location:
 
 #### Demo config file
 
-The demo config file tells origami-build-tools what demo files to build. It has two main properties:
+The demo config file tells __origami-build-tools__ what demo files to build. It has two main properties:
 
 * `options`: configuration to apply to all demos (unless overridden for a specific demo)
 * `demos`: list of demos to build, keyed by the output HTML file name
@@ -103,8 +104,6 @@ Example:
     }
 }
 ```
-
-The `demos` property of your `origami.json` file will be updated - either to list the demo files that have been created (if built for the buildservice), or emptied (if built for local).
 
 Demo CSS and JS will be built with sourcemaps.
 
