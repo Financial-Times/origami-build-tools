@@ -82,6 +82,8 @@ Options, and individual demos, can have the following properties:
 * `js`: The JS file to build with Browserify.
 * `data`: Data to pass to the mustache template.
 * `bodyClasses`: String. CSS classes to set on the body.
+* `expanded`: (default: `true`) Whether the demo should be shown in expanded form in the [Registry](registry.origami.ft.com).
+* `description`: Optional explanation of the purpose of the demo.
 
 Example:
 
@@ -92,16 +94,20 @@ Example:
         "data": "demos/src/data.json",
         "bodyClasses": "o-hoverable-on"
     },
-    "demos": {
-        "demo1": {
+    "demos": [
+        {
+            "name": "demo1",
             "template": "demos/src/demo1.mustache",
             "js": "demos/src/demo1.js"
         },
-        "demo2": {
+        {
+            "name": "demo2",
             "template": "demos/src/demo2.mustache",
-            "js": "demos/src/demo2.js"
+            "js": "demos/src/demo2.js",
+            "expanded": false,
+            "description": "Demo of obscure but realistic scenario."
         }
-    }
+    ]
 }
 ```
 
