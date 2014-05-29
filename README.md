@@ -52,11 +52,14 @@ Parameters:
 
 Switches:
 
-* `--local` asset paths will be for the local filesystem
-* `--buildservice` (default) assets paths will be for the Origami build service
+* `--local` Build local HTML, CSS and JS files, in addition to demo HTML for the build service.
 * `--updateorigami` The `demos` property of your `origami.json` file will be updated - to list the demo files that have been created.
 
 Build static demo pages from demo source files, according to a spec in a config JSON file.
+
+Build service demos consist of only HTML, with build service URLs for static resources.
+
+Local demos consist of HTML, CSS and JS (if SASS & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
 
 #### Examples
 
