@@ -28,7 +28,7 @@ Install all dependencies:
 * __Install Bower__ globally (if it's not already installed)
 * __Run npm install__ (if your module has a `package.json` in its root)
 * __Run bower install__ (using both the Origami Registry and the default Bower registry to resolve dependencies)
-* __Install linting tools__ if `jshint` or `scss-lint` are not installed, this will install the minimum versions)
+* __Install linting tools__ if `jshint` or `scss-lint` are not installed, this will install the minimum required versions)
 
 ### build
 
