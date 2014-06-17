@@ -49,8 +49,9 @@ Runs `build`, and then also runs basic standard tests on the module:
 
 Runs linting tools based on the minimum requirements set out in the Origami
 standard.  If your module has a `main.js` file, `jshint` will be run. If you have a
-`main.scss` file `scss-lint`.  `verify` is watchable with the `--watch`
-command line flag.
+`main.scss` file, `scss-lint` will be run.
+
+`verify` is watchable with the `--watch` command line flag.
 
 ### demo
 
