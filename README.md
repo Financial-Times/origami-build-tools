@@ -28,12 +28,13 @@ Install all dependencies:
 * __Install Bower__ globally (if it's not already installed)
 * __Run npm install__ (if your module has a `package.json` in its root)
 * __Run bower install__ (using both the Origami Registry and the default Bower registry to resolve dependencies)
+* __Install linting tools__ if `jshint` or `scss-lint` are not installed, this will install the minimum required versions)
 
 ### build
 
 * Compile `main.scss` (if it exists and is listed in `bower.json` main)
 * Browserify `main.js` (if it exists and is listed in `bower.json` main)
- 
+
 Generated files are placed in a /build folder. These files should not be committed to the module repo.
 
 ### test
@@ -43,6 +44,14 @@ Runs `build`, and then also runs basic standard tests on the module:
 * __SASS__ If your SASS contains a `$<module-name>-is-silent` variable, then also:
     * Check the SASS outputs no CSS by default
     * Check the SASS outputs some CSS with `$<module-name>-is-silent` set to false
+
+### verify
+
+Runs linting tools based on the minimum requirements set out in the Origami
+standard.  If your module has a `main.js` file, `jshint` will be run. If you have a
+`main.scss` file, `scss-lint` will be run.
+
+`verify` is watchable with the `--watch` command line flag.
 
 ### demo
 
@@ -118,7 +127,7 @@ Demo CSS and JS will be built with sourcemaps.
 
 ## Watching
 
-The commands `build`, `test` and `demo` can be run with the switch `--watch` to automatically re-run when files change.
+The commands `build`, `test`, `verify` and `demo` can be run with the switch `--watch` to automatically re-run when files change.
 
 Example:
 
