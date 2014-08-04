@@ -13,17 +13,17 @@
   },
   "dependencies": {
     "async": "^0.2.10",
-    "colors": "^0.6.2",
-    "findit": "^1.1.1",
-    "debowerify": "^0.7.0",
     "browserify": "~3.44.2",
-    "minimist": "0.0.8",
-    "node.extend": "^1.0.9",
-    "mustache": "^0.8.1",
+    "colors": "^0.6.2",
+    "debowerify": "^0.7.0",
+    "findit": "^1.1.1",
     "gaze": "^0.5.1",
+    "minimist": "0.0.8",
     "moment": "^2.5.1",
-    "textrequireify": "^1.0.0",
+    "mustache": "^0.8.1",
+    "node.extend": "^1.0.9",
     "semver": "^2.2.1",
+    "textrequireify": "^1.0.0",
     "which": "^1.0.5"
   }
 }
