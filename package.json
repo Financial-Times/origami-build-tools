@@ -19,6 +19,7 @@
     "debowerify": "^0.7.0",
     "findit": "^1.1.1",
     "gaze": "^0.5.1",
+    "http-server": "^0.6.1",
     "minimist": "0.0.8",
     "moment": "^2.5.1",
     "mustache": "^0.8.1",
