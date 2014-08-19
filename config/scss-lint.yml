@@ -27,6 +27,10 @@ linters:
   DeclarationOrder:
     enabled: true
 
+  # Disallow use of the same property more than once in the same ruleset
+  DuplicateProperty:
+    enabled: true
+
   # Require a newline at the end of the file
   FinalNewline:
     enabled: true
@@ -108,11 +112,6 @@ linters:
 
 
   # DISABLED
-
-  # Disallow use of the same property more than once in the same ruleset
-  # (AB: Often needed for fallbacks where one value is legacy, and another is modern, eg rgba backgrounds)
-  DuplicateProperty:
-    enabled: true
 
   # Use single quotes, not double quotes
   # (AB: This really doesn't matter IMHO)
