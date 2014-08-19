@@ -10,10 +10,6 @@ linters:
   CapitalizationInSelector:
     enabled: true
 
-  # "#0f0" not "green"
-  ColorKeyword:
-    enabled: true
-
   # // not /**/
   # (differs from Guardian)
   Comment:
@@ -112,6 +108,11 @@ linters:
 
 
   # DISABLED
+
+  # "#0f0" not "green"
+  # (AB: Causes problems with o-colors < 3, because o-colors uses color names that are also valid CSS color strings)
+  ColorKeyword:
+    enabled: false
 
   # Use single quotes, not double quotes
   # (AB: This really doesn't matter IMHO)
