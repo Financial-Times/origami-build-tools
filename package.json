@@ -25,6 +25,7 @@
     "mustache": "^0.8.1",
     "node.extend": "^1.0.9",
     "npmconf": "^1.1.5",
+    "portfinder": "0.2.x",
     "semver": "^2.2.1",
     "textrequireify": "^1.0.0",
     "which": "^1.0.5"
