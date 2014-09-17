@@ -8,5 +8,6 @@ gulp.src('lol.js')
 
 gulp.task('customTask', function() {
 	console.log('???');
-	customTasks(gulp);
+	console.log(customTasks);
+	customTasks.task1();
 });
