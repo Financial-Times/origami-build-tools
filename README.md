@@ -50,7 +50,10 @@ If your SASS contains a `$<module-name>-is-silent` variable, then runs:
 
 Runs:
 
-* __scssLint(gulp, config)__
+* __scssLint(gulp, config)__ Config accepts:
+    - sass: `String` Path to your main sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
+* __jsHint(gulp, config)__ Config accepts:
+    - js: `String` Path to your main javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
 
 ### demo
 
