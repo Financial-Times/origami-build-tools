@@ -13,9 +13,11 @@ You should already have the following installed:
 
 ## Tasks
 
-All the different tasks are built using gulp, and almost all of them return a stream. They are structured in 5 higher level tasks, and each one has one or more subtasks. 
+All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them return a stream. They are structured in 5 higher level tasks, and each one has one or more subtasks. 
 
 ### install
+
+Installs all the tools and dependencies required for the Origami build process to build your components.
 
 Runs:
 
@@ -28,25 +30,29 @@ Runs:
 
 ### build
 
+Builds CSS and JavaScript bundles from their respective main acting files and saves the built output into your working tree.
+
 Runs:
 
 * __js(gulp, config)__ Config accepts:
     - js: `String` Path to your main javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
-    - buildJs: `String` Name of the built javascript bundle. (Default: './main.js')
+    - buildJs: `String` Name of the built javascript bundle. (Default: 'main.js')
     - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
 * __sass(gulp, config)__ Config accepts:
     - sass: `String` Path to your main sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
-    - buildCss: `String` Name of the built CSS bundle. (Default: './main.css')
+    - buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
     - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
 
 ### test
 
-If your SASS contains a `$<module-name>-is-silent` variable, then runs:
+Tests [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).  If your SASS contains a `$<module-name>-is-silent` variable, then runs:
 
 * __silentCompilation(gulp)__ Check the SASS outputs no CSS by default
 * __silentCompilation(gulp)__ Check the SASS outputs some CSS with `$<module-name>-is-silent` set to false
 
 ### verify
+
+Lints JavaScript and SCSS against Origami coding standards (see standards for [SCSS](http://origami.ft.com/docs/syntax/scss/#syntax-convention-rules) and [JavaScript](http://origami.ft.com/docs/syntax/js/#syntax-convention-rules)).
 
 Runs:
 
@@ -57,6 +63,8 @@ Runs:
 
 ### demo
 
+Builds component demos into the `demo` directory from a demo config file.
+
 Config:
 
 * local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Also runs a local server to help you test your demos.
@@ -66,13 +74,15 @@ Runs:
 
 * __runServer(gulp)__ Starts a local server
 
-Build service demos consist of only HTML, with build service URLs for static resources.
+AB: Surely it also runs build?
+
+Build service demos consist of only HTML, with build service URLs for static resources, and are created in `demos/`
 
 Local demos consist of HTML, CSS and JS (if SASS & JS exists), and are created in `demos/local/`. A CSS sourcemap is also generated. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
 
 ## gulpfile usage
 
-To run these tasks in your `gulpfile.js`, you only need to require `origami-build-tools` and run the task or subtask you need passing gulp and an optional config object.
+Use the build tools in your own Gulp file to incorporate the Origami build process into a *product* (don't use this method if you are building an Origami component).  To run these tasks in your `gulpfile.js`, you only need to require `origami-build-tools` and run the task or subtask you need, passing gulp and an optional config object.
 
 ```js
 var gulp = require('gulp');
@@ -85,17 +95,19 @@ gulp.task('build', function() {
 
 ## Command Line usage
 
-In the directory of your Origami module or product, run:
+Component developers should use the build tools as a command line utility, though product developers can choose to use the command line interface too. In the directory of your Origami module or product, run:
 
     origami-build-tools <command>
 
-Where `<command>` is one of the tasks explained above. To pass config options to the command line, add them as arguments like this: `--js=src/main.js`. 
+Where `<command>` is one of the tasks explained above. To pass config options to the command line, add them as arguments like this: `--js=src/main.js`.  The CLI supports the following arguments in addition to the gulpfile config options:
 
-### Demo
+### Unnamed argument for demo path
 
-For this command, you can also add the parameter:
+For the demo command, you can also add an unnamed parameter:
 
 * `<config file>`: The path to the demo config file. Default: `demos/src/config.json`
+
+AB: Shouldn't we just standardise this and make it a gulp arg?
 
 ### Watching
 
