@@ -16,6 +16,7 @@
     "browserify": "~3.44.2",
     "colors": "^0.6.2",
     "debowerify": "^0.7.0",
+    "es6-promise": "^1.0.0",
     "findit": "^1.1.1",
     "gulp": "^3.8.7",
     "gulp-csso": "^0.2.9",

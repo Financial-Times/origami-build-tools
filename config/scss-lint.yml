@@ -93,7 +93,7 @@ linters:
     spaces: 0
 
   # Every property value must end with a semicolon
-  TrailingSemicolonAfterPropertyValue:
+  TrailingSemicolon:
     enabled: true
 
   # No unnecessary fractions: 1 not 1.0
