@@ -68,13 +68,12 @@ Builds component demos into the `demo` directory from a demo config file.
 Config:
 
 * local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Also runs a local server to help you test your demos.
+* demoConfig: `String` The path to the demo config file. Default: `demos/src/config.json`
 * updateorigami: `Boolean` The `demos` property of your `origami.json` file will be updated - to list the demo files that have been created.
 
 Runs:
 
 * __runServer(gulp)__ Starts a local server
-
-AB: Surely it also runs build?
 
 Build service demos consist of only HTML, with build service URLs for static resources, and are created in `demos/`
 
@@ -99,15 +98,7 @@ Component developers should use the build tools as a command line utility, thoug
 
     origami-build-tools <command>
 
-Where `<command>` is one of the tasks explained above. To pass config options to the command line, add them as arguments like this: `--js=src/main.js`.  The CLI supports the following arguments in addition to the gulpfile config options:
-
-### Unnamed argument for demo path
-
-For the demo command, you can also add an unnamed parameter:
-
-* `<config file>`: The path to the demo config file. Default: `demos/src/config.json`
-
-AB: Shouldn't we just standardise this and make it a gulp arg?
+Where `<command>` is one of the tasks explained above. To pass config options to the command line, add them as arguments like this: `--js=src/main.js`.
 
 ### Watching
 
