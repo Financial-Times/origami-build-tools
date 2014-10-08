@@ -43,6 +43,8 @@ Runs:
     - buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
     - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
 
+    _(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
+
 ### test
 
 Tests [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).  If your SASS contains a `$<module-name>-is-silent` variable, then runs:
@@ -77,7 +79,9 @@ Runs:
 
 Build service demos consist of only HTML, with build service URLs for static resources, and are created in `demos/`
 
-Local demos consist of HTML, CSS and JS (if SASS & JS exists), and are created in `demos/local/`. A CSS sourcemap is also generated. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
+Local demos consist of HTML, CSS and JS (if SASS & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
+
+_(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
 ## gulpfile usage
 
