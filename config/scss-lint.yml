@@ -68,7 +68,7 @@ linters:
   # Limit selector depth
   SelectorDepth:
     enabled: true
-    max_depth: 3
+    max_depth: 4
 
   # margin: 1px not margin: 1px 1px 1px 1px;
   Shorthand:
