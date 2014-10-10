@@ -43,6 +43,8 @@ Runs:
     - buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
     - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
 
+    _(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
+
 ### test
 
 Tests [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).  If your SASS contains a `$<module-name>-is-silent` variable, then runs:
@@ -77,18 +79,30 @@ Runs:
 
 Build service demos consist of only HTML, with build service URLs for static resources, and are created in `demos/`
 
-Local demos consist of HTML, CSS and JS (if SASS & JS exists), and are created in `demos/local/`. A CSS sourcemap is also generated. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
+Local demos consist of HTML, CSS and JS (if SASS & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
+
+_(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
 ## gulpfile usage
 
-Use the build tools in your own Gulp file to incorporate the Origami build process into a *product* (don't use this method if you are building an Origami component).  To run these tasks in your `gulpfile.js`, you only need to require `origami-build-tools` and run the task or subtask you need, passing gulp and an optional config object.
+Use the build tools in your own Gulp file to incorporate the Origami build process into a *product* (don't use this method if you are building an Origami component). An in depth explanation of how to use the `origami-build-tools` in your product to build Origami modules can be found in the [Origami spec](http://origami.ft.com/docs/developer-guide/building-modules/).  
+
+To run these tasks in your `gulpfile.js`, you only need to require `origami-build-tools` and run the task or subtask you need, passing gulp and an optional config object.
 
 ```js
 var gulp = require('gulp');
 var obt = require('origami-build-tools');
 
 gulp.task('build', function() {
-    obt.build.js(gulp, {js: 'src/main.js'});
+    obt.build.js(gulp, {js: './src/main.js'});
+    obt.build.sass(gulp, {sass: './src/main.scss'});
+});
+
+gulp.task('verify', function() {
+    obt.verify(gulp, {
+        js: './src/main.js',
+        sass: './src/main.scss'
+    });
 });
 ```
 
