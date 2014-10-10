@@ -1,6 +1,6 @@
 # origami-build-tools
 
-Standardised build tools for Origami modules.
+Standardised build tools for Origami modules and products developed based on these modules.
 
 ## Installation
 
@@ -9,144 +9,115 @@ You should already have the following installed:
 * Node JS (with NPM)
 * Ruby
 
-
 `npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/master`
 
-## Usage
+## Tasks
 
-In your Origami module directory run:
-
-    origami-build-tools <command>
-
-Where `<command>` is one of:
+All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them return a stream. They are structured in 5 higher level tasks, and each one has one or more subtasks. 
 
 ### install
 
-Install all dependencies:
+Installs all the tools and dependencies required for the Origami build process to build your components.
 
-* __Install the SASS Ruby gem__ (if your module has a `main.scss` in its root, and the gem is not already installed)
-* __Install Bower__ globally (if it's not already installed)
-* __Run npm install__ (if your module has a `package.json` in its root)
-* __Run bower install__ (using both the Origami Registry and the default Bower registry to resolve dependencies)
-* __Install linting tools__ if `jshint` or `scss-lint` are not installed, this will install the minimum required versions)
+Runs:
+
+* __installSass()__ globally (if it's not already installed)
+* __installScssLint()__ globally (if it's not already installed)
+* __installJshint()__ globally (if it's not already installed)
+* __installBower()__ globally (if it's not already installed)
+* __runNpmInstall()__ if there is a `package.json` inthe root directory
+* __runBowerInstall()__ using both the Origami Registry and the default Bower registry to resolve dependencies
 
 ### build
 
-* Compile `main.scss` (if it exists and is listed in `bower.json` main)
-* Browserify `main.js` (if it exists and is listed in `bower.json` main)
+Builds CSS and JavaScript bundles from their respective main acting files and saves the built output into your working tree.
 
-Generated files are placed in a /build folder. These files should not be committed to the module repo.
+Runs:
+
+* __js(gulp, config)__ Config accepts:
+    - js: `String` Path to your main javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
+    - buildJs: `String` Name of the built javascript bundle. (Default: 'main.js')
+    - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+* __sass(gulp, config)__ Config accepts:
+    - sass: `String` Path to your main sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
+    - buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
+    - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+
+    _(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
 ### test
 
-Runs `build`, and then also runs basic standard tests on the module:
+Tests [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).  If your SASS contains a `$<module-name>-is-silent` variable, then runs:
 
-* __SASS__ If your SASS contains a `$<module-name>-is-silent` variable, then also:
-    * Check the SASS outputs no CSS by default
-    * Check the SASS outputs some CSS with `$<module-name>-is-silent` set to false
+* __silentCompilation(gulp)__ Check the SASS outputs no CSS by default
+* __silentCompilation(gulp)__ Check the SASS outputs some CSS with `$<module-name>-is-silent` set to false
 
 ### verify
 
-Runs linting tools based on the minimum requirements set out in the Origami
-standard.  If your module has a `main.js` file, `jshint` will be run. If you have a
-`main.scss` file, `scss-lint` will be run.
+Lints JavaScript and SCSS against Origami coding standards (see standards for [SCSS](http://origami.ft.com/docs/syntax/scss/#syntax-convention-rules) and [JavaScript](http://origami.ft.com/docs/syntax/js/#syntax-convention-rules)).
 
-`verify` is watchable with the `--watch` command line flag.
+Runs:
+
+* __scssLint(gulp, config)__ Config accepts:
+    - sass: `String` Path to your main sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
+* __jsHint(gulp, config)__ Config accepts:
+    - js: `String` Path to your main javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
 
 ### demo
 
-Parameters:
+Builds component demos into the `demo` directory from a demo config file.
 
-* `<config file>`: The path to the demo config file. Default: `demos/src/config.json`
+Config:
 
-Switches:
+* local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Also runs a local server to help you test your demos.
+* demoConfig: `String` The path to the demo config file. Default: `demos/src/config.json`
+* updateorigami: `Boolean` The `demos` property of your `origami.json` file will be updated - to list the demo files that have been created.
 
-* `--local` Build local HTML, CSS and JS files, in addition to demo HTML for the build service.
-* `--updateorigami` The `demos` property of your `origami.json` file will be updated - to list the demo files that have been created.
+Runs:
 
-Build static demo pages from demo source files, according to a spec in a config JSON file.
+* __runServer(gulp)__ Starts a local server
 
-Build service demos consist of only HTML, with build service URLs for static resources.
+Build service demos consist of only HTML, with build service URLs for static resources, and are created in `demos/`
 
 Local demos consist of HTML, CSS and JS (if SASS & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
 
-#### Examples
+_(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
-Building demos for build service, using default config file location:
+## gulpfile usage
 
-    origami-build-tool demo
+Use the build tools in your own Gulp file to incorporate the Origami build process into a *product* (don't use this method if you are building an Origami component). An in depth explanation of how to use the `origami-build-tools` in your product to build Origami modules can be found in the [Origami spec](http://origami.ft.com/docs/developer-guide/building-modules/).  
 
-Building demos for local development, using custom config file location:
+To run these tasks in your `gulpfile.js`, you only need to require `origami-build-tools` and run the task or subtask you need, passing gulp and an optional config object.
 
-    origami-build-tool demo demos/demo-config.json --local
+```js
+var gulp = require('gulp');
+var obt = require('origami-build-tools');
 
-#### Demo config file
+gulp.task('build', function() {
+    obt.build.js(gulp, {js: './src/main.js'});
+    obt.build.sass(gulp, {sass: './src/main.scss'});
+});
 
-The demo config file tells __origami-build-tools__ what demo files to build. It has two main properties:
-
-* `options`: configuration to apply to all demos (unless overridden for a specific demo)
-* `demos`: list of demos to build, keyed by the output HTML file name
-
-Options, and individual demos, can have the following properties:
-
-* `template`: The mustache template to render.
-* `sass`: The SASS file to compile.
-* `js`: The JS file to build with Browserify.
-* `data`: Data to pass to the mustache template.
-* `bodyClasses`: String. CSS classes to set on the body.
-* `expanded`: (default: `true`) Whether the demo should be shown in expanded form in the [Registry](registry.origami.ft.com).
-* `description`: Optional explanation of the purpose of the demo.
-
-Example:
-
-```json
-{
-    "options": {
-        "sass": "demos/src/demo.scss",
-        "data": "demos/src/data.json",
-        "bodyClasses": "o-hoverable-on"
-    },
-    "demos": [
-        {
-            "name": "demo1",
-            "template": "demos/src/demo1.mustache",
-            "js": "demos/src/demo1.js"
-        },
-        {
-            "name": "demo2",
-            "template": "demos/src/demo2.mustache",
-            "js": "demos/src/demo2.js",
-            "expanded": false,
-            "description": "Demo of obscure but realistic scenario."
-        }
-    ]
-}
+gulp.task('verify', function() {
+    obt.verify(gulp, {
+        js: './src/main.js',
+        sass: './src/main.scss'
+    });
+});
 ```
 
-Demo CSS and JS will be built with sourcemaps.
+## Command Line usage
 
-## Watching
+Component developers should use the build tools as a command line utility, though product developers can choose to use the command line interface too. In the directory of your Origami module or product, run:
 
-The commands `build`, `test`, `verify` and `demo` can be run with the switch `--watch` to automatically re-run when files change.
+    origami-build-tools <command>
+
+Where `<command>` is one of the tasks explained above. To pass config options to the command line, add them as arguments like this: `--js=src/main.js`.
+
+### Watching
+
+The commands `build`, `test`, `verify` and `demo` can be run with the argument `--watch` to automatically re-run when files change.
 
 Example:
 
     origami-build-tools demo /demos/src/config.json --local --watch
-
-## Travis CI build configuration
-
-If your module has no other tests, then your Travis build can configured with just one file:
-
-`.travis.yml`:
-
-```yaml
-language: node_js
-node_js:
-  - "0.10"
-before_install:
-  - npm install -g https://github.com/Financial-Times/origami-build-tools/tarball/node-0.10
-  - origami-build-tools install
-script:
-  - origami-build-tools test
-  - origami-build-tools verify
-```
