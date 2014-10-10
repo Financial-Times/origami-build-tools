@@ -8,7 +8,6 @@
     "undef": true,
     "unused": true,
     "curly": true,
-    "browser": true,
     "newcap": true,
     "immed": true,
     "trailing": true,
