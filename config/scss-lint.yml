@@ -10,11 +10,6 @@ linters:
   CapitalizationInSelector:
     enabled: true
 
-  # // not /**/
-  # (differs from Guardian)
-  Comment:
-    enabled: true
-
   # Disallow "@debug"
   DebugStatement:
     enabled: true
@@ -98,7 +93,7 @@ linters:
     spaces: 0
 
   # Every property value must end with a semicolon
-  TrailingSemicolonAfterPropertyValue:
+  TrailingSemicolon:
     enabled: true
 
   # No unnecessary fractions: 1 not 1.0
@@ -112,6 +107,11 @@ linters:
   # "#0f0" not "green"
   # (AB: Causes problems with o-colors < 3, because o-colors uses color names that are also valid CSS color strings)
   ColorKeyword:
+    enabled: false
+
+  # // not /**/
+  # (differs from Guardian)
+  Comment:
     enabled: false
 
   # Use single quotes, not double quotes
