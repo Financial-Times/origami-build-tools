@@ -51,6 +51,7 @@ Tests [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles
 
 * __silentCompilation(gulp)__ Check the SASS outputs no CSS by default
 * __silentCompilation(gulp)__ Check the SASS outputs some CSS with `$<module-name>-is-silent` set to false
+* __npmTest()__ Runs 'npm test', so whatever test script that you have in you `package.json` will be executed
 
 ### verify
 
