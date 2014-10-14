@@ -28,6 +28,13 @@ Runs:
 * __runNpmInstall()__ if there is a `package.json` inthe root directory
 * __runBowerInstall()__ using both the Origami Registry and the default Bower registry to resolve dependencies
 
+The versions that are installed and supported are:
+
+* SASS: '3.3.14'
+* scss-lint: '0.27.0'
+* JSHint: '2.5.6'
+* Bower: '1.3.12'
+
 ### build
 
 Builds CSS and JavaScript bundles from their respective main acting files and saves the built output into your working tree.
