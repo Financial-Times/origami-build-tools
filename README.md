@@ -30,7 +30,7 @@ Runs:
 
 The versions that are installed and supported are:
 
-* SASS: '3.3.14'
+* SASS: '3.3.14' _(SASS 3.4.x is currently not supported and you may not get the desired result)_
 * scss-lint: '0.27.0'
 * JSHint: '2.5.6'
 * Bower: '1.3.12'
