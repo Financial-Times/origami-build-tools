@@ -1,4 +1,4 @@
-# origami-build-tools
+# origami-build-tools [![Build Status](https://travis-ci.org/Financial-Times/origami-build-tools.svg)](https://travis-ci.org/Financial-Times/origami-build-tools)
 
 Standardised build tools for Origami modules and products developed based on these modules.
 
@@ -42,8 +42,8 @@ Builds CSS and JavaScript bundles from their respective main acting files and sa
 Runs:
 
 * __js(gulp, config)__ Config accepts:
-    - js: `String` Path to your main Javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
-    - buildJs: `String` Name of the built Javascript bundle. (Default: 'main.js')
+    - js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
+    - buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
     - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
     - env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 * __sass(gulp, config)__ Config accepts:
@@ -71,7 +71,7 @@ Runs:
 * __scssLint(gulp, config)__ Config accepts:
     - sass: `String` Path to your main sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
 * __jsHint(gulp, config)__ Config accepts:
-    - js: `String` Path to your main javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
+    - js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
 
 ### demo
 
