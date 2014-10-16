@@ -60,11 +60,6 @@ linters:
     enabled: true
     extra_properties: []
 
-  # Limit selector depth
-  SelectorDepth:
-    enabled: true
-    max_depth: 3
-
   # margin: 1px not margin: 1px 1px 1px 1px;
   Shorthand:
     enabled: true
@@ -167,3 +162,9 @@ linters:
   # Rulesets with multiple (comma delimited) selectors must have each selector on a separate line
   SingleLinePerSelector:
     enabled: false
+
+  # Limit selector depth
+  # (AB: We decided to deal with this via peer review in https://github.com/Financial-Times/ft-origami/issues/243.  If SCSS-lint were to support excluding sections of code, we could turn this back on.  Issue: https://github.com/causes/scss-lint/issues/150)
+  SelectorDepth:
+    enabled: false
+    max_depth: 3
