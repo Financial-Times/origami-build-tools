@@ -1,4 +1,4 @@
-# origami-build-tools
+# origami-build-tools [![Build Status](https://travis-ci.org/Financial-Times/origami-build-tools.svg)](https://travis-ci.org/Financial-Times/origami-build-tools)
 
 Standardised build tools for Origami modules and products developed based on these modules.
 
@@ -44,13 +44,15 @@ Builds CSS and JavaScript bundles from their respective main acting files and sa
 Runs:
 
 * __js(gulp, config)__ Config accepts:
-    - js: `String` Path to your main javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
-    - buildJs: `String` Name of the built javascript bundle. (Default: 'main.js')
+    - js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
+    - buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
     - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+    - env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 * __sass(gulp, config)__ Config accepts:
-    - sass: `String` Path to your main sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
+    - sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
     - buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
     - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+    - env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the SASS file with the 'compressed' style option and will also run [csso](https://github.com/css/csso). (Default: 'development')
 
     _(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
