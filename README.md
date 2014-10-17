@@ -28,6 +28,13 @@ Runs:
 * __runNpmInstall()__ if there is a `package.json` inthe root directory
 * __runBowerInstall()__ using both the Origami Registry and the default Bower registry to resolve dependencies
 
+The versions that are installed and supported are:
+
+* SASS: '3.3.14' _(SASS 3.4.x is currently not supported and you may not get the desired result)_
+* scss-lint: '0.27.0'
+* JSHint: '2.5.6'
+* Bower: '1.3.12'
+
 ### build
 
 Builds CSS and JavaScript bundles from their respective main acting files and saves the built output into your working tree.
@@ -35,13 +42,15 @@ Builds CSS and JavaScript bundles from their respective main acting files and sa
 Runs:
 
 * __js(gulp, config)__ Config accepts:
-    - js: `String` Path to your main javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
-    - buildJs: `String` Name of the built javascript bundle. (Default: 'main.js')
+    - js: `String` Path to your main Javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
+    - buildJs: `String` Name of the built Javascript bundle. (Default: 'main.js')
     - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+    - env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 * __sass(gulp, config)__ Config accepts:
-    - sass: `String` Path to your main sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
+    - sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
     - buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
     - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+    - env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the SASS file with the 'compressed' style option and will also run [csso](https://github.com/css/csso). (Default: 'development')
 
     _(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
@@ -51,6 +60,7 @@ Tests [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles
 
 * __silentCompilation(gulp)__ Check the SASS outputs no CSS by default
 * __silentCompilation(gulp)__ Check the SASS outputs some CSS with `$<module-name>-is-silent` set to false
+* __npmTest()__ Runs 'npm test', so whatever test script that you have in you `package.json` will be executed
 
 ### verify
 
