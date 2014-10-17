@@ -78,7 +78,7 @@ Runs:
 
 ### demo
 
-Builds component demos into the `demo` directory from a demo config file.
+Builds component demos into the `demo` directory from a [demo config file](http://origami.ft.com/docs/component-spec/modules/#demo-config-file).
 
 Config:
 
