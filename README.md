@@ -28,7 +28,7 @@ Runs:
 * __runNpmInstall()__ if there is a `package.json` inthe root directory
 * __runBowerInstall()__ using both the Origami Registry and the default Bower registry to resolve dependencies
 * __addEditorConfig(gulp, config)__ Config accepts:
-    - editorconfig: `Boolean` If true, the default Origami '.editorconfig' file will be added to the root of your project (Default: 'false') 
+	- editorconfig: `Boolean` If true, the default Origami '.editorconfig' file will be added to the root of your project (Default: 'false') 
 
 The versions that are installed and supported are:
 
@@ -44,17 +44,25 @@ Builds CSS and JavaScript bundles from their respective main acting files and sa
 Runs:
 
 * __js(gulp, config)__ Config accepts:
-    - js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
-    - buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
-    - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
-    - env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
+	- js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
+	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
+	- buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
+	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as one of the following
+		- `String` The name of the transform
+		- `Array` [config, 'transform-name'] Where custom config needs to be passed into the transform use an array containing the config object followed by the transform name
+		- `Object` Some transforms require passing in a single object which both specifies and configures the transform
+	- insertGlobals: See [browserify documentation](https://github.com/substack/node-browserify#usage)
+	- detectGlobals: See [browserify documentation](https://github.com/substack/node-browserify#usage)
+	- ignoreMissing: See [browserify documentation](https://github.com/substack/node-browserify#usage)
+	- standalone: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 * __sass(gulp, config)__ Config accepts:
-    - sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
-    - buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
-    - buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
-    - env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the SASS file with the 'compressed' style option and will also run [csso](https://github.com/css/csso). (Default: 'development')
+	- sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
+	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
+	- buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the SASS file with the 'compressed' style option and will also run [csso](https://github.com/css/csso). (Default: 'development')
 
-    _(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
+	_(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
 ### test
 
@@ -71,9 +79,9 @@ Lints JavaScript and SCSS against Origami coding standards (see standards for [S
 Runs:
 
 * __scssLint(gulp, config)__ Config accepts:
-    - sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
+	- sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
 * __jsHint(gulp, config)__ Config accepts:
-    - js: `String` Path to your main Javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key)
+	- js: `String` Path to your main Javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key)
 * __lintspaces(gulp)__ Runs lintspaces on your Javascript and SASS files.
 
 ### demo
@@ -107,15 +115,15 @@ var gulp = require('gulp');
 var obt = require('origami-build-tools');
 
 gulp.task('build', function() {
-    obt.build.js(gulp, {js: './src/main.js'});
-    obt.build.sass(gulp, {sass: './src/main.scss'});
+	obt.build.js(gulp, {js: './src/main.js'});
+	obt.build.sass(gulp, {sass: './src/main.scss'});
 });
 
 gulp.task('verify', function() {
-    obt.verify(gulp, {
-        js: './src/main.js',
-        sass: './src/main.scss'
-    });
+	obt.verify(gulp, {
+		js: './src/main.js',
+		sass: './src/main.scss'
+	});
 });
 ```
 
@@ -123,7 +131,7 @@ gulp.task('verify', function() {
 
 Component developers should use the build tools as a command line utility, though product developers can choose to use the command line interface too. In the directory of your Origami module or product, run:
 
-    origami-build-tools <command>
+	origami-build-tools <command>
 
 Where `<command>` is one of the tasks explained above. To pass config options to the command line, add them as arguments like this: `--js=src/main.js`.
 
@@ -133,4 +141,4 @@ The commands `build`, `test`, `verify` and `demo` can be run with the argument `
 
 Example:
 
-    origami-build-tools demo /demos/src/config.json --local --watch
+	origami-build-tools demo /demos/src/config.json --local --watch
