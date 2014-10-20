@@ -80,9 +80,14 @@ Runs:
 
 * __scssLint(gulp, config)__ Config accepts:
 	- sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
+	- scssLintPath: `String` Path to your custom 'scss-lint.yml' config file. (Default: 'origami-build-tools/config/scss-lint.yml')
 * __jsHint(gulp, config)__ Config accepts:
 	- js: `String` Path to your main Javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key)
-* __lintspaces(gulp)__ Runs lintspaces on your Javascript and SASS files.
+	- jsHintPath: `String` Path to your custom jsHint config file. (Default: 'origami-build-tools/config/jshint.json'
+* __lintspaces(gulp, config)__ Config accepts:
+	- editorconfigPath: `String` Path to your '.editorconfig' that lintspaces uses for linting. (Default: 'origami-build-tools/config/.editorconfig') 
+
+_Changing the config file is only for products, the default ones follow the Origami spec and must be used for module development_
 
 ### demo
 
