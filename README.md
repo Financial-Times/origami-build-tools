@@ -86,6 +86,7 @@ Runs:
 	- jsHintPath: `String` Path to your custom jsHint config file. (Default: 'origami-build-tools/config/jshint.json'
 * __lintspaces(gulp, config)__ Config accepts:
 	- editorconfigPath: `String` Path to your '.editorconfig' that lintspaces uses for linting. (Default: 'origami-build-tools/config/.editorconfig') 
+* __origamiJson()__ If there's an 'origami.json' file in your project's root, it will make sure it's compliant with the [spec](http://origami.ft.com/docs/syntax/origamijson/#format)
 
 _Changing the config file is only for products, the default ones follow the Origami spec and must be used for module development_
 
