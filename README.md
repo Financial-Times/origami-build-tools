@@ -74,7 +74,8 @@ Runs:
     - sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
 * __jsHint(gulp, config)__ Config accepts:
     - js: `String` Path to your main Javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key)
-* __lintspaces(gulp)__ Runs lintspaces on your Javascript and SASS files.
+* __lintspaces(gulp)__ Runs lintspaces on your Javascript and SASS files
+* __origamiJson()__ If there's an 'origami.json' file in your project's root, it will make sure it's compliant with the [spec](http://origami.ft.com/docs/syntax/origamijson/#format)
 
 ### demo
 
