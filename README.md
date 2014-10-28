@@ -27,8 +27,6 @@ Runs:
 * __installBower()__ globally (if it's not already installed)
 * __runNpmInstall()__ if there is a `package.json` inthe root directory
 * __runBowerInstall()__ using both the Origami Registry and the default Bower registry to resolve dependencies
-* __addEditorConfig(gulp, config)__ Config accepts:
-	- editorconfig: `Boolean` If true, the default Origami '.editorconfig' file will be added to the root of your project (Default: 'false') 
 
 The versions that are installed and supported are:
 
