@@ -29,6 +29,8 @@ Runs:
 * __runBowerInstall()__ using both the Origami Registry and the default Bower registry to resolve dependencies
 * __addEditorConfig(gulp, config)__ Config accepts:
 	- editorconfig: `Boolean` If true, the default Origami '.editorconfig' file will be added to the root of your project (Default: 'false') 
+* __addJsHintRc(gulp, config)__ Config accepts:
+	- jshintrc: `Boolean` If true, the default Origami '.jshintrc' file will be added to the root of your project (Default: 'false') 
 
 The versions that are installed and supported are:
 
