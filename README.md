@@ -131,7 +131,7 @@ gulp.task('verify', function() {
 });
 ```
 
-Note: to use this you will to install origami-build-tools *and* gulp as direct dependencies of your project.  If you do not have it installed already, you will also need to install gulp globally.
+Note: to use this you will need to install origami-build-tools *and* gulp as direct dependencies of your project.  Additionally, if you do not have it installed already, you will also need to install gulp globally.
 
 ```sh
 npm install --save-dev https://github.com/Financial-Times/origami-build-tools/tarball/master
