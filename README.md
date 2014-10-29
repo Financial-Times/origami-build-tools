@@ -131,6 +131,14 @@ gulp.task('verify', function() {
 });
 ```
 
+Note: to use this you will need to install origami-build-tools *and* gulp as direct dependencies of your project.  Additionally, if you do not have it installed already, you will also need to install gulp globally.
+
+```sh
+npm install --save-dev https://github.com/Financial-Times/origami-build-tools/tarball/master
+npm install --save-dev gulp
+npm install -g gulp
+```
+
 ## Command Line usage
 
 Component developers should use the build tools as a command line utility, though product developers can choose to use the command line interface too. In the directory of your Origami module or product, run:
