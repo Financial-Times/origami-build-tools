@@ -44,7 +44,7 @@ Runs:
 * __js(gulp, config)__ Config accepts:
 	- js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
 	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
-	- buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as one of the following
 		- `String` The name of the transform
@@ -57,7 +57,7 @@ Runs:
 * __sass(gulp, config)__ Config accepts:
 	- sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
-	- buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the SASS file with the 'compressed' style option and will also run [csso](https://github.com/css/csso). (Default: 'development')
 
 	_(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
