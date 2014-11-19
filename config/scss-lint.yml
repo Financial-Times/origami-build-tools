@@ -2,17 +2,22 @@ linters:
 
   # ENABLED:
 
+  # "value !important;" not "value!important ;"
+  BangFormat:
+    enabled: true
+    space_before_bang: true
+    space_after_bang: false
+    severity: error
+
   # "border: 0" not "border: none"
   BorderZero:
     enabled: true
-
-  # No capitals in selectors
-  CapitalizationInSelector:
-    enabled: true
+    severity: error
 
   # Disallow "@debug"
   DebugStatement:
     enabled: true
+    severity: error
 
   # @extend must come first, then properties, then nested rulesets
   DeclarationOrder:
@@ -21,6 +26,12 @@ linters:
   # Disallow use of the same property more than once in the same ruleset
   DuplicateProperty:
     enabled: true
+    severity: error
+
+  # "} else {" not "}\n else {"
+  ElsePlacement:
+    enabled: true
+    style: same_line # or 'new_line'
 
   # Require a newline at the end of the file
   FinalNewline:
@@ -31,6 +42,7 @@ linters:
   HexLength:
     enabled: true
     style: long
+    severity: error
 
   # Require hex colors to be lowercase (if they include any of the letters a-f)
   HexNotation:
@@ -44,58 +56,137 @@ linters:
   # Disallow combining of ID selectors with other selector tokens
   IdWithExtraneousSelector:
     enabled: true
+    severity: error
+
+  # "@import 'path/to/partial'" not "@import 'path/to/_partial.scss'"
+  ImportPath:
+    enabled: true
+    leading_underscore: false
+    filename_extension: false
+
+  # Force tab indentation
+  Indentation:
+    enabled: true
+    character: tab
+    width: 1
+    severity: error
 
   # 0.1 not .1
   # (differs from Guardian)
   LeadingZero:
     enabled: true
     style: include_zero
+    severity: error
+
+  # Allow camelcase but forbid non-alphanumeric characters
+  # in mixin, variable and function names.
+  NameFormat:
+    enabled: true
+    convention: '\w'
+    severity: error
+
+  # Thou shall nest 3 levels deep maximum. Not 4, nor 5.
+  # See SelectorDepth for control over the actually maximum authorized depth
+  NestingDepth:
+    enabled: true
+    max_depth: 3
 
   # @extend %placeholders, don't @extend .a-class
   PlaceholderInExtend:
     enabled: true
+    severity: error
 
   # Disallow unknown CSS property names
   PropertySpelling:
     enabled: true
     extra_properties: []
 
+  # ".class, [foo]" not "span.class, div[foo]"
+  QualifyingElement:
+    enabled: true
+    allow_element_with_attribute: false
+    allow_element_with_class: false
+    allow_element_with_id: false
+    severity: error
+
+  # Limit selector depth
+  # (AB: We decided to deal with this via peer review in 
+  # https://github.com/Financial-Times/ft-origami/issues/243.
+  # If SCSS-lint were to support excluding sections of code,
+  # we could turn this back on (KDP:… as an error).
+  # Issue: https://github.com/causes/scss-lint/issues/150)
+  SelectorDepth:
+    enabled: true
+    max_depth: 3
+
+  # Allow 
+  SelectorFormat:
+    enabled: true
+    convention: '\w'
+    severity: error
+
   # margin: 1px not margin: 1px 1px 1px 1px;
   Shorthand:
     enabled: true
+    severity: error
+
+  # Disallow properties on the same line "margin: 0; padding: 0;"
+  SingleLinePerProperty:
+    enabled: true
+    # enable simple rules to be on a single line "el { margin: 0; }"
+    allow_single_line_rule_sets: true
+    severity: error
+
+  # Rulesets with multiple (comma delimited) selectors
+  # must have each selector on a separate line
+  SingleLinePerSelector:
+    enabled: true
+    severity: error
 
   # rgb(0, 0, 0) not rgb(0,0,0)
   SpaceAfterComma:
     enabled: true
+    severity: error
 
   # margin: 0px not margin:0px
   SpaceAfterPropertyColon:
     enabled: true
+    style: one_space
+    severity: error
 
   # margin: 0px not margin : 0px
   # (AB: clearly this should be called NoSpaceAfterPropertyName)
   SpaceAfterPropertyName:
     enabled: true
+    severity: error
 
   # .thing { not .thing{
   SpaceBeforeBrace:
     enabled: true
+    style: space
     allow_single_line_padding: false
+    severity: error
 
-  # rgb(0,0,0) not rgb( 0,0,0 )
+  # rgb(0, 0, 0) not rgb( 0, 0, 0 )
   SpaceBetweenParens:
     enabled: true
     spaces: 0
+    severity: error
 
   # Every property value must end with a semicolon
   TrailingSemicolon:
+    enabled: true
+    severity: error
+    severity: error
+
+  # "margin: .5em;" not "margin: .500em;"
+  TrailingZero:
     enabled: true
 
   # No unnecessary fractions: 1 not 1.0
   UnnecessaryMantissa:
     enabled: true
-
-
+    severity: error
 
   # DISABLED
 
@@ -108,6 +199,26 @@ linters:
   # (differs from Guardian)
   Comment:
     enabled: false
+
+  # Require an empty line between rulesets
+  EmptyLineBetweenBlocks:
+    enabled: false
+
+  # Disallow empty rulesets
+  EmptyRule:
+    enabled: false
+
+  # Disallow more than one ruleset with the same selector in the same file
+  MergeableSelector:
+    enabled: false
+
+  # Require properties to be in alphabetical order
+  # (also possible to specify a specific order)
+  # (AB: Alpha seems a bit weird. Rhys had a tool to do this,
+  # maybe we should set the order here and use this tool)
+  PropertySortOrder:
+    enabled: false
+    order: []
 
   # Use single quotes, not double quotes
   # (AB: This really doesn't matter IMHO)
@@ -124,47 +235,16 @@ linters:
   UrlQuotes:
     enabled: false
 
+  # Disable this rule to allow parent references such as "& + * {}"
+  UnnecessaryParentReference:
+    enabled: false
+
+  # Allow vendor prefixes
+  VendorPrefixes:
+    enabled: false
+
   # No units on zero values: 0 not 0px
-  # (AB: it can be useful to express what unit you want something to be in if its value is ever adjusted away from zero)
+  # (AB: it can be useful to express what unit you want
+  # something to be in if its value is ever adjusted away from zero)
   ZeroUnit:
     enabled: false
-
-  # Require an empty line between rulesets
-  EmptyLineBetweenBlocks:
-    enabled: false
-
-  # Disallow more than one ruleset with the same selector in the same file
-  MergeableSelector:
-    enabled: false
-
-  # Disallow empty rulesets
-  EmptyRule:
-    enabled: false
-
-  # Require spaces for indentation
-  # (AB: Absolutely not.  Revelation: tabs are designed to indent stuff)
-  # (differs from Guardian)
-  Indentation:
-    enabled: false
-
-  # Disallow camelcase and enforce BEM standards
-  # (AB: we have exceptions, we use camel for mixins and functions)
-  NameFormat:
-    enabled: false
-    convention: BEM
-
-  # Require properties to be in alphabetical order (also possible to specify a specific order)
-  # (AB: Alpha seems a bit weird.  Rhys had a tool to do this, maybe we should set the order here and use this tool)
-  PropertySortOrder:
-    enabled: false
-    order: []
-
-  # Rulesets with multiple (comma delimited) selectors must have each selector on a separate line
-  SingleLinePerSelector:
-    enabled: false
-
-  # Limit selector depth
-  # (AB: We decided to deal with this via peer review in https://github.com/Financial-Times/ft-origami/issues/243.  If SCSS-lint were to support excluding sections of code, we could turn this back on.  Issue: https://github.com/causes/scss-lint/issues/150)
-  SelectorDepth:
-    enabled: false
-    max_depth: 3
