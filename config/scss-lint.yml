@@ -64,12 +64,9 @@ linters:
     leading_underscore: false
     filename_extension: false
 
-  # Force tab indentation
+  # Don't check indentation since it's done via another task
   Indentation:
-    enabled: true
-    character: tab
-    width: 1
-    severity: error
+    enabled: false
 
   # 0.1 not .1
   # (differs from Guardian)
