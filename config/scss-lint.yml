@@ -119,7 +119,8 @@ linters:
     enabled: true
     max_depth: 3
 
-  # Allow 
+  # Allow camelcase but forbid non-alphanumeric characters
+  # in selector names.
   SelectorFormat:
     enabled: true
     convention: '\w'
