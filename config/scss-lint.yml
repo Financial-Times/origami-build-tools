@@ -178,7 +178,6 @@ linters:
   TrailingSemicolon:
     enabled: true
     severity: error
-    severity: error
 
   # "margin: .5em;" not "margin: .500em;"
   TrailingZero:
