@@ -23,10 +23,11 @@ linters:
   DeclarationOrder:
     enabled: true
 
-  # Disallow use of the same property more than once in the same ruleset
+  # Warn when the same property appears more than once in the same ruleset
+  # This is not a deal breaker, as authors will may repeat properties
+  # in the case where both a value and its fallback are needed
   DuplicateProperty:
     enabled: true
-    severity: error
 
   # "} else {" not "}\n else {"
   ElsePlacement:
