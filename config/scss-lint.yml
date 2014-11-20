@@ -99,7 +99,6 @@ linters:
     enabled: true
     extra_properties:
       - text-size-adjust
-      - user-select
 
   # ".class, [foo]" not "span.class, div[foo]"
   QualifyingElement:
