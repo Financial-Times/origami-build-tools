@@ -97,7 +97,9 @@ linters:
   # Disallow unknown CSS property names
   PropertySpelling:
     enabled: true
-    extra_properties: []
+    extra_properties:
+      - text-size-adjust
+      - user-select
 
   # ".class, [foo]" not "span.class, div[foo]"
   QualifyingElement:
