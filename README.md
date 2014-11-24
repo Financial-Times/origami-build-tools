@@ -56,6 +56,9 @@ Runs:
 	- standalone: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 * __sass(gulp, config)__ Config accepts:
 	- sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
+	- autoprefixerBrowsers: `Array` An array of strings of [browser names for autoprefixer](https://github.com/postcss/autoprefixer#browsers) to check what prefixes it needs. (Default: `["> 1%", "last 2 versions", "ie > 6", "ff ESR"]`)
+	- autoprefixerCascade: `Boolean` Whether autoprefixer should display CSS prefixed properties [cascaded](https://github.com/postcss/autoprefixer#visual-cascade) (Default: false)
+	- autoprefixerRemove: `Boolean` Remove unneeded prefixes (Default: true)
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
 	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the SASS file with the 'compressed' style option and will also run [csso](https://github.com/css/csso). (Default: 'development')
