@@ -1,6 +1,7 @@
 linters:
 
-  # ENABLED:
+  # Documentation:
+  # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md
 
   # "value !important;" not "value!important ;"
   BangFormat:
@@ -14,6 +15,16 @@ linters:
     enabled: true
     severity: error
 
+  # "#0f0" not "green"
+  # (AB: Causes problems with o-colors < 3, because o-colors uses
+  # color names that are also valid CSS color strings)
+  ColorKeyword:
+    enabled: false
+
+  # // not /**/
+  Comment:
+    enabled: false
+
   # Disallow "@debug"
   DebugStatement:
     enabled: true
@@ -24,7 +35,7 @@ linters:
     enabled: true
 
   # Warn when the same property appears more than once in the same ruleset
-  # This is not a deal breaker, as authors will may repeat properties
+  # This is not a deal breaker, as authors may repeat properties
   # in the case where both a value and its fallback are needed
   DuplicateProperty:
     enabled: true
@@ -33,6 +44,14 @@ linters:
   ElsePlacement:
     enabled: true
     style: same_line # or 'new_line'
+
+  # Require an empty line between rulesets
+  EmptyLineBetweenBlocks:
+    enabled: false
+
+  # Disallow empty rulesets
+  EmptyRule:
+    enabled: false
 
   # Require a newline at the end of the file
   FinalNewline:
@@ -65,7 +84,7 @@ linters:
     leading_underscore: false
     filename_extension: false
 
-  # Don't check indentation since it's done via another task
+  # Disable indentation liting since it's done via another task
   Indentation:
     enabled: false
 
@@ -75,6 +94,10 @@ linters:
     enabled: true
     style: include_zero
     severity: error
+
+  # Disallow more than one ruleset with the same selector in the same file
+  MergeableSelector:
+    enabled: false
 
   # Allow camelcase but forbid non-alphanumeric characters
   # in mixin, variable and function names.
@@ -93,6 +116,14 @@ linters:
   PlaceholderInExtend:
     enabled: true
     severity: error
+
+  # Require properties to be in alphabetical order
+  # (also possible to specify a specific order)
+  # (AB: Alpha seems a bit weird. Rhys had a tool to do this,
+  # maybe we should set the order here and use this tool)
+  PropertySortOrder:
+    enabled: false
+    order: []
 
   # Disallow unknown CSS property names
   PropertySpelling:
@@ -118,7 +149,7 @@ linters:
     enabled: true
     max_depth: 3
 
-  # Allow camelcase but forbid non-alphanumeric characters
+  # Allow lowercase only, but forbid non-alphanumeric characters
   # in selector names.
   SelectorFormat:
     enabled: true
@@ -173,6 +204,12 @@ linters:
     spaces: 0
     severity: error
 
+  # Use single quotes, not double quotes
+  # (AB: This really doesn't matter IMHO)
+  # Differs from guardian
+  StringQuotes:
+    enabled: false
+
   # Every property value must end with a semicolon
   TrailingSemicolon:
     enabled: true
@@ -187,42 +224,8 @@ linters:
     enabled: true
     severity: error
 
-  # DISABLED
-
-  # "#0f0" not "green"
-  # (AB: Causes problems with o-colors < 3, because o-colors uses color names that are also valid CSS color strings)
-  ColorKeyword:
-    enabled: false
-
-  # // not /**/
-  # (differs from Guardian)
-  Comment:
-    enabled: false
-
-  # Require an empty line between rulesets
-  EmptyLineBetweenBlocks:
-    enabled: false
-
-  # Disallow empty rulesets
-  EmptyRule:
-    enabled: false
-
-  # Disallow more than one ruleset with the same selector in the same file
-  MergeableSelector:
-    enabled: false
-
-  # Require properties to be in alphabetical order
-  # (also possible to specify a specific order)
-  # (AB: Alpha seems a bit weird. Rhys had a tool to do this,
-  # maybe we should set the order here and use this tool)
-  PropertySortOrder:
-    enabled: false
-    order: []
-
-  # Use single quotes, not double quotes
-  # (AB: This really doesn't matter IMHO)
-  # Differs from guardian
-  StringQuotes:
+  # Disable this rule to allow parent references such as "& + * {}"
+  UnnecessaryParentReference:
     enabled: false
 
   # URLs must not contain domain names
@@ -234,11 +237,10 @@ linters:
   UrlQuotes:
     enabled: false
 
-  # Disable this rule to allow parent references such as "& + * {}"
-  UnnecessaryParentReference:
-    enabled: false
-
   # Allow vendor prefixes
+  # (…by disabling the linter that forbids vendor prefixes)
+  # But: ideally products should use autoprefixer or equivalent,
+  # since we might eventually enable this linter.
   VendorPrefixes:
     enabled: false
 
