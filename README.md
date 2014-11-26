@@ -27,10 +27,6 @@ Runs:
 * __installBower()__ globally (if it's not already installed)
 * __runNpmInstall()__ if there is a `package.json` inthe root directory
 * __runBowerInstall()__ using both the Origami Registry and the default Bower registry to resolve dependencies
-* __addEditorConfig(gulp, config)__ Config accepts:
-	- editorconfig: `Boolean` If true, the default Origami '.editorconfig' file will be added to the root of your project (Default: 'false') 
-* __addJsHintRc(gulp, config)__ Config accepts:
-	- jshintrc: `Boolean` If true, the default Origami '.jshintrc' file will be added to the root of your project (Default: 'false') 
 
 The versions that are installed and supported are:
 
@@ -48,7 +44,7 @@ Runs:
 * __js(gulp, config)__ Config accepts:
 	- js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
 	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
-	- buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as one of the following
 		- `String` The name of the transform
@@ -60,8 +56,11 @@ Runs:
 	- standalone: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 * __sass(gulp, config)__ Config accepts:
 	- sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
+	- autoprefixerBrowsers: `Array` An array of strings of [browser names for autoprefixer](https://github.com/postcss/autoprefixer#browsers) to check what prefixes it needs. (Default: `["> 1%", "last 2 versions", "ie > 6", "ff ESR"]`)
+	- autoprefixerCascade: `Boolean` Whether autoprefixer should display CSS prefixed properties [cascaded](https://github.com/postcss/autoprefixer#visual-cascade) (Default: false)
+	- autoprefixerRemove: `Boolean` Remove unneeded prefixes (Default: true)
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
-	- buildDir: `String` Path to directory where the built file will be created. (Default: './build/')
+	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the SASS file with the 'compressed' style option and will also run [csso](https://github.com/css/csso). (Default: 'development')
 
 	_(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
@@ -131,6 +130,14 @@ gulp.task('verify', function() {
 		sass: './src/main.scss'
 	});
 });
+```
+
+Note: to use this you will need to install origami-build-tools *and* gulp as direct dependencies of your project.  Additionally, if you do not have it installed already, you will also need to install gulp globally.
+
+```sh
+npm install --save-dev https://github.com/Financial-Times/origami-build-tools/tarball/master
+npm install --save-dev gulp
+npm install -g gulp
 ```
 
 ## Command Line usage
