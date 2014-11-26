@@ -30,7 +30,7 @@ Runs:
 
 The versions that are installed and supported are:
 
-* SASS: '3.3.14' _(SASS 3.4.x is currently not supported and you may not get the desired result)_
+* Sass: '3.3.14' _(Sass 3.4.x is currently not supported and you may not get the desired result)_
 * scss-lint: '0.27.0'
 * JSHint: '2.5.6'
 * Bower: '1.3.12'
@@ -55,22 +55,22 @@ Runs:
 	- ignoreMissing: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 	- standalone: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 * __sass(gulp, config)__ Config accepts:
-	- sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
+	- sass: `String` Path to your main Sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
 	- autoprefixerBrowsers: `Array` An array of strings of [browser names for autoprefixer](https://github.com/postcss/autoprefixer#browsers) to check what prefixes it needs. (Default: `["> 1%", "last 2 versions", "ie > 6", "ff ESR"]`)
 	- autoprefixerCascade: `Boolean` Whether autoprefixer should display CSS prefixed properties [cascaded](https://github.com/postcss/autoprefixer#visual-cascade) (Default: false)
 	- autoprefixerRemove: `Boolean` Remove unneeded prefixes (Default: true)
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
 	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
-	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the SASS file with the 'compressed' style option and will also run [csso](https://github.com/css/csso). (Default: 'development')
+	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [csso](https://github.com/css/csso). (Default: 'development')
 
 	_(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
 ### test
 
-Tests [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).  If your SASS contains a `$<module-name>-is-silent` variable, then runs:
+Tests [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).  If your Sass contains a `$<module-name>-is-silent` variable, then runs:
 
-* __silentCompilation(gulp)__ Check the SASS outputs no CSS by default
-* __silentCompilation(gulp)__ Check the SASS outputs some CSS with `$<module-name>-is-silent` set to false
+* __silentCompilation(gulp)__ Check the Sass outputs no CSS by default
+* __silentCompilation(gulp)__ Check the Sass outputs some CSS with `$<module-name>-is-silent` set to false
 * __npmTest()__ Runs 'npm test', so whatever test script that you have in you `package.json` will be executed
 
 ### verify
@@ -80,7 +80,7 @@ Lints JavaScript and SCSS against Origami coding standards (see standards for [S
 Runs:
 
 * __scssLint(gulp, config)__ Config accepts:
-	- sass: `String` Path to your main SASS file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
+	- sass: `String` Path to your main Sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
 	- scssLintPath: `String` Path to your custom 'scss-lint.yml' config file. (Default: 'origami-build-tools/config/scss-lint.yml') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 * __jsHint(gulp, config)__ Config accepts:
 	- js: `String` Path to your main Javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key)
@@ -105,9 +105,19 @@ Runs:
 
 Build service demos consist of only HTML, with build service URLs for static resources, and are created in `demos/`
 
-Local demos consist of HTML, CSS and JS (if SASS & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
+Local demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
 
 _(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
+
+### docs
+
+Build component documentation into the `docs` directory.
+
+Runs:
+
+* __sassDoc(gulp, config)__ Sass documentation is built using [SassDoc](http://sassdoc.com/). Config accepts:
+	- sassDir: `String` Path to the directory where you main Sass file is. (Default: '.')
+	- Any option supported by the [SassDoc gulp plugin](http://sassdoc.com/gulp/#options)
 
 ## gulpfile usage
 
