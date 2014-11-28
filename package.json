@@ -12,7 +12,7 @@
 		"node": ">= 0.10.0"
 	},
 	"scripts": {
-		"test": "node_modules/mocha/bin/mocha --recursive"
+		"test": "node_modules/mocha/bin/mocha --recursive -t 5000"
 	},
 	"dependencies": {
 		"bower-config": "^0.5.2",
