@@ -105,6 +105,12 @@ Runs:
 
 Build demos found in the [demo config file](http://origami.ft.com/docs/component-spec/modules/#demo-config-file) into the `demos/` directory.
 
+Config:
+
+* local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Also runs a local server to help you test your demos.
+* demoConfig: `String` The path to the demo config file. Default: `demos/src/config.json`
+* updateorigami: `Boolean` The `demos` property of your `origami.json` file will be updated - to list the demo files that have been created.
+
 Runs:
 
 * __runServer(gulp)__ Starts a local server
