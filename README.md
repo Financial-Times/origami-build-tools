@@ -29,7 +29,7 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 
 	Usage: origami-build-tools <command> [<options>]
 	
-	Commands
+	Commands:
 	   install  Install system and local dependencies
 	   build    Build module in current directory
 	   demo     Build demos into the demos/ directory
@@ -37,16 +37,18 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 	   test     Test if Sass silent compilation follows the Origami specification
 	   docs     Build module documentation into the docs/ directory
 	
-	Options
-	   [--watch]               Re-run every time a file changes
-	   [--local]               Build demos locally, and run them in a browser
-	   [--updateorigami]       Update origami.json with the latest demo files created
-	   [--demoConfig=<path>]   Path to the demos config file. (default: demos/src/config.json)
-	   [--js=<path>]           Main JavaScript file (default: ./src/main.js)
-	   [--sass=<path>]         Main Sass file (default: ./src/main.scss)
-	   [--buildJs=<file>]      Compiled JavaScript file (default: main.js)
-	   [--buildCss=<file>]     Compiled CSS file (default: main.css)
-	   [--buildFolder=<file>]  Compiled assets directory (default: ./build/)
+	Mostly used options include:
+	   [--watch]                    Re-run every time a file changes
+	   [--local]                    Build demos locally, and run them in a browser
+	   [--updateorigami]            Update origami.json with the latest demo files created
+	   [--js=<path>]                Main JavaScript file (default: ./src/main.js)
+	   [--sass=<path>]              Main Sass file (default: ./src/main.scss)
+	   [--buildJs=<file>]           Compiled JavaScript file (default: main.js)
+	   [--buildCss=<file>]          Compiled CSS file (default: main.css)
+	   [--buildFolder=<dir>]        Compiled assets directory (default: ./build/)
+	   [--scssLintPath=<path>]      Custom scss-lint configuration
+	   [--jsHintPath=<path>]        Custom JS Hint configuration
+	   [--editorconfigPath=<path>]  Custom .editorconfig
 
 ### `install`
 
