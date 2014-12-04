@@ -7,7 +7,6 @@
 	"bin": {
 		"origami-build-tools": "./lib/origami-build-tools-cli.js"
 	},
-	"private": true,
 	"engines": {
 		"node": ">= 0.10.0"
 	},
