@@ -4,9 +4,9 @@ Standardised build tools for Origami modules and products developed based on the
 
 ## Installation
 
-1. origami-build-tools need these dependencies to run:
+1. Install these dependencies:
 	* [node.js](http://nodejs.org/)
-	* Ruby (Macs typically ship with Ruby by default)
+	* [Ruby](https://www.ruby-lang.org/en/) (Macs typically ship with Ruby by default)
 
 2. Install the build tools globally:
 
