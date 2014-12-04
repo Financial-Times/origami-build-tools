@@ -5,7 +5,8 @@
   "description": "Origami component development tools.",
   "main": "./lib/origami-build-tools",
   "bin": {
-    "origami-build-tools": "./lib/origami-build-tools-cli.js"
+    "origami-build-tools": "./lib/origami-build-tools-cli.js",
+    "obt": "./lib/origami-build-tools-cli.js"
   },
   "engines": {
     "node": ">= 0.10.0"
