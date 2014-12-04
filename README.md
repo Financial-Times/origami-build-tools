@@ -10,7 +10,7 @@ Standardised build tools for Origami modules and products developed based on the
 
 2. Install the build tools globally:
 
-		npm install -g Financial-Times/origami-build-tools
+		npm install -g origami-build-tools
 
 3. Run the `install` task for the first time will to install required dependencies:
 
@@ -184,7 +184,7 @@ gulp.task('verify', function() {
 Note: to use this you will need to install origami-build-tools *and* gulp as direct dependencies of your project.  Additionally, if you do not have it installed already, you will also need to install gulp globally.
 
 ```sh
-npm install --save-dev Financial-Times/origami-build-tools
+npm install --save-dev origami-build-tools
 npm install --save-dev gulp
 npm install -g gulp
 ```
