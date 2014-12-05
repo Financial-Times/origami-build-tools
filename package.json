@@ -1,7 +1,7 @@
 {
   "name": "origami-build-tools",
   "preferGlobal": true,
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "Origami component development tools.",
   "main": "./lib/origami-build-tools",
   "bin": {
