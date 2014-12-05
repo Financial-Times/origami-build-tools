@@ -1,1 +1,7 @@
-$o-test-is-silent: true;
+@import "src/scss/variables";
+
+@if (not $o-test-is-silent) {
+	div {
+		color: blue;
+	}
+}

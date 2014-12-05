@@ -7,12 +7,15 @@ var fs = require('fs');
 var path = require('path');
 
 var files = require('../../lib/helpers/files');
+var oTestPath = 'test/fixtures/o-test';
 
 describe('Files helper', function() {
-	var oTestPath = 'test/fixtures/o-test';
-
 	before(function() {
 		process.chdir(oTestPath);
+	});
+
+	after(function() {
+		process.chdir('../../..');
 	});
 
 	it('should return correct build folder', function() {
