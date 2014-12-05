@@ -3,17 +3,17 @@
 <!--[if IE 8]>         <html class="o-useragent-ie8 o-hoverable-on"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="o-hoverable-on"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8" />
-    <title>{{oDemoTitle}}</title>
-    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    <script src="//polyfill.webservices.ft.com/v1/polyfill.min.js"></script>
-    <style>body { margin: 0; }.demo-js .o--if-nojs { display: none; }</style>
-    {{{oDemoStyle}}}
+	<meta charset="utf-8" />
+	<title>{{oDemoTitle}}</title>
+	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+	<script src="//polyfill.webservices.ft.com/v1/polyfill.min.js"></script>
+	<style>body { margin: 0; } .demo-js .o--if-nojs { display: none; }</style>
+	<script>(function(d) { d.className = d.className + ' demo-js'; })(document.documentElement);</script>
+	{{{oDemoStyle}}}
 </head>
 <body class="{{oDemoBodyClasses}}">
-    <script>(function(d) {var b = d.getElementsByTagName('body')[0];b.className = b.className + ' demo-js';})(document);</script>
-    {{{oDemoTpl}}}
-    {{{oDemoScript}}}
-    <script src="//registry.origami.ft.com/embedapi?autoload=resize"></script>
+{{{oDemoTpl}}}
+{{{oDemoScript}}}
+<script src="//registry.origami.ft.com/embedapi?autoload=resize"></script>
 </body>
 </html>
