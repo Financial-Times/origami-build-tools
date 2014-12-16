@@ -155,7 +155,7 @@ Build component documentation into the `docs` directory.
 Runs:
 
 * __sassDoc(gulp, config)__ Sass documentation is built using [SassDoc](http://sassdoc.com/). Config accepts:
-	- sassDir: `String` Path to the directory where you main Sass file is. (Default: '.')
+	- sassDir: `String` Path to where you want the 'docs' directory to be generated. (Default: '.')
 	- Any option supported by the [SassDoc gulp plugin](http://sassdoc.com/gulp/#options)
 
 ## gulpfile usage
