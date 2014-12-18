@@ -11,7 +11,7 @@ var path = require('path');
 var demo = require('../../lib/tasks/demo');
 var oTestPath = 'test/fixtures/o-test';
 
-describe('Demo task', function() {
+xdescribe('Demo task', function() {
 
 	before(function() {
 		process.chdir(oTestPath)
