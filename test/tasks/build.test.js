@@ -136,7 +136,6 @@ describe('Build task', function() {
 		});
 
 		it('should work with default options', function(done) {
-			console.log(fs.readFileSync('bower.json', 'utf8'));
 			build.sass(gulp)
 				.on('end', function() {
 					var builtCss = fs.readFileSync('build/main.css', 'utf8');

@@ -10,7 +10,7 @@ var path = require('path');
 var docs = require('../../lib/tasks/docs');
 var oTestPath = 'test/fixtures/o-test';
 
-xdescribe('Docs task', function() {
+describe('Docs task', function() {
 	before(function() {
 		process.chdir(oTestPath);
 	});
