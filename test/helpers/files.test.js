@@ -9,7 +9,7 @@ var path = require('path');
 var files = require('../../lib/helpers/files');
 var oTestPath = 'test/fixtures/o-test';
 
-xdescribe('Files helper', function() {
+describe('Files helper', function() {
 	before(function() {
 		process.chdir(oTestPath);
 	});
