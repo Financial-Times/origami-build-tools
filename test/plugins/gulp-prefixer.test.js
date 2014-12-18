@@ -6,7 +6,7 @@ var File = require('vinyl');
 
 var prefixer = require('../../lib/plugins/gulp-prefixer.js');
 
-xdescribe('gulp-prefixer', function() {
+describe('gulp-prefixer', function() {
 	describe('in buffer mode', function() {
 
 		it('should prepend text', function(done) {
