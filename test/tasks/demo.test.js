@@ -3,6 +3,7 @@
 var expect = require('expect.js');
 var gulp = require('gulp');
 var extend = require('node.extend');
+var rimraf = require('rimraf');
 
 var fs = require('fs');
 var path = require('path');
@@ -19,10 +20,11 @@ describe('Demo task', function() {
 	after(function() {
 		fs.unlink('demos/src/test1.mustache');
 		fs.unlink('demos/src/test2.mustache');
+		fs.unlink('bower.json');
 		process.chdir('../../..');
 	});
 
-	xdescribe('Run server', function() {
+	describe('Run server', function() {
 		it('should run a server', function(done) {
 			demo.runServer(gulp)
 				.then(function(server) {
@@ -34,7 +36,7 @@ describe('Demo task', function() {
 	});
 
 	describe('Build demos', function() {
-		xit('should fail if there is not a bower.json file', function(done) {
+		it('should fail if there is not a bower.json file', function(done) {
 			demo(gulp)
 				.catch(function(err) {
 					setTimeout(function() {
@@ -44,19 +46,22 @@ describe('Demo task', function() {
 				});
 		});
 
-		xit('should fail if there is not a config file', function(done) {
+		it('should fail if there is not a config file', function(done) {
 			process.chdir('../../..');
+			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
 			demo(gulp)
 				.catch(function(err) {
 					setTimeout(function() {
 						expect(err).to.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js');
 					});
+					fs.unlink('bower.json');
 					process.chdir(oTestPath);
 					done();
 				});
 		});
 
-		xit('should not error with a custom config file', function(done) {
+		it('should not error with a custom config file', function(done) {
+			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
 			fs.renameSync('demos/src/config.json', 'demos/src/mysupercoolconfig.json');
 			demo(gulp, {
 				demoConfig: 'demos/src/mysupercoolconfig.json'
@@ -69,7 +74,7 @@ describe('Demo task', function() {
 			});
 		});
 
-		xit('should not fail if there is a config.json file', function(done) {
+		it('should not fail if there is a config.json file', function(done) {
 			demo(gulp)
 				.catch(function(err) {
 					setTimeout(function() {
@@ -79,7 +84,7 @@ describe('Demo task', function() {
 				});
 		});
 
-		xit('should not fail if there is a config.js file', function(done) {
+		it('should not fail if there is a config.js file', function(done) {
 			var config = fs.readFileSync('demos/src/config.json');
 			fs.writeFileSync('demos/src/config.js', 'module.exports = ' + config, 'utf8');
 			demo(gulp)
@@ -92,7 +97,7 @@ describe('Demo task', function() {
 				});
 		});
 
-		xit('should not fail if it\'s using the old config format', function(done) {
+		it('should not fail if it\'s using the old config format', function(done) {
 			demo(gulp, {
 				demoConfig: 'demos/src/oldconfig.json'
 			})
@@ -104,7 +109,7 @@ describe('Demo task', function() {
 			});
 		});
 
-		xit('should fail if there are demos with the same name', function(done) {
+		it('should fail if there are demos with the same name', function(done) {
 			var demoConfig = JSON.parse(fs.readFileSync('demos/src/config.json', 'utf8'));
 			demoConfig.demos[1].name = 'test1';
 			fs.writeFileSync('demos/src/config2.json', JSON.stringify(demoConfig));
@@ -119,7 +124,6 @@ describe('Demo task', function() {
 		});
 
 		it('should build demo html', function(done) {
-			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
 			demo(gulp)
@@ -143,12 +147,12 @@ describe('Demo task', function() {
 				expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.be('div{color:blue}\n');
 				fs.unlink('demos/test1.html');
 				fs.unlink('demos/test2.html');
-				rimraf.sync('demos/link');
+				rimraf.sync('demos/local');
 				done();
 			});
 		});
 
-		xit('should update origami.json with demos', function(done) {
+		it('should update origami.json with demos', function(done) {
 			var origamiConfig = fs.readFileSync('origami.json', 'utf8');
 			demo(gulp, {
 				updateorigami: true
