@@ -1,7 +1,7 @@
 {
   "name": "origami-build-tools",
   "preferGlobal": true,
-  "version": "2.6.0",
+  "version": "2.6.1",
   "description": "Origami component development tools.",
   "main": "./lib/origami-build-tools",
   "bin": {
@@ -12,7 +12,7 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha --recursive -t 8000"
+    "test": "node_modules/mocha/bin/mocha --recursive -t 10000"
   },
   "dependencies": {
     "bower-config": "^0.5.2",
@@ -50,6 +50,7 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "mocha": "^2.0.1",
+    "rimraf": "^2.2.8",
     "sinon": "^1.12.1"
   },
   "repository": {
