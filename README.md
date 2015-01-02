@@ -82,7 +82,7 @@ Runs:
 	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
 	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
-	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env id 'development'
+	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'
 	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as one of the following
 		- `String` The name of the transform
 		- `Array` [config, 'transform-name'] Where custom config needs to be passed into the transform use an array containing the config object followed by the transform name
