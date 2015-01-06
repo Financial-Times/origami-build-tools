@@ -166,6 +166,8 @@ describe('Demo task', function() {
 				newOrigamiConfig.demos = demosConfig;
 				expect(JSON.stringify(updatedOrigamiConfig)).to.be(JSON.stringify(newOrigamiConfig));
 				fs.writeFileSync('origami.json', origamiConfig, 'utf8');
+				fs.unlink('demos/test1.html');
+				fs.unlink('demos/test2.html');
 				done();
 			});
 		});
