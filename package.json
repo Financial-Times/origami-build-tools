@@ -1,7 +1,7 @@
 {
   "name": "origami-build-tools",
   "preferGlobal": true,
-  "version": "2.6.0",
+  "version": "2.6.1",
   "description": "Origami component development tools.",
   "main": "./lib/origami-build-tools",
   "bin": {
@@ -55,5 +55,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Financial-Times/origami-build-tools.git"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.0.1",
+    "sinon": "^1.12.1"
   }
 }
