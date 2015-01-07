@@ -10,6 +10,7 @@
 	"unused": "vars",
 	"strict": true,
 	"trailing": true,
+	"node" : true,
 
 	"esnext": true,
 	"expr": true,
