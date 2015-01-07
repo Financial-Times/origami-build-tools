@@ -82,6 +82,7 @@ Runs:
 	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
 	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
+	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'
 	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as one of the following
 		- `String` The name of the transform
 		- `Array` [config, 'transform-name'] Where custom config needs to be passed into the transform use an array containing the config object followed by the transform name
@@ -155,7 +156,7 @@ Build component documentation into the `docs` directory.
 Runs:
 
 * __sassDoc(gulp, config)__ Sass documentation is built using [SassDoc](http://sassdoc.com/). Config accepts:
-	- sassDir: `String` Path to the directory where you main Sass file is. (Default: '.')
+	- sassDir: `String` Path to where you want the 'docs' directory to be generated. (Default: '.')
 	- Any option supported by the [SassDoc gulp plugin](http://sassdoc.com/gulp/#options)
 
 ## gulpfile usage

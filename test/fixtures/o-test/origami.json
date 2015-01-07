@@ -1,0 +1,19 @@
+{
+    "description": "Test module",
+    "origamiType": "module",
+    "origamiVersion": 1,
+    "support": "origami.support@ft.com",
+    "supportStatus": "active",
+    "demos": [
+        {
+            "path": "/demos/test1.html",
+            "expanded": true,
+            "description": "First test"
+        },
+        {
+            "path": "/demos/test2.html",
+            "expanded": false,
+            "description": "Second test"
+        }
+    ]
+}

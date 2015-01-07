@@ -15,6 +15,10 @@ gulp.task('test', function() {
 	obt.test.npmTest(gulp);
 });
 
+gulp.task('install', function() {
+	obt.install();
+});
+
 gulp.task('watch', function() {
 	gulp.watch('./lib/**/*', ['verify', 'test']);
 });
