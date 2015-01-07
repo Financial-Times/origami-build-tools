@@ -12,7 +12,7 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha --recursive -t 7000"
+    "test": "node_modules/mocha/bin/mocha --recursive -t 10000"
   },
   "dependencies": {
     "bower-config": "^0.5.2",
@@ -47,6 +47,12 @@
     "vinyl-source-stream": "^1.0.0",
     "which": "^1.0.5"
   },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.0.1",
+    "rimraf": "^2.2.8",
+    "sinon": "^1.12.1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Financial-Times/origami-build-tools.git"
@@ -54,6 +60,7 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "mocha": "^2.0.1",
+    "rimraf": "^2.2.8",
     "sinon": "^1.12.1"
   }
 }
