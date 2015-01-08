@@ -28,7 +28,7 @@ automatically re-build the module's demos and assets every time a file changes:
 All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them return a stream. They are structured in 5 higher level tasks, and each one has one or more subtasks.
 
 	Usage: origami-build-tools <command> [<options>]
-
+	
 	Commands:
 	   install  Install system and local dependencies
 	   build    Build module in current directory
@@ -36,7 +36,7 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 	   verify   Lint code and verify if module structure follows the Origami specification
 	   test     Test if Sass silent compilation follows the Origami specification
 	   docs     Build module documentation into the docs/ directory
-
+	
 	Mostly used options include:
 	   [--watch]                    Re-run every time a file changes
 	   [--local]                    Build demos locally, and preview them in a browser
@@ -78,12 +78,11 @@ Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
 Runs:
 
 * __js(gulp, config)__ Config accepts:
-	- js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key)
+	- js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
 	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
 	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'
-	- compress: `Boolean|Object` Set to true to minify js and sass.  Pass object to specify different options for js and sass, eg `{js:true,sass:false}`
 	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as one of the following
 		- `String` The name of the transform
 		- `Array` [config, 'transform-name'] Where custom config needs to be passed into the transform use an array containing the config object followed by the transform name
@@ -93,12 +92,11 @@ Runs:
 	- ignoreMissing: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 	- standalone: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 * __sass(gulp, config)__ Config accepts:
-	- sass: `String` Path to your main Sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
+	- sass: `String` Path to your main Sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
 	- autoprefixerBrowsers: `Array` An array of strings of [browser names for autoprefixer](https://github.com/postcss/autoprefixer#browsers) to check what prefixes it needs. (Default: `["> 1%", "last 2 versions", "ie > 6", "ff ESR"]`)
 	- autoprefixerCascade: `Boolean` Whether autoprefixer should display CSS prefixed properties [cascaded](https://github.com/postcss/autoprefixer#visual-cascade) (Default: false)
 	- autoprefixerRemove: `Boolean` Remove unneeded prefixes (Default: true)
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
-	- compress: `Boolean|Object` Set to true to minify js and sass.  Pass object to specify different options for js and sass, eg `{js:false,sass:true}`
 	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [csso](https://github.com/css/csso). (Default: 'development')
 
@@ -144,7 +142,7 @@ Runs:
 
 ### `test`
 
-Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).
+Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).  
 If a `$<module-name>-is-silent` variable is found, then runs:
 
 * __silentCompilation(gulp)__ Check the Sass outputs no CSS by default
@@ -163,7 +161,7 @@ Runs:
 
 ## gulpfile usage
 
-Use the build tools in your own Gulp file to incorporate the Origami build process into a *product* (don't use this method if you are building an Origami component). An in depth explanation of how to use the `origami-build-tools` in your product to build Origami modules can be found in the [Origami spec](http://origami.ft.com/docs/developer-guide/building-modules/).
+Use the build tools in your own Gulp file to incorporate the Origami build process into a *product* (don't use this method if you are building an Origami component). An in depth explanation of how to use the `origami-build-tools` in your product to build Origami modules can be found in the [Origami spec](http://origami.ft.com/docs/developer-guide/building-modules/).  
 
 To run these tasks in your `gulpfile.js`, you only need to require `origami-build-tools` and run the task or subtask you need, passing gulp and an optional config object.
 
