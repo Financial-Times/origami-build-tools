@@ -12,5 +12,6 @@
     "immed": true,
     "trailing": true,
     "smarttabs": true,
-    "node": true
+    "node": true,
+    "predef": ["describe", "it", "before", "after", "afterEach"]
 }

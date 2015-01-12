@@ -4,10 +4,11 @@ var expect = require('expect.js');
 var gulp = require('gulp');
 
 var fs = require('fs');
-var path = require('path');
 
 var build = require('../../lib/tasks/build');
 var oTestPath = 'test/fixtures/o-test';
+
+var rimraf = require('rimraf');
 
 describe('Build task', function() {
 
@@ -30,15 +31,11 @@ describe('Build task', function() {
 		});
 
 		after(function() {
-			fs.unlink('bower.json');
+			rimraf.sync('bower.json');
 		});
 
 		afterEach(function() {
-			if (fs.existsSync('build/main.js')) {
-				fs.unlink('build/main.js');
-				fs.rmdir('build');
-			}
-
+			rimraf.sync('build');
 		});
 
 		it('should work with default options', function(done) {
@@ -90,8 +87,7 @@ describe('Build task', function() {
 					expect(builtJs.indexOf('sourceMappingURL')).to.not.be(-1);
 					expect(builtJs.indexOf('var Test')).to.not.be(-1);
 					expect(builtJs.indexOf('function Test() {\n\tvar name = \'test\';\n};')).to.not.be(-1);
-					fs.unlink('test-build/main.js');
-					fs.rmdir('test-build');
+					rimraf.sync('test-build');
 					done();
 				});
 		});
@@ -106,8 +102,37 @@ describe('Build task', function() {
 					expect(builtJs.indexOf('sourceMappingURL')).to.not.be(-1);
 					expect(builtJs.indexOf('var Test')).to.not.be(-1);
 					expect(builtJs.indexOf('function Test() {\n\tvar name = \'test\';\n};')).to.not.be(-1);
-					fs.unlink('build/bundle.js');
-					fs.rmdir('build');
+					done();
+				});
+		});
+
+		it('should build a hashed version of the js', function(done) {
+			build
+				.js(gulp, {
+					hash: true
+				})
+				.on('end', function() {
+					var builtJsJson = fs.readFileSync('build/main.js-asset-hash.json', 'utf8');
+					expect(builtJsJson.indexOf('main.js')).to.not.be(-1);
+					var jsFileName = JSON.parse(builtJsJson)['main.js'],
+						jsFileContents = fs.readFileSync('build/' + jsFileName, 'utf8');
+					expect(jsFileContents.length).to.be.greaterThan(1);
+					done();
+				});
+		});
+
+		it('should build a hashed version of the js with a bespoke filename', function(done) {
+			build
+				.js(gulp, {
+					buildJs: 'dooDah.js',
+					hash: true
+				})
+				.on('end', function() {
+					var builtJsJson = fs.readFileSync('build/dooDah.js-asset-hash.json', 'utf8');
+					expect(builtJsJson.indexOf('dooDah.js')).to.not.be(-1);
+					var jsFileName = JSON.parse(builtJsJson)['dooDah.js'];
+					var jsFileContents = fs.readFileSync('build/' + jsFileName, 'utf8');
+					expect(jsFileContents.length).to.be.greaterThan(1);
 					done();
 				});
 		});
@@ -124,15 +149,13 @@ describe('Build task', function() {
 		});
 
 		after(function() {
-			fs.unlink('bower.json');
+			rimraf.sync('bower.json');
+			//TODO: get this working - the .sass-cache folder doesn't currently get deleted on my local machine
+			rimraf.sync('.sass-cache');
 		});
 
 		afterEach(function() {
-			if (fs.existsSync('build/main.css')) {
-				fs.unlink('build/main.css');
-				fs.rmdir('build');
-			}
-
+			rimraf.sync('build');
 		});
 
 		it('should work with default options', function(done) {
@@ -176,8 +199,7 @@ describe('Build task', function() {
 				.on('end', function() {
 					var builtCss = fs.readFileSync('test-build/main.css', 'utf8');
 					expect(builtCss).to.be('div {\n  color: blue; }\n');
-					fs.unlink('test-build/main.css');
-					fs.rmdir('test-build');
+					rimraf.sync('test-build');
 					done();
 				});
 		});
@@ -190,8 +212,39 @@ describe('Build task', function() {
 				.on('end', function() {
 					var builtCss = fs.readFileSync('build/bundle.css', 'utf8');
 					expect(builtCss).to.be('div {\n  color: blue; }\n');
-					fs.unlink('build/bundle.css');
-					fs.rmdir('build');
+					done();
+				});
+		});
+
+
+		it('should build a hashed version of the css', function(done) {
+			build
+				.sass(gulp, {
+					hash: true
+				})
+				.on('end', function() {
+					var builtCssJson = fs.readFileSync('build/main.css-asset-hash.json', 'utf8');
+					expect(builtCssJson.indexOf('main.css')).to.not.be(-1);
+					var cssFileName = JSON.parse(builtCssJson)['main.css'],
+						cssFileContents = fs.readFileSync('build/' + cssFileName, 'utf8');
+					expect(cssFileContents.length).to.be.greaterThan(1);
+					done();
+				});
+		});
+
+
+		it('should build a hashed version of the css to a custom filename', function(done) {
+			build
+				.sass(gulp, {
+					buildCss: 'dooDah.css',
+					hash: true
+				})
+				.on('end', function() {
+					var builtCssJson = fs.readFileSync('build/' + 'dooDah.css' + '-asset-hash.json', 'utf8');
+					expect(builtCssJson.indexOf('dooDah.css')).to.not.be(-1);
+					var cssFileName = JSON.parse(builtCssJson)['dooDah.css'];
+					var cssFileContents = fs.readFileSync('build/' + cssFileName, 'utf8');
+					expect(cssFileContents.length).to.be.greaterThan(1);
 					done();
 				});
 		});

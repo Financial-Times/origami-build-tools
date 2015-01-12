@@ -25,6 +25,7 @@
     "gulp": "^3.8.7",
     "gulp-autoprefixer": "^2.0.0",
     "gulp-csso": "^0.2.9",
+    "gulp-hash": "^2.0.3",
     "gulp-if": "^1.2.5",
     "gulp-jshint": "^1.8.4",
     "gulp-lintspaces": "^0.2.2",
@@ -37,6 +38,7 @@
     "gulp-uglify": "^1.0.1",
     "gulp-util": "^3.0.1",
     "gulp-webserver": "^0.8.3",
+    "merge-stream": "^0.1.6",
     "minimist": "0.0.8",
     "node.extend": "^1.0.9",
     "npmconf": "^1.1.5",
@@ -45,6 +47,7 @@
     "textrequireify": "^1.0.0",
     "through2": "^0.6.2",
     "vinyl-source-stream": "^1.0.0",
+    "vinyl": "^0.4.6",
     "which": "^1.0.5"
   },
   "devDependencies": {
