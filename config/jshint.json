@@ -22,5 +22,6 @@
 
 	"browser": true,
 	"nonstandard": true,
-	"predef": ["require", "module", "exports", "requireText"]
+	"predef": ["requireText"],
+	"node": true
 }
