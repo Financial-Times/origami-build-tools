@@ -2,10 +2,6 @@
 
 Standardised build tools for Origami modules and products developed based on these modules.
 
-## Licence
-This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
-
-
 ## Installation
 
 1. Install these dependencies:
@@ -195,3 +191,6 @@ npm install --save-dev origami-build-tools
 npm install --save-dev gulp
 npm install -g gulp
 ```
+
+## Licence
+This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
