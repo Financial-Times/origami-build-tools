@@ -21,6 +21,7 @@
     "gulp": "^3.8.7",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-csso": "^0.2.9",
+    "gulp-hash": "^2.0.3",
     "gulp-if": "^1.2.5",
     "gulp-jshint": "^1.8.4",
     "gulp-lintspaces": "^0.2.2",
