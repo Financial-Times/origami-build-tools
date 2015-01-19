@@ -103,7 +103,7 @@ describe('Demo task', function() {
 			})
 			.catch(function(err) {
 				setTimeout(function() {
-					expect(err.toString()).to.be('Error: Demo template not found: /Users/alberto.elias/origami/origami-build-tools/test/fixtures/o-test/demos/src/test1.mustache');
+					expect(err.toString()).to.be('Error: Demo template not found: ' + path.resolve(process.cwd(), 'demos/src/test1.mustache'));
 				});
 				done();
 			});
