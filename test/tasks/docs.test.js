@@ -21,8 +21,9 @@ describe('Docs task', function() {
 
 	describe('SassDoc', function() {
 		it('should generate SassDoc in default directory', function(done) {
-			docs.sassDoc(gulp)
-				.on('data', function() {
+			var stream = docs.sassDoc(gulp);
+			stream.resume();
+			stream.on('end', function() {
 					expect(fs.existsSync('./docs/sass/index.html')).to.be(true);
 					expect(fs.existsSync('./docs/sass/assets')).to.be(true);
 					rimraf.sync('./docs');
@@ -31,10 +32,11 @@ describe('Docs task', function() {
 		});
 
 		it('should generate SassDoc in custom directory', function(done) {
-			docs.sassDoc(gulp, {
+			var stream = docs.sassDoc(gulp, {
 				sassDir: 'test'
-			})
-			.on('data', function() {
+			});
+			stream.resume();
+			stream.on('end', function() {
 				expect(fs.existsSync('./test/docs/sass/index.html')).to.be(true);
 				expect(fs.existsSync('./test/docs/sass/assets')).to.be(true);
 				rimraf.sync('./test');
