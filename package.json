@@ -49,9 +49,8 @@
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
+    "fs-extra": "^0.15.0",
     "mocha": "^2.0.1",
-    "rimraf": "^2.2.8",
-    "sinon": "^1.12.1",
     "vinyl": "^0.4.6"
   },
   "repository": {

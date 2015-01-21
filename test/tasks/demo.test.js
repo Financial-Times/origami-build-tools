@@ -3,25 +3,27 @@
 var expect = require('expect.js');
 var gulp = require('gulp');
 var extend = require('node.extend');
-var rimraf = require('rimraf');
 
-var fs = require('fs');
+var fs = require('fs-extra');
 var path = require('path');
 
 var demo = require('../../lib/tasks/demo');
+
+var obtPath = process.cwd();
 var oTestPath = 'test/fixtures/o-test';
+var pathSuffix = '-demo';
+var demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
 describe('Demo task', function() {
 
 	before(function() {
-		process.chdir(oTestPath)
+		fs.copySync(path.resolve(obtPath, oTestPath), demoTestPath);
+		process.chdir(demoTestPath);
 	});
 
 	after(function() {
-		fs.unlink('demos/src/test1.mustache');
-		fs.unlink('demos/src/test2.mustache');
-		fs.unlink('bower.json');
-		process.chdir('../../..');
+		process.chdir(obtPath);
+		fs.removeSync(demoTestPath);
 	});
 
 	describe('Run server', function() {
@@ -47,29 +49,29 @@ describe('Demo task', function() {
 		});
 
 		it('should fail if there is not a config file', function(done) {
-			process.chdir('../../..');
+			process.chdir(obtPath);
 			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
 			demo(gulp)
 				.catch(function(err) {
 					setTimeout(function() {
 						expect(err).to.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js');
 					});
-					fs.unlink('bower.json');
-					process.chdir(oTestPath);
+					fs.unlink(path.resolve(obtPath, 'bower.json'));
+					process.chdir(demoTestPath);
 					done();
 				});
 		});
 
 		it('should not error with a custom config file', function(done) {
 			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
-			fs.renameSync('demos/src/config.json', 'demos/src/mysupercoolconfig.json');
+			fs.copySync('demos/src/config.json', 'demos/src/mysupercoolconfig.json');
 			demo(gulp, {
 				demoConfig: 'demos/src/mysupercoolconfig.json'
 			}).catch(function(err) {
 				setTimeout(function() {
 					expect(err).to.not.be('Couldn\'t find demos config path, checked: demos/src/mysupercoolconfigs.json');
 				});
-				fs.renameSync('demos/src/mysupercoolconfig.json', 'demos/src/config.json');
+				fs.unlink('demos/src/mysupercoolconfig.json');
 				done();
 			});
 		});
@@ -147,7 +149,7 @@ describe('Demo task', function() {
 				expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.be('div{color:blue}\n');
 				fs.unlink('demos/test1.html');
 				fs.unlink('demos/test2.html');
-				rimraf.sync('demos/local');
+				fs.removeSync('demos/local');
 				done();
 			});
 		});

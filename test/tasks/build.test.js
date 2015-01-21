@@ -3,24 +3,22 @@
 var expect = require('expect.js');
 var gulp = require('gulp');
 
-var fs = require('fs');
+var fs = require('fs-extra');
 var path = require('path');
 
 var build = require('../../lib/tasks/build');
+
+var obtPath = process.cwd();
 var oTestPath = 'test/fixtures/o-test';
 
 describe('Build task', function() {
-
-	before(function() {
-		process.chdir(oTestPath);
-	});
-
-	after(function() {
-		process.chdir('../../..');
-	});
-
 	describe('Build Js', function() {
+		var pathSuffix = '-build-js';
+		var buildTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
+
 		before(function() {
+			fs.copySync(path.resolve(obtPath, oTestPath), buildTestPath);
+			process.chdir(buildTestPath);
 			fs.writeFileSync('bower.json', JSON.stringify(
 				{
 					name: "o-test",
@@ -30,7 +28,8 @@ describe('Build task', function() {
 		});
 
 		after(function() {
-			fs.unlink('bower.json');
+			process.chdir(obtPath);
+			fs.removeSync(buildTestPath);
 		});
 
 		afterEach(function() {
@@ -38,7 +37,6 @@ describe('Build task', function() {
 				fs.unlink('build/main.js');
 				fs.rmdir('build');
 			}
-
 		});
 
 		it('should work with default options', function(done) {
@@ -114,7 +112,12 @@ describe('Build task', function() {
 	});
 
 	describe('Build Sass', function() {
+		var pathSuffix = '-build-sass';
+		var buildTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
+
 		before(function() {
+			fs.copySync(path.resolve(obtPath, oTestPath), buildTestPath);
+			process.chdir(buildTestPath);
 			fs.writeFileSync('bower.json', JSON.stringify(
 				{
 					name: "o-test",
@@ -124,7 +127,8 @@ describe('Build task', function() {
 		});
 
 		after(function() {
-			fs.unlink('bower.json');
+			process.chdir(obtPath);
+			fs.removeSync(path.resolve(obtPath, buildTestPath));
 		});
 
 		afterEach(function() {
@@ -132,7 +136,6 @@ describe('Build task', function() {
 				fs.unlink('build/main.css');
 				fs.rmdir('build');
 			}
-
 		});
 
 		it('should work with default options', function(done) {

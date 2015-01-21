@@ -2,7 +2,6 @@
 
 var expect = require('expect.js');
 var gulp = require('gulp');
-var rimraf = require('rimraf');
 
 var fs = require('fs');
 var path = require('path');

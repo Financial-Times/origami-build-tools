@@ -2,12 +2,13 @@
 
 var expect = require('expect.js');
 var gulp = require('gulp');
-var rimraf = require('rimraf');
 
-var fs = require('fs');
+var fs = require('fs-extra');
 var path = require('path');
 
 var docs = require('../../lib/tasks/docs');
+
+var obtPath = process.cwd();
 var oTestPath = 'test/fixtures/o-test';
 
 describe('Docs task', function() {
@@ -16,7 +17,7 @@ describe('Docs task', function() {
 	});
 
 	after(function() {
-		process.chdir('../../..');
+		process.chdir(obtPath);
 	});
 
 	describe('SassDoc', function() {
@@ -26,7 +27,7 @@ describe('Docs task', function() {
 			stream.on('end', function() {
 					expect(fs.existsSync('./docs/sass/index.html')).to.be(true);
 					expect(fs.existsSync('./docs/sass/assets')).to.be(true);
-					rimraf.sync('./docs');
+					fs.removeSync('./docs');
 					done();
 				});
 		});
@@ -39,7 +40,7 @@ describe('Docs task', function() {
 			stream.on('end', function() {
 				expect(fs.existsSync('./test/docs/sass/index.html')).to.be(true);
 				expect(fs.existsSync('./test/docs/sass/assets')).to.be(true);
-				rimraf.sync('./test');
+				fs.removeSync('./test');
 				done();
 			});
 		});
