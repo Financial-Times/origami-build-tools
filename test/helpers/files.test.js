@@ -84,6 +84,12 @@ describe('Files helper', function() {
 	});
 
 	describe('Bower.json', function() {
+		beforeEach(function() {
+			if (fs.existsSync(path.resolve(filesTestPath, 'bower.json'))) {
+				fs.unlink(path.resolve(filesTestPath, 'bower.json'));
+			}
+		});
+
 		afterEach(function() {
 			fs.unlink(path.resolve(filesTestPath, 'bower.json'));
 		});
@@ -102,6 +108,12 @@ describe('Files helper', function() {
 	});
 
 	describe('Package.json', function() {
+		beforeEach(function() {
+			if (fs.existsSync(path.resolve(filesTestPath, 'package.json'))) {
+				fs.unlink(path.resolve(filesTestPath, 'package.json'));
+			}
+		});
+
 		afterEach(function() {
 			fs.unlink(path.resolve(filesTestPath, 'package.json'));
 		});
