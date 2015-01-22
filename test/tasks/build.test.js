@@ -1,3 +1,4 @@
+/* global describe, it, before, after, afterEach */
 'use strict';
 
 var expect = require('expect.js');
@@ -43,9 +44,9 @@ describe('Build task', function() {
 			build.js(gulp)
 				.on('end', function() {
 					var builtJs = fs.readFileSync('build/main.js', 'utf8');
-					expect(builtJs.indexOf('sourceMappingURL')).to.not.be(-1);
-					expect(builtJs.indexOf('var Test')).to.not.be(-1);
-					expect(builtJs.indexOf('function Test() {\n\tvar name = \'test\';\n};')).to.not.be(-1);
+					expect(builtJs).to.contain('sourceMappingURL');
+					expect(builtJs).to.contain('var Test');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					done();
 				});
 		});
@@ -57,9 +58,9 @@ describe('Build task', function() {
 				})
 				.on('end', function() {
 					var builtJs = fs.readFileSync('build/main.js', 'utf8');
-					expect(builtJs.indexOf('sourceMappingURL')).to.be(-1);
-					expect(builtJs.indexOf('var Test')).to.be(-1);
-					expect(builtJs.indexOf('function Test() {\n\tvar name = \'test\';\n};')).to.be(-1);
+					expect(builtJs).to.not.contain('sourceMappingURL');
+					expect(builtJs).to.not.contain('var Test');
+					expect(builtJs).to.not.contain('function Test() {\n\tvar name = \'test\';');
 					done();
 			});
 		});
@@ -71,9 +72,9 @@ describe('Build task', function() {
 				})
 				.on('end', function() {
 					var builtJs = fs.readFileSync('build/main.js', 'utf8');
-					expect(builtJs.indexOf('sourceMappingURL')).to.not.be(-1);
-					expect(builtJs.indexOf('var Test')).to.be(-1);
-					expect(builtJs.indexOf('function Test() {\n\tvar name = \'test\';\n};')).to.not.be(-1);
+					expect(builtJs).to.contain('sourceMappingURL');
+					expect(builtJs).to.not.contain('var Test');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					done();
 				});
 		});
@@ -85,9 +86,9 @@ describe('Build task', function() {
 				})
 				.on('end', function() {
 					var builtJs = fs.readFileSync('test-build/main.js', 'utf8');
-					expect(builtJs.indexOf('sourceMappingURL')).to.not.be(-1);
-					expect(builtJs.indexOf('var Test')).to.not.be(-1);
-					expect(builtJs.indexOf('function Test() {\n\tvar name = \'test\';\n};')).to.not.be(-1);
+					expect(builtJs).to.contain('sourceMappingURL');
+					expect(builtJs).to.contain('var Test');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					fs.unlink('test-build/main.js');
 					fs.rmdir('test-build');
 					done();
@@ -101,9 +102,9 @@ describe('Build task', function() {
 				})
 				.on('end', function() {
 					var builtJs = fs.readFileSync('build/bundle.js', 'utf8');
-					expect(builtJs.indexOf('sourceMappingURL')).to.not.be(-1);
-					expect(builtJs.indexOf('var Test')).to.not.be(-1);
-					expect(builtJs.indexOf('function Test() {\n\tvar name = \'test\';\n};')).to.not.be(-1);
+					expect(builtJs).to.contain('sourceMappingURL');
+					expect(builtJs).to.contain('var Test');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					fs.unlink('build/bundle.js');
 					fs.rmdir('build');
 					done();

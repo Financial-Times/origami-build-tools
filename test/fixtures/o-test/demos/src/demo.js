@@ -1,1 +1,1 @@
-var demo = require('../../main');
+var demo = require('../../main');  // jshint ignore:line

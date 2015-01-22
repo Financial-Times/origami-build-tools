@@ -1,10 +1,10 @@
+/* global describe, it, before, after */
 'use strict';
 
 var expect = require('expect.js');
 var gulp = require('gulp');
 
 var fs = require('fs-extra');
-var path = require('path');
 
 var docs = require('../../lib/tasks/docs');
 
