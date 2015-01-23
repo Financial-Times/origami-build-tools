@@ -73,7 +73,6 @@ describe('Verify task', function() {
 		var verifiedOrigamiJson = verify.origamiJson();
 		expect(verifiedOrigamiJson.valid).to.be(true);
 		expect(verifiedOrigamiJson.message.length).to.be(0);
-		var origamiJson = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
 		fs.writeFileSync('origami.json', JSON.stringify({}), 'utf8');
 		verifiedOrigamiJson = verify.origamiJson();
 		expect(verifiedOrigamiJson.valid).to.be(false);
