@@ -46,7 +46,6 @@
     "textrequireify": "^1.0.0",
     "through2": "^0.6.2",
     "vinyl-source-stream": "^1.0.0",
-    "vinyl": "^0.4.6",
     "which": "^1.0.5"
   },
   "devDependencies": {
