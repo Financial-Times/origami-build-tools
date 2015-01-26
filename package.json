@@ -1,6 +1,5 @@
 {
   "name": "origami-build-tools",
-  "preferGlobal": true,
   "version": "2.6.2",
   "description": "Origami component development tools.",
   "main": "./lib/origami-build-tools",
@@ -12,7 +11,7 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha --recursive -t 100000"
+    "test": "node_modules/mocha/bin/mocha --recursive -t 50000"
   },
   "dependencies": {
     "bower-config": "^0.5.2",
@@ -52,18 +51,13 @@
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
+    "fs-extra": "^0.15.0",
     "mocha": "^2.0.1",
-    "rimraf": "^2.2.8",
-    "sinon": "^1.12.1"
+    "vinyl": "^0.4.6"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Financial-Times/origami-build-tools.git"
   },
-  "devDependencies": {
-    "expect.js": "^0.3.1",
-    "mocha": "^2.0.1",
-    "rimraf": "^2.2.8",
-    "sinon": "^1.12.1"
-  }
+  "license": "MIT"
 }

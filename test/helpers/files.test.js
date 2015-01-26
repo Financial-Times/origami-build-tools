@@ -1,21 +1,28 @@
+/* global describe, it, before, after, beforeEach, afterEach */
 'use strict';
 
 var expect = require('expect.js');
 require('es6-promise').polyfill();
 
-var fs = require('fs');
+var fs = require('fs-extra');
 var path = require('path');
 
 var files = require('../../lib/helpers/files');
+
+var obtPath = process.cwd();
 var oTestPath = 'test/fixtures/o-test';
+var pathSuffix = '-file';
+var filesTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
 describe('Files helper', function() {
 	before(function() {
-		process.chdir(oTestPath);
+		fs.copySync(path.resolve(obtPath, oTestPath), filesTestPath);
+		process.chdir(filesTestPath);
 	});
 
 	after(function() {
-		process.chdir('../../..');
+		process.chdir(obtPath);
+		fs.removeSync(filesTestPath);
 	});
 
 	it('should return correct build folder', function() {
@@ -26,7 +33,7 @@ describe('Files helper', function() {
 		expect(files.getModuleName()).to.be('');
 		fs.writeFileSync('bower.json', JSON.stringify({ name: "o-test" }), 'utf8');
 		expect(files.getModuleName()).to.be('o-test');
-		fs.unlink('bower.json');
+		fs.unlink(path.resolve(filesTestPath, 'bower.json'));
 	});
 
 	it('should return a list of Sass files', function(done) {
@@ -44,7 +51,7 @@ describe('Files helper', function() {
 			.then(files.sassSupportsSilent)
 			.then(function(supportsSilent) {
 				expect(supportsSilent).to.be(true);
-				fs.unlink('bower.json');
+				fs.unlink(path.resolve(filesTestPath, 'bower.json'));
 				done();
 			});
 	});
@@ -55,7 +62,7 @@ describe('Files helper', function() {
 		});
 
 		after(function() {
-			fs.unlink('bower.json');
+			fs.unlink(path.resolve(filesTestPath, 'bower.json'));
 		});
 
 		it('should get the path of main.scss', function() {
@@ -78,8 +85,14 @@ describe('Files helper', function() {
 	});
 
 	describe('Bower.json', function() {
+		beforeEach(function() {
+			if (fs.existsSync(path.resolve(filesTestPath, 'bower.json'))) {
+				fs.unlink(path.resolve(filesTestPath, 'bower.json'));
+			}
+		});
+
 		afterEach(function() {
-			fs.unlink('bower.json');
+			fs.unlink(path.resolve(filesTestPath, 'bower.json'));
 		});
 
 		it('should get bower.json', function() {
@@ -96,8 +109,14 @@ describe('Files helper', function() {
 	});
 
 	describe('Package.json', function() {
+		beforeEach(function() {
+			if (fs.existsSync(path.resolve(filesTestPath, 'package.json'))) {
+				fs.unlink(path.resolve(filesTestPath, 'package.json'));
+			}
+		});
+
 		afterEach(function() {
-			fs.unlink('package.json');
+			fs.unlink(path.resolve(filesTestPath, 'package.json'));
 		});
 
 		it('should get package.json', function() {

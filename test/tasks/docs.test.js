@@ -1,13 +1,14 @@
+/* global describe, it, before, after */
 'use strict';
 
 var expect = require('expect.js');
 var gulp = require('gulp');
-var rimraf = require('rimraf');
 
-var fs = require('fs');
-var path = require('path');
+var fs = require('fs-extra');
 
 var docs = require('../../lib/tasks/docs');
+
+var obtPath = process.cwd();
 var oTestPath = 'test/fixtures/o-test';
 
 describe('Docs task', function() {
@@ -16,28 +17,30 @@ describe('Docs task', function() {
 	});
 
 	after(function() {
-		process.chdir('../../..');
+		process.chdir(obtPath);
 	});
 
 	describe('SassDoc', function() {
 		it('should generate SassDoc in default directory', function(done) {
-			docs.sassDoc(gulp)
-				.on('data', function() {
+			var stream = docs.sassDoc(gulp);
+			stream.resume();
+			stream.on('end', function() {
 					expect(fs.existsSync('./docs/sass/index.html')).to.be(true);
 					expect(fs.existsSync('./docs/sass/assets')).to.be(true);
-					rimraf.sync('./docs');
+					fs.removeSync('./docs');
 					done();
 				});
 		});
 
 		it('should generate SassDoc in custom directory', function(done) {
-			docs.sassDoc(gulp, {
+			var stream = docs.sassDoc(gulp, {
 				sassDir: 'test'
-			})
-			.on('data', function() {
+			});
+			stream.resume();
+			stream.on('end', function() {
 				expect(fs.existsSync('./test/docs/sass/index.html')).to.be(true);
 				expect(fs.existsSync('./test/docs/sass/assets')).to.be(true);
-				rimraf.sync('./test');
+				fs.removeSync('./test');
 				done();
 			});
 		});
