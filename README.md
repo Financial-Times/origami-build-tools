@@ -12,13 +12,21 @@ Standardised build tools for Origami modules and products developed based on the
 
 		npm install -g origami-build-tools
 
-3. Run the `install` task for the first time will to install required dependencies:
+## Usage
+
+Run the install task for the first time will to install required dependencies:
 
 		origami-build-tools install
 
-## Developing locally
+### Developing products
 
-Browse the demos (typically: <http://localhost:8080/demos/local/>),
+Build CSS and JavaScript bundles in the `build` directory:
+
+		origami-build-tools build
+
+### Developing modules locally
+
+Build and browse the demos (typically: <http://localhost:8080/demos/local/>),
 automatically re-build the module's demos and assets every time a file changes:
 
 	origami-build-tools demo --local --watch
@@ -28,7 +36,7 @@ automatically re-build the module's demos and assets every time a file changes:
 All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them return a stream. They are structured in 5 higher level tasks, and each one has one or more subtasks.
 
 	Usage: origami-build-tools <command> [<options>]
-	
+
 	Commands:
 	   install  Install system and local dependencies
 	   build    Build module in current directory
@@ -36,7 +44,7 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 	   verify   Lint code and verify if module structure follows the Origami specification
 	   test     Test if Sass silent compilation follows the Origami specification
 	   docs     Build module documentation into the docs/ directory
-	
+
 	Mostly used options include:
 	   [--watch]                    Re-run every time a file changes
 	   [--local]                    Build demos locally, and preview them in a browser
@@ -70,6 +78,8 @@ The versions that are installed and supported are:
 * JSHint: '2.5.6'
 * Bower: '1.3.12'
 
+Note: If you receive an error specifying `Unable to download data from https://rubygems.org/ - SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (https://api.rubygems.org/specs.4.8.gz)` you'll need to manually update your gem package using the directions in [this gist](https://gist.github.com/luislavena/f064211759ee0f806c88).
+
 ### `build`
 
 Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
@@ -78,7 +88,7 @@ Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
 Runs:
 
 * __js(gulp, config)__ Config accepts:
-	- js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key) 
+	- js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key)
 	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
 	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
@@ -92,7 +102,7 @@ Runs:
 	- ignoreMissing: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 	- standalone: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 * __sass(gulp, config)__ Config accepts:
-	- sass: `String` Path to your main Sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key) 
+	- sass: `String` Path to your main Sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
 	- autoprefixerBrowsers: `Array` An array of strings of [browser names for autoprefixer](https://github.com/postcss/autoprefixer#browsers) to check what prefixes it needs. (Default: `["> 1%", "last 2 versions", "ie > 6", "ff ESR"]`)
 	- autoprefixerCascade: `Boolean` Whether autoprefixer should display CSS prefixed properties [cascaded](https://github.com/postcss/autoprefixer#visual-cascade) (Default: false)
 	- autoprefixerRemove: `Boolean` Remove unneeded prefixes (Default: true)
@@ -142,7 +152,7 @@ Runs:
 
 ### `test`
 
-Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).  
+Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).
 If a `$<module-name>-is-silent` variable is found, then runs:
 
 * __silentCompilation(gulp)__ Check the Sass outputs no CSS by default
@@ -156,12 +166,12 @@ Build component documentation into the `docs` directory.
 Runs:
 
 * __sassDoc(gulp, config)__ Sass documentation is built using [SassDoc](http://sassdoc.com/). Config accepts:
-	- sassDir: `String` Path to the directory where you main Sass file is. (Default: '.')
+	- sassDir: `String` Path to where you want the 'docs' directory to be generated. (Default: '.')
 	- Any option supported by the [SassDoc gulp plugin](http://sassdoc.com/gulp/#options)
 
 ## gulpfile usage
 
-Use the build tools in your own Gulp file to incorporate the Origami build process into a *product* (don't use this method if you are building an Origami component). An in depth explanation of how to use the `origami-build-tools` in your product to build Origami modules can be found in the [Origami spec](http://origami.ft.com/docs/developer-guide/building-modules/).  
+Use the build tools in your own Gulp file to incorporate the Origami build process into a *product* (don't use this method if you are building an Origami component). An in depth explanation of how to use the `origami-build-tools` in your product to build Origami modules can be found in the [Origami spec](http://origami.ft.com/docs/developer-guide/building-modules/).
 
 To run these tasks in your `gulpfile.js`, you only need to require `origami-build-tools` and run the task or subtask you need, passing gulp and an optional config object.
 
@@ -189,3 +199,6 @@ npm install --save-dev origami-build-tools
 npm install --save-dev gulp
 npm install -g gulp
 ```
+
+## Licence
+This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
