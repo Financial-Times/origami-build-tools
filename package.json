@@ -1,13 +1,12 @@
 {
   "name": "origami-build-tools",
-  "preferGlobal": true,
-  "version": "2.3.1",
+  "version": "2.6.2",
   "description": "Origami component development tools.",
   "main": "./lib/origami-build-tools",
   "bin": {
-    "origami-build-tools": "./lib/origami-build-tools-cli.js"
+    "origami-build-tools": "./lib/origami-build-tools-cli.js",
+    "obt": "./lib/origami-build-tools-cli.js"
   },
-  "private": true,
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -16,24 +15,25 @@
     "browserify": "~3.44.2",
     "colors": "^0.6.2",
     "configstore": "^0.3.1",
-    "debowerify": "git+https://github.com/Financial-Times/debowerify.git",
+    "debowerify": "Financial-Times/debowerify",
     "es6-promise": "^1.0.0",
     "findit": "^1.1.1",
     "gulp": "^3.8.7",
-    "gulp-autoprefixer": "^2.0.0",
+    "gulp-autoprefixer": "^2.1.0",
     "gulp-csso": "^0.2.9",
     "gulp-if": "^1.2.5",
     "gulp-jshint": "^1.8.4",
     "gulp-lintspaces": "^0.2.2",
     "gulp-mustache": "^0.4.0",
     "gulp-rename": "^1.2.0",
-    "gulp-ruby-sass": "^0.7.1",
+    "gulp-ruby-sass": "git+https://github.com/sindresorhus/gulp-ruby-sass.git#master",
     "gulp-sassdoc": "^1.1.1",
     "gulp-scss-lint": "^0.1.3",
     "gulp-streamify": "0.0.5",
     "gulp-uglify": "^1.0.1",
     "gulp-util": "^3.0.1",
     "gulp-webserver": "^0.8.3",
+    "merge-stream": "^0.1.6",
     "minimist": "0.0.8",
     "node.extend": "^1.0.9",
     "npmconf": "^1.1.5",
@@ -43,5 +43,10 @@
     "through2": "^0.6.2",
     "vinyl-source-stream": "^1.0.0",
     "which": "^1.0.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Financial-Times/origami-build-tools.git"
+  },
+  "license": "MIT"
 }
