@@ -12,13 +12,21 @@ Standardised build tools for Origami modules and products developed based on the
 
 		npm install -g origami-build-tools
 
-3. Run the `install` task for the first time will to install required dependencies:
+## Usage
+
+Run the install task for the first time will to install required dependencies:
 
 		origami-build-tools install
 
-## Developing locally
+### Developing products
 
-Browse the demos (typically: <http://localhost:8080/demos/local/>),
+Build CSS and JavaScript bundles in the `build` directory:
+
+		origami-build-tools build
+
+### Developing modules locally
+
+Build and browse the demos (typically: <http://localhost:8080/demos/local/>),
 automatically re-build the module's demos and assets every time a file changes:
 
 	origami-build-tools demo --local --watch
