@@ -131,8 +131,12 @@ describe('Demo task', function() {
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
 			demo(gulp)
 				.then(function() {
-					expect(fs.readFileSync('demos/test1.html', 'utf8')).to.contain('<div>test1</div>');
-					expect(fs.readFileSync('demos/test2.html', 'utf8')).to.contain('<div>test2</div>');
+					var test1 = fs.readFileSync('demos/test1.html', 'utf8');
+					var test2 = fs.readFileSync('demos/test1.html', 'utf8');
+					expect(test1).to.contain('<div>test1</div>');
+					expect(test2).to.contain('<div>test2</div>');
+					expect(test1).to.match(/\/v1\/polyfill\.min\.js\?features=.*modernizr:promises/);
+					expect(test2).to.match(/\/v1\/polyfill\.min\.js\?features=.*modernizr:promises/);
 					fs.unlink('demos/test1.html');
 					fs.unlink('demos/test2.html');
 					done();
