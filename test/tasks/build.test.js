@@ -119,8 +119,8 @@ describe('Build task', function() {
 				.on('end', function() {
 					var builtJsJson = fs.readFileSync('build/main.js-asset-hash.json', 'utf8');
 					expect(builtJsJson.indexOf('main.js')).to.not.be(-1);
-					var jsFileName = JSON.parse(builtJsJson)['main.js'],
-						jsFileContents = fs.readFileSync('build/' + jsFileName, 'utf8');
+					var jsFileName = JSON.parse(builtJsJson)['main.js'];
+					var jsFileContents = fs.readFileSync('build/' + jsFileName, 'utf8');
 					expect(jsFileContents.length).to.be.greaterThan(1);
 					done();
 				});
@@ -240,8 +240,8 @@ describe('Build task', function() {
 				.on('end', function() {
 					var builtCssJson = fs.readFileSync('build/main.css-asset-hash.json', 'utf8');
 					expect(builtCssJson.indexOf('main.css')).to.not.be(-1);
-					var cssFileName = JSON.parse(builtCssJson)['main.css'],
-						cssFileContents = fs.readFileSync('build/' + cssFileName, 'utf8');
+					var cssFileName = JSON.parse(builtCssJson)['main.css'];
+					var cssFileContents = fs.readFileSync('build/' + cssFileName, 'utf8');
 					expect(cssFileContents.length).to.be.greaterThan(1);
 					done();
 				});
