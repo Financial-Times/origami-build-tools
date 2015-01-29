@@ -110,6 +110,37 @@ describe('Build task', function() {
 					done();
 				});
 		});
+
+		it('should build a hashed version of the js', function(done) {
+			build
+				.js(gulp, {
+					hash: true
+				})
+				.on('end', function() {
+					var builtJsJson = fs.readFileSync('build/main.js-asset-hash.json', 'utf8');
+					expect(builtJsJson.indexOf('main.js')).to.not.be(-1);
+					var jsFileName = JSON.parse(builtJsJson)['main.js'];
+					var jsFileContents = fs.readFileSync('build/' + jsFileName, 'utf8');
+					expect(jsFileContents.length).to.be.greaterThan(1);
+					done();
+				});
+		});
+
+		it('should build a hashed version of the js with a bespoke filename', function(done) {
+			build
+				.js(gulp, {
+					buildJs: 'dooDah.js',
+					hash: true
+				})
+				.on('end', function() {
+					var builtJsJson = fs.readFileSync('build/dooDah.js-asset-hash.json', 'utf8');
+					expect(builtJsJson.indexOf('dooDah.js')).to.not.be(-1);
+					var jsFileName = JSON.parse(builtJsJson)['dooDah.js'];
+					var jsFileContents = fs.readFileSync('build/' + jsFileName, 'utf8');
+					expect(jsFileContents.length).to.be.greaterThan(1);
+					done();
+				});
+		});
 	});
 
 	describe('Build Sass', function() {
@@ -196,6 +227,39 @@ describe('Build task', function() {
 					expect(builtCss).to.be('div {\n  color: blue; }\n');
 					fs.unlink('build/bundle.css');
 					fs.rmdir('build');
+					done();
+				});
+		});
+
+
+		it('should build a hashed version of the css', function(done) {
+			build
+				.sass(gulp, {
+					hash: true
+				})
+				.on('end', function() {
+					var builtCssJson = fs.readFileSync('build/main.css-asset-hash.json', 'utf8');
+					expect(builtCssJson.indexOf('main.css')).to.not.be(-1);
+					var cssFileName = JSON.parse(builtCssJson)['main.css'];
+					var cssFileContents = fs.readFileSync('build/' + cssFileName, 'utf8');
+					expect(cssFileContents.length).to.be.greaterThan(1);
+					done();
+				});
+		});
+
+
+		it('should build a hashed version of the css to a custom filename', function(done) {
+			build
+				.sass(gulp, {
+					buildCss: 'dooDah.css',
+					hash: true
+				})
+				.on('end', function() {
+					var builtCssJson = fs.readFileSync('build/' + 'dooDah.css' + '-asset-hash.json', 'utf8');
+					expect(builtCssJson.indexOf('dooDah.css')).to.not.be(-1);
+					var cssFileName = JSON.parse(builtCssJson)['dooDah.css'];
+					var cssFileContents = fs.readFileSync('build/' + cssFileName, 'utf8');
+					expect(cssFileContents.length).to.be.greaterThan(1);
 					done();
 				});
 		});
