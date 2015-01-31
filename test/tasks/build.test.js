@@ -3,7 +3,7 @@
 
 require('es6-promise').polyfill();
 var denodeify = require('denodeify');
-var exec = denodeify(require('child_process').exec, function(err, stdout, stderr) { return [err, stdout]; });
+var exec = denodeify(require('child_process').exec, function(err, stdout) { return [err, stdout]; });
 
 var expect = require('expect.js');
 var gulp = require('gulp');
