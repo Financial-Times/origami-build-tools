@@ -39,7 +39,7 @@ describe('Build task', function() {
 		afterEach(function(done) {
 			if (fs.existsSync('build/main.js')) {
 				denodeify(fs.unlink)('build/main.js')
-					.then(function() { return denodeify(fs.rmdir)('build') })
+					.then(function() { return denodeify(fs.rmdir)('build'); })
 					.then(function() { done(); }, done);
 			}
 		});
