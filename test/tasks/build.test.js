@@ -38,7 +38,7 @@ describe('Build task', function() {
 		});
 
 		afterEach(function() {
-			return exec('rm -rf build/main.js');
+			return exec('rm -rf build');
 		});
 
 		it('should work with default options', function(done) {
@@ -161,7 +161,7 @@ describe('Build task', function() {
 		});
 
 		afterEach(function() {
-			return exec('rm -rf build/main.js');
+			return exec('rm -rf build');
 		});
 
 		it('should work with default options', function(done) {
