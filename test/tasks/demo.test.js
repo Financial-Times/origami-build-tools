@@ -1,6 +1,7 @@
 /* global describe, it, before, after */
 'use strict';
 
+require('es6-promise').polyfill();
 var expect = require('expect.js');
 var gulp = require('gulp');
 var extend = require('node.extend');
