@@ -1,6 +1,9 @@
 /* global describe, it, before, after, afterEach */
 'use strict';
 
+require('es6-promise').polyfill();
+var denodeify = require('denodeify');
+
 var expect = require('expect.js');
 var gulp = require('gulp');
 
@@ -33,10 +36,11 @@ describe('Build task', function() {
 			fs.removeSync(buildTestPath);
 		});
 
-		afterEach(function() {
+		afterEach(function(done) {
 			if (fs.existsSync('build/main.js')) {
-				fs.unlink('build/main.js');
-				fs.rmdir('build');
+				denodeify(fs.unlink)('build/main.js')
+					.then(function() { return denodeify(fs.rmdir)('build') })
+					.then(function() { done(); }, done);
 			}
 		});
 
