@@ -11,9 +11,10 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha --recursive -t 50000"
+    "test": "mocha --recursive -t 50000 *.test.js"
   },
   "dependencies": {
+    "6to5ify": "^4.0.0",
     "bower-config": "^0.5.2",
     "browserify": "~3.44.2",
     "colors": "^0.6.2",
