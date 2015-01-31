@@ -93,9 +93,9 @@ describe('Build task', function() {
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
-					fs.unlink('test-build/main.js');
-					fs.rmdir('test-build');
-					done();
+					denodeify(fs.unlink)('test-build/main.js')
+						.then(function() { denodeify(fs.rmdir)('test-build'); })
+						.then(function() { done(); }, done);
 				});
 		});
 
@@ -109,9 +109,9 @@ describe('Build task', function() {
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
-					fs.unlink('build/bundle.js');
-					fs.rmdir('build');
-					done();
+					denodeify(fs.unlink)('build/bundle.js')
+						.then(function() { denodeify(fs.rmdir)('build'); })
+						.then(function() { done(); }, done);
 				});
 		});
 
@@ -169,8 +169,9 @@ describe('Build task', function() {
 
 		afterEach(function() {
 			if (fs.existsSync('build/main.css')) {
-				fs.unlink('build/main.css');
-				fs.rmdir('build');
+				denodeify(fs.unlink)('build/main.css')
+					.then(function() { return denodeify(fs.rmdir)('build'); })
+					.then(function() { done(); }, done);
 			}
 		});
 
