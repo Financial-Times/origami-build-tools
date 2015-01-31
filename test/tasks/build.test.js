@@ -3,6 +3,7 @@
 
 require('es6-promise').polyfill();
 var denodeify = require('denodeify');
+var exec = denodeify(require('child_process').exec, function(err, stdout, stderr) { return [err, stdout]; });
 
 var expect = require('expect.js');
 var gulp = require('gulp');
@@ -36,12 +37,8 @@ describe('Build task', function() {
 			fs.removeSync(buildTestPath);
 		});
 
-		afterEach(function(done) {
-			if (fs.existsSync('build/main.js')) {
-				denodeify(fs.unlink)('build/main.js')
-					.then(function() { return denodeify(fs.rmdir)('build'); })
-					.then(function() { done(); }, done);
-			}
+		afterEach(function() {
+			return exec('rm -rf build/main.js');
 		});
 
 		it('should work with default options', function(done) {
@@ -93,9 +90,7 @@ describe('Build task', function() {
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
-					denodeify(fs.unlink)('test-build/main.js')
-						.then(function() { denodeify(fs.rmdir)('test-build'); })
-						.then(function() { done(); }, done);
+					done();
 				});
 		});
 
@@ -109,9 +104,7 @@ describe('Build task', function() {
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
-					denodeify(fs.unlink)('build/bundle.js')
-						.then(function() { denodeify(fs.rmdir)('build'); })
-						.then(function() { done(); }, done);
+					done();
 				});
 		});
 
@@ -167,12 +160,8 @@ describe('Build task', function() {
 			fs.removeSync(path.resolve(obtPath, buildTestPath));
 		});
 
-		afterEach(function(done) {
-			if (fs.existsSync('build/main.css')) {
-				denodeify(fs.unlink)('build/main.css')
-					.then(function() { return denodeify(fs.rmdir)('build'); })
-					.then(function() { done(); }, done);
-			}
+		afterEach(function() {
+			return exec('rm -rf build/main.js');
 		});
 
 		it('should work with default options', function(done) {
@@ -216,9 +205,8 @@ describe('Build task', function() {
 				.on('end', function() {
 					var builtCss = fs.readFileSync('test-build/main.css', 'utf8');
 					expect(builtCss).to.be('div {\n  color: blue; }\n');
-					fs.unlink('test-build/main.css');
-					fs.rmdir('test-build');
-					done();
+					exec('rm -rf test-build')
+						.then(function() { done(); }, done);
 				});
 		});
 
@@ -230,8 +218,6 @@ describe('Build task', function() {
 				.on('end', function() {
 					var builtCss = fs.readFileSync('build/bundle.css', 'utf8');
 					expect(builtCss).to.be('div {\n  color: blue; }\n');
-					fs.unlink('build/bundle.css');
-					fs.rmdir('build');
 					done();
 				});
 		});
