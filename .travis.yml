@@ -4,4 +4,4 @@ node_js:
 script:
   - gulp install
   - gulp verify
-  - gulp test
+  - npm test # temporarily undo gulp test (no output, doesn't seem to fail)
