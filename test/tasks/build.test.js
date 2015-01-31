@@ -167,7 +167,7 @@ describe('Build task', function() {
 			fs.removeSync(path.resolve(obtPath, buildTestPath));
 		});
 
-		afterEach(function() {
+		afterEach(function(done) {
 			if (fs.existsSync('build/main.css')) {
 				denodeify(fs.unlink)('build/main.css')
 					.then(function() { return denodeify(fs.rmdir)('build'); })
