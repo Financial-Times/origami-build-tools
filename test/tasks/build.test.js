@@ -46,7 +46,7 @@ describe('Build task', function() {
 					var builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
 					done();
 				});
 		});
@@ -60,7 +60,7 @@ describe('Build task', function() {
 					var builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.not.contain('sourceMappingURL');
 					expect(builtJs).to.not.contain('var Test');
-					expect(builtJs).to.not.contain('function Test() {\n\tvar name = \'test\';');
+					expect(builtJs).to.not.contain('function Test() {\n\tvar name = "test";');
 					done();
 			});
 		});
@@ -74,7 +74,7 @@ describe('Build task', function() {
 					var builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.not.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
 					done();
 				});
 		});
@@ -88,7 +88,7 @@ describe('Build task', function() {
 					var builtJs = fs.readFileSync('test-build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
 					fs.unlink('test-build/main.js');
 					fs.rmdir('test-build');
 					done();
@@ -104,7 +104,7 @@ describe('Build task', function() {
 					var builtJs = fs.readFileSync('build/bundle.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
 					fs.unlink('build/bundle.js');
 					fs.rmdir('build');
 					done();
