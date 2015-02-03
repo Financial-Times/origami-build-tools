@@ -11,9 +11,10 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha --recursive -t 50000"
+    "test": "mocha -t 50000 `find . -name '*.test.js' -path './test/*'`"
   },
   "dependencies": {
+    "6to5ify": "^4.0.0",
     "bower-config": "^0.5.2",
     "browserify": "~3.44.2",
     "colors": "^0.6.2",
@@ -49,6 +50,7 @@
     "which": "^1.0.5"
   },
   "devDependencies": {
+    "denodeify": "^1.2.0",
     "expect.js": "^0.3.1",
     "fs-extra": "^0.15.0",
     "mocha": "^2.0.1",

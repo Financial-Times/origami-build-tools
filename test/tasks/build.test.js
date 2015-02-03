@@ -1,6 +1,10 @@
 /* global describe, it, before, after, afterEach */
 'use strict';
 
+require('es6-promise').polyfill();
+var denodeify = require('denodeify');
+var exec = denodeify(require('child_process').exec, function(err, stdout) { return [err, stdout]; });
+
 var expect = require('expect.js');
 var gulp = require('gulp');
 
@@ -34,10 +38,7 @@ describe('Build task', function() {
 		});
 
 		afterEach(function() {
-			if (fs.existsSync('build/main.js')) {
-				fs.unlink('build/main.js');
-				fs.rmdir('build');
-			}
+			return exec('rm -rf build');
 		});
 
 		it('should work with default options', function(done) {
@@ -46,7 +47,7 @@ describe('Build task', function() {
 					var builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
 					done();
 				});
 		});
@@ -60,7 +61,7 @@ describe('Build task', function() {
 					var builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.not.contain('sourceMappingURL');
 					expect(builtJs).to.not.contain('var Test');
-					expect(builtJs).to.not.contain('function Test() {\n\tvar name = \'test\';');
+					expect(builtJs).to.not.contain('function Test() {\n\tvar name = "test";');
 					done();
 			});
 		});
@@ -74,7 +75,7 @@ describe('Build task', function() {
 					var builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.not.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
 					done();
 				});
 		});
@@ -88,9 +89,7 @@ describe('Build task', function() {
 					var builtJs = fs.readFileSync('test-build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
-					fs.unlink('test-build/main.js');
-					fs.rmdir('test-build');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
 					done();
 				});
 		});
@@ -104,9 +103,7 @@ describe('Build task', function() {
 					var builtJs = fs.readFileSync('build/bundle.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
-					fs.unlink('build/bundle.js');
-					fs.rmdir('build');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = "test";');
 					done();
 				});
 		});
@@ -164,10 +161,7 @@ describe('Build task', function() {
 		});
 
 		afterEach(function() {
-			if (fs.existsSync('build/main.css')) {
-				fs.unlink('build/main.css');
-				fs.rmdir('build');
-			}
+			return exec('rm -rf build');
 		});
 
 		it('should work with default options', function(done) {
@@ -211,9 +205,8 @@ describe('Build task', function() {
 				.on('end', function() {
 					var builtCss = fs.readFileSync('test-build/main.css', 'utf8');
 					expect(builtCss).to.be('div {\n  color: blue; }\n');
-					fs.unlink('test-build/main.css');
-					fs.rmdir('test-build');
-					done();
+					exec('rm -rf test-build')
+						.then(function() { done(); }, done);
 				});
 		});
 
@@ -225,8 +218,6 @@ describe('Build task', function() {
 				.on('end', function() {
 					var builtCss = fs.readFileSync('build/bundle.css', 'utf8');
 					expect(builtCss).to.be('div {\n  color: blue; }\n');
-					fs.unlink('build/bundle.css');
-					fs.rmdir('build');
 					done();
 				});
 		});
