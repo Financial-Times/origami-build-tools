@@ -132,5 +132,3 @@ describe('Files helper', function() {
 		});
 	});
 });
-
-
