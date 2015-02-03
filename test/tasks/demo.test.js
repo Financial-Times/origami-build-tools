@@ -1,6 +1,7 @@
 /* global describe, it, before, after */
 'use strict';
 
+require('es6-promise').polyfill();
 var expect = require('expect.js');
 var gulp = require('gulp');
 var extend = require('node.extend');
@@ -39,27 +40,29 @@ describe('Demo task', function() {
 	});
 
 	describe('Build demos', function() {
-		it('should fail if there is not a bower.json file', function(done) {
-			demo(gulp)
-				.catch(function(err) {
+		it('should fail if there is not a bower.json file', function() {
+			return demo(gulp)
+				.then(function() {
+					throw new Error("No error thrown");
+				}, function(err) {
 					setTimeout(function() {
 						expect(err).to.be('Couldn\'t find a bower.json file. Please add one and try again');
 					});
-					done();
 				});
 		});
 
-		it('should fail if there is not a config file', function(done) {
+		it('should fail if there is not a config file', function() {
 			process.chdir(obtPath);
 			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
-			demo(gulp)
-				.catch(function(err) {
+			return demo(gulp)
+				.then(function() {
+					throw new Error("No error thrown");
+				}, function(err) {
 					setTimeout(function() {
 						expect(err).to.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js');
 					});
 					fs.unlink(path.resolve(obtPath, 'bower.json'));
 					process.chdir(demoTestPath);
-					done();
 				});
 		});
 
@@ -126,32 +129,34 @@ describe('Demo task', function() {
 			});
 		});
 
-		it('should build demo html', function(done) {
+		it('should build demo html', function() {
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
-			demo(gulp)
+			return demo(gulp)
 				.then(function() {
-					expect(fs.readFileSync('demos/test1.html', 'utf8')).to.contain('<div>test1</div>');
-					expect(fs.readFileSync('demos/test2.html', 'utf8')).to.contain('<div>test2</div>');
+					var test1 = fs.readFileSync('demos/test1.html', 'utf8');
+					var test2 = fs.readFileSync('demos/test2.html', 'utf8');
+					expect(test1).to.contain('<div>test1</div>');
+					expect(test2).to.contain('<div>test2</div>');
+					expect(test1).to.match(/\/v1\/polyfill\.min\.js\?features=.*modernizr:promises/);
+					expect(test2).to.match(/\/v1\/polyfill\.min\.js\?features=.*modernizr:promises/);
 					fs.unlink('demos/test1.html');
 					fs.unlink('demos/test2.html');
-					done();
 				});
 		});
 
-		it('should build local demos', function(done) {
-			demo(gulp, {
+		it('should build local demos', function() {
+			return demo(gulp, {
 				local: true
 			})
 			.then(function() {
 				expect(fs.readFileSync('demos/local/test1.html', 'utf8')).to.contain('<div>test1</div>');
 				expect(fs.readFileSync('demos/local/test2.html', 'utf8')).to.contain('<div>test2</div>');
-				expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\tvar name = \'test\';');
+				expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\tvar name = "test";');
 				expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.be('div{color:blue}\n');
 				fs.unlink('demos/test1.html');
 				fs.unlink('demos/test2.html');
 				fs.removeSync('demos/local');
-				done();
 			});
 		});
 
