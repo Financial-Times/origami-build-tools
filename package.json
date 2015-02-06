@@ -43,7 +43,7 @@
     "node.extend": "^1.0.9",
     "npmconf": "^1.1.5",
     "portfinder": "0.2.x",
-    "semver": "^2.2.1",
+    "semver": "^2.3.2",
     "textrequireify": "^1.0.0",
     "through2": "^0.6.2",
     "vinyl-source-stream": "^1.0.0",
