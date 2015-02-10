@@ -11,7 +11,7 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "mocha -t 50000 `find . -name '*.test.js' -path './test/*'`"
+    "test": "mocha -t 10000 `find . -name '*.test.js' -path './test/*'`"
   },
   "dependencies": {
     "6to5ify": "^4.0.0",

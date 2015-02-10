@@ -64,9 +64,7 @@ linters:
 
   # #aabbcc good, #abc bad. Makes the codebase more searchable
   HexLength:
-    enabled: true
-    style: long
-    severity: error
+    enabled: false
 
   # Require hex colors to be lowercase (if they include any of the letters a-f)
   HexNotation:
