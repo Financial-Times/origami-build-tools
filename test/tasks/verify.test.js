@@ -40,11 +40,9 @@ describe('Verify task', function() {
 			scssLintPath: 'scss-lint.yml'
 		})
 		.on('error', function(error) {
-			console.log(error);
 			expect(error.message).to.be(undefined);
 		})
 		.on('end', function() {
-			console.log(100000);
 			done();
 		});
 	});
