@@ -5,7 +5,6 @@ var obt = require('./lib/origami-build-tools');
 
 gulp.task('verify', function() {
 	obt.verify(gulp, {
-		js: 'lib/origami-build-tools.js',
 		jsHintPath: '.jshintrc',
 		editorconfigPath: '.editorconfig'
 	});

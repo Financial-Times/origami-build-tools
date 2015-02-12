@@ -141,10 +141,8 @@ Lints JavaScript and SCSS against Origami coding standards (see standards for [S
 Runs:
 
 * __scssLint(gulp, config)__ Config accepts:
-	- sass: `String` Path to your main Sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
 	- scssLintPath: `String` Path to your custom 'scss-lint.yml' config file. (Default: 'origami-build-tools/config/scss-lint.yml') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 * __jsHint(gulp, config)__ Config accepts:
-	- js: `String` Path to your main Javascript file. (Default: './main.js' and checks your bower.json to see if it's in its main key)
 	- jsHintPath: `String` Path to your custom jsHint config file. (Default: 'origami-build-tools/config/jshint.json' _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 * __lintspaces(gulp, config)__ Config accepts:
 	- editorconfigPath: `String` Path to your '.editorconfig' that lintspaces uses for linting. (Default: 'origami-build-tools/config/.editorconfig') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
