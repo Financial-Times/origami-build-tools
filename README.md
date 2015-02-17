@@ -92,7 +92,8 @@ Runs:
 	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
 	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
-	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'
+	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'. (Default: false)
+	- hash: `Boolean` Set to true to generate a hashed JavaScript built file to facilitate cachebusting. Also generates a JSON file with mappings to the original filename. (Default: false)
 	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as one of the following
 		- `String` The name of the transform
 		- `Array` [config, 'transform-name'] Where custom config needs to be passed into the transform use an array containing the config object followed by the transform name
@@ -109,6 +110,7 @@ Runs:
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
 	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [csso](https://github.com/css/csso). (Default: 'development')
+	- hash: `Boolean` Set to true to generate a hashed JavaScript built file to facilitate cachebusting. Also generates a JSON file with mappings to the original filename. (Default: false)
 
 	_(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
