@@ -20,6 +20,7 @@
     "colors": "^1.0.3",
     "configstore": "^0.3.1",
     "debowerify": "^1.2.0",
+    "denodeify": "^1.2.0",
     "es6-promise": "^2.0.1",
     "findit": "^2.0.0",
     "gulp": "^3.8.7",
@@ -37,6 +38,8 @@
     "gulp-uglify": "^1.0.1",
     "gulp-util": "^3.0.1",
     "gulp-webserver": "^0.9.0",
+    "haikro": "^1.13.0",
+    "isomorphic-fetch": "^2.0.0",
     "merge-stream": "^0.1.6",
     "minimist": "^1.1.1",
     "node.extend": "^1.0.9",
@@ -51,7 +54,6 @@
     "which": "^1.0.5"
   },
   "devDependencies": {
-    "denodeify": "^1.2.0",
     "expect.js": "^0.3.1",
     "fs-extra": "^0.15.0",
     "mocha": "^2.0.1",
