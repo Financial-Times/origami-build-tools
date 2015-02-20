@@ -78,6 +78,9 @@ The versions that are installed and supported are:
 * JSHint: '2.5.6'
 * Bower: '1.3.12'
 
+Config:
+* verbose: `Boolean` Outputs verbose results of bower and npm installation when `true`. For npm this will be the result of `--loglevel info`.
+
 Note: If you receive an error specifying `Unable to download data from https://rubygems.org/ - SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (https://api.rubygems.org/specs.4.8.gz)` you'll need to manually update your gem package using the directions in [this gist](https://gist.github.com/luislavena/f064211759ee0f806c88).
 
 ### `build`
