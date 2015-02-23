@@ -74,7 +74,7 @@ Runs:
 The versions that are installed and supported are:
 
 * Sass: '3.4.x'
-* scss-lint: '0.33.0'
+* scss-lint: '0.34.0'
 * JSHint: '2.5.6'
 * Bower: '1.3.12'
 
