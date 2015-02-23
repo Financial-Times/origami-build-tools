@@ -192,7 +192,7 @@ describe('Build task', function() {
 				})
 				.on('end', function() {
 					var builtCss = fs.readFileSync('build/main.css', 'utf8');
-					expect(builtCss).to.be('p {\n  color: black; }\n');
+					expect(builtCss).to.be('p {\n  color: #000000; }\n');
 					done();
 				});
 		});
