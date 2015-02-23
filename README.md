@@ -144,8 +144,10 @@ Runs:
 
 * __scssLint(gulp, config)__ Config accepts:
 	- scssLintPath: `String` Path to your custom 'scss-lint.yml' config file. (Default: 'origami-build-tools/config/scss-lint.yml') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
+	- excludeFiles `Array` e.g. `['!**/demo.scss']`
 * __jsHint(gulp, config)__ Config accepts:
 	- jsHintPath: `String` Path to your custom jsHint config file. (Default: 'origami-build-tools/config/jshint.json' _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
+	- excludeFiles `Array` e.g. `['!**/demo.js']`
 * __lintspaces(gulp, config)__ Config accepts:
 	- editorconfigPath: `String` Path to your '.editorconfig' that lintspaces uses for linting. (Default: 'origami-build-tools/config/.editorconfig') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 * __origamiJson()__ If there's an 'origami.json' file in your project's root, it will make sure it's compliant with the [spec](http://origami.ft.com/docs/syntax/origamijson/#format)
