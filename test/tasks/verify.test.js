@@ -18,7 +18,7 @@ describe('Verify task', function() {
 	before(function() {
 		fs.copySync(path.resolve(obtPath, oTestPath), verifyTestPath);
 		process.chdir(verifyTestPath);
-		fs.writeFileSync('src/scss/verify.scss', 'p { color: #ccc; }', 'utf8');
+		fs.writeFileSync('src/scss/verify.scss', '$color: #ccc;\n\np {\n  color: $color!important ;\n}\n', 'utf8');
 		fs.writeFileSync('src/js/verify.js', 'var test = "We live in financial times";');
 	});
 
@@ -37,12 +37,10 @@ describe('Verify task', function() {
 
 	it('should run scssLint with custom config', function(done) {
 		verify.scssLint(gulp, {
-			scssLintPath: 'scss-lint.yml'
-		})
-		.on('error', function(error) {
-			expect(error.message).to.be(undefined);
-		})
-		.on('end', function() {
+			scssLintPath: 'scss-lint.yml',
+			// Verify only verify.scss:
+			excludeFiles: ['!**/demo.scss', '!**/test.scss', '!**/main.scss']
+		}).on('end', function() {
 			done();
 		});
 	});

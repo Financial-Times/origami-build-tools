@@ -1,3 +1,4 @@
 p {
-	color: black;
+	$my-color: #000000;
+	color: $my-color;
 }

@@ -14,12 +14,13 @@ linters:
   BorderZero:
     enabled: true
     severity: error
+    convention: zero
 
   # Allow colors to be used outside of variables
   ColorVariable:
     enabled: false
 
-  # "#0f0" not "green"
+  # "#00ff00" not "green"
   # (AB: Causes problems with o-colors < 3, because o-colors uses
   # color names that are also valid CSS color strings)
   ColorKeyword:
@@ -94,6 +95,7 @@ linters:
   # Disable indentation liting since it's done via another task
   Indentation:
     enabled: false
+    allow_non_nested_indentation: false
 
   # 0.1 not .1
   # (differs from Guardian)
@@ -135,6 +137,7 @@ linters:
   PropertySortOrder:
     enabled: false
     order: []
+    separate_groups: false
 
   # Disallow unknown CSS property names
   PropertySpelling:
@@ -151,11 +154,8 @@ linters:
     severity: error
 
   # Limit selector depth
-  # (AB: We decided to deal with this via peer review in 
-  # https://github.com/Financial-Times/ft-origami/issues/243.
-  # If SCSS-lint were to support excluding sections of code,
-  # we could turn this back on (KDP:… as an error).
-  # Issue: https://github.com/causes/scss-lint/issues/150)
+  # We decided to deal with this via peer review in
+  # https://github.com/Financial-Times/ft-origami/issues/243
   SelectorDepth:
     enabled: true
     max_depth: 3
