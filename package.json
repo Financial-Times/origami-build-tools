@@ -14,7 +14,7 @@
     "test": "mocha -t 50000 `find . -name '*.test.js' -path './test/*'`"
   },
   "dependencies": {
-    "6to5ify": "^4.0.0",
+    "babelify": "^5.0.3",
     "bower-config": "^0.5.2",
     "browserify": "~3.44.2",
     "colors": "^0.6.2",
@@ -28,7 +28,7 @@
     "gulp-hash": "^2.0.3",
     "gulp-if": "^1.2.5",
     "gulp-jshint": "^1.8.4",
-    "gulp-lintspaces": "^0.2.2",
+    "gulp-lintspaces": "^0.2.3",
     "gulp-mustache": "^0.4.0",
     "gulp-rename": "^1.2.0",
     "gulp-ruby-sass": "^0.7.1",
@@ -37,7 +37,7 @@
     "gulp-streamify": "0.0.5",
     "gulp-uglify": "^1.0.1",
     "gulp-util": "^3.0.1",
-    "gulp-webserver": "^0.8.3",
+    "gulp-webserver": "^0.9.0",
     "merge-stream": "^0.1.6",
     "minimist": "0.0.8",
     "node.extend": "^1.0.9",
