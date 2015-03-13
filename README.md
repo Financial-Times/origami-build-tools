@@ -11,6 +11,7 @@ Standardised build tools for Origami modules and products developed based on the
 		* If you get a `Gem::FilePermissionError` error, you need to [install a ruby version manager](http://stackoverflow.com/questions/19579392/installing-gem-fails-with-permissions-error).
 		* To [install rbenv](https://github.com/sstephenson/rbenv#homebrew-on-mac-os-x) you first need to [install homebrew](http://brew.sh/).
 		* Once you've installed rbenv you need to [install ruby](https://github.com/sstephenson/rbenv/#installing-ruby-versions).
+			* Note: rbenv needs a bit of post-install setup. If you install with homebrew, also do steps 2 and 3 of the [Basic GitHub Checkout](https://github.com/sstephenson/rbenv/#basic-github-checkout) section.
 
 2. Install the build tools globally:
 
