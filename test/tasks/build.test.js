@@ -1,4 +1,4 @@
-/* global describe, it, before, after, afterEach */
+/* global xdescribe, it, before, after, afterEach */
 'use strict';
 
 require('es6-promise').polyfill();
@@ -16,8 +16,8 @@ var build = require('../../lib/tasks/build');
 var obtPath = process.cwd();
 var oTestPath = 'test/fixtures/o-test';
 
-describe('Build task', function() {
-	describe('Build Js', function() {
+xdescribe('Build task', function() {
+	xdescribe('Build Js', function() {
 		var pathSuffix = '-build-js';
 		var buildTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
@@ -109,7 +109,7 @@ describe('Build task', function() {
 		});
 	});
 
-	describe('Build Sass', function() {
+	xdescribe('Build Sass', function() {
 		var pathSuffix = '-build-sass';
 		var buildTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
