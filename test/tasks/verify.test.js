@@ -1,4 +1,4 @@
-/* global describe, it, before, after */
+/* global xdescribe, it, before, after */
 'use strict';
 
 var expect = require('expect.js');
@@ -14,7 +14,7 @@ var oTestPath = 'test/fixtures/o-test';
 var pathSuffix = '-verify';
 var verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
-describe('Verify task', function() {
+xdescribe('Verify task', function() {
 	before(function() {
 		fs.copySync(path.resolve(obtPath, oTestPath), verifyTestPath);
 		process.chdir(verifyTestPath);
