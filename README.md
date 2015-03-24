@@ -162,7 +162,10 @@ If a `$<module-name>-is-silent` variable is found, then runs:
 * __silentCompilation(gulp)__ Check the Sass outputs no CSS by default
 * __silentCompilation(gulp)__ Check the Sass outputs some CSS with `$<module-name>-is-silent` set to false
 * __npmTest()__ Runs 'npm test', so whatever test script that you have in you `package.json` will be executed
-* __browserTest(gulp, config)__ Runs [Nightwatch](http://nightwatchjs.org/) tests on our [Selenium](http://www.seleniumhq.org/projects/webdriver/) grid by deploying the demo pages to Heroku. This is an optional subtask that requires the config option _browserTest_ to be set to true. Config accepts:
+* __browserTest(gulp, config)__ Runs [Nightwatch](http://nightwatchjs.org/) tests on our [Selenium](http://www.seleniumhq.org/projects/webdriver/) grid by deploying the demo pages to Heroku. This is an optional subtask that requires the config option _browserTest_ to be set to true. You also need to set the following environment variables:
+	- HEROKU_AUTH_TOKEN: The result of running `heroku auth:token`
+	- SELENIUM_PROXY_KEY: The key to use the proxy to the Selenium grid
+Config accepts:
 	- testUrl: `String` Url to where the html the tests are going to run agains is. (Default: 'https://module-name.herokuapp.com')
 	- nightwatchConfig: `String` Path to your 'nightwatch.json' file that Nightwatch uses for testing. (Default: `./test/browser/nightwatch.json`)
 
