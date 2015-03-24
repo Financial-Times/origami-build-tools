@@ -87,7 +87,6 @@ Note: If you receive an error specifying `Unable to download data from https://r
 
 Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
 
-
 Runs:
 
 * __js(gulp, config)__ Config accepts:
@@ -138,8 +137,6 @@ Build service demos consist of only HTML, with build service URLs for static res
 Local demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
 
 _(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
-
-
 
 ### `verify`
 
