@@ -53,7 +53,6 @@
     "which": "^1.0.5"
   },
   "devDependencies": {
-    "denodeify": "^1.2.0",
     "expect.js": "^0.3.1",
     "fs-extra": "^0.15.0",
     "mocha": "^2.0.1",
