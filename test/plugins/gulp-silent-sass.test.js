@@ -1,4 +1,4 @@
-/* global xdescribe, it */
+/* global describe, it */
 'use strict';
 
 var expect = require('expect.js');
@@ -6,7 +6,7 @@ var File = require('vinyl');
 
 var silentSass = require('../../lib/plugins/gulp-silent-sass.js');
 
-xdescribe('Gulp silent Sass plugin', function() {
+describe('Gulp silent Sass plugin', function() {
 	it('Should succeed if silent is false and file has content', function(done) {
 		var fakeFile = new File({
 			contents: new Buffer('p{color:black;}')

@@ -1,4 +1,4 @@
-/* global xdescribe, it */
+/* global describe, it */
 'use strict';
 
 var expect = require('expect.js');
@@ -6,7 +6,7 @@ require('es6-promise').polyfill();
 
 var commandLine = require('../../lib/helpers/command-line');
 
-xdescribe('Command line helper', function() {
+describe('Command line helper', function() {
 	it('should return output from stdout', function(done) {
 		commandLine.run('echo', ['test']).then(function(output) {
 			expect(output.stdout).to.be('test\n');
