@@ -1,4 +1,4 @@
-/* global xdescribe, it, before, after */
+/* global describe, it, before, after */
 'use strict';
 
 require('es6-promise').polyfill();
@@ -16,7 +16,7 @@ var oTestPath = 'test/fixtures/o-test';
 var pathSuffix = '-demo';
 var demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
-xdescribe('Demo task', function() {
+describe('Demo task', function() {
 
 	before(function() {
 		fs.copySync(path.resolve(obtPath, oTestPath), demoTestPath);
@@ -28,7 +28,7 @@ xdescribe('Demo task', function() {
 		fs.removeSync(demoTestPath);
 	});
 
-	xdescribe('Run server', function() {
+	describe('Run server', function() {
 		it('should run a server', function(done) {
 			demo.runServer(gulp)
 				.then(function(server) {
@@ -39,7 +39,7 @@ xdescribe('Demo task', function() {
 		});
 	});
 
-	xdescribe('Build demos', function() {
+	describe('Build demos', function() {
 		it('should fail if there is not a bower.json file', function() {
 			return demo(gulp)
 				.then(function() {

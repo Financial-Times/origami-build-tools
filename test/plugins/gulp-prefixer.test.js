@@ -1,4 +1,4 @@
-/* global xdescribe, it */
+/* global describe, it */
 
 // Code based on https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/testing.md
 'use strict';
@@ -8,8 +8,8 @@ var File = require('vinyl');
 
 var prefixer = require('../../lib/plugins/gulp-prefixer.js');
 
-xdescribe('gulp-prefixer', function() {
-	xdescribe('in buffer mode', function() {
+describe('gulp-prefixer', function() {
+	describe('in buffer mode', function() {
 
 		it('should prepend text', function(done) {
 

@@ -1,4 +1,4 @@
-/* global xdescribe, it, before, after */
+/* global describe, it, before, after */
 'use strict';
 
 var expect = require('expect.js');
@@ -14,7 +14,7 @@ var oTestPath = 'test/fixtures/o-test';
 var pathSuffix = '-docs';
 var docsTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
-xdescribe('Docs task', function() {
+describe('Docs task', function() {
 	before(function() {
 		fs.copySync(path.resolve(obtPath, oTestPath), docsTestPath);
 		process.chdir(docsTestPath);
@@ -25,7 +25,7 @@ xdescribe('Docs task', function() {
 		fs.removeSync(docsTestPath);
 	});
 
-	xdescribe('SassDoc', function() {
+	describe('SassDoc', function() {
 		it('should generate SassDoc in default directory', function(done) {
 			docs.sassDoc(gulp).promise.then(function() {
 				expect(fs.existsSync(path.join(docsTestPath, 'docs/sass/index.html'))).to.be(true);

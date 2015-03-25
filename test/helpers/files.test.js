@@ -1,4 +1,4 @@
-/* global xdescribe, it, before, after, beforeEach, afterEach */
+/* global describe, it, before, after, beforeEach, afterEach */
 'use strict';
 
 var expect = require('expect.js');
@@ -14,7 +14,7 @@ var oTestPath = 'test/fixtures/o-test';
 var pathSuffix = '-file';
 var filesTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
-xdescribe('Files helper', function() {
+describe('Files helper', function() {
 	before(function() {
 		fs.copySync(path.resolve(obtPath, oTestPath), filesTestPath);
 		process.chdir(filesTestPath);
@@ -56,7 +56,7 @@ xdescribe('Files helper', function() {
 			});
 	});
 
-	xdescribe('Main files', function() {
+	describe('Main files', function() {
 		before(function() {
 			fs.writeFileSync('bower.json', JSON.stringify({ name: "o-test" }), 'utf8');
 		});
@@ -84,7 +84,7 @@ xdescribe('Files helper', function() {
 		});
 	});
 
-	xdescribe('Bower.json', function() {
+	describe('Bower.json', function() {
 		beforeEach(function() {
 			if (fs.existsSync(path.resolve(filesTestPath, 'bower.json'))) {
 				fs.unlink(path.resolve(filesTestPath, 'bower.json'));
@@ -108,7 +108,7 @@ xdescribe('Files helper', function() {
 		});
 	});
 
-	xdescribe('Package.json', function() {
+	describe('Package.json', function() {
 		beforeEach(function() {
 			if (fs.existsSync(path.resolve(filesTestPath, 'package.json'))) {
 				fs.unlink(path.resolve(filesTestPath, 'package.json'));
