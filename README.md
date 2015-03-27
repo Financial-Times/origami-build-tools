@@ -47,7 +47,7 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 
 	Mostly used options include:
 	   [--watch]                    Re-run every time a file changes
-	   [--local]                    Build demos locally, and preview them in a browser
+	   [--local]                    Build demos locally
 	   [--updateorigami]            Update origami.json with the latest demo files created
 	   [--js=<path>]                Main JavaScript file (default: ./src/main.js)
 	   [--sass=<path>]              Main Sass file (default: ./src/main.scss)
@@ -123,10 +123,10 @@ Build demos found in the [demo config file](http://origami.ft.com/docs/component
 
 Config:
 
-* local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Also runs a local server to help you test your demos.
+* local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Default: `false`
 * demoConfig: `String` The path to the demo config file. Default: `demos/src/config.json`
 * updateorigami: `Boolean` The `demos` property of your `origami.json` file will be updated - to list the demo files that have been created.
-* runServer: `Boolean` Whether you want to run a local server or not. Default: `false`
+* runServer: `Boolean` Whether you want to run a local server or not. If true, it also sets 'local' to true. Default: `false`
 
 Runs:
 
@@ -165,6 +165,7 @@ If a `$<module-name>-is-silent` variable is found, then runs:
 * __browserTest(gulp, config)__ Runs [Nightwatch](http://nightwatchjs.org/) tests on our [Selenium](http://www.seleniumhq.org/projects/webdriver/) grid by deploying the demo pages to Heroku. This is an optional subtask that requires the config option _browserTest_ to be set to true. You also need to set the following environment variables:
 	- HEROKU_AUTH_TOKEN: The result of running `heroku auth:token`
 	- SELENIUM_PROXY_KEY: The key to use the proxy to the Selenium grid
+	- SELENIUM_HOST: The host of the Selenium grid or proxy
 Config accepts:
 	- testUrl: `String` Url to where the html the tests are going to run agains is. (Default: 'https://module-name.herokuapp.com')
 	- nightwatchConfig: `String` Path to your 'nightwatch.json' file that Nightwatch uses for testing. (Default: `./test/browser/nightwatch.json`)
