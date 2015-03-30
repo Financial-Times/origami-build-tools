@@ -2,6 +2,8 @@
 
 Standardised build tools for Origami modules and products developed based on these modules.
 
+If you have any issues with OBT, please check out [troubleshooting guide](https://github.com/Financial-Times/origami-build-tools/blob/master/TROUBLESHOOT.md) before raising an issue.
+
 ## Installation
 
 1. Install these dependencies:
@@ -73,20 +75,17 @@ Runs:
 
 The versions that are installed and supported are:
 
-* Sass: '3.4.x'
+* Sass: '^3.4.0'
 * scss-lint: '0.34.0'
-* JSHint: '2.5.6'
-* Bower: '1.3.12'
+* JSHint: '^2.5.0'
+* Bower: '^1.3.0'
 
 Config:
 * verbose: `Boolean` Outputs verbose results of bower and npm installation when `true`. For npm this will be the result of `--loglevel info`. (Default: false)
 
-Note: If you receive an error specifying `Unable to download data from https://rubygems.org/ - SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (https://api.rubygems.org/specs.4.8.gz)` you'll need to manually update your gem package using the directions in [this gist](https://gist.github.com/luislavena/f064211759ee0f806c88).
-
 ### `build`
 
 Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
-
 
 Runs:
 
@@ -137,8 +136,6 @@ Build service demos consist of only HTML, with build service URLs for static res
 Local demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
 
 _(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
-
-
 
 ### `verify`
 
