@@ -44,7 +44,7 @@
     "portfinder": "0.2.x",
     "sassdoc": "^2.1.2",
     "semver": "^2.2.1",
-    "textrequireify": "samgiles/textrequireify",
+    "textrequireify": "^2.0.1",
     "through2": "^0.6.2",
     "vinyl-source-stream": "^1.0.0",
     "which": "^1.0.5"
