@@ -18,7 +18,12 @@ If you receive an error specifying `Unable to download data from https://rubygem
 
 ### Error `While executing gem ... (Gem::FilePermissionError)`
 
-When installing Sass and/or ScssLint, depending on how you have your permissions configured in your computer, you might get this error. You will need to run the command manual prefixing sudo to it. To install the supported version you need to run the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
+When installing Sass and/or ScssLint, depending on how permissions are set on your machine, OBT might fail and return:
+
+>While executing gem ... (Gem::FilePermissionError).
+>You don't have write permissions for the /Library/Ruby/Gems/2.0.0 directory.
+
+The command needs to be run manually prefixing sudo to it. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
 
 ```bash
 sudo gem install scss-lint -v 0.34.0
@@ -27,7 +32,7 @@ sudo gem install sass -v 3.4.0
 
 ### Warning `Origami registry is not configured in a .bowerrc file`
 
-The install task runs `bower install`, which needs to check the Origami registry apart from the bower one. That's why you need to configure a `.bowerrc` file. You can do this in your home directory by running the following command:
+Origami modules are listed on Origami's custom Bower registry, and aren't available to the global, public one. Custom registries can be added to a `.bowerrc` configuration file located in your home directory. To create a `.bowerrc` configuration file now, run::
 
 ```bash
 echo '{"registry":{"search":["http://registry.origami.ft.com","https://bower.herokuapp.com"]}}' > ~/.bowerrc
