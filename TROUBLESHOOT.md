@@ -23,7 +23,9 @@ When installing Sass and/or ScssLint, depending on how permissions are set on yo
 >While executing gem ... (Gem::FilePermissionError).
 >You don't have write permissions for the /Library/Ruby/Gems/2.0.0 directory.
 
-The command needs to be run manually prefixing sudo to it. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
+This can be fixed by following the [Installing Ruby steps](#installing-ruby) mentioned above.
+
+If the error still occurs, run the command manually by prefixing sudo to it. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
 
 ```bash
 sudo gem install scss-lint -v 0.34.0
