@@ -18,7 +18,7 @@ If you receive an error specifying `Unable to download data from https://rubygem
 
 ### Error `While executing gem ... (Gem::FilePermissionError)`
 
-When installing Sass and/or ScssLint, depending on how permissions are set on your machine, OBT might fail and return:
+When installing [Sass](http://sass-lang.com/) and/or [SCSS-Lint](https://github.com/causes/scss-lint), depending on how permissions are set on your machine, OBT might fail and return:
 
 >While executing gem ... (Gem::FilePermissionError).
 >You don't have write permissions for the /Library/Ruby/Gems/2.0.0 directory.
