@@ -28,7 +28,7 @@ This can be fixed by following the [Installing Ruby steps](#installing-ruby) men
 If the error still occurs, run the command manually by prefixing sudo to it. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
 
 ```bash
-sudo gem install scss-lint -v 0.34.0
+sudo gem install scss-lint -v 0.35.0
 sudo gem install sass -v 3.4.0
 ```
 
