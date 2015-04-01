@@ -95,7 +95,6 @@ Runs:
 	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'. (Default: false)
-	- hash: `Boolean` Set to true to generate a hashed JavaScript built file to facilitate cachebusting. Also generates a JSON file with mappings to the original filename. (Default: false)
 	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as a function
 		- `Function` The transform function.  e.g:  `var brfs = require('brfs'); config.transform.push(brfs);`
 	- insertGlobals: See [browserify documentation](https://github.com/substack/node-browserify#usage)
