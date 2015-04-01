@@ -24,7 +24,6 @@
     "findit": "^1.1.1",
     "gulp": "^3.8.7",
     "gulp-autoprefixer": "^2.1.0",
-    "gulp-hash": "^2.0.3",
     "gulp-if": "^1.2.5",
     "gulp-jshint": "^1.8.4",
     "gulp-lintspaces": "^0.2.3",
