@@ -1,2 +1,6 @@
 .idea/
-node_modules/
+test/
+*.md
+.jshintrc
+gulpfile.js
+.travis.yml
