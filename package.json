@@ -16,10 +16,10 @@
   "dependencies": {
     "babelify": "^5.0.3",
     "bower-config": "^0.5.2",
-    "browserify": "~3.44.2",
+    "browserify": "^9.0.0",
     "colors": "^0.6.2",
     "configstore": "^0.3.1",
-    "debowerify": "Financial-Times/debowerify",
+    "debowerify": "^1.2.0",
     "es6-promise": "^1.0.0",
     "findit": "^1.1.1",
     "gulp": "^3.8.7",
@@ -44,7 +44,7 @@
     "portfinder": "0.2.x",
     "sassdoc": "^2.1.2",
     "semver": "^2.2.1",
-    "textrequireify": "^1.0.0",
+    "textrequireify": "^2.0.1",
     "through2": "^0.6.2",
     "vinyl-source-stream": "^1.0.0",
     "which": "^1.0.5"
