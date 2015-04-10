@@ -186,7 +186,7 @@ describe('Build task', function() {
 				})
 				.on('end', function() {
 					var builtCss = fs.readFileSync('build/bundle.css', 'utf8');
-					expect(builtCss).to.be('div {\n  color: blue; }\n');
+					expect(builtCss).to.contain('div {\n  color: blue; }\n');
 					done();
 				});
 		});
