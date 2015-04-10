@@ -17,7 +17,7 @@ describe('Command line helper', function() {
 	it('should return output from stderr', function(done) {
 		commandLine.run('node', ['error']).then(function() {}, function(output) {
 			expect(output.stderr).to.contain('throw err;\n');
-			expect(output.err).to.be(8);
+			expect(output.err).to.be(1);
 			done();
 		});
 	});
