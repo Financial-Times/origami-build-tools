@@ -8,7 +8,7 @@
     "obt": "./lib/origami-build-tools-cli.js"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 0.12.0"
   },
   "scripts": {
     "test": "mocha -t 50000 `find . -name '*.test.js' -path './test/*'`"

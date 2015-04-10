@@ -107,7 +107,6 @@ describe('Build task', function() {
 					done();
 				});
 		});
-
 	});
 
 	describe('Build Sass', function() {
@@ -138,7 +137,7 @@ describe('Build task', function() {
 			build.sass(gulp)
 				.on('end', function() {
 					var builtCss = fs.readFileSync('build/main.css', 'utf8');
-					expect(builtCss).to.be('div {\n  color: blue; }\n');
+					expect(builtCss).to.contain('div {\n  color: blue; }\n');
 					done();
 				});
 		});
@@ -162,7 +161,7 @@ describe('Build task', function() {
 				})
 				.on('end', function() {
 					var builtCss = fs.readFileSync('build/main.css', 'utf8');
-					expect(builtCss).to.be('p {\n  color: #000000; }\n');
+					expect(builtCss).to.contain('p {\n  color: #000000; }\n');
 					done();
 				});
 		});
@@ -174,7 +173,7 @@ describe('Build task', function() {
 				})
 				.on('end', function() {
 					var builtCss = fs.readFileSync('test-build/main.css', 'utf8');
-					expect(builtCss).to.be('div {\n  color: blue; }\n');
+					expect(builtCss).to.contain('div {\n  color: blue; }\n');
 					exec('rm -rf test-build')
 						.then(function() { done(); }, done);
 				});

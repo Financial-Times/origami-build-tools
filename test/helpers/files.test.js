@@ -37,7 +37,7 @@ describe('Files helper', function() {
 	});
 
 	it('should return a list of Sass files', function(done) {
-		files.getSASSFilesList().then(function(files) {
+		files.getSassFilesList().then(function(files) {
 			var testResults = [path.join(process.cwd() + '/main.scss'), path.join(process.cwd() + '/src/scss/_variables.scss')];
 			expect(files).to.contain(testResults[0]);
 			expect(files).to.contain(testResults[1]);
@@ -47,7 +47,7 @@ describe('Files helper', function() {
 
 	it('should check if the module supports silent mode', function(done) {
 		fs.writeFileSync('bower.json', JSON.stringify({ name: "o-test" }), 'utf8');
-		files.getSASSFilesList()
+		files.getSassFilesList()
 			.then(files.sassSupportsSilent)
 			.then(function(supportsSilent) {
 				expect(supportsSilent).to.be(true);
