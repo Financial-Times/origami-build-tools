@@ -44,7 +44,7 @@
     "portfinder": "^0.4.0",
     "sassdoc": "^2.1.2",
     "semver": "^4.3.3",
-    "textrequireify": "^2.0.1",
+    "textrequireify": "^2.1.0",
     "through2": "^0.6.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
