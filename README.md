@@ -49,7 +49,7 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 
 	Mostly used options include:
 	   [--watch]                    Re-run every time a file changes
-	   [--local]                    Build demos locally, and preview them in a browser
+	   [--local]                    Build demos locally
 	   [--updateorigami]            Update origami.json with the latest demo files created
 	   [--js=<path>]                Main JavaScript file (default: ./src/main.js)
 	   [--sass=<path>]              Main Sass file (default: ./src/main.scss)
@@ -119,9 +119,10 @@ Build demos found in the [demo config file](http://origami.ft.com/docs/component
 
 Config:
 
-* local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Also runs a local server to help you test your demos.
+* local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Default: `false`
 * demoConfig: `String` The path to the demo config file. Default: `demos/src/config.json`
 * updateorigami: `Boolean` The `demos` property of your `origami.json` file will be updated - to list the demo files that have been created.
+* runServer: `Boolean` Whether you want to run a local server or not. If true, it also sets 'local' to true. Default: `false`
 
 Runs:
 
@@ -130,8 +131,6 @@ Runs:
 Build service demos consist of only HTML, with build service URLs for static resources, and are created in `demos/`.
 
 Local demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
-
-_(Sourcemaps aren't generated as this feature is incompatible with clean-css. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
 ### `verify`
 
@@ -157,6 +156,16 @@ If a `$<module-name>-is-silent` variable is found, then runs:
 * __silentCompilation(gulp)__ Check the Sass outputs no CSS by default
 * __silentCompilation(gulp)__ Check the Sass outputs some CSS with `$<module-name>-is-silent` set to false
 * __npmTest()__ Runs 'npm test', so whatever test script that you have in you `package.json` will be executed
+* __browserTest(gulp, config)__ Runs [Nightwatch](http://nightwatchjs.org/) tests on our [Selenium](http://www.seleniumhq.org/projects/webdriver/) grid by deploying the demo pages to Heroku. This is an optional subtask that requires the config option _browserTest_ to be set to true. You also need to set the following environment variables:
+	- HEROKU_AUTH_TOKEN: The result of running `heroku auth:token`
+	- SELENIUM_USER: The username of the Selenium grid proxy
+	- SELENIUM_KEY: The key to use the proxy to the Selenium grid
+	- SELENIUM_HOST: The host of the Selenium grid or proxy
+Config accepts:
+	- testUrl: `String` Url to where the html the tests are going to run agains is. (Default: 'https://module-name.herokuapp.com')
+	- nightwatchConfig: `String` Path to your 'nightwatch.json' file that Nightwatch uses for testing. (Default: `./test/browser/nightwatch.json`)
+	- environments: `String` Comma separated list of environments from your nightwatch config file to run your tests on. (Default: `chrome37_Grid,chrome38_Grid,chrome39_Grid,chrome40_Grid,firefox30_Grid,firefox31_Grid,firefox32_Grid,firefox33_Grid,firefox34_Grid,firefox35_Grid,ie8_Grid,ie9_Grid,ie10_Grid,ie11_Grid,safari7_Grid`)
+	- testsPath: `String` Relative path from your project's root directory to where your nightwatch tests are. (Default: `test/browser/tests`)
 
 ### `docs`
 
