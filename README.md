@@ -166,6 +166,8 @@ If a `$<module-name>-is-silent` variable is found, then runs:
 Config accepts:
 	- testUrl: `String` Url to where the html the tests are going to run agains is. (Default: 'https://module-name.herokuapp.com')
 	- nightwatchConfig: `String` Path to your 'nightwatch.json' file that Nightwatch uses for testing. (Default: `./test/browser/nightwatch.json`)
+	- environments: `String` Comma separated list of environments from your nightwatch config file to run your tests on. (Default: `chrome37_Grid,chrome38_Grid,chrome39_Grid,chrome40_Grid,firefox30_Grid,firefox31_Grid,firefox32_Grid,firefox33_Grid,firefox34_Grid,firefox35_Grid,ie8_Grid,ie9_Grid,ie10_Grid,ie11_Grid,safari7_Grid`)
+	- testsPath: `String` Relative path from your project's root directory to where your nightwatch tests are. (Default: `test/browser/tests`)
 
 ### `docs`
 
