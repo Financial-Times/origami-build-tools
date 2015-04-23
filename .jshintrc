@@ -13,5 +13,5 @@
     "trailing": true,
     "smarttabs": true,
     "node": true,
-    "predef": ["Promise"]
+    "predef": ["Promise", "fetch"]
 }
