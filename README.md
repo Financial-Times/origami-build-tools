@@ -45,7 +45,6 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 	   demo     Build demos into the demos/ directory
 	   verify   Lint code and verify if module structure follows the Origami specification
 	   test     Test if Sass silent compilation follows the Origami specification
-	   docs     Build module documentation into the docs/ directory
 
 	Mostly used options include:
 	   [--watch]                    Re-run every time a file changes
@@ -164,16 +163,6 @@ Config accepts:
 	- nightwatchConfig: `String` Path to your 'nightwatch.json' file that Nightwatch uses for testing. (Default: `./test/browser/nightwatch.json`)
 	- environments: `String` Comma separated list of environments from your nightwatch config file to run your tests on. (Default: `chrome37_Grid,chrome38_Grid,chrome39_Grid,chrome40_Grid,firefox30_Grid,firefox31_Grid,firefox32_Grid,firefox33_Grid,firefox34_Grid,firefox35_Grid,ie8_Grid,ie9_Grid,ie10_Grid,ie11_Grid,safari7_Grid`)
 	- testsPath: `String` Relative path from your project's root directory to where your nightwatch tests are. (Default: `test/browser/tests`)
-
-### `docs`
-
-Build component documentation into the `docs` directory.
-
-Runs:
-
-* __sassDoc(gulp, config)__ Sass documentation is built using [SassDoc](http://sassdoc.com/). Config accepts:
-	- sassDir: `String` Path to where you want the 'docs' directory to be generated. (Default: '.')
-	- Any option supported by the [SassDoc gulp plugin](http://sassdoc.com/gulp/#options)
 
 ## gulpfile usage
 
