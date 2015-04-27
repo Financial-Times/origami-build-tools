@@ -68,7 +68,6 @@ Runs:
 
 * __installSass()__ globally (if it's not already installed)
 * __installScssLint()__ globally (if it's not already installed)
-* __installJshint()__ globally (if it's not already installed)
 * __installBower()__ globally (if it's not already installed)
 * __runNpmInstall()__ if there is a `package.json` inthe root directory
 * __runBowerInstall()__ using both the Origami Registry and the default Bower registry to resolve dependencies
@@ -77,7 +76,6 @@ The versions that are installed and supported are:
 
 * Sass: '^3.4.0'
 * scss-lint: '0.35.0'
-* JSHint: '^2.5.0'
 * Bower: '^1.3.0'
 
 Config:
