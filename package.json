@@ -32,7 +32,7 @@
     "gulp-mustache": "^1.0.2",
     "gulp-rename": "^1.2.0",
     "gulp-ruby-sass": "^1.0.1",
-    "gulp-scss-lint": "samgiles/gulp-scss-lint#v1.0.0",
+    "gulp-scss-lint": "^0.1.12",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-streamify": "0.0.5",
     "gulp-uglify": "^1.0.1",
