@@ -18,7 +18,7 @@ If you receive an error specifying `Unable to download data from https://rubygem
 
 ### Error `While executing gem ... (Gem::FilePermissionError)`
 
-When installing [Sass](http://sass-lang.com/) and/or [SCSS-Lint](https://github.com/causes/scss-lint), depending on how permissions are set on your machine, OBT might fail and return:
+When installing [SCSS-Lint](https://github.com/causes/scss-lint), depending on how permissions are set on your machine, OBT might fail and return:
 
 >While executing gem ... (Gem::FilePermissionError).
 >You don't have write permissions for the /Library/Ruby/Gems/2.0.0 directory.
@@ -29,7 +29,6 @@ If the error still occurs, run the command manually by prefixing sudo to it. It'
 
 ```bash
 sudo gem install scss-lint -v 0.35.0
-sudo gem install sass -v 3.4.0
 ```
 
 ### Warning `Origami registry is not configured in a .bowerrc file`

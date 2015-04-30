@@ -65,7 +65,6 @@ Install tools and dependencies required to build modules.
 
 Runs:
 
-* __installSass()__ globally (if it's not already installed)
 * __installScssLint()__ globally (if it's not already installed)
 * __installBower()__ globally (if it's not already installed)
 * __runNpmInstall()__ if there is a `package.json` inthe root directory
@@ -73,7 +72,6 @@ Runs:
 
 The versions that are installed and supported are:
 
-* Sass: '^3.4.0'
 * scss-lint: '0.35.0'
 * Bower: '^1.3.0'
 
@@ -107,8 +105,6 @@ Runs:
 	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [clean-css](https://github.com/jakubpawlowicz/clean-css). (Default: development)
 	- cleanCss: `Object` Config object to pass to [clean-css](https://github.com/jakubpawlowicz/clean-css/blob/master/README.md#how-to-use-clean-css-programmatically). (Default: `{advanced: false}`)
-
-	_(Sourcemaps aren't generated as this feature is incompatible with clean-css. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
 ### `demo`
 
