@@ -18,13 +18,13 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 
 Run the install task for the first time will to install required dependencies:
 
-		origami-build-tools install
+	origami-build-tools install
 
 ### Developing products
 
 Build CSS and JavaScript bundles in the `build` directory:
 
-		origami-build-tools build
+	origami-build-tools build
 
 ### Developing modules locally
 
