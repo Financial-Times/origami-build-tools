@@ -31,7 +31,7 @@
     "gulp-minify-css": "^1.0.0",
     "gulp-mustache": "^1.0.2",
     "gulp-rename": "^1.2.0",
-    "gulp-sass": "dlmanning/gulp-sass#2.x",
+    "gulp-sass": "^2.0.0",
     "gulp-scss-lint": "^0.1.12",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-streamify": "0.0.5",
