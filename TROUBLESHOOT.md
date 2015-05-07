@@ -31,6 +31,33 @@ If the error still occurs, run the command manually by prefixing sudo to it. It'
 sudo gem install scss-lint -v 0.35.0
 ```
 
+### Error `npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "bower" "--quiet"`
+
+When installing [bower](https://bower.io), depending on how permissions are set on your machine, OBT might fail and return something like this:
+
+>npm ERR! Darwin 14.3.0
+>npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "bower" "--quiet"
+>npm ERR! node v0.12.2
+>npm ERR! npm  v2.1.6
+>npm ERR! path /usr/local/lib/node_modules/bower
+>npm ERR! code EACCES
+>npm ERR! errno -13
+>
+>npm ERR! Error: EACCES, unlink '/usr/local/lib/node_modules/bower'
+>npm ERR!     at Error (native)
+>npm ERR!  { [Error: EACCES, unlink '/usr/local/lib/node_modules/bower']
+>npm ERR!   errno: -13,
+>npm ERR!   code: 'EACCES',
+>npm ERR!   path: '/usr/local/lib/node_modules/bower' }
+>npm ERR!
+>npm ERR! Please try running this command again as root/Administrator.
+
+The command can be ran manually prefixing sudo to it. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
+
+```bash
+sudo npm install -g bower@^1.3.1
+```
+
 ### Warning `Origami registry is not configured in a .bowerrc file`
 
 Origami modules are listed on Origami's custom Bower registry, and aren't available to the global, public one. Custom registries can be added to a `.bowerrc` configuration file located in your home directory. To create a `.bowerrc` configuration file now, run::
