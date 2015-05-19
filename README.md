@@ -14,6 +14,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 
 		npm install -g origami-build-tools
 
+__Attention:__ _OBT doesn't work with 'npm >1.7.5' due to a a problem with npm and Editorconfig 0.11.x_
 ## Usage
 
 Run the install task for the first time will to install required dependencies:
@@ -87,7 +88,7 @@ Runs:
 * __js(gulp, config)__ Config accepts:
 	- js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key)
 	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
-	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
+	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'. (Default: false)
 	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as a function
@@ -102,7 +103,7 @@ Runs:
 	- autoprefixerCascade: `Boolean` Whether autoprefixer should display CSS prefixed properties [cascaded](https://github.com/postcss/autoprefixer#visual-cascade) (Default: false)
 	- autoprefixerRemove: `Boolean` Remove unneeded prefixes (Default: true)
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
-	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
+	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [clean-css](https://github.com/jakubpawlowicz/clean-css). (Default: development)
 	- cleanCss: `Object` Config object to pass to [clean-css](https://github.com/jakubpawlowicz/clean-css/blob/master/README.md#how-to-use-clean-css-programmatically). (Default: `{advanced: false}`)
 
