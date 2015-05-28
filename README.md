@@ -14,7 +14,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 
 		npm install -g origami-build-tools
 
-__Attention:__ _OBT doesn't work with 'npm >1.7.5' due to a a problem with npm and Editorconfig 0.11.x_
+__Attention:__ _OBT doesn't work with 'npm >2.7.5' due to a a problem with npm and Editorconfig 0.11.x_
 ## Usage
 
 Run the install task for the first time will to install required dependencies:
