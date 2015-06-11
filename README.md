@@ -15,6 +15,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		npm install -g origami-build-tools
 
 __Attention:__ _OBT doesn't work with 'npm >2.7.5' due to a a problem with npm and Editorconfig 0.11.x_
+
 ## Usage
 
 Run the install task for the first time will to install required dependencies:
@@ -57,7 +58,7 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 	   [--buildCss=<file>]          Compiled CSS file (default: main.css)
 	   [--buildFolder=<dir>]        Compiled assets directory (default: ./build/)
 	   [--scssLintPath=<path>]      Custom scss-lint configuration
-	   [--jsHintPath=<path>]        Custom JS Hint configuration
+	   [--jsHintPath=<path>]        Custom JSHint configuration
 	   [--editorconfigPath=<path>]  Custom .editorconfig
 
 ### `install`
@@ -83,6 +84,14 @@ Config:
 
 Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
 
+It comes with support for things like:
+
+* [Babel](https://github.com/babel/babel) so you can use ES2015 features in your modules and products
+* [autoprefixer](https://github.com/postcss/autoprefixer) so you don't have to worry about writing browser prefixes in your Sass
+* If `env` is set to `'production'`:
+	- [uglifyJS](https://github.com/mishoo/UglifyJS2) which minimises your JavaScript bundle
+	- [clean-css](https://github.com/jakubpawlowicz/clean-css) which minimises your CSS bundle
+
 Runs:
 
 * __js(gulp, config)__ Config accepts:
@@ -91,7 +100,7 @@ Runs:
 	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'. (Default: false)
-	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as a function
+	- transforms: `Array` Additional browserify transforms to run *after* babelify, debowerify and textrequireify. Each transform should be specified as a
 		- `Function` The transform function.  e.g:  `var brfs = require('brfs'); config.transform.push(brfs);`
 	- insertGlobals: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 	- detectGlobals: See [browserify documentation](https://github.com/substack/node-browserify#usage)
@@ -144,11 +153,8 @@ Runs:
 
 ### `test`
 
-Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).
-If a `$<module-name>-is-silent` variable is found, then runs:
-
-* __silentCompilation(gulp)__ Check the Sass outputs no CSS by default
-* __silentCompilation(gulp)__ Check the Sass outputs some CSS with `$<module-name>-is-silent` set to false
+* __silentCompilation(gulp)__ Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles). Check the Sass outputs no CSS by default. Only ran af a `$<module-name>-is-silent` variable is found
+* __silentCompilation(gulp)__ Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles). Check the Sass outputs some CSS with `$<module-name>-is-silent` set to false. Only ran af a `$<module-name>-is-silent` variable is found
 * __npmTest()__ Runs 'npm test', so whatever test script that you have in you `package.json` will be executed
 * __browserTest(gulp, config)__ Runs [Nightwatch](http://nightwatchjs.org/) tests on our [Selenium](http://www.seleniumhq.org/projects/webdriver/) grid by deploying the demo pages to Heroku. This is an optional subtask that requires the config option _browserTest_ to be set to true. You also need to set the following environment variables:
 	- HEROKU_AUTH_TOKEN: The result of running `heroku auth:token`
@@ -158,7 +164,7 @@ If a `$<module-name>-is-silent` variable is found, then runs:
 Config accepts:
 	- testUrl: `String` Url to where the html the tests are going to run agains is. (Default: 'https://module-name.herokuapp.com')
 	- nightwatchConfig: `String` Path to your 'nightwatch.json' file that Nightwatch uses for testing. (Default: `./test/browser/nightwatch.json`)
-	- environments: `String` Comma separated list of environments from your nightwatch config file to run your tests on. (Default: `chrome37_Grid,chrome38_Grid,chrome39_Grid,chrome40_Grid,firefox30_Grid,firefox31_Grid,firefox32_Grid,firefox33_Grid,firefox34_Grid,firefox35_Grid,ie8_Grid,ie9_Grid,ie10_Grid,ie11_Grid,safari7_Grid`)
+	- environments: `String` Comma separated list of environments from your nightwatch config file to run your tests on. (Default: `chrome_latest,chrome_latest-1,firefox_latest,firefox_latest-1,ie8_Grid,ie9_Grid,ie10_Grid,ie11_Grid,safari7_Grid`)
 	- testsPath: `String` Relative path from your project's root directory to where your nightwatch tests are. (Default: `test/browser/tests`)
 
 ## gulpfile usage
