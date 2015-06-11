@@ -2,6 +2,29 @@
 
 Different common issues encountered when using OBT organized by the different tasks.
 
+### Error `npm ERR! argv "node" "/usr/local/bin/npm" "install" "-g" "origami-build-tools"`
+
+When install origami-build-tools, depending on the version of [npm](https://github.com/npm/npm), it might fail with an error similar to this:
+
+>npm ERR! Darwin 14.3.0
+>npm ERR! argv "node" "/usr/local/bin/npm" "install" "-g" "origami-build-tools"
+>npm ERR! node v0.12.4
+>npm ERR! npm  v2.11.1
+>npm ERR! path /usr/local/lib/node_modules/origami-build-tools/node_modules/gulp-lintspaces/node_modules/lintspaces/node_modules/editorconfig/bin\editorconfig
+>npm ERR! code ENOENT
+>npm ERR! errno -2
+>
+>npm ERR! enoent ENOENT, chmod '/usr/local/lib/node_modules/origami-build-tools/node_modules/gulp-lintspaces/node_modules/lintspaces/node_modules/editorconfig/bin\editorconfig'
+>npm ERR! enoent This is most likely not a problem with npm itself
+>npm ERR! enoent and is related to npm not being able to find a file.
+>npm ERR! enoent
+
+The version of npm required to use OBT is `>= 2.0.0<=2.7.5` as there is a bug with [npm](https://github.com/npm/npm) and [EditorConfig](https://github.com/editorconfig/editorconfig-core-js). To fix it, try installing npm v2.7.5 by running:
+
+```bash
+sudo npm install -g npm@2.7.5
+```
+
 ## `install`
 
 ### Installing Ruby
