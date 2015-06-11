@@ -84,6 +84,14 @@ Config:
 
 Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
 
+It comes with support for things like:
+
+* [Babel](https://github.com/babel/babel) so you can use ES2015 features in your modules and products
+* [autoprefixer](https://github.com/postcss/autoprefixer) so you don't have to worry about writing browser prefixes in your Sass
+* If `env` is set to `'production'`:
+	- [uglifyJS](https://github.com/mishoo/UglifyJS2) which minimises your JavaScript bundle
+	- [clean-css](https://github.com/jakubpawlowicz/clean-css) which minimises your CSS bundle
+
 Runs:
 
 * __js(gulp, config)__ Config accepts:
@@ -92,7 +100,7 @@ Runs:
 	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'. (Default: false)
-	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as a function
+	- transforms: `Array` Additional browserify transforms to run *after* babelify, debowerify and textrequireify. Each transform should be specified as a
 		- `Function` The transform function.  e.g:  `var brfs = require('brfs'); config.transform.push(brfs);`
 	- insertGlobals: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 	- detectGlobals: See [browserify documentation](https://github.com/substack/node-browserify#usage)
