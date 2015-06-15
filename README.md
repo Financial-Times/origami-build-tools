@@ -50,7 +50,7 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 
 	Mostly used options include:
 	   [--watch]                    Re-run every time a file changes
-	   [--local]                    Build demos locally
+	   [--runServer]                Build demos locally and runs a server
 	   [--updateorigami]            Update origami.json with the latest demo files created
 	   [--js=<path>]                Main JavaScript file (default: ./src/main.js)
 	   [--sass=<path>]              Main Sass file (default: ./src/main.scss)
