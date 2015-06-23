@@ -40,11 +40,7 @@ describe('Verify task', function() {
 			scssLintPath: 'scss-lint.yml',
 			// Verify only verify.scss:
 			excludeFiles: ['!**/demo.scss', '!**/test.scss', '!**/main.scss']
-		})
-		.on('error', function(e) {
-			console.log(e); done();
-		})
-		.on('end', function() {
+		}).on('end', function() {
 			done();
 		});
 	});
