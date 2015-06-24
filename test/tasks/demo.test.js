@@ -138,8 +138,8 @@ describe('Demo task', function() {
 					var test2 = fs.readFileSync('demos/test2.html', 'utf8');
 					expect(test1).to.contain('<div>test1</div>');
 					expect(test2).to.contain('<div>test2</div>');
-					expect(test1).to.match(/\/v1\/polyfill\.min\.js\?features=.*modernizr:promises/);
-					expect(test2).to.match(/\/v1\/polyfill\.min\.js\?features=.*modernizr:promises/);
+					expect(test1).to.match(/\/v1\/polyfill\.min\.js\?features=.*promises/);
+					expect(test2).to.match(/\/v1\/polyfill\.min\.js\?features=.*promises/);
 					fs.unlink('demos/test1.html');
 					fs.unlink('demos/test2.html');
 				});
