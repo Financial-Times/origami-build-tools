@@ -4,6 +4,8 @@ Different common issues encountered when using OBT organized by the different ta
 
 ### Error `npm ERR! argv "node" "/usr/local/bin/npm" "install" "-g" "origami-build-tools"`
 
+> This error should be fixed in v3.0.2 of origami-build-tools, but we're keeping it in this troubleshooting guide for now.
+
 When install origami-build-tools, depending on the version of [npm](https://github.com/npm/npm), it might fail with an error similar to this:
 
 >npm ERR! Darwin 14.3.0
