@@ -44,6 +44,7 @@
     "merge-stream": "^0.1.6",
     "minimist": "^1.1.1",
     "nightwatch": "^0.5.36",
+    "node-notifier": "^4.2.3",
     "node.extend": "^1.0.9",
     "npmconf": "^2.1.1",
     "portfinder": "^0.4.0",
