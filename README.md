@@ -97,6 +97,7 @@ Runs:
 	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
 	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
+	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: current working directory)
 	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'. (Default: false)
 	- transforms: `Array` Additional browserify transforms to run *after* babelify, debowerify and textrequireify. Each transform should be specified as a
 		- `Function` The transform function.  e.g:  `var brfs = require('brfs'); config.transform.push(brfs);`
@@ -109,6 +110,7 @@ Runs:
 	- autoprefixerBrowsers: `Array` An array of strings of [browser names for autoprefixer](https://github.com/postcss/autoprefixer#browsers) to check what prefixes it needs. (Default: `["> 1%", "last 2 versions", "ie > 6", "ff ESR"]`)
 	- autoprefixerCascade: `Boolean` Whether autoprefixer should display CSS prefixed properties [cascaded](https://github.com/postcss/autoprefixer#visual-cascade) (Default: false)
 	- autoprefixerRemove: `Boolean` Remove unneeded prefixes (Default: true)
+	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: current working directory)
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
 	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [clean-css](https://github.com/jakubpawlowicz/clean-css). (Default: development)
