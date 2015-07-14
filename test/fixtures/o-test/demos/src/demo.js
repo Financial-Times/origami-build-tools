@@ -1,1 +1,3 @@
-var demo = require('../../main');  // jshint ignore:line
+/*eslint-disable */
+var demo = require('../../main');
+/*eslint-enable */

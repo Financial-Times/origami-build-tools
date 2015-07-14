@@ -1,6 +1,7 @@
-'use strict';
 function Test() {
-	let name = 'test';  // jshint ignore:line
+	/*eslint-disable */
+	let name = 'test';
+	/*eslint-enable */
 }
 
 module.exports = Test;
