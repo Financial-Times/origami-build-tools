@@ -1,6 +1,6 @@
 function Test() {
 	/*eslint-disable */
-		let name = 'test';
+	let name = 'test';
 	/*eslint-enable */
 }
 

@@ -1,12 +1,11 @@
 {
 	"parser": "babel-eslint",
+	"env": {
+		"node": true,
+		"es6": false
+	},
 	"ecmaFeatures": {
 		"modules": false
-	},
-	"env": {
-		"es6": true,
-		"browser": true,
-		"node": true
 	},
 	"rules": {
 		"eqeqeq": 2,
@@ -19,14 +18,17 @@
 		"no-trailing-spaces": 2,
 		"no-multri-str": 0,
 		"dot-notation": 0,
-		"strict": [2, "never"],
+		"strict": [2, "global"],
 		"valid-jsdoc": 1,
 		"no-loop-func": 2,
 		"no-multi-spaces": 2,
 		"no-multiple-empty-lines": 2,
-		"one-var": [2, "never"],
+		"one-var": 0,
 		"constructor-super": 2,
 		"no-this-before-super": 2,
-		"prefer-const": 1
+		"prefer-const": 1,
+		"no-process-exit": 1,
+		"no-shadow": 1,
+		"valid-jsdoc": 0
 	}
 }
