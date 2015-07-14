@@ -5,7 +5,7 @@ var obt = require('./lib/origami-build-tools');
 
 gulp.task('verify', function() {
 	return obt.verify(gulp, {
-		jsHintPath: '.jshintrc',
+		eslintPath: '.eslintrc',
 		editorconfigPath: '.editorconfig'
 	});
 });
