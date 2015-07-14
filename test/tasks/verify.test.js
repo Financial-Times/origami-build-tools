@@ -19,7 +19,7 @@ describe('Verify task', function() {
 		fs.copySync(path.resolve(obtPath, oTestPath), verifyTestPath);
 		process.chdir(verifyTestPath);
 		fs.writeFileSync('src/scss/verify.scss', '$color: #ccc;\n\np {\n  color: $color!important ;\n}\n', 'utf8');
-		fs.writeFileSync('src/js/verify.js', 'var test = "We live in financial times";');
+		fs.writeFileSync('src/js/verify.js', 'var test = "We live in financial times";\nconsole.log(test);\n');
 	});
 
 	after(function() {
@@ -45,17 +45,17 @@ describe('Verify task', function() {
 		});
 	});
 
-	it('should run jsHint with default config', function(done) {
-		verify.jsHint(gulp)
+	it('should run eslint with default config', function(done) {
+		verify.eslint(gulp)
 			.on('error', function(error) {
-				expect(error.message).to.be('JSHint failed for: ' + path.resolve(verifyTestPath, 'src/js/verify.js'));
+				expect(error.fileName).to.be(path.resolve(verifyTestPath, 'src/js/verify.js'));
 				done();
 			});
 	});
 
-	it('should run jsHint with custom config', function(done) {
-		var stream = verify.jsHint(gulp, {
-			jsHintPath: 'jshint.json'
+	it('should run eslint with custom config', function(done) {
+		var stream = verify.eslint(gulp, {
+			eslintPath: 'eslint.json'
 		})
 		.on('error', function(error) {
 			expect(error.message).to.be(undefined);
