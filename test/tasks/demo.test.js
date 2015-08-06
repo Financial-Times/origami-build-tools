@@ -43,7 +43,7 @@ describe('Demo task', function() {
 		it('should fail if there is not a bower.json file', function() {
 			return demo(gulp)
 				.then(function() {
-					throw new Error("No error thrown");
+					throw new Error('No error thrown');
 				}, function(err) {
 					setTimeout(function() {
 						expect(err).to.be('Couldn\'t find a bower.json file. Please add one and try again');
@@ -56,7 +56,7 @@ describe('Demo task', function() {
 			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
 			return demo(gulp)
 				.then(function() {
-					throw new Error("No error thrown");
+					throw new Error('No error thrown');
 				}, function(err) {
 					setTimeout(function() {
 						expect(err).to.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js');
@@ -169,8 +169,8 @@ describe('Demo task', function() {
 				var newOrigamiConfig = extend({}, JSON.parse(origamiConfig));
 				var updatedOrigamiConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
 				var demosConfig = [];
-				demosConfig.push({"path": "/demos/test1.html", "expanded": true, "description": "First test"});
-				demosConfig.push({"path": "/demos/test2.html", "expanded": false, "description": "Second test"});
+				demosConfig.push({'path': '/demos/test1.html', 'expanded': true, 'description': 'First test'});
+				demosConfig.push({'path': '/demos/test2.html', 'expanded': false, 'description': 'Second test'});
 				newOrigamiConfig.demos = demosConfig;
 				expect(JSON.stringify(updatedOrigamiConfig)).to.be(JSON.stringify(newOrigamiConfig));
 				fs.writeFileSync('origami.json', origamiConfig, 'utf8');
