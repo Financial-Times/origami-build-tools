@@ -31,22 +31,22 @@ describe('Files helper', function() {
 
 	it('should return module name', function() {
 		expect(files.getModuleName()).to.be('');
-		fs.writeFileSync('bower.json', JSON.stringify({ name: "o-test" }), 'utf8');
+		fs.writeFileSync('bower.json', JSON.stringify({ name: 'o-test' }), 'utf8');
 		expect(files.getModuleName()).to.be('o-test');
 		fs.unlink(path.resolve(filesTestPath, 'bower.json'));
 	});
 
 	it('should return a list of Sass files', function(done) {
-		files.getSassFilesList().then(function(files) {
+		files.getSassFilesList().then(function(sassFiles) {
 			var testResults = [path.join(process.cwd() + '/main.scss'), path.join(process.cwd() + '/src/scss/_variables.scss')];
-			expect(files).to.contain(testResults[0]);
-			expect(files).to.contain(testResults[1]);
+			expect(sassFiles).to.contain(testResults[0]);
+			expect(sassFiles).to.contain(testResults[1]);
 			done();
 		});
 	});
 
 	it('should check if the module supports silent mode', function(done) {
-		fs.writeFileSync('bower.json', JSON.stringify({ name: "o-test" }), 'utf8');
+		fs.writeFileSync('bower.json', JSON.stringify({ name: 'o-test' }), 'utf8');
 		files.getSassFilesList()
 			.then(files.sassSupportsSilent)
 			.then(function(supportsSilent) {
@@ -58,7 +58,7 @@ describe('Files helper', function() {
 
 	describe('Main files', function() {
 		before(function() {
-			fs.writeFileSync('bower.json', JSON.stringify({ name: "o-test" }), 'utf8');
+			fs.writeFileSync('bower.json', JSON.stringify({ name: 'o-test' }), 'utf8');
 		});
 
 		after(function() {
@@ -98,7 +98,7 @@ describe('Files helper', function() {
 		it('should get bower.json', function() {
 			expect(typeof files.getBowerJson()).to.be('undefined');
 			fs.writeFileSync('bower.json', JSON.stringify({}), 'utf8');
-			expect(typeof files.getBowerJson()).to.not.be("undefined");
+			expect(typeof files.getBowerJson()).to.not.be('undefined');
 		});
 
 		it('should check if bower.json is present', function() {
@@ -122,7 +122,7 @@ describe('Files helper', function() {
 		it('should get package.json', function() {
 			expect(typeof files.getPackageJson()).to.be('undefined');
 			fs.writeFileSync('package.json', JSON.stringify({}), 'utf8');
-			expect(typeof files.getPackageJson()).to.not.be("undefined");
+			expect(typeof files.getPackageJson()).to.not.be('undefined');
 		});
 
 		it('should check if package.json is present', function() {

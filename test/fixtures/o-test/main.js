@@ -1,1 +1,1 @@
-var Test = require('./src/js/test');  // jshint ignore:line
+var Test = require('./src/js/test');  // eslint-disable-line

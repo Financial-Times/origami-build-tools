@@ -26,8 +26,8 @@ describe('Build task', function() {
 			process.chdir(buildTestPath);
 			fs.writeFileSync('bower.json', JSON.stringify(
 				{
-					name: "o-test",
-					main: "main.js"
+					name: 'o-test',
+					main: 'main.js'
 				}
 			), 'utf8');
 		});
@@ -118,8 +118,8 @@ describe('Build task', function() {
 			process.chdir(buildTestPath);
 			fs.writeFileSync('bower.json', JSON.stringify(
 				{
-					name: "o-test",
-					main: "main.scss"
+					name: 'o-test',
+					main: 'main.scss'
 				}
 			), 'utf8');
 		});
