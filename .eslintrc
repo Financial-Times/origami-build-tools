@@ -14,13 +14,11 @@
         "wrap-iife": 2,
         "new-cap": 2,
         "no-caller": 2,
-        "no-irregular-whitespace": 1,
-        "no-trailing-spaces": 2,
         "strict": [2, "global"],
         "quotes": [1, "single"],
         "no-loop-func": 2,
+        "no-irregular-whitespace": 1,
         "no-multi-spaces": 2,
-        "no-multiple-empty-lines": 2,
         "one-var": [2, "never"]
     },
     "globals": {
