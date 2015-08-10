@@ -27,9 +27,9 @@
 		"prefer-const": 1
 	},
 	"globals": {
-		"require": true,
-		"module": true,
-		"exports": true,
-		"requireText": true
+		"require": false,
+		"module": false,
+		"exports": false,
+		"requireText": false
 	}
 }
