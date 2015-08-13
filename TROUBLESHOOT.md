@@ -77,7 +77,9 @@ When installing [bower](https://bower.io), depending on how permissions are set 
 >npm ERR!
 >npm ERR! Please try running this command again as root/Administrator.
 
-The command can be ran manually prefixing sudo to it. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
+This can be fixed by following one of the methods suggested in the [official guide](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
+
+If the error still occurs, the command can be ran manually prefixing sudo to it. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
 
 ```bash
 sudo npm install -g bower@^1.3.1
