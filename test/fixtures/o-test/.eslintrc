@@ -27,7 +27,8 @@
     "no-this-before-super": 2,
     "no-var": 2,
     "no-unused-vars": 0,
-    "prefer-const": 1
+    "prefer-const": 1,
+	"no-const-assign": 2
   },
   "globals": {
     "require": true,

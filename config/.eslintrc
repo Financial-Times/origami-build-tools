@@ -25,7 +25,8 @@
 		"constructor-super": 2,
 		"no-this-before-super": 2,
 		"no-var": 2,
-		"prefer-const": 1
+		"prefer-const": 1,
+		"no-const-assign": 2
 	},
 	"globals": {
 		"require": false,
