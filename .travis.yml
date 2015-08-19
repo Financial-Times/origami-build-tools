@@ -1,11 +1,10 @@
-sudo: false
 language: node_js
 node_js:
-  - "0.10"
+  - "0.12"
 script:
   - gulp install
   - gulp verify
-  - npm test # temporarily undo gulp test (no output, doesn't seem to fail)
+  - gulp test
 cache:
   directories:
   - node_modules

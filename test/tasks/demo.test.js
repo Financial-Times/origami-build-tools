@@ -43,7 +43,7 @@ describe('Demo task', function() {
 		it('should fail if there is not a bower.json file', function() {
 			return demo(gulp)
 				.then(function() {
-					throw new Error("No error thrown");
+					throw new Error('No error thrown');
 				}, function(err) {
 					setTimeout(function() {
 						expect(err).to.be('Couldn\'t find a bower.json file. Please add one and try again');
@@ -56,7 +56,7 @@ describe('Demo task', function() {
 			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
 			return demo(gulp)
 				.then(function() {
-					throw new Error("No error thrown");
+					throw new Error('No error thrown');
 				}, function(err) {
 					setTimeout(function() {
 						expect(err).to.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js');
@@ -138,8 +138,8 @@ describe('Demo task', function() {
 					var test2 = fs.readFileSync('demos/test2.html', 'utf8');
 					expect(test1).to.contain('<div>test1</div>');
 					expect(test2).to.contain('<div>test2</div>');
-					expect(test1).to.match(/\/v1\/polyfill\.min\.js\?features=.*modernizr:promises/);
-					expect(test2).to.match(/\/v1\/polyfill\.min\.js\?features=.*modernizr:promises/);
+					expect(test1).to.match(/\/v1\/polyfill\.min\.js\?features=.*promises/);
+					expect(test2).to.match(/\/v1\/polyfill\.min\.js\?features=.*promises/);
 					fs.unlink('demos/test1.html');
 					fs.unlink('demos/test2.html');
 				});
@@ -152,8 +152,8 @@ describe('Demo task', function() {
 			.then(function() {
 				expect(fs.readFileSync('demos/local/test1.html', 'utf8')).to.contain('<div>test1</div>');
 				expect(fs.readFileSync('demos/local/test2.html', 'utf8')).to.contain('<div>test2</div>');
-				expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\tvar name = "test";');
-				expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.be('div{color:blue}\n');
+				expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\tvar name = \'test\';');
+				expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  color: blue; }\n');
 				fs.unlink('demos/test1.html');
 				fs.unlink('demos/test2.html');
 				fs.removeSync('demos/local');
@@ -169,8 +169,8 @@ describe('Demo task', function() {
 				var newOrigamiConfig = extend({}, JSON.parse(origamiConfig));
 				var updatedOrigamiConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
 				var demosConfig = [];
-				demosConfig.push({"path": "/demos/test1.html", "expanded": true, "description": "First test"});
-				demosConfig.push({"path": "/demos/test2.html", "expanded": false, "description": "Second test"});
+				demosConfig.push({'path': '/demos/test1.html', 'expanded': true, 'description': 'First test'});
+				demosConfig.push({'path': '/demos/test2.html', 'expanded': false, 'description': 'Second test'});
 				newOrigamiConfig.demos = demosConfig;
 				expect(JSON.stringify(updatedOrigamiConfig)).to.be(JSON.stringify(newOrigamiConfig));
 				fs.writeFileSync('origami.json', origamiConfig, 'utf8');

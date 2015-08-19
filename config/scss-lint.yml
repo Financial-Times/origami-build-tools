@@ -252,12 +252,14 @@ linters:
   VariableForProperty:
     enabled: false
 
-  # Allow vendor prefixes
-  # (…by disabling the linter that forbids vendor prefixes)
-  # But: ideally products should use autoprefixer or equivalent,
+  # No vendor prefixes
+  # Ideally products should use autoprefixer or equivalent,
   # since we might eventually enable this linter.
-  VendorPrefixes:
+  VendorPrefix:
     enabled: true
+    identifier_list: base
+    additional_identifiers: []
+    excluded_identifiers: ["user-select", "appearance", "font-smoothing", "osx-font-smoothing"]
     severity: warning
 
   # No units on zero values: 0 not 0px

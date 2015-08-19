@@ -4,18 +4,18 @@ var gulp = require('gulp');
 var obt = require('./lib/origami-build-tools');
 
 gulp.task('verify', function() {
-	obt.verify(gulp, {
-		jsHintPath: '.jshintrc',
+	return obt.verify(gulp, {
+		esLintPath: '.eslintrc',
 		editorconfigPath: '.editorconfig'
 	});
 });
 
 gulp.task('test', function() {
-	obt.test.npmTest(gulp);
+	return obt.test.npmTest(gulp);
 });
 
 gulp.task('install', function() {
-	obt.install();
+	return obt.install();
 });
 
 gulp.task('watch', function() {

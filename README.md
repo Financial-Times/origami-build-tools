@@ -2,6 +2,8 @@
 
 Standardised build tools for Origami modules and products developed based on these modules.
 
+If you have any issues with OBT, please check out [troubleshooting guide](https://github.com/Financial-Times/origami-build-tools/blob/master/TROUBLESHOOT.md) before raising an issue.
+
 ## Installation
 
 1. Install these dependencies:
@@ -16,20 +18,20 @@ Standardised build tools for Origami modules and products developed based on the
 
 Run the install task for the first time will to install required dependencies:
 
-		origami-build-tools install
+	origami-build-tools install
 
 ### Developing products
 
 Build CSS and JavaScript bundles in the `build` directory:
 
-		origami-build-tools build
+	origami-build-tools build
 
 ### Developing modules locally
 
 Build and browse the demos (typically: <http://localhost:8080/demos/local/>),
 automatically re-build the module's demos and assets every time a file changes:
 
-	origami-build-tools demo --local --watch
+	origami-build-tools demo --runServer --watch
 
 ## Tasks
 
@@ -43,11 +45,10 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 	   demo     Build demos into the demos/ directory
 	   verify   Lint code and verify if module structure follows the Origami specification
 	   test     Test if Sass silent compilation follows the Origami specification
-	   docs     Build module documentation into the docs/ directory
 
 	Mostly used options include:
 	   [--watch]                    Re-run every time a file changes
-	   [--local]                    Build demos locally, and preview them in a browser
+	   [--runServer]                Build demos locally and runs a server
 	   [--updateorigami]            Update origami.json with the latest demo files created
 	   [--js=<path>]                Main JavaScript file (default: ./src/main.js)
 	   [--sass=<path>]              Main Sass file (default: ./src/main.scss)
@@ -55,7 +56,7 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 	   [--buildCss=<file>]          Compiled CSS file (default: main.css)
 	   [--buildFolder=<dir>]        Compiled assets directory (default: ./build/)
 	   [--scssLintPath=<path>]      Custom scss-lint configuration
-	   [--jsHintPath=<path>]        Custom JS Hint configuration
+	   [--esLintPath=<path>]        Custom esLint configuration
 	   [--editorconfigPath=<path>]  Custom .editorconfig
 
 ### `install`
@@ -64,43 +65,42 @@ Install tools and dependencies required to build modules.
 
 Runs:
 
-* __installSass()__ globally (if it's not already installed)
 * __installScssLint()__ globally (if it's not already installed)
-* __installJshint()__ globally (if it's not already installed)
 * __installBower()__ globally (if it's not already installed)
 * __runNpmInstall()__ if there is a `package.json` inthe root directory
 * __runBowerInstall()__ using both the Origami Registry and the default Bower registry to resolve dependencies
 
 The versions that are installed and supported are:
 
-* Sass: '3.4.x'
-* scss-lint: '0.34.0'
-* JSHint: '2.5.6'
-* Bower: '1.3.12'
+* scss-lint: '0.35.0'
+* Bower: '^1.3.0'
 
 Config:
 * verbose: `Boolean` Outputs verbose results of bower and npm installation when `true`. For npm this will be the result of `--loglevel info`. (Default: false)
-
-Note: If you receive an error specifying `Unable to download data from https://rubygems.org/ - SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (https://api.rubygems.org/specs.4.8.gz)` you'll need to manually update your gem package using the directions in [this gist](https://gist.github.com/luislavena/f064211759ee0f806c88).
 
 ### `build`
 
 Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
 
+It comes with support for things like:
+
+* [Babel](https://github.com/babel/babel) so you can use ES2015 features in your modules and products
+* [autoprefixer](https://github.com/postcss/autoprefixer) so you don't have to worry about writing browser prefixes in your Sass
+* If `env` is set to `'production'`:
+	- [uglifyJS](https://github.com/mishoo/UglifyJS2) which minimises your JavaScript bundle
+	- [clean-css](https://github.com/jakubpawlowicz/clean-css) which minimises your CSS bundle
 
 Runs:
 
 * __js(gulp, config)__ Config accepts:
 	- js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key)
 	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
-	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
+	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
+	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: current working directory)
 	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'. (Default: false)
-	- hash: `Boolean` Set to true to generate a hashed JavaScript built file to facilitate cachebusting. Also generates a JSON file with mappings to the original filename. (Default: false)
-	- transforms: `Array` Additional browserify transforms to run *after* debowerify and textrequireify. Each transform should be specified as one of the following
-		- `String` The name of the transform
-		- `Array` [config, 'transform-name'] Where custom config needs to be passed into the transform use an array containing the config object followed by the transform name
-		- `Object` Some transforms require passing in a single object which both specifies and configures the transform
+	- transforms: `Array` Additional browserify transforms to run *after* babelify, debowerify and textrequireify. Each transform should be specified as a
+		- `Function` The transform function.  e.g:  `var brfs = require('brfs'); config.transform.push(brfs);`
 	- insertGlobals: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 	- detectGlobals: See [browserify documentation](https://github.com/substack/node-browserify#usage)
 	- ignoreMissing: See [browserify documentation](https://github.com/substack/node-browserify#usage)
@@ -110,13 +110,11 @@ Runs:
 	- autoprefixerBrowsers: `Array` An array of strings of [browser names for autoprefixer](https://github.com/postcss/autoprefixer#browsers) to check what prefixes it needs. (Default: `["> 1%", "last 2 versions", "ie > 6", "ff ESR"]`)
 	- autoprefixerCascade: `Boolean` Whether autoprefixer should display CSS prefixed properties [cascaded](https://github.com/postcss/autoprefixer#visual-cascade) (Default: false)
 	- autoprefixerRemove: `Boolean` Remove unneeded prefixes (Default: true)
+	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: current working directory)
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
-	- buildFolder: `String` Path to directory where the built file will be created. (Default: './build/')
-	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [clean-css](https://github.com/jakubpawlowicz/clean-css). (Default: 'development')
-	- hash: `Boolean` Set to true to generate a hashed JavaScript built file to facilitate cachebusting. Also generates a JSON file with mappings to the original filename. (Default: false)
+	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
+	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [clean-css](https://github.com/jakubpawlowicz/clean-css). (Default: development)
 	- cleanCss: `Object` Config object to pass to [clean-css](https://github.com/jakubpawlowicz/clean-css/blob/master/README.md#how-to-use-clean-css-programmatically). (Default: `{advanced: false}`)
-
-	_(Sourcemaps aren't generated as this feature is incompatible with clean-css. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
 
 ### `demo`
 
@@ -124,9 +122,11 @@ Build demos found in the [demo config file](http://origami.ft.com/docs/component
 
 Config:
 
-* local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Also runs a local server to help you test your demos.
+* local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Default: `false`
 * demoConfig: `String` The path to the demo config file. Default: `demos/src/config.json`
 * updateorigami: `Boolean` The `demos` property of your `origami.json` file will be updated - to list the demo files that have been created.
+* runServer: `Boolean` Whether you want to run a local server or not. If true, it also sets 'local' to true. Default: `false`
+* livereload: `Boolean` Will enable livereload on `runServer`. Default: `true`
 
 Runs:
 
@@ -135,10 +135,6 @@ Runs:
 Build service demos consist of only HTML, with build service URLs for static resources, and are created in `demos/`.
 
 Local demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
-
-_(Sourcemaps aren't generated as this feature is incompatible with csso. We will revisit this when [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) 1.0 is released)_
-
-
 
 ### `verify`
 
@@ -149,8 +145,8 @@ Runs:
 * __scssLint(gulp, config)__ Config accepts:
 	- scssLintPath: `String` Path to your custom 'scss-lint.yml' config file. (Default: 'origami-build-tools/config/scss-lint.yml') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 	- excludeFiles `Array` e.g. `['!**/demo.scss']`
-* __jsHint(gulp, config)__ Config accepts:
-	- jsHintPath: `String` Path to your custom jsHint config file. (Default: 'origami-build-tools/config/jshint.json' _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
+* __esLint(gulp, config)__ Config accepts:
+	- esLintPath: `String` Path to your custom esLint config file. (Default: 'origami-build-tools/config/.eslintrc' _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 	- excludeFiles `Array` e.g. `['!**/demo.js']`
 * __lintspaces(gulp, config)__ Config accepts:
 	- editorconfigPath: `String` Path to your '.editorconfig' that lintspaces uses for linting. (Default: 'origami-build-tools/config/.editorconfig') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
@@ -158,22 +154,19 @@ Runs:
 
 ### `test`
 
-Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles).
-If a `$<module-name>-is-silent` variable is found, then runs:
-
-* __silentCompilation(gulp)__ Check the Sass outputs no CSS by default
-* __silentCompilation(gulp)__ Check the Sass outputs some CSS with `$<module-name>-is-silent` set to false
+* __silentCompilation(gulp)__ Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles). Check the Sass outputs no CSS by default. Only ran af a `$<module-name>-is-silent` variable is found
+* __silentCompilation(gulp)__ Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles). Check the Sass outputs some CSS with `$<module-name>-is-silent` set to false. Only ran af a `$<module-name>-is-silent` variable is found
 * __npmTest()__ Runs 'npm test', so whatever test script that you have in you `package.json` will be executed
-
-### `docs`
-
-Build component documentation into the `docs` directory.
-
-Runs:
-
-* __sassDoc(gulp, config)__ Sass documentation is built using [SassDoc](http://sassdoc.com/). Config accepts:
-	- sassDir: `String` Path to where you want the 'docs' directory to be generated. (Default: '.')
-	- Any option supported by the [SassDoc gulp plugin](http://sassdoc.com/gulp/#options)
+* __browserTest(gulp, config)__ Runs [Nightwatch](http://nightwatchjs.org/) tests on our [Selenium](http://www.seleniumhq.org/projects/webdriver/) grid by deploying the demo pages to Heroku. This is an optional subtask that requires the config option _browserTest_ to be set to true. You also need to set the following environment variables:
+	- HEROKU_AUTH_TOKEN: The result of running `heroku auth:token`
+	- SELENIUM_USER: The username of the Selenium grid proxy
+	- SELENIUM_KEY: The key to use the proxy to the Selenium grid
+	- SELENIUM_HOST: The host of the Selenium grid or proxy
+Config accepts:
+	- testUrl: `String` Url to where the html the tests are going to run agains is. (Default: 'https://module-name.herokuapp.com')
+	- nightwatchConfig: `String` Path to your 'nightwatch.json' file that Nightwatch uses for testing. (Default: `./test/browser/nightwatch.json`)
+	- environments: `String` Comma separated list of environments from your nightwatch config file to run your tests on. (Default: `chrome_latest,chrome_latest-1,firefox_latest,firefox_latest-1,ie8_Grid,ie9_Grid,ie10_Grid,ie11_Grid,safari7_Grid`)
+	- testsPath: `String` Relative path from your project's root directory to where your nightwatch tests are. (Default: `test/browser/tests`)
 
 ## gulpfile usage
 

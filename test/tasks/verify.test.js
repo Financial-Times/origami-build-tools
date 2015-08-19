@@ -19,7 +19,7 @@ describe('Verify task', function() {
 		fs.copySync(path.resolve(obtPath, oTestPath), verifyTestPath);
 		process.chdir(verifyTestPath);
 		fs.writeFileSync('src/scss/verify.scss', '$color: #ccc;\n\np {\n  color: $color!important ;\n}\n', 'utf8');
-		fs.writeFileSync('src/js/verify.js', 'var test = "We live in financial times";');
+		fs.writeFileSync('src/js/verify.js', 'const test = \'We live in financial times\';\n');
 	});
 
 	after(function() {
@@ -45,17 +45,17 @@ describe('Verify task', function() {
 		});
 	});
 
-	it('should run jsHint with default config', function(done) {
-		verify.jsHint(gulp)
+	it('should run esLint with default config', function(done) {
+		verify.esLint(gulp)
 			.on('error', function(error) {
-				expect(error.message).to.be('JSHint failed for: ' + path.resolve(verifyTestPath, 'src/js/verify.js'));
+				expect(error.message).to.be('Failed with 1 error');
 				done();
 			});
 	});
 
-	it('should run jsHint with custom config', function(done) {
-		var stream = verify.jsHint(gulp, {
-			jsHintPath: 'jshint.json'
+	it('should run esLint with custom config', function(done) {
+		var stream = verify.esLint(gulp, {
+			esLintPath: '.eslintrc'
 		})
 		.on('error', function(error) {
 			expect(error.message).to.be(undefined);
@@ -67,18 +67,21 @@ describe('Verify task', function() {
 		});
 	});
 
-	it('should run origamiJson check', function() {
-		var verifiedOrigamiJson = verify.origamiJson();
-		expect(verifiedOrigamiJson.valid).to.be(true);
-		expect(verifiedOrigamiJson.message.length).to.be(0);
-		fs.writeFileSync('origami.json', JSON.stringify({}), 'utf8');
-		verifiedOrigamiJson = verify.origamiJson();
-		expect(verifiedOrigamiJson.valid).to.be(false);
-		expect(verifiedOrigamiJson.message).to.contain('A non-empty description property is required');
-		expect(verifiedOrigamiJson.message).to.contain('The origamiType property needs to be set to either "module" or "service"');
-		expect(verifiedOrigamiJson.message).to.contain('A non-empty description property is required');
-		expect(verifiedOrigamiJson.message).to.contain('The origamiVersion property needs to be set to 1');
-		expect(verifiedOrigamiJson.message).to.contain('The support property must be an email or url to an issue tracker for this module');
-		expect(verifiedOrigamiJson.message).to.contain('The supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"');
+	it('should run origamiJson check', function(done) {
+		verify.origamiJson()
+			.then(function(verifiedOrigamiJson) {
+				expect(verifiedOrigamiJson.length).to.be(0);
+				fs.writeFileSync('origami.json', JSON.stringify({}), 'utf8');
+				return verify.origamiJson();
+			})
+			.then(function() {}, function(verifiedOrigamiJson) {
+				expect(verifiedOrigamiJson).to.contain('A non-empty description property is required');
+				expect(verifiedOrigamiJson).to.contain('The origamiType property needs to be set to either "module" or "service"');
+				expect(verifiedOrigamiJson).to.contain('A non-empty description property is required');
+				expect(verifiedOrigamiJson).to.contain('The origamiVersion property needs to be set to 1');
+				expect(verifiedOrigamiJson).to.contain('The support property must be an email or url to an issue tracker for this module');
+				expect(verifiedOrigamiJson).to.contain('The supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"');
+				done();
+			});
 	});
 });
