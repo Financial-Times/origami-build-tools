@@ -21,10 +21,10 @@ When install origami-build-tools, depending on the version of [npm](https://gith
 >npm ERR! enoent and is related to npm not being able to find a file.
 >npm ERR! enoent
 
-The version of npm required to use OBT is `>= 2.0.0<=2.7.5` as there is a bug with [npm](https://github.com/npm/npm) and [EditorConfig](https://github.com/editorconfig/editorconfig-core-js). To fix it, try installing npm v2.7.5 by running:
+There was bug with some versions of [npm](https://github.com/npm/npm) and [EditorConfig](https://github.com/editorconfig/editorconfig-core-js). To fix it, try updating to the latest npm by running:
 
 ```bash
-sudo npm install -g npm@2.7.5
+npm install -g npm
 ```
 
 ## `install`
@@ -50,7 +50,7 @@ When installing [SCSS-Lint](https://github.com/causes/scss-lint), depending on h
 
 This can be fixed by following the [Installing Ruby steps](#installing-ruby) mentioned above.
 
-If the error still occurs, run the command manually by prefixing sudo to it. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
+If the error still occurs, run the command manually by prefixing sudo to it. Keep in mind this will install it with "root" permissions, which may be a security risk. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
 
 ```bash
 sudo gem install scss-lint -v 0.35.0
@@ -79,7 +79,7 @@ When installing [bower](https://bower.io), depending on how permissions are set 
 
 This can be fixed by following one of the methods suggested in the [official guide](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
 
-If the error still occurs, the command can be ran manually prefixing sudo to it. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
+If the error still occurs, the command can be ran manually prefixing sudo to it. Keep in mind this will install it with "root" permissions, which may be a security risk. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
 
 ```bash
 sudo npm install -g bower@^1.3.1
