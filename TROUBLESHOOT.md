@@ -2,44 +2,94 @@
 
 Different common issues encountered when using OBT organized by the different tasks.
 
-### Error `npm ERR! argv "node" "/usr/local/bin/npm" "install" "-g" "origami-build-tools"`
+## `install`
 
-> This error should be fixed in v3.0.2 of origami-build-tools, but we're keeping it in this troubleshooting guide for now.
+### Installing Node.js
 
-When install origami-build-tools, depending on the version of [npm](https://github.com/npm/npm), it might fail with an error similar to this:
+Node is available in most package management repositories, and instructions are available in the Node install guide:
 
->npm ERR! Darwin 14.3.0
->npm ERR! argv "node" "/usr/local/bin/npm" "install" "-g" "origami-build-tools"
->npm ERR! node v0.12.4
->npm ERR! npm  v2.11.1
->npm ERR! path /usr/local/lib/node_modules/origami-build-tools/node_modules/gulp-lintspaces/node_modules/lintspaces/node_modules/editorconfig/bin\editorconfig
->npm ERR! code ENOENT
->npm ERR! errno -2
->
->npm ERR! enoent ENOENT, chmod '/usr/local/lib/node_modules/origami-build-tools/node_modules/gulp-lintspaces/node_modules/lintspaces/node_modules/editorconfig/bin\editorconfig'
->npm ERR! enoent This is most likely not a problem with npm itself
->npm ERR! enoent and is related to npm not being able to find a file.
->npm ERR! enoent
+[Install Node.js via package manager](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
 
-There was bug with some versions of [npm](https://github.com/npm/npm) and [EditorConfig](https://github.com/editorconfig/editorconfig-core-js). To fix it, try updating to the latest npm by running:
+#### Fix npm permissions
+
+npm should not require root access when installing packages. If you get an `EACCES` error when installing a package globally, you'll need to fix npm's permissions:
+
+1. Make a directory for global installations:
 
 ```bash
-npm install -g npm
+mkdir ~/npm-global
 ```
 
-## `install`
+2. Configure npm to use the new directory path:
+```bash
+npm config set prefix '~/npm-global'
+```
+
+3. Open or create a ~/.bashrc file and add this line:
+```bash
+export PATH=~/npm-global/bin:$PATH
+```
+
+4. Back on the command line, update your system variables:
+```bash
+source ~/.profile
+```
+
+Test: Download a package globally without using sudo.
+```bash
+npm install -g eslint
+```
 
 ### Installing Ruby
 
-* Macs typically ship with Ruby by default, but:
-	- If you get a `Gem::FilePermissionError` error, you need to [install a ruby version manager](http://stackoverflow.com/questions/19579392/installing-gem-fails-with-permissions-error).
-	- To [install rbenv](https://github.com/sstephenson/rbenv#homebrew-on-mac-os-x) you first need to [install homebrew](http://brew.sh/).
-	- Once you've installed rbenv you need to [install ruby](https://github.com/sstephenson/rbenv/#installing-ruby-versions).
-		- Note: rbenv needs a bit of post-install setup. If you install with homebrew, also do steps 2 and 3 of the [Basic GitHub Checkout](https://github.com/sstephenson/rbenv/#basic-github-checkout) section.
+We recommend you install Ruby using the `rbenv` version manager instead of using the default Mac or Linux repository versions. This will ensure Ruby Gems habe permissions correctly set and allow you to easily migrate to different versions of Ruby.
 
-### Error `Unable to download data from https://rubygems.org/`
+1. Check out rbenv into `~/.rbenv`.
 
-If you receive an error specifying `Unable to download data from https://rubygems.org/ - SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (https://api.rubygems.org/specs.4.8.gz)` you'll need to manually update your gem package using the directions in [this gist](https://gist.github.com/luislavena/f064211759ee0f806c88).
+	~~~ sh
+	$ git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+	~~~
+
+2. Add `~/.rbenv/bin` to your `$PATH` for access to the `rbenv` command-line utility.
+
+	~~~ sh
+	$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+	~~~
+
+	**Ubuntu Desktop note**: Modify your `~/.bashrc` instead of `~/.bash_profile`.
+
+	**Zsh note**: Modify your `~/.zshrc` file instead of `~/.bash_profile`.
+
+3. Add `rbenv init` to your shell to enable shims and autocompletion.
+
+	~~~ sh
+	$ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+	~~~
+
+_Same as in previous step, use `~/.bashrc` on Ubuntu, or `~/.zshrc` for Zsh._
+
+4. Restart your shell so that PATH changes take effect. (Opening a new terminal tab will usually do it.) Now check if rbenv was set up:
+
+	~~~ sh
+	$ type rbenv
+	#=> "rbenv is a function"
+	~~~
+
+5. Install ruby-build, which provides the `rbenv install` command that simplifies the process of installing new Ruby versions.
+
+	~~~ sh
+	$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+	~~~
+
+6. Install a version of Ruby:
+
+	~~~ sh
+	# list all available versions:
+	$ rbenv install -l
+	
+	# install a Ruby version:
+	$ rbenv install 2.2.3
+	~~~
 
 ### Error `While executing gem ... (Gem::FilePermissionError)`
 
@@ -87,3 +137,7 @@ This can happen if the git protocol is blocked on your network. To get around th
 
 ```bash
 echo -e '[url "http://"]\n    insteadOf = git://' >> ~/.gitconfig
+
+### Error `Unable to download data from https://rubygems.org/`
+
+If you receive an error specifying `Unable to download data from https://rubygems.org/ - SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (https://api.rubygems.org/specs.4.8.gz)` you'll need to manually update your gem package using the directions in [this gist](https://gist.github.com/luislavena/f064211759ee0f806c88).
