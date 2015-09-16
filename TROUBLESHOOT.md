@@ -33,6 +33,7 @@ npm should not require root access when installing packages. If you get an `EACC
 	```
 
 	**Ubuntu Desktop note**: Modify your `~/.bashrc` instead of `~/.bash_profile`.
+	
 	**Zsh note**: Modify your `~/.zshrc` file instead of `~/.bash_profile`.
 
 4. Back on the command line, update your system variables:
