@@ -80,3 +80,10 @@ Origami modules are listed on Origami's custom Bower registry, and aren't availa
 ```bash
 echo '{"registry":{"search":["http://registry.origami.ft.com","https://bower.herokuapp.com"]}}' > ~/.bowerrc
 ```
+
+### Error `fatal: unable to connect to github.com"`
+
+This can happen if the git protocol is blocked on your network. To get around this you can use the http instead:
+
+```bash
+echo -e '[url "http://"]\n    insteadOf = git://' >> ~/.gitconfig
