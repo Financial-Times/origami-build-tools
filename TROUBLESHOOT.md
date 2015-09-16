@@ -16,24 +16,27 @@ npm should not require root access when installing packages. If you get an `EACC
 
 1. Make a directory for global installations:
 
-```bash
-mkdir ~/npm-global
-```
+	```bash
+	mkdir ~/npm-global
+	```
 
 2. Configure npm to use the new directory path:
-```bash
-npm config set prefix '~/npm-global'
-```
+
+	```bash
+	npm config set prefix '~/npm-global'
+	```
 
 3. Open or create a ~/.bashrc file and add this line:
-```bash
-export PATH=~/npm-global/bin:$PATH
-```
+
+	```bash
+	export PATH=~/npm-global/bin:$PATH
+	```
 
 4. Back on the command line, update your system variables:
-```bash
-source ~/.profile
-```
+
+	```bash
+	source ~/.profile
+	```
 
 Test: Download a package globally without using sudo.
 ```bash
@@ -137,6 +140,7 @@ This can happen if the git protocol is blocked on your network. To get around th
 
 ```bash
 echo -e '[url "http://"]\n    insteadOf = git://' >> ~/.gitconfig
+```
 
 ### Error `Unable to download data from https://rubygems.org/`
 
