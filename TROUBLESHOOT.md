@@ -50,12 +50,6 @@ When installing [SCSS-Lint](https://github.com/causes/scss-lint), depending on h
 
 This can be fixed by following the [Installing Ruby steps](#installing-ruby) mentioned above.
 
-If the error still occurs, run the command manually by prefixing sudo to it. Keep in mind this will install it with "root" permissions, which may be a security risk. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
-
-```bash
-sudo gem install scss-lint -v 0.35.0
-```
-
 ### Error `npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "bower" "--quiet"`
 
 When installing [bower](https://bower.io), depending on how permissions are set on your machine, OBT might fail and return something like this:
@@ -78,12 +72,6 @@ When installing [bower](https://bower.io), depending on how permissions are set 
 >npm ERR! Please try running this command again as root/Administrator.
 
 This can be fixed by following one of the methods suggested in the [official guide](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
-
-If the error still occurs, the command can be ran manually prefixing sudo to it. Keep in mind this will install it with "root" permissions, which may be a security risk. It's the following command (substituting the version number by the one mentioned [here](https://github.com/Financial-Times/origami-build-tools/#install)):
-
-```bash
-sudo npm install -g bower@^1.3.1
-```
 
 ### Warning `Origami registry is not configured in a .bowerrc file`
 
