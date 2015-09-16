@@ -26,16 +26,19 @@ npm should not require root access when installing packages. If you get an `EACC
 	npm config set prefix '~/npm-global'
 	```
 
-3. Open or create a ~/.bashrc file and add this line:
+3. Open or create a ~/.bash_profile file and add this line:
 
 	```bash
 	export PATH=~/npm-global/bin:$PATH
 	```
 
+	**Ubuntu Desktop note**: Modify your `~/.bashrc` instead of `~/.bash_profile`.
+	**Zsh note**: Modify your `~/.zshrc` file instead of `~/.bash_profile`.
+
 4. Back on the command line, update your system variables:
 
 	```bash
-	source ~/.profile
+	source ~/.bash_profile
 	```
 
 Test: Download a package globally without using sudo.
