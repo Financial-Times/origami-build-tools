@@ -8,7 +8,7 @@
     "obt": "./lib/origami-build-tools-cli.js"
   },
   "engines": {
-    "node": "^0.12.2",
+    "node": "^4.0.0",
     "npm": "^2.0.0"
   },
   "scripts": {
@@ -22,7 +22,6 @@
     "colors": "^1.1.2",
     "configstore": "^1.1.0",
     "denodeify": "^1.2.1",
-    "es6-promise": "^2.3.0",
     "falafel": "^1.2.0",
     "findit": "^2.0.0",
     "gulp": "^3.9.0",
@@ -54,7 +53,7 @@
     "through2": "^2.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "webpack-stream": "^2.1.0",
+    "webpack-stream": "AlbertoElias/webpack-stream",
     "which": "^1.1.1"
   },
   "devDependencies": {
