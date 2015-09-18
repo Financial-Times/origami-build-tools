@@ -44,12 +44,12 @@ npm should not require root access when installing packages. If you get an `EACC
 
 Test: Download a package globally without using sudo.
 ```bash
-npm install -g eslint
+npm install -g origami-build-tools
 ```
 
 ### Installing Ruby
 
-We recommend you install Ruby using the `rbenv` version manager instead of using the default Mac or Linux repository versions. This will ensure Ruby Gems habe permissions correctly set and allow you to easily migrate to different versions of Ruby.
+We recommend you install Ruby using the `rbenv` version manager instead of using the default Mac or Linux repository versions. This will ensure Ruby Gems have permissions correctly set and allow you to easily migrate to different versions of Ruby.
 
 1. Check out rbenv into `~/.rbenv`.
 
@@ -88,13 +88,13 @@ _Same as in previous step, use `~/.bashrc` on Ubuntu, or `~/.zshrc` for Zsh._
 	$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 	~~~
 
-6. Install a version of Ruby:
+6. Install the latest version of Ruby (2.2.3 as of writing):
 
 	~~~ sh
 	# list all available versions:
 	$ rbenv install -l
 	
-	# install a Ruby version:
+	# install the latest version version of Ruby:
 	$ rbenv install 2.2.3
 	~~~
 
@@ -128,7 +128,7 @@ When installing [bower](https://bower.io), depending on how permissions are set 
 >npm ERR!
 >npm ERR! Please try running this command again as root/Administrator.
 
-This can be fixed by following one of the methods suggested in the [official guide](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
+This can be fixed by following the guide above on [fixing npm permissions](#fix-npm-permissions).
 
 ### Warning `Origami registry is not configured in a .bowerrc file`
 
@@ -140,7 +140,7 @@ echo '{"registry":{"search":["http://registry.origami.ft.com","https://bower.her
 
 ### Error `fatal: unable to connect to github.com"`
 
-This can happen if the git protocol is blocked on your network. To get around this you can use the http instead:
+This can happen if the git protocol is blocked on your network. To get around this you can use the http protocol instead:
 
 ```bash
 echo -e '[url "http://"]\n    insteadOf = git://' >> ~/.gitconfig
