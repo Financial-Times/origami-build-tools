@@ -18,7 +18,7 @@
     "babel-loader": "^5.3.2",
     "babel-runtime": "^5.6.15",
     "bower-config": "^0.6.1",
-    "bower-webpack-plugin": "^0.1.8",
+    "bower-webpack-plugin": "^0.1.9",
     "colors": "^1.1.2",
     "configstore": "^1.1.0",
     "denodeify": "^1.2.1",
