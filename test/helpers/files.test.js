@@ -2,7 +2,6 @@
 'use strict';
 
 var expect = require('expect.js');
-require('es6-promise').polyfill();
 
 var fs = require('fs-extra');
 var path = require('path');

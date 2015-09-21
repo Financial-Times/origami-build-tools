@@ -1,7 +1,6 @@
 /* global describe, it, before, after, afterEach */
 'use strict';
 
-require('es6-promise').polyfill();
 var denodeify = require('denodeify');
 var exec = denodeify(require('child_process').exec, function(err, stdout) { return [err, stdout]; });
 
