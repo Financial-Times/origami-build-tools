@@ -48,7 +48,7 @@ describe('Verify task', function() {
 	it('should run esLint with default config', function(done) {
 		verify.esLint(gulp)
 			.on('error', function(error) {
-				expect(error.message).to.be('Failed with 1 error');
+				expect(error.message).to.be('Failed with 2 errors');
 				done();
 			});
 	});
@@ -58,7 +58,7 @@ describe('Verify task', function() {
 			esLintPath: '.eslintrc'
 		})
 		.on('error', function(error) {
-			expect(error.message).to.be(undefined);
+			expect(error.message).to.be('Failed with 1 error');
 		});
 
 		stream.resume();
