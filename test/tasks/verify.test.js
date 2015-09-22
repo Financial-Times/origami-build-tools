@@ -47,18 +47,19 @@ describe('Verify task', function() {
 
 	it('should run esLint with default config', function(done) {
 		verify.esLint(gulp)
-			.on('error', function(error) {
-				expect(error.message).to.be('Failed with 2 errors');
-				done();
-			});
+		.on('error', function(error) {
+			expect(error.message).to.be('Failed with 1 error');
+			done();
+		});
 	});
 
 	it('should run esLint with custom config', function(done) {
 		var stream = verify.esLint(gulp, {
-			esLintPath: '.eslintrc'
+			esLintPath: '.eslintrc',
+			excludeFiles: ['./src/js/syntax-error.js']
 		})
 		.on('error', function(error) {
-			expect(error.message).to.be('Failed with 1 error');
+			expect(error.message).to.be(undefined);
 		});
 
 		stream.resume();
