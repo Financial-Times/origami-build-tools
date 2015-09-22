@@ -1,6 +1,5 @@
 .idea/
 test/
 *.md
-.jshintrc
 gulpfile.js
 .travis.yml

@@ -31,7 +31,7 @@ Build CSS and JavaScript bundles in the `build` directory:
 Build and browse the demos (typically: <http://localhost:8080/demos/local/>),
 automatically re-build the module's demos and assets every time a file changes:
 
-	origami-build-tools demo --local --watch
+	origami-build-tools demo --runServer --watch
 
 ## Tasks
 
@@ -56,7 +56,7 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 	   [--buildCss=<file>]          Compiled CSS file (default: main.css)
 	   [--buildFolder=<dir>]        Compiled assets directory (default: ./build/)
 	   [--scssLintPath=<path>]      Custom scss-lint configuration
-	   [--jsHintPath=<path>]        Custom JSHint configuration
+	   [--esLintPath=<path>]        Custom esLint configuration
 	   [--editorconfigPath=<path>]  Custom .editorconfig
 
 ### `install`
@@ -99,12 +99,7 @@ Runs:
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: current working directory)
 	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'. (Default: false)
-	- transforms: `Array` Additional browserify transforms to run *after* babelify, debowerify and textrequireify. Each transform should be specified as a
-		- `Function` The transform function.  e.g:  `var brfs = require('brfs'); config.transform.push(brfs);`
-	- insertGlobals: See [browserify documentation](https://github.com/substack/node-browserify#usage)
-	- detectGlobals: See [browserify documentation](https://github.com/substack/node-browserify#usage)
-	- ignoreMissing: See [browserify documentation](https://github.com/substack/node-browserify#usage)
-	- standalone: See [browserify documentation](https://github.com/substack/node-browserify#usage)
+	- loaders: `Array` Additional Webpack loaders for JavaScript files to run *before* imports-loader (removes AMD module support), babel-loader (which adds babel-runtime polyfills) and textrequireify-loader. OBT will search for loaders in its `node_modules` directory, but also in the project's `node_modules` folder. This way, you can install your own loaders and pass them to the `loaders` array by their name. e.g. `[coffee-loader]`
 * __sass(gulp, config)__ Config accepts:
 	- sass: `String` Path to your main Sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
 	- autoprefixerBrowsers: `Array` An array of strings of [browser names for autoprefixer](https://github.com/postcss/autoprefixer#browsers) to check what prefixes it needs. (Default: `["> 1%", "last 2 versions", "ie > 6", "ff ESR"]`)
@@ -145,8 +140,8 @@ Runs:
 * __scssLint(gulp, config)__ Config accepts:
 	- scssLintPath: `String` Path to your custom 'scss-lint.yml' config file. (Default: 'origami-build-tools/config/scss-lint.yml') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 	- excludeFiles `Array` e.g. `['!**/demo.scss']`
-* __jsHint(gulp, config)__ Config accepts:
-	- jsHintPath: `String` Path to your custom jsHint config file. (Default: 'origami-build-tools/config/jshint.json' _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
+* __esLint(gulp, config)__ Config accepts:
+	- esLintPath: `String` Path to your custom esLint config file. (Default: 'origami-build-tools/config/.eslintrc' _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 	- excludeFiles `Array` e.g. `['!**/demo.js']`
 * __lintspaces(gulp, config)__ Config accepts:
 	- editorconfigPath: `String` Path to your '.editorconfig' that lintspaces uses for linting. (Default: 'origami-build-tools/config/.editorconfig') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_

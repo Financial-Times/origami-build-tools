@@ -1,6 +1,7 @@
-'use strict';
+/* eslint-disable strict */
+
 function Test() {
-	let name = 'test';  // jshint ignore:line
+	let name = 'test';  // eslint-disable-line
 }
 
 module.exports = Test;
