@@ -1,7 +1,6 @@
 /* global describe, it, before, after */
 'use strict';
 
-require('es6-promise').polyfill();
 var expect = require('expect.js');
 var gulp = require('gulp');
 var extend = require('node.extend');
@@ -152,7 +151,7 @@ describe('Demo task', function() {
 			.then(function() {
 				expect(fs.readFileSync('demos/local/test1.html', 'utf8')).to.contain('<div>test1</div>');
 				expect(fs.readFileSync('demos/local/test2.html', 'utf8')).to.contain('<div>test2</div>');
-				expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\tvar name = \'test\';');
+				expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\t\tvar name = \'test\';');
 				expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  color: blue; }\n');
 				fs.unlink('demos/test1.html');
 				fs.unlink('demos/test2.html');
