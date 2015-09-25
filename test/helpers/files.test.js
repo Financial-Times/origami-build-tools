@@ -1,17 +1,17 @@
 /* global describe, it, before, after, beforeEach, afterEach */
 'use strict';
 
-var expect = require('expect.js');
+const expect = require('expect.js');
 
-var fs = require('fs-extra');
-var path = require('path');
+const fs = require('fs-extra');
+const path = require('path');
 
-var files = require('../../lib/helpers/files');
+const files = require('../../lib/helpers/files');
 
-var obtPath = process.cwd();
-var oTestPath = 'test/fixtures/o-test';
-var pathSuffix = '-file';
-var filesTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
+const obtPath = process.cwd();
+const oTestPath = 'test/fixtures/o-test';
+const pathSuffix = '-file';
+const filesTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
 describe('Files helper', function() {
 	before(function() {
@@ -37,7 +37,7 @@ describe('Files helper', function() {
 
 	it('should return a list of Sass files', function(done) {
 		files.getSassFilesList().then(function(sassFiles) {
-			var testResults = [path.join(process.cwd() + '/main.scss'), path.join(process.cwd() + '/src/scss/_variables.scss')];
+			const testResults = [path.join(process.cwd() + '/main.scss'), path.join(process.cwd() + '/src/scss/_variables.scss')];
 			expect(sassFiles).to.contain(testResults[0]);
 			expect(sassFiles).to.contain(testResults[1]);
 			done();
@@ -66,7 +66,7 @@ describe('Files helper', function() {
 
 		it('should get the path of main.scss', function() {
 			expect(files.getMainSassPath()).to.be(null);
-			var bowerJson = files.getBowerJson();
+			const bowerJson = files.getBowerJson();
 			bowerJson.main = bowerJson.main || [];
 			bowerJson.main.push('main.scss');
 			fs.writeFileSync('bower.json', JSON.stringify(bowerJson), 'utf8');
@@ -75,7 +75,7 @@ describe('Files helper', function() {
 
 		it('should get the path of main.js', function() {
 			expect(files.getMainJsPath()).to.be(null);
-			var bowerJson = files.getBowerJson();
+			const bowerJson = files.getBowerJson();
 			bowerJson.main = bowerJson.main || [];
 			bowerJson.main.push('main.js');
 			fs.writeFileSync('bower.json', JSON.stringify(bowerJson), 'utf8');

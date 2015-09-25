@@ -1,1 +1,1 @@
-var demo = require('../../main');  // eslint-disable-line
+const demo = require('../../main');  // eslint-disable-line

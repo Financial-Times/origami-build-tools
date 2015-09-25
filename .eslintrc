@@ -21,7 +21,12 @@
         "no-loop-func": 2,
         "no-irregular-whitespace": 1,
         "no-multi-spaces": 2,
-        "one-var": [2, "never"]
+        "one-var": [2, "never"],
+        "constructor-super": 2,
+        "no-this-before-super": 2,
+        "no-var": 2,
+        "prefer-const": 1,
+        "no-const-assign": 2
     },
     "globals": {
         "fetch": true
