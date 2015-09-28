@@ -1,1 +1,1 @@
-le test = 'wrong syntax';
+cons test = 'wrong syntax';

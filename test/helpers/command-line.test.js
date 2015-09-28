@@ -1,9 +1,9 @@
 /* global describe, it */
 'use strict';
 
-var expect = require('expect.js');
+const expect = require('expect.js');
 
-var commandLine = require('../../lib/helpers/command-line');
+const commandLine = require('../../lib/helpers/command-line');
 
 describe('Command line helper', function() {
 	it('should return output from stdout', function(done) {

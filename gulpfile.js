@@ -1,7 +1,7 @@
 'use strict';
 
-var gulp = require('gulp');
-var obt = require('./lib/origami-build-tools');
+const gulp = require('gulp');
+const obt = require('./lib/origami-build-tools');
 
 gulp.task('verify', function() {
 	return obt.verify(gulp, {
