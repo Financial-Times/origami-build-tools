@@ -1,7 +1,6 @@
 /* global describe, it, before, after, afterEach */
 'use strict';
 
-require('es6-promise').polyfill();
 var denodeify = require('denodeify');
 var exec = denodeify(require('child_process').exec, function(err, stdout) { return [err, stdout]; });
 
@@ -48,6 +47,8 @@ describe('Build task', function() {
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
+					expect(builtJs).to.contain('\tmodule.exports = {\n\t\t"test": true\n\t};')
 					done();
 				});
 		});
@@ -61,6 +62,8 @@ describe('Build task', function() {
 					var builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.not.contain('sourceMappingURL');
 					expect(builtJs).to.not.contain('var Test');
+					expect(builtJs).to.not.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.not.contain('"This is a test"');
 					expect(builtJs).to.not.contain('function Test() {\n\t\tvar name = \'test\';');
 					done();
 			});
@@ -90,6 +93,8 @@ describe('Build task', function() {
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
+					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
 					done();
 				});
 		});
@@ -104,6 +109,41 @@ describe('Build task', function() {
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
+					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					done();
+				});
+		});
+
+		it('should fail on syntax error', function(done) {
+			build
+				.js(gulp, {
+					js: './src/js/syntax-error.js'
+				})
+				.on('error', function(e) {
+					expect(e.message).to.contain('SyntaxError');
+					expect(e.message).to.contain('Unexpected token');
+					done();
+				})
+				.on('end', function() {
+					// Fail quickly to not wait for test to timeout
+					expect(true).to.be(false);
+					done();
+				});
+		});
+
+		it('should fail when a dependency is not found', function(done) {
+			build
+				.js(gulp, {
+					js: './src/js/missing-dep.js'
+				})
+				.on('error', function(e) {
+					expect(e.message).to.contain('ModuleNotFoundError: Module not found: Error: Cannot resolve module \'dep\'');
+					done();
+				})
+				.on('end', function() {
+					// Fail quickly to not wait for test to timeout
+					expect(true).to.be(false);
 					done();
 				});
 		});
