@@ -1,19 +1,19 @@
 /* global describe, it, before, after */
 'use strict';
 
-var expect = require('expect.js');
-var gulp = require('gulp');
-var extend = require('node.extend');
+const expect = require('expect.js');
+const gulp = require('gulp');
+const extend = require('node.extend');
 
-var fs = require('fs-extra');
-var path = require('path');
+const fs = require('fs-extra');
+const path = require('path');
 
-var demo = require('../../lib/tasks/demo');
+const demo = require('../../lib/tasks/demo');
 
-var obtPath = process.cwd();
-var oTestPath = 'test/fixtures/o-test';
-var pathSuffix = '-demo';
-var demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
+const obtPath = process.cwd();
+const oTestPath = 'test/fixtures/o-test';
+const pathSuffix = '-demo';
+const demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
 describe('Demo task', function() {
 
@@ -90,7 +90,7 @@ describe('Demo task', function() {
 		});
 
 		it('should not fail if there is a config.js file', function(done) {
-			var config = fs.readFileSync('demos/src/config.json');
+			const config = fs.readFileSync('demos/src/config.json');
 			fs.writeFileSync('demos/src/config.js', 'module.exports = ' + config, 'utf8');
 			demo(gulp)
 				.catch(function(err) {
@@ -115,7 +115,7 @@ describe('Demo task', function() {
 		});
 
 		it('should fail if there are demos with the same name', function(done) {
-			var demoConfig = JSON.parse(fs.readFileSync('demos/src/config.json', 'utf8'));
+			const demoConfig = JSON.parse(fs.readFileSync('demos/src/config.json', 'utf8'));
 			demoConfig.demos[1].name = 'test1';
 			fs.writeFileSync('demos/src/config2.json', JSON.stringify(demoConfig));
 			demo(gulp, {
@@ -133,8 +133,8 @@ describe('Demo task', function() {
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
 			return demo(gulp)
 				.then(function() {
-					var test1 = fs.readFileSync('demos/test1.html', 'utf8');
-					var test2 = fs.readFileSync('demos/test2.html', 'utf8');
+					const test1 = fs.readFileSync('demos/test1.html', 'utf8');
+					const test2 = fs.readFileSync('demos/test2.html', 'utf8');
 					expect(test1).to.contain('<div>test1</div>');
 					expect(test2).to.contain('<div>test2</div>');
 					expect(test1).to.match(/\/v1\/polyfill\.min\.js\?features=.*promises/);
@@ -160,14 +160,14 @@ describe('Demo task', function() {
 		});
 
 		it('should update origami.json with demos', function(done) {
-			var origamiConfig = fs.readFileSync('origami.json', 'utf8');
+			const origamiConfig = fs.readFileSync('origami.json', 'utf8');
 			demo(gulp, {
 				updateorigami: true
 			})
 			.then(function() {
-				var newOrigamiConfig = extend({}, JSON.parse(origamiConfig));
-				var updatedOrigamiConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
-				var demosConfig = [];
+				const newOrigamiConfig = extend({}, JSON.parse(origamiConfig));
+				const updatedOrigamiConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
+				const demosConfig = [];
 				demosConfig.push({'path': '/demos/test1.html', 'expanded': true, 'description': 'First test'});
 				demosConfig.push({'path': '/demos/test2.html', 'expanded': false, 'description': 'Second test'});
 				newOrigamiConfig.demos = demosConfig;
