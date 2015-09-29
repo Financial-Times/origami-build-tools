@@ -101,6 +101,7 @@ _Same as in previous step, use `~/.bashrc` on Ubuntu, or `~/.zshrc` for Zsh._
 7. Use this version of Ruby in all shells:
 	~~~ sh
 	$ rbenv global 2.2.3
+	~~~
 
 ### Error `While executing gem ... (Gem::FilePermissionError)`
 
