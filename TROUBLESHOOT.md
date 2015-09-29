@@ -88,7 +88,7 @@ _Same as in previous step, use `~/.bashrc` on Ubuntu, or `~/.zshrc` for Zsh._
 	$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 	~~~
 
-6. Install the latest version of Ruby (2.2.3 as of writing):
+6. Install the latest version of Ruby by checking the [Ruby website](https://www.ruby-lang.org) (2.2.3 as of writing) and avoid jRuby or Rubinius as these haven't been tested with OBT:
 
 	~~~ sh
 	# list all available versions:
@@ -97,6 +97,10 @@ _Same as in previous step, use `~/.bashrc` on Ubuntu, or `~/.zshrc` for Zsh._
 	# install the latest version version of Ruby:
 	$ rbenv install 2.2.3
 	~~~
+
+7. Use this version of Ruby in all shells:
+	~~~ sh
+	$ rbenv global 2.2.3
 
 ### Error `While executing gem ... (Gem::FilePermissionError)`
 
