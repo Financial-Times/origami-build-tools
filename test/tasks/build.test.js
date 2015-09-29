@@ -1,24 +1,24 @@
 /* global describe, it, before, after, afterEach */
 'use strict';
 
-var denodeify = require('denodeify');
-var exec = denodeify(require('child_process').exec, function(err, stdout) { return [err, stdout]; });
+const denodeify = require('denodeify');
+const exec = denodeify(require('child_process').exec, function(err, stdout) { return [err, stdout]; });
 
-var expect = require('expect.js');
-var gulp = require('gulp');
+const expect = require('expect.js');
+const gulp = require('gulp');
 
-var fs = require('fs-extra');
-var path = require('path');
+const fs = require('fs-extra');
+const path = require('path');
 
-var build = require('../../lib/tasks/build');
+const build = require('../../lib/tasks/build');
 
-var obtPath = process.cwd();
-var oTestPath = 'test/fixtures/o-test';
+const obtPath = process.cwd();
+const oTestPath = 'test/fixtures/o-test';
 
 describe('Build task', function() {
 	describe('Build Js', function() {
-		var pathSuffix = '-build-js';
-		var buildTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
+		const pathSuffix = '-build-js';
+		const buildTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
 		before(function() {
 			fs.copySync(path.resolve(obtPath, oTestPath), buildTestPath);
@@ -43,7 +43,7 @@ describe('Build task', function() {
 		it('should work with default options', function(done) {
 			build.js(gulp)
 				.on('end', function() {
-					var builtJs = fs.readFileSync('build/main.js', 'utf8');
+					const builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
@@ -59,7 +59,7 @@ describe('Build task', function() {
 					env: 'production'
 				})
 				.on('end', function() {
-					var builtJs = fs.readFileSync('build/main.js', 'utf8');
+					const builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.not.contain('sourceMappingURL');
 					expect(builtJs).to.not.contain('var Test');
 					expect(builtJs).to.not.contain('function Test() {\n\t\tvar name = \'test\';');
@@ -75,7 +75,7 @@ describe('Build task', function() {
 					js: './src/js/test.js'
 				})
 				.on('end', function() {
-					var builtJs = fs.readFileSync('build/main.js', 'utf8');
+					const builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.not.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
@@ -89,7 +89,7 @@ describe('Build task', function() {
 					buildFolder: 'test-build'
 				})
 				.on('end', function() {
-					var builtJs = fs.readFileSync('test-build/main.js', 'utf8');
+					const builtJs = fs.readFileSync('test-build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
@@ -105,7 +105,7 @@ describe('Build task', function() {
 					buildJs: 'bundle.js'
 				})
 				.on('end', function() {
-					var builtJs = fs.readFileSync('build/bundle.js', 'utf8');
+					const builtJs = fs.readFileSync('build/bundle.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
@@ -147,11 +147,28 @@ describe('Build task', function() {
 					done();
 				});
 		});
+
+		it('should support a standalone option which creates a global variable', function(done) {
+			build
+				.js(gulp, {
+					standalone: 'origami'
+				})
+				.on('end', function() {
+					const builtJs = fs.readFileSync('build/main.js', 'utf8');
+					expect(builtJs).to.contain('sourceMappingURL');
+					expect(builtJs).to.contain('var Test');
+					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
+					expect(builtJs).to.contain('\tmodule.exports = {\n\t\t"test": true\n\t};')
+					expect(builtJs).to.contain('var origami =\n');
+					done();
+				});
+		});
 	});
 
 	describe('Build Sass', function() {
-		var pathSuffix = '-build-sass';
-		var buildTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
+		const pathSuffix = '-build-sass';
+		const buildTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
 		before(function() {
 			fs.copySync(path.resolve(obtPath, oTestPath), buildTestPath);
@@ -176,7 +193,7 @@ describe('Build task', function() {
 		it('should work with default options', function(done) {
 			build.sass(gulp)
 				.on('end', function() {
-					var builtCss = fs.readFileSync('build/main.css', 'utf8');
+					const builtCss = fs.readFileSync('build/main.css', 'utf8');
 					expect(builtCss).to.contain('div {\n  color: blue; }\n');
 					done();
 				});
@@ -188,7 +205,7 @@ describe('Build task', function() {
 					env: 'production'
 				})
 				.on('end', function() {
-					var builtCss = fs.readFileSync('build/main.css', 'utf8');
+					const builtCss = fs.readFileSync('build/main.css', 'utf8');
 					expect(builtCss).to.be('div{color:#00f}');
 					done();
 			});
@@ -200,7 +217,7 @@ describe('Build task', function() {
 					sass: './src/scss/test.scss'
 				})
 				.on('end', function() {
-					var builtCss = fs.readFileSync('build/main.css', 'utf8');
+					const builtCss = fs.readFileSync('build/main.css', 'utf8');
 					expect(builtCss).to.contain('p {\n  color: #000000; }\n');
 					done();
 				});
@@ -212,7 +229,7 @@ describe('Build task', function() {
 					buildFolder: 'test-build'
 				})
 				.on('end', function() {
-					var builtCss = fs.readFileSync('test-build/main.css', 'utf8');
+					const builtCss = fs.readFileSync('test-build/main.css', 'utf8');
 					expect(builtCss).to.contain('div {\n  color: blue; }\n');
 					exec('rm -rf test-build')
 						.then(function() { done(); }, done);
@@ -225,7 +242,7 @@ describe('Build task', function() {
 					buildCss: 'bundle.css'
 				})
 				.on('end', function() {
-					var builtCss = fs.readFileSync('build/bundle.css', 'utf8');
+					const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
 					expect(builtCss).to.contain('div {\n  color: blue; }\n');
 					done();
 				});

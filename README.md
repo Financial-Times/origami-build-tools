@@ -100,6 +100,7 @@ Runs:
 	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: current working directory)
 	- sourcemaps: `Boolean` Set to true to output sourcemaps, even if env is 'development'. (Default: false)
 	- loaders: `Array` Additional Webpack loaders for JavaScript files to run *before* imports-loader (removes AMD module support), babel-loader (which adds babel-runtime polyfills) and textrequireify-loader. OBT will search for loaders in its `node_modules` directory, but also in the project's `node_modules` folder. This way, you can install your own loaders and pass them to the `loaders` array by their name. e.g. `[coffee-loader]`
+	- standalone: `String` Export built file to a global variable with the name passed to this (Default: '')
 * __sass(gulp, config)__ Config accepts:
 	- sass: `String` Path to your main Sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
 	- autoprefixerBrowsers: `Array` An array of strings of [browser names for autoprefixer](https://github.com/postcss/autoprefixer#browsers) to check what prefixes it needs. (Default: `["> 1%", "last 2 versions", "ie > 6", "ff ESR"]`)
@@ -108,7 +109,7 @@ Runs:
 	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: current working directory)
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
 	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
-	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [clean-css](https://github.com/jakubpawlowicz/clean-css). (Default: development)
+	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [clean-css](https://github.com/jakubpawlowicz/clean-css). (Default: 'development')
 	- cleanCss: `Object` Config object to pass to [clean-css](https://github.com/jakubpawlowicz/clean-css/blob/master/README.md#how-to-use-clean-css-programmatically). (Default: `{advanced: false}`)
 
 ### `demo`

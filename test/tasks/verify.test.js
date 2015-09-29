@@ -1,18 +1,18 @@
 /* global describe, it, before, after */
 'use strict';
 
-var expect = require('expect.js');
-var gulp = require('gulp');
+const expect = require('expect.js');
+const gulp = require('gulp');
 
-var fs = require('fs-extra');
-var path = require('path');
+const fs = require('fs-extra');
+const path = require('path');
 
-var verify = require('../../lib/tasks/verify');
+const verify = require('../../lib/tasks/verify');
 
-var obtPath = process.cwd();
-var oTestPath = 'test/fixtures/o-test';
-var pathSuffix = '-verify';
-var verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
+const obtPath = process.cwd();
+const oTestPath = 'test/fixtures/o-test';
+const pathSuffix = '-verify';
+const verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
 describe('Verify task', function() {
 	before(function() {
@@ -54,7 +54,7 @@ describe('Verify task', function() {
 	});
 
 	it('should run esLint with custom config', function(done) {
-		var stream = verify.esLint(gulp, {
+		const stream = verify.esLint(gulp, {
 			esLintPath: '.eslintrc',
 			excludeFiles: ['./src/js/syntax-error.js']
 		})
