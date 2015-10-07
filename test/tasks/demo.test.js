@@ -73,9 +73,9 @@ describe('Demo task', function() {
 			}).catch(function(err) {
 				setTimeout(function() {
 					expect(err).to.not.be('Couldn\'t find demos config path, checked: demos/src/mysupercoolconfigs.json');
+					fs.unlink('demos/src/mysupercoolconfig.json');
+					done();
 				});
-				fs.unlink('demos/src/mysupercoolconfig.json');
-				done();
 			});
 		});
 
@@ -83,9 +83,9 @@ describe('Demo task', function() {
 			demo(gulp)
 				.catch(function(err) {
 					setTimeout(function() {
-						expect(err).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js');
+						expect(err).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js,origami.json');
+						done();
 					});
-					done();
 				});
 		});
 
@@ -95,11 +95,22 @@ describe('Demo task', function() {
 			demo(gulp)
 				.catch(function(err) {
 					setTimeout(function() {
-						expect(err).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js');
+						expect(err).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js,origami.json');
+						fs.unlink('demos/src/config.js');
+						done();
 					});
-					fs.unlink('demos/src/config.js');
+				});
+		});
+
+		it('should not fail using origami.json', function(done) {
+			demo(gulp, {
+				demoConfig: 'origami.json'
+			}).catch(function(err) {
+				setTimeout(function() {
+					expect(err).to.not.be('Couldn\'t find demos config path, checked: origami.json');
 					done();
 				});
+			})
 		});
 
 		it('should not fail if it\'s using the old config format', function(done) {
@@ -109,8 +120,8 @@ describe('Demo task', function() {
 			.catch(function(err) {
 				setTimeout(function() {
 					expect(err.toString()).to.be('Error: Demo template not found: ' + path.resolve(process.cwd(), 'demos/src/test1.mustache'));
+					done();
 				});
-				done();
 			});
 		});
 
