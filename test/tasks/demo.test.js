@@ -39,18 +39,7 @@ describe('Demo task', function() {
 	});
 
 	describe('Build demos', function() {
-		it('should fail if there is not a bower.json file', function() {
-			return demo(gulp)
-				.then(function() {
-					throw new Error('No error thrown');
-				}, function(err) {
-					setTimeout(function() {
-						expect(err).to.be('Couldn\'t find a bower.json file. Please add one and try again');
-					});
-				});
-		});
-
-		it('should fail if there is not a config file', function() {
+		it('should fail if there is not a config file', function(done) {
 			process.chdir(obtPath);
 			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
 			return demo(gulp)
@@ -58,10 +47,11 @@ describe('Demo task', function() {
 					throw new Error('No error thrown');
 				}, function(err) {
 					setTimeout(function() {
-						expect(err).to.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js');
+						expect(err).to.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js,origami.json');
+						fs.unlink(path.resolve(obtPath, 'bower.json'));
+						process.chdir(demoTestPath);
+						done();
 					});
-					fs.unlink(path.resolve(obtPath, 'bower.json'));
-					process.chdir(demoTestPath);
 				});
 		});
 
@@ -72,10 +62,11 @@ describe('Demo task', function() {
 				demoConfig: 'demos/src/mysupercoolconfig.json'
 			}).catch(function(err) {
 				setTimeout(function() {
+					// It will throw a template not found error which is fixed in "should build html" test
 					expect(err).to.not.be('Couldn\'t find demos config path, checked: demos/src/mysupercoolconfigs.json');
+					fs.unlink('demos/src/mysupercoolconfig.json');
+					done();
 				});
-				fs.unlink('demos/src/mysupercoolconfig.json');
-				done();
 			});
 		});
 
@@ -83,9 +74,10 @@ describe('Demo task', function() {
 			demo(gulp)
 				.catch(function(err) {
 					setTimeout(function() {
-						expect(err).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js');
+						// It will throw a template not found error which is fixed in "should build html" test
+						expect(err).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js,origami.json');
+						done();
 					});
-					done();
 				});
 		});
 
@@ -95,11 +87,24 @@ describe('Demo task', function() {
 			demo(gulp)
 				.catch(function(err) {
 					setTimeout(function() {
-						expect(err).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js');
+						// It will throw a template not found error which is fixed in "should build html" test
+						expect(err).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js,origami.json');
+						fs.unlink('demos/src/config.js');
+						done();
 					});
-					fs.unlink('demos/src/config.js');
+				});
+		});
+
+		it('should not fail using origami.json', function(done) {
+			demo(gulp, {
+				demoConfig: 'origami.json'
+			}).catch(function(err) {
+				setTimeout(function() {
+					// It will throw a template not found error which is fixed in "should build html" test
+					expect(err).to.not.be('Couldn\'t find demos config path, checked: origami.json');
 					done();
 				});
+			})
 		});
 
 		it('should not fail if it\'s using the old config format', function(done) {
@@ -109,8 +114,8 @@ describe('Demo task', function() {
 			.catch(function(err) {
 				setTimeout(function() {
 					expect(err.toString()).to.be('Error: Demo template not found: ' + path.resolve(process.cwd(), 'demos/src/test1.mustache'));
+					done();
 				});
-				done();
 			});
 		});
 
