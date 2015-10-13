@@ -8,7 +8,7 @@ Different common issues encountered when using OBT organized by the different ta
 
 Node is available in most package management repositories, and instructions are available in the Node install guide:
 
-[Install Node.js via package manager](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
+[Install Node.js via package manager](https://nodejs.org/en/download/package-manager)
 
 #### Fix npm permissions
 
