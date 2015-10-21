@@ -122,9 +122,9 @@ Config:
 
 * local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Default: `false`
 * demoConfig: `String` The path to the demo config file. Default: `demos/src/config.json`
-* updateorigami: `Boolean` The `demos` property of your `origami.json` file will be updated - to list the demo files that have been created.
 * runServer: `Boolean` Whether you want to run a local server or not. If true, it also sets 'local' to true. Default: `false`
 * livereload: `Boolean` Will enable livereload on `runServer`. Default: `true`
+* demoFilter: `Array` List of files for OBT to build. If the array is empty or `undefined`, it will build all demos. This is something only used in the [build service](https://build.origami.ft.com). Default: `undefined`
 
 Runs:
 
