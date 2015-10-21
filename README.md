@@ -98,7 +98,7 @@ Runs:
 	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will run [uglify](https://github.com/mishoo/UglifyJS2). If it's 'development', it will generate a sourcemap. (Default: 'development')
 	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: current working directory)
-	- sourcemaps: `Boolean | 'inline'` Set to true to output sourcemaps, even if env is 'production'. Set to 'inline' to outout sourcemaps inline (Default: false in production, true in development)
+	- sourcemaps: `Boolean | 'inline'` Set to true to output sourcemaps as a separate file, even if env is 'production'. Set to 'inline' to output sourcemaps inline (Default: false in production, true in development)
 	- loaders: `Array` Additional Webpack loaders for JavaScript files to run *before* imports-loader (removes AMD module support), babel-loader (which adds babel-runtime polyfills) and textrequireify-loader. OBT will search for loaders in its `node_modules` directory, but also in the project's `node_modules` folder. This way, you can install your own loaders and pass them to the `loaders` array by their name. e.g. `[coffee-loader]`
 	- standalone: `String` Export built file to a global variable with the name passed to this (Default: '')
 * __sass(gulp, config)__ Config accepts:
@@ -109,7 +109,7 @@ Runs:
 	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: current working directory)
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
 	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
-	- sourcemaps: `Boolean | 'inline'` Set to true to output sourcemaps, even if env is 'production'. Set to 'inline' to outout sourcemaps inline (Default: false in production, true in development) *Separate file source maps not yet supported for sass*
+	- sourcemaps: `Boolean | 'inline'` Set to true to output sourcemaps as a separate file, even if env is 'production'. Set to 'inline' to output sourcemaps inline (Default: false in production, true in development) *Separate file source maps not yet supported for sass*
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [clean-css](https://github.com/jakubpawlowicz/clean-css). (Default: 'development')
 	- cleanCss: `Object` Config object to pass to [clean-css](https://github.com/jakubpawlowicz/clean-css/blob/master/README.md#how-to-use-clean-css-programmatically). (Default: `{advanced: false}`)
 	- sassIncludePaths: `Array` List of paths to search for Sass imports. (Default: '[]')
