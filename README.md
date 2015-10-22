@@ -146,6 +146,7 @@ Runs:
 * __esLint(gulp, config)__ Config accepts:
 	- esLintPath: `String` Path to your custom esLint config file. (Default: 'origami-build-tools/config/.eslintrc' _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 	- excludeFiles `Array` e.g. `['!**/demo.js']`
+	- fix `Boolean` Attempts to fix any linting errors found
 * __lintspaces(gulp, config)__ Config accepts:
 	- editorconfigPath: `String` Path to your '.editorconfig' that lintspaces uses for linting. (Default: 'origami-build-tools/config/.editorconfig') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 * __origamiJson()__ If there's an 'origami.json' file in your project's root, it will make sure it's compliant with the [spec](http://origami.ft.com/docs/syntax/origamijson/#format)
