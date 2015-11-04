@@ -109,7 +109,7 @@ Runs:
 	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: current working directory)
 	- buildCss: `String` Name of the built CSS bundle. (Default: 'main.css')
 	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
-	- sourcemaps: `Boolean | 'inline'` Set to true to output sourcemaps as a separate file, even if env is 'production'. Set to 'inline' to output sourcemaps inline (Default: false in production, true in development) *Separate file source maps not yet supported for sass*
+	- sourcemaps: `Boolean | 'inline'` Set to true to output sourcemaps as a separate file, even if env is 'production'. Set to 'inline' to output sourcemaps inline (Default: false in production, true in development)
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [clean-css](https://github.com/jakubpawlowicz/clean-css). (Default: 'development')
 	- cleanCss: `Object` Config object to pass to [clean-css](https://github.com/jakubpawlowicz/clean-css/blob/master/README.md#how-to-use-clean-css-programmatically). (Default: `{advanced: false}`)
 	- sassIncludePaths: `Array` List of paths to search for Sass imports. (Default: '[]')
