@@ -6,7 +6,8 @@ const obt = require('./lib/origami-build-tools');
 gulp.task('verify', function() {
 	return obt.verify(gulp, {
 		esLintPath: '.eslintrc',
-		editorconfigPath: '.editorconfig'
+		editorconfigPath: '.editorconfig',
+		excludeFiles: ['!test/fixtures/o-test/src/js/syntax-error.js']
 	});
 });
 
