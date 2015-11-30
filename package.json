@@ -48,7 +48,7 @@
     "npmconf": "^2.1.2",
     "portfinder": "^0.4.0",
     "semver": "^4.3.6",
-    "stream-combiner2": "^1.0.2",
+    "stream-combiner2": "1.0.2",
     "through2": "^2.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
