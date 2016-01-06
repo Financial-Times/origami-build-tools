@@ -116,13 +116,12 @@ Runs:
 
 ### `demo`
 
-Build demos found in the [demo config file](http://origami.ft.com/docs/component-spec/modules/#demo-config-file) into the `demos/` directory.
+Build demos found in the [demo config file](http://origami.ft.com/docs/component-spec/modules/#demo-config-file).
 
 Config:
 
-* local: `Boolean` Build local HTML, CSS and JS files, in addition to demo HTML for the build service. Default: `false`
-* demoConfig: `String` The path to the demo config file. Default: `demos/src/config.json`
-* runServer: `Boolean` Whether you want to run a local server or not. If true, it also sets 'local' to true. Default: `false`
+* dist: `Boolean` Builds demo HTML for the build service. Default: `false`
+* runServer: `Boolean` Whether you want to run a local server or not. Default: `false`
 * livereload: `Boolean` Will enable livereload on `runServer`. Default: `true`
 * demoFilter: `Array` List of files for OBT to build. If the array is empty or `undefined`, it will build all demos. This is something only used in the [build service](https://build.origami.ft.com). Default: `undefined`
 
@@ -130,9 +129,9 @@ Runs:
 
 * __runServer(gulp)__ Starts a local server
 
-Build service demos consist of only HTML, with build service URLs for static resources, and are created in `demos/`.
+Dist demos consist of only HTML, with build service URLs for static resources, and are created in `demos/`.
 
-Local demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add demos/local/ to your `.gitignore`.
+Local demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add _demos/local/_ to your `.gitignore`.
 
 ### `verify`
 

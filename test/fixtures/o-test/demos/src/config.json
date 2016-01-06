@@ -1,5 +1,5 @@
 {
-	"options": {
+	"demosDefaults": {
 		"sass": "demos/src/demo.scss",
 		"js": "demos/src/demo.js",
 		"bodyClasses": "o-hoverable-on"
