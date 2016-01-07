@@ -43,7 +43,7 @@ describe('Demo task', function() {
 			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
 			demo(gulp)
 				.on('error', function(err) {
-					expect(err.message).to.be('Couldn\'t find demos config path, checked: origami.json');
+					expect(err.message).to.be('Couldn\'t find demos config path, checked: origami.json,demos/src/config.js,demos/src/config.json');
 					fs.unlink(path.resolve(obtPath, 'bower.json'));
 					process.chdir(demoTestPath);
 					done();
@@ -75,6 +75,40 @@ describe('Demo task', function() {
 				demoStream.removeListener('error', errorHandler);
 				done();
 			})
+		});
+
+		it('should not fail if there is a config.json file', function(done) {
+			const demoStream = demo(gulp)
+				.on('error', function errorHandler(err) {
+						// It will throw a template not found error which is fixed in "should build html" test
+						expect(err.message).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js,origami.json');
+						demoStream.removeListener('error', errorHandler);
+						done();
+					});
+		});
+
+		it('should not fail if there is a config.js file', function(done) {
+			const config = fs.readFileSync('demos/src/config.json');
+			fs.writeFileSync('demos/src/config.js', 'module.exports = ' + config, 'utf8');
+			const demoStream = demo(gulp)
+				.on('error', function errorHandler(err) {
+						// It will throw a template not found error which is fixed in "should build html" test
+						expect(err.message).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js,origami.json');
+						fs.unlink('demos/src/config.js');
+						demoStream.removeListener('error', errorHandler);
+						done();
+					});
+		});
+
+		it('should not fail if it\'s using the old config format', function(done) {
+			const demoStream = demo(gulp, {
+				demoConfig: 'demos/src/oldconfig.json'
+			})
+			.on('error', function errorHandler(err) {
+				expect(err.message).to.be('Demo template not found: ' + path.resolve(process.cwd(), 'demos/src/test1.mustache'));
+				demoStream.removeListener('error', errorHandler);
+				done();
+			});
 		});
 
 		it('should fail if there are demos with the same name', function(done) {
