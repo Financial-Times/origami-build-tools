@@ -124,6 +124,7 @@ Config:
 * runServer: `Boolean` Whether you want to run a local server or not. Default: `false`
 * livereload: `Boolean` Will enable livereload on `runServer`. Default: `true`
 * demoFilter: `Array` List of files for OBT to build. If the array is empty or `undefined`, it will build all demos. This is something only used in the [build service](https://build.origami.ft.com). Default: `undefined`
+* cwd: `String` The path to the working directory, in which the code to be built exists. (Default: current working directory)
 
 Runs:
 
