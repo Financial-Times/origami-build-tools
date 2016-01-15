@@ -116,7 +116,7 @@ Runs:
 
 ### `demo`
 
-Build demos found in the [demo config file](http://origami.ft.com/docs/component-spec/modules/#demo-config-file).
+Build demos found in the [demo config file](http://origami.ft.com/docs/component-spec/modules/#demo-config).
 
 Config:
 
