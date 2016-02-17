@@ -16,6 +16,7 @@
         "wrap-iife": 2,
         "new-cap": 2,
         "no-caller": 2,
+        "semi": [2, "always"],
         "strict": [2, "global"],
         "quotes": [1, "single"],
         "no-loop-func": 2,

@@ -104,7 +104,7 @@ describe('Demo task', function() {
 					expect(err).to.not.be('Couldn\'t find demos config path, checked: origami.json');
 					done();
 				});
-			})
+			});
 		});
 
 		it('should not fail if it\'s using the old config format', function(done) {
