@@ -74,7 +74,7 @@ describe('Demo task', function() {
 				expect(err.message).to.not.be('Couldn\'t find demos config path, checked: origami.json');
 				demoStream.removeListener('error', errorHandler);
 				done();
-			})
+			});
 		});
 
 		it('should not fail if there is a config.json file', function(done) {
