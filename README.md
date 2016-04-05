@@ -165,6 +165,7 @@ Config accepts:
 	- nightwatchConfig: `String` Path to your 'nightwatch.json' file that Nightwatch uses for testing. (Default: `./test/browser/nightwatch.json`)
 	- environments: `String` Comma separated list of environments from your nightwatch config file to run your tests on. (Default: `chrome_latest,chrome_latest-1,firefox_latest,firefox_latest-1,ie8_Grid,ie9_Grid,ie10_Grid,ie11_Grid,safari7_Grid`)
 	- testsPath: `String` Relative path from your project's root directory to where your nightwatch tests are. (Default: `test/browser/tests`)
+	- browserTestFailBuild: `Boolean` by default the failed browser tests will not fail the task, however you can override the default behaviour by setting this option to `true`. Default: `false`
 
 ## gulpfile usage
 
