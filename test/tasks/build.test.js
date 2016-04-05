@@ -39,7 +39,7 @@ describe('Build task', function() {
 		afterEach(function() {
 			return fs.emptydirSync('build', function(){
 				fs.removeSync('build');
-			})
+			});
 		});
 
 		it('should work with default options', function(done) {
