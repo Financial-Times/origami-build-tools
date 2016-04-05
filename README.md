@@ -155,7 +155,7 @@ Runs:
 * __silentCompilation(gulp)__ Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles). Check the Sass outputs no CSS by default. Only ran af a `$<module-name>-is-silent` variable is found
 * __silentCompilation(gulp)__ Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles). Check the Sass outputs some CSS with `$<module-name>-is-silent` set to false. Only ran af a `$<module-name>-is-silent` variable is found
 * __npmTest()__ Runs 'npm test', so whatever test script that you have in you `package.json` will be executed
-* __browserTest(gulp, config)__ Runs [Nightwatch](http://nightwatchjs.org/) tests on our [Selenium](http://www.seleniumhq.org/projects/webdriver/) grid by deploying the demo pages to Heroku. This is an optional subtask that requires the config option _browserTest_ to be set to true. You also need to set the following environment variables:
+* __browserTest(gulp, config)__ Runs [Nightwatch](http://nightwatchjs.org/) tests on our [Selenium](http://www.seleniumhq.org/projects/webdriver/) grid by deploying the demo pages to Heroku. This is an optional subtask that requires the config option _browserTest_ to be set to true. By default the failed browser tests will not fail the task, however you can override the default behaviour by setting _browserTestFailBuild_ config option to true. You also need to set the following environment variables:
 	- HEROKU_AUTH_TOKEN: The result of running `heroku auth:token`
 	- SELENIUM_USER: The username of the Selenium grid proxy
 	- SELENIUM_KEY: The key to use the proxy to the Selenium grid
