@@ -1,6 +1,6 @@
 {
   "name": "origami-build-tools",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "Origami component development tools.",
   "main": "./lib/origami-build-tools",
   "bin": {
@@ -33,7 +33,9 @@
     "gulp-minify-css": "^1.1.6",
     "gulp-mustache": "^2.2.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.0.1",
+    "gulp-replace": "^0.5.4",
+    "gulp-sass": "~2.2.0",
+    "node-sass": "~3.4.2",
     "gulp-scss-lint": "^0.3.8",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^3.0.6",
@@ -53,7 +55,7 @@
     "through2": "^2.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "webpack-stream": "AlbertoElias/webpack-stream",
+    "webpack-stream": "github:albertoelias/webpack-stream",
     "which": "^1.1.1"
   },
   "devDependencies": {
@@ -64,7 +66,58 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Financial-Times/origami-build-tools.git"
+    "url": "git+https://github.com/Financial-Times/origami-build-tools.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "3979740edcafe471e5d1a19f3e12d2d42516a4fa",
+  "bugs": {
+    "url": "https://github.com/Financial-Times/origami-build-tools/issues"
+  },
+  "homepage": "https://github.com/Financial-Times/origami-build-tools#readme",
+  "_id": "origami-build-tools@5.1.1",
+  "_shasum": "aaa96ccb16122da612fdc59d55a1960ac33cd1b3",
+  "_from": "origami-build-tools@>=5.0.1 <6.0.0",
+  "_npmVersion": "2.14.14",
+  "_nodeVersion": "5.6.0",
+  "_npmUser": {
+    "name": "albertoelias",
+    "email": "me@alberto-elias.com"
+  },
+  "dist": {
+    "shasum": "aaa96ccb16122da612fdc59d55a1960ac33cd1b3",
+    "tarball": "https://registry.npmjs.org/origami-build-tools/-/origami-build-tools-5.1.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "albertoelias",
+      "email": "me@alberto-elias.com"
+    },
+    {
+      "name": "ftlabs",
+      "email": "ftlabs-opensource@ft.com"
+    },
+    {
+      "name": "kaelig",
+      "email": "kaelig@deloumeau.fr"
+    },
+    {
+      "name": "kornel",
+      "email": "pornel@pornel.net"
+    },
+    {
+      "name": "mattandrews",
+      "email": "matt@mattandre.ws"
+    },
+    {
+      "name": "samgiles",
+      "email": "sam@samgil.es"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/origami-build-tools-5.1.1.tgz_1461243103339_0.49191167345270514"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/origami-build-tools/-/origami-build-tools-5.1.1.tgz",
+  "readme": "ERROR: No README data found!"
 }
