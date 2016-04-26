@@ -54,7 +54,7 @@
     "through2": "^2.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "webpack-stream": "github:albertoelias/webpack-stream",
+    "webpack-stream": "AlbertoElias/webpack-stream",
     "which": "^1.1.1"
   },
   "devDependencies": {
@@ -65,58 +65,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Financial-Times/origami-build-tools.git"
+    "url": "https://github.com/Financial-Times/origami-build-tools.git"
   },
-  "license": "MIT",
-  "gitHead": "3979740edcafe471e5d1a19f3e12d2d42516a4fa",
-  "bugs": {
-    "url": "https://github.com/Financial-Times/origami-build-tools/issues"
-  },
-  "homepage": "https://github.com/Financial-Times/origami-build-tools#readme",
-  "_id": "origami-build-tools@5.1.1",
-  "_shasum": "aaa96ccb16122da612fdc59d55a1960ac33cd1b3",
-  "_from": "origami-build-tools@>=5.0.1 <6.0.0",
-  "_npmVersion": "2.14.14",
-  "_nodeVersion": "5.6.0",
-  "_npmUser": {
-    "name": "albertoelias",
-    "email": "me@alberto-elias.com"
-  },
-  "dist": {
-    "shasum": "aaa96ccb16122da612fdc59d55a1960ac33cd1b3",
-    "tarball": "https://registry.npmjs.org/origami-build-tools/-/origami-build-tools-5.1.1.tgz"
-  },
-  "maintainers": [
-    {
-      "name": "albertoelias",
-      "email": "me@alberto-elias.com"
-    },
-    {
-      "name": "ftlabs",
-      "email": "ftlabs-opensource@ft.com"
-    },
-    {
-      "name": "kaelig",
-      "email": "kaelig@deloumeau.fr"
-    },
-    {
-      "name": "kornel",
-      "email": "pornel@pornel.net"
-    },
-    {
-      "name": "mattandrews",
-      "email": "matt@mattandre.ws"
-    },
-    {
-      "name": "samgiles",
-      "email": "sam@samgil.es"
-    }
-  ],
-  "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/origami-build-tools-5.1.1.tgz_1461243103339_0.49191167345270514"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/origami-build-tools/-/origami-build-tools-5.1.1.tgz",
-  "readme": "ERROR: No README data found!"
+  "license": "MIT"
 }
