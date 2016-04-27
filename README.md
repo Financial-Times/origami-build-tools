@@ -101,6 +101,7 @@ Runs:
 	- sourcemaps: `Boolean | 'inline'` Set to true to output sourcemaps as a separate file, even if env is 'production'. Set to 'inline' to output sourcemaps inline (Default: false in production, true in development)
 	- loaders: `Array` Additional Webpack loaders for JavaScript files to run *before* imports-loader (removes AMD module support), babel-loader (which adds babel-runtime polyfills) and textrequireify-loader. OBT will search for loaders in its `node_modules` directory, but also in the project's `node_modules` folder. This way, you can install your own loaders and pass them to the `loaders` array by their name. e.g. `[coffee-loader]`
 	- standalone: `String` Export built file to a global variable with the name passed to this (Default: '')
+	- vars: `Object` These variables will be passed to the built resources as obt_var_{key}, with the corresponding value. Please note that the value will be a String.
 
 **In your JS files, you can use `obt_env`, which will be replaced with the value of `env` (either 'development' or 'production.'). Bear in mind that it's not a variable, it will be replaced with the string.**
 
@@ -116,6 +117,7 @@ Runs:
 	- env: `String` It can be either 'production' or 'development'. If it's 'production', it will compile the Sass file with the 'compressed' style option and will also run [clean-css](https://github.com/jakubpawlowicz/clean-css). (Default: 'development')
 	- cleanCss: `Object` Config object to pass to [clean-css](https://github.com/jakubpawlowicz/clean-css/blob/master/README.md#how-to-use-clean-css-programmatically). (Default: `{advanced: false}`)
 	- sassIncludePaths: `Array` List of paths to search for Sass imports. (Default: '[]')
+	- vars: `Object` These variables will be passed to the built resources as $obt_var_{key}, with the corresponding value.
 
 **In your SCSS files, you can use `$obt_env`, which is a variable with the value of `env` (either 'development' or 'production.').**
 
