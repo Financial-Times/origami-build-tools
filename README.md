@@ -101,7 +101,7 @@ Runs:
 	- sourcemaps: `Boolean | 'inline'` Set to true to output sourcemaps as a separate file, even if env is 'production'. Set to 'inline' to output sourcemaps inline (Default: false in production, true in development)
 	- loaders: `Array` Additional Webpack loaders for JavaScript files to run *before* imports-loader (removes AMD module support), babel-loader (which adds babel-runtime polyfills) and textrequireify-loader. OBT will search for loaders in its `node_modules` directory, but also in the project's `node_modules` folder. This way, you can install your own loaders and pass them to the `loaders` array by their name. e.g. `[coffee-loader]`
 	- standalone: `String` Export built file to a global variable with the name passed to this (Default: '')
-	- babelRuntime: `Boolean` Set to true by default. Setting to false will exclude Babel polyfills from the built file
+	- babelRuntime: `Boolean` Setting to false will exclude Babel polyfills from the built file. (Default: true)
 * __sass(gulp, config)__ Config accepts:
 	- sass: `String` Path to your main Sass file. (Default: './main.scss' and checks your bower.json to see if it's in its main key)
 	- autoprefixerBrowsers: `Array` An array of strings of [browser names for autoprefixer](https://github.com/postcss/autoprefixer#browsers) to check what prefixes it needs. (Default: `["> 1%", "last 2 versions", "ie > 6", "ff ESR"]`)
