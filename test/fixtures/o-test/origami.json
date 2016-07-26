@@ -23,6 +23,12 @@
             "path": "/demos/test2.html",
             "expanded": false,
             "description": "Second test"
+        },
+        {
+              "name": "pa11y",
+              "template": "demos/src/pa11y.mustache",
+              "expanded": true,
+              "description": "Pa11y test"
         }
     ],
     "browserFeatures": {

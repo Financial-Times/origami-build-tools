@@ -166,6 +166,8 @@ Config accepts:
 	- environments: `String` Comma separated list of environments from your nightwatch config file to run your tests on. (Default: `chrome_latest,chrome_latest-1,firefox_latest,firefox_latest-1,ie8_Grid,ie9_Grid,ie10_Grid,ie11_Grid,safari7_Grid`)
 	- testsPath: `String` Relative path from your project's root directory to where your nightwatch tests are. (Default: `test/browser/tests`)
 	- browserTestFailBuild: `Boolean` by default the failed browser tests will not fail the task, however you can override the default behaviour by setting this option to `true`. Default: `false`
+* __pa11yTest(gulp, config)__ The test will not fail if the pa11y.html file is not find. Config accepts:
+  - pa11yPath `String` Relative path from your project's root directory to where your pa11y test is. (Default: `/demos/local/pa11y.html`)
 
 ## gulpfile usage
 
