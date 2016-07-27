@@ -164,11 +164,8 @@ describe('Demo task', function() {
 		});
 
 		it('should load local partials', function(done) {
-			fs.mkdirSync('demos/src/partials');
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>{{>partial1}}', 'utf8');
-			fs.writeFileSync('demos/src/partial1.mustache', '<div>partial1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test1</div>{{>partials/partial2}}', 'utf8');
-			fs.writeFileSync('demos/src/partials/partial2.mustache', '<div>partial2</div>', 'utf8');
 			const demoStream = demo(gulp, {
 				dist: true
 			})
