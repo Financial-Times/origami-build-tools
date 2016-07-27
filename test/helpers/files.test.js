@@ -147,7 +147,7 @@ describe('Files helper', function() {
 
 		describe('when the directory structure is one level deep', () => {
 
-			it('returns an array of all of the files in the directory', () => {
+			it('returns an array of all of the mustache files in the directory', () => {
 				const mustacheFiles = files.getMustacheFilesList(flatMustacheFiles);
 				expect(mustacheFiles).to.eql([
 					path.join(flatMustacheFiles, 'example-1.mustache'),
@@ -159,7 +159,7 @@ describe('Files helper', function() {
 
 		describe('when the directory structure has subdirectories', () => {
 
-			it('returns an array of all of the files in the directory and all subdirectories', () => {
+			it('returns an array of all of the mustache files in the directory and all subdirectories', () => {
 				const mustacheFiles = files.getMustacheFilesList(nestedMustacheFiles);
 				expect(mustacheFiles).to.eql([
 					path.join(nestedMustacheFiles, 'example-1.mustache'),
