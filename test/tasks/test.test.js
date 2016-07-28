@@ -25,8 +25,7 @@ describe('Test task', function() {
 				demoConfig: 'origami.json',
 				demoFilter: ['pa11y']
 			});
-			demoStream
-			.on('end', done);
+			demoStream.on('end', done);
 			demoStream.resume();
 		});
 
@@ -35,31 +34,52 @@ describe('Test task', function() {
 			fs.removeSync(testTestPath);
 		});
 
-		it('should not fail when the file is not found', function(done){
+		it('should fail when the file is not found', function(done){
 			// run pa11y subtask
-			let res = test.pa11yTest(gulp, {
-				// set an empty path
+			const res = test.pa11yTest(gulp, {
+				// set an invalid path
 				pa11yPath: './file.html'
 			});
 			res
-			.then(function() {
-				expect(true).to.be(false);
-				done();
-			})
-			.catch(function errorHandler(err) {
-				expect(err);
-				done();
-			});
+				.then(function() {
+					// it should throw an error, not resolve
+					expect(true).to.be(false);
+					done();
+				})
+				.catch(function errorHandler(err) {
+					expect(err).to.be('[Error: expected true to equal false]');
+					done();
+				});
 		});
 
 		it('should run pa11y correctly', function(done) {
 			// run pa11y subtask
-			let res = test.pa11yTest();
+			const res = test.pa11yTest();
 			res
-			.then(function() {
+			.then(function(results) {
+				expect(results[0].type).to.be('error');
 				done();
 			})
 			.catch(function errorHandler() {
+				// it should throw an error, not resolve
+				expect(true).to.be(false);
+				done();
+			});
+		});
+
+		it('should run pa11y with custom ignore options', function(done) {
+			// run pa11y subtask
+			const res = test.pa11yTest(gulp, {
+				// set custom ignore options
+				pa11yIgnore: 'error;notice'
+			});
+			res
+			.then(function(results) {
+				expect(results[0].type).to.be('warning');
+				done();
+			})
+			.catch(function errorHandler() {
+				// it should throw an error, not resolve
 				expect(true).to.be(false);
 				done();
 			});
