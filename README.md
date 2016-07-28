@@ -168,6 +168,7 @@ Config accepts:
 	- browserTestFailBuild: `Boolean` by default the failed browser tests will not fail the task, however you can override the default behaviour by setting this option to `true`. Default: `false`
 * __pa11yTest(gulp, config)__ The test will not fail if the pa11y.html file is not find. Config accepts:
   - pa11yPath `String` Relative path from your project's root directory to where your pa11y test is. (Default: `/demos/local/pa11y.html`)
+	- pa11yIgnore `String` Types and codes of messages to ignore, a repeatable value or separated by semi-colons. (Default: `WCAG2AA.Principle2.Guideline2_4.2_4_1.G1,G123,G124.NoSuchID;warning;notice`)
 
 ## gulpfile usage
 

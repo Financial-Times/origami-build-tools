@@ -34,20 +34,20 @@ describe('Test task', function() {
 			fs.removeSync(testTestPath);
 		});
 
-		it('should fail when the file is not found', function(done){
+		it('should not fail when the file is not found', function(done){
 			// run pa11y subtask
 			const res = test.pa11yTest(gulp, {
 				// set an invalid path
 				pa11yPath: './file.html'
 			});
 			res
-				.then(function() {
+				.then(function(results) {
 					// it should throw an error, not resolve
-					expect(true).to.be(false);
+					//expect(results.errno).to.be(-2);
+					expect(results).to.be(undefined);
 					done();
 				})
-				.catch(function errorHandler(err) {
-					expect(err).to.be('[Error: expected true to equal false]');
+				.catch(function errorHandler() {
 					done();
 				});
 		});
