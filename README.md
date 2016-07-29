@@ -9,6 +9,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 1. Install these dependencies:
 	* [node.js](http://nodejs.org/)
 	* [Ruby](https://www.ruby-lang.org/en/) (Macs typically ship with Ruby by default)
+	* [PhantomJS](http://phantomjs.org/)
 
 2. Install the build tools globally:
 
@@ -166,7 +167,7 @@ Config accepts:
 	- environments: `String` Comma separated list of environments from your nightwatch config file to run your tests on. (Default: `chrome_latest,chrome_latest-1,firefox_latest,firefox_latest-1,ie8_Grid,ie9_Grid,ie10_Grid,ie11_Grid,safari7_Grid`)
 	- testsPath: `String` Relative path from your project's root directory to where your nightwatch tests are. (Default: `test/browser/tests`)
 	- browserTestFailBuild: `Boolean` by default the failed browser tests will not fail the task, however you can override the default behaviour by setting this option to `true`. Default: `false`
-* __pa11yTest(gulp, config)__ The test will not fail if the pa11y.html file is not find. Config accepts:
+* __pa11yTest(gulp, config)__ The test will not fail if the pa11y.html file is not find. PhantomJS is required for running this test. Config accepts:
   - pa11yPath `String` Relative path from your project's root directory to where your pa11y test is. (Default: `/demos/local/pa11y.html`)
 	- pa11yIgnore `String` Types and codes of messages to ignore, a repeatable value or separated by semi-colons. (Default: `WCAG2AA.Principle2.Guideline2_4.2_4_1.G1,G123,G124.NoSuchID;warning;notice`)
 
