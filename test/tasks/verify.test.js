@@ -68,21 +68,39 @@ describe('Verify task', function() {
 		});
 	});
 
-	it('should run origamiJson check', function(done) {
-		verify.origamiJson()
-			.then(function(verifiedOrigamiJson) {
-				expect(verifiedOrigamiJson.length).to.be(0);
-				fs.writeFileSync('origami.json', JSON.stringify({}), 'utf8');
-				return verify.origamiJson();
-			})
-			.then(function() {}, function(verifiedOrigamiJson) {
-				expect(verifiedOrigamiJson).to.contain('A non-empty description property is required');
-				expect(verifiedOrigamiJson).to.contain('The origamiType property needs to be set to either "module" or "service"');
-				expect(verifiedOrigamiJson).to.contain('A non-empty description property is required');
-				expect(verifiedOrigamiJson).to.contain('The origamiVersion property needs to be set to 1');
-				expect(verifiedOrigamiJson).to.contain('The support property must be an email or url to an issue tracker for this module');
-				expect(verifiedOrigamiJson).to.contain('The supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"');
-				done();
-			});
+	describe('verify origami.json', function() {
+		it('should run origami.json check successfully', function(done) {
+			verify.origamiJson()
+				.then(function(verifiedOrigamiJson) {
+					expect(verifiedOrigamiJson.length).to.be(0);
+					done();
+				});
+		});
+
+		it('should fail with an empty origami.json', function(done) {
+			fs.writeFileSync('origami.json', JSON.stringify({}), 'utf8');
+
+			verify.origamiJson()
+				.then(function() {}, function(verifiedOrigamiJson) {
+					expect(verifiedOrigamiJson).to.contain('A non-empty description property is required');
+					expect(verifiedOrigamiJson).to.contain('The origamiType property needs to be set to either "module" or "service"');
+					expect(verifiedOrigamiJson).to.contain('A non-empty description property is required');
+					expect(verifiedOrigamiJson).to.contain('The origamiVersion property needs to be set to 1');
+					expect(verifiedOrigamiJson).to.contain('The support property must be an email or url to an issue tracker for this module');
+					expect(verifiedOrigamiJson).to.contain('The supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"');
+					done();
+				});
+		});
+
+		it('should fail when an expanded property is found for a demo', function(done) {
+			fs.writeFileSync('origami.json', JSON.stringify({ demos: [ { expanded: false }, { expanded: true } ] }), 'utf8');
+
+			verify.origamiJson()
+				.then(function() {}, function(verifiedOrigamiJson) {
+					expect(verifiedOrigamiJson).to.contain('The expanded property has been deprecated. Use the "hidden" property when a demo should not appear in the Registry.');
+					done();
+				});
+		});
 	});
+
 });
