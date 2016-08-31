@@ -11,7 +11,7 @@ const prefixer = require('../../lib/plugins/gulp-prefixer.js');
 describe('gulp-prefixer', function() {
 	describe('in buffer mode', function() {
 
-		it('should prepend text', function() {
+		it('should prepend text', function(done) {
 
 			const fakeFile = new File({
 				contents: new Buffer('abufferwiththiscontent')
@@ -21,9 +21,10 @@ describe('gulp-prefixer', function() {
 
 			myPrefixer.write(fakeFile);
 
-			return myPrefixer.once('data', function(file) {
+			myPrefixer.once('data', function(file) {
 				expect(file.isBuffer()).to.be(true);
 				expect(file.contents.toString('utf8')).to.be('prependthisabufferwiththiscontent');
+				done();
 			});
 
 		});
