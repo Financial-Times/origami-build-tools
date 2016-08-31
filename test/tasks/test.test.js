@@ -34,21 +34,14 @@ describe('Test task', function() {
 			fs.removeSync(testTestPath);
 		});
 
-		it('should not fail when the file is not found', function(done){
+		it('should not fail when the file is not found', function() {
 			// run pa11y subtask
-			const res = test.pa11yTest(gulp, {
-				// set an invalid path
-				pa11yPath: './file.html'
-			});
-			res
-				.then(function(results) {
-					// it should throw an error, not resolve
-					//expect(results.errno).to.be(-2);
-					expect(results).to.be(undefined);
-					done();
+			return test.pa11yTest(gulp, {
+					// set an invalid path
+					pa11yPath: './file.html'
 				})
-				.catch(function errorHandler() {
-					done();
+				.then(function(results) {
+					expect(results).to.be(undefined);
 				});
 		});
 
@@ -56,15 +49,15 @@ describe('Test task', function() {
 			// run pa11y subtask
 			const res = test.pa11yTest();
 			res
-			.then(function(results) {
-				expect(results[0].type).to.be('error');
-				done();
-			})
-			.catch(function errorHandler() {
-				// it should throw an error, not resolve
-				expect(true).to.be(false);
-				done();
-			});
+				.then(function(results) {
+					expect(results[0].type).to.be('error');
+					done();
+				})
+				.catch(function errorHandler() {
+					// it should throw an error, not resolve
+					expect(true).to.be(false);
+					done();
+				});
 		});
 
 		it('should run pa11y with custom ignore options', function(done) {
@@ -74,15 +67,15 @@ describe('Test task', function() {
 				pa11yIgnore: 'error;notice'
 			});
 			res
-			.then(function(results) {
-				expect(results[0].type).to.be('warning');
-				done();
-			})
-			.catch(function errorHandler() {
-				// it should throw an error, not resolve
-				expect(true).to.be(false);
-				done();
-			});
+				.then(function(results) {
+					expect(results[0].type).to.be('warning');
+					done();
+				})
+				.catch(function errorHandler() {
+					// it should throw an error, not resolve
+					expect(true).to.be(false);
+					done();
+				});
 		});
 	});
 });
