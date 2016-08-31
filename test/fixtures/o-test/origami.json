@@ -14,14 +14,12 @@
             "name": "test1",
             "template": "demos/src/test1.mustache",
             "path": "/demos/test1.html",
-            "expanded": true,
             "description": "First test"
         },
         {
             "name": "test2",
             "template": "demos/src/test2.mustache",
             "path": "/demos/test2.html",
-            "expanded": false,
             "description": "Second test"
         }
     ],
