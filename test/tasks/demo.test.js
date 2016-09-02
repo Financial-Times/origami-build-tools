@@ -137,8 +137,8 @@ describe('Demo task', function() {
 					const test2 = fs.readFileSync('demos/test2.html', 'utf8');
 					expect(test1).to.contain('<div>test1</div>');
 					expect(test2).to.contain('<div>test2</div>');
-					expect(test1).to.match(/\/v1\/polyfill\.min\.js\?features=.*promises/);
-					expect(test2).to.match(/\/v1\/polyfill\.min\.js\?features=.*promises/);
+					expect(test1).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+					expect(test2).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
 					fs.unlink('demos/test1.html');
 					fs.unlink('demos/test2.html');
 					done();
@@ -157,6 +157,25 @@ describe('Demo task', function() {
 				fs.unlink('demos/test1.html');
 				fs.unlink('demos/test2.html');
 				fs.removeSync('demos/local');
+				done();
+			});
+
+			demoStream.resume();
+		});
+
+		it('should load local partials', function(done) {
+			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>{{>partial1}}', 'utf8');
+			fs.writeFileSync('demos/src/test2.mustache', '<div>test1</div>{{>partials/partial2}}', 'utf8');
+			const demoStream = demo(gulp, {
+				dist: true
+			})
+			.on('end', function() {
+				const test1 = fs.readFileSync('demos/test1.html', 'utf8');
+				const test2 = fs.readFileSync('demos/test2.html', 'utf8');
+				expect(test1).to.contain('<div>partial1</div>');
+				expect(test2).to.contain('<div>partial2</div>');
+				fs.unlink('demos/test1.html');
+				fs.unlink('demos/test2.html');
 				done();
 			});
 

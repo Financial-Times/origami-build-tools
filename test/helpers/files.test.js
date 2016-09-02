@@ -35,23 +35,21 @@ describe('Files helper', function() {
 		fs.unlink(path.resolve(filesTestPath, 'bower.json'));
 	});
 
-	it('should return a list of Sass files', function(done) {
-		files.getSassFilesList().then(function(sassFiles) {
+	it('should return a list of Sass files', function() {
+		return files.getSassFilesList().then(function(sassFiles) {
 			const testResults = [path.join(process.cwd() + '/main.scss'), path.join(process.cwd() + '/src/scss/_variables.scss')];
 			expect(sassFiles).to.contain(testResults[0]);
 			expect(sassFiles).to.contain(testResults[1]);
-			done();
 		});
 	});
 
-	it('should check if the module supports silent mode', function(done) {
+	it('should check if the module supports silent mode', function() {
 		fs.writeFileSync('bower.json', JSON.stringify({ name: 'o-test' }), 'utf8');
-		files.getSassFilesList()
+		return files.getSassFilesList()
 			.then(files.sassSupportsSilent)
 			.then(function(supportsSilent) {
 				expect(supportsSilent).to.be(true);
 				fs.unlink(path.resolve(filesTestPath, 'bower.json'));
-				done();
 			});
 	});
 
@@ -130,4 +128,47 @@ describe('Files helper', function() {
 			expect(files.packageJsonExists()).to.be(true);
 		});
 	});
+
+	describe('.getMustacheFilesList(basePath)', () => {
+		const mustacheTestPath = path.resolve(filesTestPath, 'demos/src');
+		const flatMustacheFiles = path.resolve(mustacheTestPath, 'flat');
+		const nestedMustacheFiles = path.resolve(mustacheTestPath, 'nested');
+
+		it('is a function', () => {
+			expect(files.getMustacheFilesList).to.be.a('function');
+		});
+
+		it('returns an array', () => {
+			const mustacheFiles = files.getMustacheFilesList(flatMustacheFiles);
+			expect(mustacheFiles).to.be.an('array');
+		});
+
+		describe('when the directory structure is one level deep', () => {
+
+			it('returns an array of all of the mustache files in the directory', () => {
+				const mustacheFiles = files.getMustacheFilesList(flatMustacheFiles);
+				expect(mustacheFiles).to.eql([
+					path.join(flatMustacheFiles, 'example-1.mustache'),
+					path.join(flatMustacheFiles, 'example-2.mustache')
+				]);
+			});
+
+		});
+
+		describe('when the directory structure has subdirectories', () => {
+
+			it('returns an array of all of the mustache files in the directory and all subdirectories', () => {
+				const mustacheFiles = files.getMustacheFilesList(nestedMustacheFiles);
+				expect(mustacheFiles).to.eql([
+					path.join(nestedMustacheFiles, 'example-1.mustache'),
+					path.join(nestedMustacheFiles, 'example-2.mustache'),
+					path.join(nestedMustacheFiles, 'folder-1/example-3.mustache'),
+					path.join(nestedMustacheFiles, 'folder-1/folder-2/example-4.mustache')
+				]);
+			});
+
+		});
+
+	});
+
 });
