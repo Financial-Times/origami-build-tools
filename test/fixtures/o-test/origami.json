@@ -14,20 +14,18 @@
             "name": "test1",
             "template": "demos/src/test1.mustache",
             "path": "/demos/test1.html",
-            "expanded": true,
             "description": "First test"
         },
         {
             "name": "test2",
             "template": "demos/src/test2.mustache",
             "path": "/demos/test2.html",
-            "expanded": false,
+            "hidden": true,
             "description": "Second test"
         },
         {
               "name": "pa11y",
               "template": "demos/src/pa11y.mustache",
-              "expanded": true,
               "description": "Pa11y test"
         }
     ],
