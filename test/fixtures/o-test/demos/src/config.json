@@ -8,14 +8,13 @@
 		{
 			"name": "test1",
 			"description": "First test",
-			"template": "demos/src/test1.mustache",
-			"expanded": true
+			"template": "demos/src/test1.mustache"
 		},
 		{
 			"name": "test2",
 			"description": "Second test",
 			"template": "demos/src/test2.mustache",
-			"expanded": false
+			"hidden": true
 		}
 	]
 }

@@ -20,7 +20,13 @@
             "name": "test2",
             "template": "demos/src/test2.mustache",
             "path": "/demos/test2.html",
+            "hidden": true,
             "description": "Second test"
+        },
+        {
+              "name": "pa11y",
+              "template": "demos/src/pa11y.mustache",
+              "description": "Pa11y test"
         }
     ],
     "browserFeatures": {
