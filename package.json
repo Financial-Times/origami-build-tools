@@ -1,6 +1,6 @@
 {
   "name": "origami-build-tools",
-  "version": "5.3.0",
+  "version": "5.4.0",
   "description": "Origami component development tools.",
   "main": "./lib/origami-build-tools",
   "bin": {
@@ -48,7 +48,7 @@
     "nightwatch": "^0.8.9",
     "node.extend": "^1.1.5",
     "npmconf": "^2.1.2",
-    "pa11y":  "^4.0.0",
+    "pa11y": "^4.0.0",
     "portfinder": "^0.4.0",
     "raw-loader": "^0.5.1",
     "semver": "^5.1.0",
