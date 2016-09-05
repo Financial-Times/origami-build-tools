@@ -63,7 +63,7 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "fs-extra": "^0.30.0",
-    "mocha": "^2.2.5",
+    "mocha": "^3.0.2",
     "vinyl": "^0.5.0"
   },
   "repository": {
