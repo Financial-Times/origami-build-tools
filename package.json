@@ -50,7 +50,7 @@
     "node.extend": "^1.1.5",
     "npmconf": "^2.1.2",
     "pa11y": "^4.0.0",
-    "portfinder": "^0.4.0",
+    "portfinder": "^1.0.7",
     "raw-loader": "^0.5.1",
     "semver": "^5.1.0",
     "stream-combiner2": "1.0.2",
