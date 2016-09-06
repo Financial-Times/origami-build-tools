@@ -48,7 +48,7 @@ describe('Verify task', function() {
 	it('should run esLint with default config', function(done) {
 		verify.esLint(gulp)
 		.on('error', function(error) {
-			expect(error.message).to.be('Failed with 1 error');
+			expect(error.message).to.be('Failed with 2 errors');
 			done();
 		});
 	});
@@ -56,7 +56,7 @@ describe('Verify task', function() {
 	it('should run esLint with custom config', function(done) {
 		const stream = verify.esLint(gulp, {
 			esLintPath: '.eslintrc',
-			excludeFiles: ['./src/js/syntax-error.js']
+			excludeFiles: ['!./src/js/syntax-error.js']
 		})
 		.on('error', function(error) {
 			expect(error.message).to.be(undefined);
