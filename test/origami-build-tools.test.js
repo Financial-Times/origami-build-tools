@@ -1,41 +1,40 @@
 /* eslint-env mocha, expect */
 'use strict';
+
 const expect = require('expect.js');
 const mockery = require('mockery');
 const sinon = require('sinon');
 
 describe('obt', function() {
 
-	const fetchMock = sinon.stub();
-	mockery.registerMock('isomorphic-fetch', fetchMock);
-
-	const updateNotifierMock = sinon.stub();
-	mockery.registerMock('./helpers/update-notifier', updateNotifierMock);
-
-	const logMock = sinon.stub();
-	mockery.registerMock('./helpers/log', logMock);
-
-	const metricsMock = sinon.stub();
-	mockery.registerMock('./helpers/metrics', metricsMock);
-
 	const moduleUnderTest = '../lib/origami-build-tools';
 
-	mockery.enable({
-		useCleanCache: true,
-		warnOnReplace: false,
-		warnOnUnregistered: false
-	});
-
-	mockery.registerAllowable(moduleUnderTest);
-
 	const version = process.version;
+	const fetchMock = sinon.stub();
+	const updateNotifierMock = sinon.stub();
+	const logMock = sinon.stub();
+	const metricsMock = sinon.stub();
 
 	beforeEach(function() {
-		mockery.resetCache();
 		fetchMock.reset();
 		logMock.reset();
 		updateNotifierMock.reset();
 		metricsMock.reset();
+
+		mockery.enable({
+			useCleanCache: true,
+			warnOnReplace: false,
+			warnOnUnregistered: false
+		});
+
+		mockery.registerMock('isomorphic-fetch', fetchMock);
+		mockery.registerMock('./helpers/update-notifier', updateNotifierMock);
+		mockery.registerMock('./helpers/log', logMock);
+		mockery.registerMock('./helpers/metrics', metricsMock);
+
+		mockery.registerAllowable(moduleUnderTest);
+
+		mockery.resetCache();
 	});
 
 	after(() => {
