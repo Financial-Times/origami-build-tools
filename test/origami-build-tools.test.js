@@ -32,13 +32,13 @@ describe('obt', function() {
 
 	beforeEach(function() {
 		mockery.resetCache();
-	});
-
-	after(() => {
 		fetchMock.reset();
 		logMock.reset();
 		updateNotifierMock.reset();
 		metricsMock.reset();
+	});
+
+	after(() => {
 		mockery.resetCache();
 		mockery.deregisterAll();
 		mockery.disable();
