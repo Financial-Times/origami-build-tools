@@ -5,7 +5,7 @@ const expect = require('expect.js');
 const mockery = require('mockery');
 const sinon = require('sinon');
 
-describe('obt', function() {
+describe('metrics helper', function() {
 
 	const moduleUnderTest = '../../lib/helpers/metrics';
 
