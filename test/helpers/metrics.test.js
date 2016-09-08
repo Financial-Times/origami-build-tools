@@ -51,9 +51,17 @@ describe('metrics helper', function() {
 		graphiteMock.createClient.returns({
 			write: writeMock
 		});
-		require(moduleUnderTest)({nodeVersion: 4});
+		require(moduleUnderTest)({
+			nodeVersion: 4
+		});
 		expect(writeMock.calledOnce).to.equal(true);
-		expect(writeMock.args[0][0]).to.eql({ origami: { buildtools: { nodeVersion: 4 } } });
+		expect(writeMock.args[0][0]).to.eql({
+			origami: {
+				buildtools: {
+					nodeVersion: 4
+				}
+			}
+		});
 	});
 
 	it('passes graphite.end into graphite.write as callback', function() {
@@ -63,10 +71,39 @@ describe('metrics helper', function() {
 			write: writeMock,
 			end: endMock
 		});
-		require(moduleUnderTest)({nodeVersion: 4});
+		require(moduleUnderTest)({
+			nodeVersion: 4
+		});
 		expect(writeMock.calledOnce).to.equal(true);
 		expect(endMock.calledOnce).to.equal(false);
 		writeMock.callArg(1);
 		expect(endMock.calledOnce).to.equal(true);
+	});
+
+	describe('process.env.DISABLE_OBT_ANALYTICS_REPORTNG set to 1', function() {
+		it('exports a function', function() {
+			process.env.DISABLE_OBT_ANALYTICS_REPORTNG = 1;
+			expect(typeof require(moduleUnderTest)).to.equal('function');
+			expect(require(moduleUnderTest).length).to.equal(1);
+		});
+
+		it('does not create a graphite client', function() {
+			process.env.DISABLE_OBT_ANALYTICS_REPORTNG = 1;
+			require(moduleUnderTest);
+			expect(graphiteMock.createClient.calledOnce).to.equal(false);
+		});
+
+		it('does not call graphite.write when invoked', function() {
+			process.env.DISABLE_OBT_ANALYTICS_REPORTNG = 1;
+			const writeMock = sinon.stub();
+			graphiteMock.createClient.returns({
+				write: writeMock
+			});
+
+			require(moduleUnderTest)({
+				nodeVersion: 4
+			});
+			expect(writeMock.calledOnce).to.equal(false);
+		});
 	});
 });
