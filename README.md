@@ -213,5 +213,8 @@ name of the given task is valid.
 `obt.loadAll()` will return an object with all of the available tasks loaded onto it.
 Access tasks on this object as properties in the same way as the `obt` object.
 
+## Analytics
+OBT gathers analytics data about its usage to help prioritise future development. If you would like to opt-out of analytics reporting you can set the environment variable `DISABLE_OBT_ANALYTICS_REPORTNG` to `1`.
+
 ## Licence
 This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
