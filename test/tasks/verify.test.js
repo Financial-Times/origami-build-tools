@@ -30,7 +30,7 @@ describe('Verify task', function() {
 	it('should run scssLint with default config', function(done) {
 		verify.scssLint(gulp)
 			.on('error', function(error) {
-				expect(error.message).to.be('SCSS-Lint failed for: src/scss/verify.scss');
+				expect(error.message).to.be('3 errors detected in src/scss/verify.scss');
 				done();
 			});
 	});
