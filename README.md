@@ -8,7 +8,6 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 
 1. Install these dependencies:
 	* [node.js](http://nodejs.org/)
-	* [Ruby](https://www.ruby-lang.org/en/) (Macs typically ship with Ruby by default)
 
 2. Install the build tools globally:
 
@@ -65,14 +64,12 @@ Install tools and dependencies required to build modules.
 
 Runs:
 
-* __installScssLint()__ globally (if it's not already installed)
 * __installBower()__ globally (if it's not already installed)
 * __runNpmInstall()__ if there is a `package.json` inthe root directory
 * __runBowerInstall()__ using both the Origami Registry and the default Bower registry to resolve dependencies
 
 The versions that are installed and supported are:
 
-* scss-lint: '0.35.0'
 * Bower: '^1.3.0'
 
 Config:
