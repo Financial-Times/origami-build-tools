@@ -54,7 +54,7 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 	   [--buildJs=<file>]           Compiled JavaScript file (default: main.js)
 	   [--buildCss=<file>]          Compiled CSS file (default: main.css)
 	   [--buildFolder=<dir>]        Compiled assets directory (default: ./build/)
-	   [--scssLintPath=<path>]      Custom sass-lint configuration
+	   [--sassLintPath=<path>]      Custom sass-lint configuration
 	   [--esLintPath=<path>]        Custom esLint configuration
 	   [--editorconfigPath=<path>]  Custom .editorconfig
 
@@ -138,8 +138,8 @@ Lints JavaScript and SCSS against Origami coding standards (see standards for [S
 
 Runs:
 
-* __scssLint(gulp, config)__ Config accepts:
-	- scssLintPath: `String` Path to your custom 'sass-lint.yml' config file. (Default: 'origami-build-tools/config/sass-lint.yml') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
+* __sassLint(gulp, config)__ Config accepts:
+	- sassLintPath: `String` Path to your custom 'sass-lint.yml' config file. (Default: 'origami-build-tools/config/sass-lint.yml') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 	- excludeFiles `Array` e.g. `['!**/demo.scss']`
 * __esLint(gulp, config)__ Config accepts:
 	- esLintPath: `String` Path to your custom esLint config file. (Default: 'origami-build-tools/config/.eslintrc' _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
