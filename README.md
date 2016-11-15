@@ -219,8 +219,7 @@ OBT gathers analytics data about its usage to help prioritise future development
 
 ### Migrating from 5.X.X to 6.X.X
 
-The 6.0.0 release removes the ability for OBT to include the Babel/Core-JS polyfills from being included in the built Javascript. If you were relying on this feature, it is recommended that you use the [Polyfill service](https://polyfill.io).
-
+The 6.0.0 release removes the ability for OBT to include the Babel/Core-JS polyfills in the built Javascript. If you were relying on this feature, we recommend that you use the [Polyfill service](https://polyfill.io) instead.
 
 ## Licence
 This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
