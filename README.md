@@ -8,7 +8,6 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 
 1. Install these dependencies:
 	* [node.js](http://nodejs.org/)
-	* [Ruby](https://www.ruby-lang.org/en/) (Macs typically ship with Ruby by default)
 
 2. Install the build tools globally:
 
@@ -55,7 +54,7 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 	   [--buildJs=<file>]           Compiled JavaScript file (default: main.js)
 	   [--buildCss=<file>]          Compiled CSS file (default: main.css)
 	   [--buildFolder=<dir>]        Compiled assets directory (default: ./build/)
-	   [--scssLintPath=<path>]      Custom scss-lint configuration
+	   [--sassLintPath=<path>]      Custom sass-lint configuration
 	   [--esLintPath=<path>]        Custom esLint configuration
 	   [--editorconfigPath=<path>]  Custom .editorconfig
 
@@ -65,14 +64,12 @@ Install tools and dependencies required to build modules.
 
 Runs:
 
-* __installScssLint()__ globally (if it's not already installed)
 * __installBower()__ globally (if it's not already installed)
 * __runNpmInstall()__ if there is a `package.json` inthe root directory
 * __runBowerInstall()__ using both the Origami Registry and the default Bower registry to resolve dependencies
 
 The versions that are installed and supported are:
 
-* scss-lint: '0.35.0'
 * Bower: '^1.3.0'
 
 Config:
@@ -140,8 +137,8 @@ Lints JavaScript and SCSS against Origami coding standards (see standards for [S
 
 Runs:
 
-* __scssLint(gulp, config)__ Config accepts:
-	- scssLintPath: `String` Path to your custom 'scss-lint.yml' config file. (Default: 'origami-build-tools/config/scss-lint.yml') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
+* __sassLint(gulp, config)__ Config accepts:
+	- sassLintPath: `String` Path to your custom 'sass-lint.yml' config file. (Default: 'origami-build-tools/config/sass-lint.yml') _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
 	- excludeFiles `Array` e.g. `['!**/demo.scss']`
 * __esLint(gulp, config)__ Config accepts:
 	- esLintPath: `String` Path to your custom esLint config file. (Default: 'origami-build-tools/config/.eslintrc' _This may be set for product development, but developers of Origami-compliant components are required to accept the default_
@@ -219,7 +216,13 @@ OBT gathers analytics data about its usage to help prioritise future development
 
 ### Migrating from 5.X.X to 6.X.X
 
-The 6.0.0 release removes the ability for OBT to include the Babel/Core-JS polyfills in the built Javascript. If you were relying on this feature, we recommend that you use the [Polyfill service](https://polyfill.io) instead.
+#### OBT build
+The 6.0.0 release removes the ability for OBT to include the Babel/Core-JS polyfills in the built Javascript. If you are relying on this feature, we recommend that you use the [Polyfill service](https://polyfill.io) instead.
+
+#### OBT verify
+The 6.0.0 release swapped out [`scss-lint`](https://www.npmjs.com/package/gulp-scss-lint) for [`sass-lint`](https://www.npmjs.com/package/gulp-sass-lint).
+
+If you are supplying your own custom scss-lint configuration you need to convert it to an equivalent sass-lint configuration, [here is a tool which can do this for you](https://sasstools.github.io/make-sass-lint-config/). The progammatic API and CLI flag has also changed from `scssLintPath` to `sassLintPath`.
 
 ## Licence
 This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).

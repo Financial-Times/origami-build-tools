@@ -27,17 +27,17 @@ describe('Verify task', function() {
 		fs.removeSync(path.resolve(obtPath, verifyTestPath));
 	});
 
-	it('should run scssLint with default config', function(done) {
-		verify.scssLint(gulp)
+	it('should run sassLint with default config', function(done) {
+		verify.sassLint(gulp)
 			.on('error', function(error) {
-				expect(error.message).to.be('SCSS-Lint failed for: src/scss/verify.scss');
+				expect(error.message).to.be('3 errors detected in src/scss/verify.scss');
 				done();
 			});
 	});
 
-	it('should run scssLint with custom config', function(done) {
-		verify.scssLint(gulp, {
-			scssLintPath: 'scss-lint.yml',
+	it('should run sassLint with custom config', function(done) {
+		verify.sassLint(gulp, {
+			sassLintPath: 'scss-lint.yml',
 			// Verify only verify.scss:
 			excludeFiles: ['!**/demo.scss', '!**/test.scss', '!**/main.scss']
 		}).on('end', function() {
