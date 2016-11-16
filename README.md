@@ -217,12 +217,12 @@ OBT gathers analytics data about its usage to help prioritise future development
 ### Migrating from 5.X.X to 6.X.X
 
 #### OBT build
-The 6.0.0 release removes the ability for OBT to include the Babel/Core-JS polyfills in the built Javascript. If you were relying on this feature, we recommend that you use the [Polyfill service](https://polyfill.io) instead.
+The 6.0.0 release removes the ability for OBT to include the Babel/Core-JS polyfills in the built Javascript. If you are relying on this feature, we recommend that you use the [Polyfill service](https://polyfill.io) instead.
 
 #### OBT verify
 The 6.0.0 release swapped out [`scss-lint`](https://www.npmjs.com/package/gulp-scss-lint) for [`sass-lint`](https://www.npmjs.com/package/gulp-sass-lint).
 
-If you were supplying your own custom scss-lint configuration you will need to convert it to an equivalent sass-lint configuration, [here is a tool which can do this for you](https://sasstools.github.io/make-sass-lint-config/). The progammatic API and CLI flag was also changed from `scssLintPath` to `sassLintPath`.
+If you are supplying your own custom scss-lint configuration you need to convert it to an equivalent sass-lint configuration, [here is a tool which can do this for you](https://sasstools.github.io/make-sass-lint-config/). The progammatic API and CLI flag has also changed from `scssLintPath` to `sassLintPath`.
 
 ## Licence
 This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
