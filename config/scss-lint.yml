@@ -53,7 +53,9 @@ rules:
   mixin-name-format:
     - 2
     - convention: '^[a-z_][a-zA-Z0-9_\-]+$'
-  mixins-before-declarations: 1
+  mixins-before-declarations:
+    - 1
+    - exclude: ['oGridRespondTo']
   nesting-depth:
     - 1
     - max-depth: 3
