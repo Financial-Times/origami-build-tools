@@ -59,7 +59,7 @@
     "through2": "^2.0.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "webpack-stream": "^2.3.0",
+    "webpack-stream": "3.0.0",
     "which": "^1.1.1"
   },
   "devDependencies": {
