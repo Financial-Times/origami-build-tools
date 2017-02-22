@@ -1,6 +1,6 @@
 {
   "name": "origami-build-tools",
-  "version": "6.0.1",
+  "version": "0.0.0",
   "description": "Origami component development tools.",
   "main": "./lib/origami-build-tools",
   "bin": {
@@ -67,6 +67,7 @@
     "fs-extra": "^2.0.0",
     "mocha": "^3.0.2",
     "mockery": "^2.0.0",
+    "npm-prepublish": "^1.2.2",
     "sinon": "^1.17.5",
     "vinyl": "^2.0.1"
   },
