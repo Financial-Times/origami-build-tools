@@ -152,17 +152,6 @@ Runs:
 * __silentCompilation(gulp)__ Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles). Check the Sass outputs no CSS by default. Only ran af a `$<module-name>-is-silent` variable is found
 * __silentCompilation(gulp)__ Test [silent compilation](http://origami.ft.com/docs/syntax/scss/#silent-styles). Check the Sass outputs some CSS with `$<module-name>-is-silent` set to false. Only ran af a `$<module-name>-is-silent` variable is found
 * __npmTest()__ Runs 'npm test', so whatever test script that you have in you `package.json` will be executed
-* __browserTest(gulp, config)__ Runs [Nightwatch](http://nightwatchjs.org/) tests on our [Selenium](http://www.seleniumhq.org/projects/webdriver/) grid by deploying the demo pages to Heroku. This is an optional subtask that requires the config option _browserTest_ to be set to true. You also need to set the following environment variables:
-	- HEROKU_AUTH_TOKEN: The result of running `heroku auth:token`
-	- SELENIUM_USER: The username of the Selenium grid proxy
-	- SELENIUM_KEY: The key to use the proxy to the Selenium grid
-	- SELENIUM_HOST: The host of the Selenium grid or proxy
-Config accepts:
-	- testUrl: `String` Url to where the html the tests are going to run agains is. (Default: 'https://module-name.herokuapp.com')
-	- nightwatchConfig: `String` Path to your 'nightwatch.json' file that Nightwatch uses for testing. (Default: `./test/browser/nightwatch.json`)
-	- environments: `String` Comma separated list of environments from your nightwatch config file to run your tests on. (Default: `chrome_latest,chrome_latest-1,firefox_latest,firefox_latest-1,ie8_Grid,ie9_Grid,ie10_Grid,ie11_Grid,safari7_Grid`)
-	- testsPath: `String` Relative path from your project's root directory to where your nightwatch tests are. (Default: `test/browser/tests`)
-	- browserTestFailBuild: `Boolean` by default the failed browser tests will not fail the task, however you can override the default behaviour by setting this option to `true`. Default: `false`
 * __pa11yTest(gulp, config)__ The test will not fail if the pa11y.html file is not found. Config accepts:
 	- pa11yPath: `String` Relative path from your project's root directory to where your pa11y test is. (Default: `/demos/local/pa11y.html`)
 	- pa11yIgnore: `String` Types and codes of messages to ignore, a repeatable value or separated by semi-colons. (Default: `WCAG2AA.Principle2.Guideline2_4.2_4_1.G1,G123,G124.NoSuchID;warning;notice`)
