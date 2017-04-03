@@ -8,15 +8,15 @@ const commandLine = require('../../lib/helpers/command-line');
 describe('Command line helper', function() {
 	it('should return output from stdout', function(done) {
 		commandLine.run('echo', ['test']).then(function(output) {
-			expect(output.stdout).to.be('test\n');
+			expect(output.stdout).to.be('test');
 			done();
 		});
 	});
 
 	it('should return output from stderr', function(done) {
 		commandLine.run('node', ['error']).then(function() {}, function(output) {
-			expect(output.stderr).to.contain('throw err;\n');
-			expect(output.err).to.be(1);
+			expect(output.stderr).to.contain('throw err;');
+			expect(output.code).to.be(1);
 			done();
 		});
 	});

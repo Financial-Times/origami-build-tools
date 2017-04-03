@@ -23,6 +23,7 @@
     "colors": "^1.1.2",
     "configstore": "^2.1.0",
     "denodeify": "^1.2.1",
+    "execa": "^0.6.3",
     "falafel": "^1.2.0",
     "findit": "^2.0.0",
     "graphite": "0.0.6",
