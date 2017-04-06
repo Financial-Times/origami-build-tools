@@ -81,7 +81,7 @@ Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
 
 It comes with support for things like:
 
-* [Babel](https://github.com/babel/babel) so you can use ES2017 features in your modules and products
+* [Babel](https://github.com/babel/babel) so you can use ES2015 features in your modules and products
 * [autoprefixer](https://github.com/postcss/autoprefixer) so you don't have to worry about writing browser prefixes in your Sass
 * If `env` is set to `'production'`:
 	- [uglifyJS](https://github.com/mishoo/UglifyJS2) which minimises your JavaScript bundle
