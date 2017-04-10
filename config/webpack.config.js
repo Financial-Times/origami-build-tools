@@ -75,18 +75,22 @@ module.exports = {
 			// TODO: Look into which components (if any) are importing html files into their JS.
 			{
 				test: /\.html$/,
+				exclude: /node_modules/,
 				use: require.resolve('raw-loader')
 			},
 			{
 				test: /\.mustache$/,
+				exclude: /node_modules/,
 				use: require.resolve('raw-loader')
 			},
 			{
 				test: /\.txt$/,
+				exclude: /node_modules/,
 				use: require.resolve('raw-loader')
 			},
 			{
 				test: /\.text$/,
+				exclude: /node_modules/,
 				use: require.resolve('raw-loader')
 			}
 		]
