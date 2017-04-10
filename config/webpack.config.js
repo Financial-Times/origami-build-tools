@@ -43,7 +43,7 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: [
-					// Disables AMD module loading
+					// Disables AMD module loading and swaps requireText() for require()
 					'imports-loader?define=>false&requireText=>require',
 					{
 						loader: 'babel-loader',
