@@ -72,7 +72,8 @@ module.exports = {
 				}]
 			},
 
-			// TODO: Look into which components (if any) are importing html files into their JS.
+			// Components which are importing html/mustache/txt/text files into their JS:
+			// markets-chat, o-chat, web-chat
 			{
 				test: /\.html$/,
 				exclude: /node_modules/,
