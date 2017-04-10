@@ -1,8 +1,4 @@
 const path = require('path');
-const process = require('process');
-
-// Temporary fix as aliased loaders don't pass in queries due to webpack bug
-const textrequireifyPath = path.join(__dirname, '../lib/plugins/textrequireify-loader.js');
 
 module.exports = {
 	bail: true,
@@ -36,10 +32,7 @@ module.exports = {
 			path.resolve(__dirname, '../node_modules'),
 			'node_modules',
 			'bower_components'
-		],
-		alias: Object.assign({
-			'textrequireify-loader': textrequireifyPath
-		})
+		]
 	},
 	module: {
 		rules: [
@@ -50,7 +43,6 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: [
-					textrequireifyPath + '?cwd=' + process.cwd(),
 					// Disables AMD module loading
 					'imports-loader?define=>false',
 					{
@@ -83,7 +75,19 @@ module.exports = {
 			// TODO: Look into which components (if any) are importing html files into their JS.
 			{
 				test: /\.html$/,
-				use: 'raw-loader'
+				use: require.resolve('raw-loader')
+			},
+			{
+				test: /\.mustache$/,
+				use: require.resolve('raw-loader')
+			},
+			{
+				test: /\.txt$/,
+				use: require.resolve('raw-loader')
+			},
+			{
+				test: /\.text$/,
+				use: require.resolve('raw-loader')
 			}
 		]
 	},

@@ -49,7 +49,7 @@ describe('Build task', function () {
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
-					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
+					expect(builtJs).to.contain('module.exports = "This is a test\\n"');
 					expect(builtJs).to.contain('\n\nmodule.exports = {\n\t"test": true\n};');
 					done();
 				});
@@ -58,7 +58,9 @@ describe('Build task', function () {
 		it('should work with production option', function (done) {
 			build
 				.js(gulp, {
-					env: 'production'
+					flags: {
+						production: true
+					}
 				})
 				.on('end', function () {
 					const builtJs = fs.readFileSync('build/main.js', 'utf8');
@@ -74,7 +76,9 @@ describe('Build task', function () {
 		it('should build from custom source', function (done) {
 			build
 				.js(gulp, {
-					js: './src/js/test.js'
+					flags: {
+						js: './src/js/test.js'
+					}
 				})
 				.on('end', function () {
 					const builtJs = fs.readFileSync('build/main.js', 'utf8');
@@ -88,14 +92,16 @@ describe('Build task', function () {
 		it('should build to a custom directory', function (done) {
 			build
 				.js(gulp, {
-					buildFolder: 'test-build'
+					flags: {
+						buildFolder: 'test-build'
+					}
 				})
 				.on('end', function () {
 					const builtJs = fs.readFileSync('test-build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
-					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
+					expect(builtJs).to.contain('module.exports = "This is a test\\n"');
 					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					done();
 				});
@@ -104,14 +110,16 @@ describe('Build task', function () {
 		it('should build to a custom file', function (done) {
 			build
 				.js(gulp, {
-					buildJs: 'bundle.js'
+					flags: {
+						buildJs: 'bundle.js'
+					}
 				})
 				.on('end', function () {
 					const builtJs = fs.readFileSync('build/bundle.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
-					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
+					expect(builtJs).to.contain('module.exports = "This is a test\\n"');
 					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					done();
 				});
@@ -120,7 +128,9 @@ describe('Build task', function () {
 		it('should fail on syntax error', function (done) {
 			build
 				.js(gulp, {
-					js: './src/js/syntax-error.js'
+					flags: {
+						js: './src/js/syntax-error.js'
+					}
 				})
 				.on('error', function (e) {
 					expect(e.message).to.contain('SyntaxError');
@@ -137,7 +147,9 @@ describe('Build task', function () {
 		it('should fail when a dependency is not found', function (done) {
 			build
 				.js(gulp, {
-					js: './src/js/missing-dep.js'
+					flags: {
+						js: './src/js/missing-dep.js'
+					}
 				})
 				.on('error', function (e) {
 					expect(e.message).to.contain('Module not found: Error: Can\'t resolve \'dep\'');
@@ -153,14 +165,16 @@ describe('Build task', function () {
 		it('should support a standalone option which creates a global variable', function (done) {
 			build
 				.js(gulp, {
-					standalone: 'origami'
+					flags: {
+						standalone: 'origami'
+					}
 				})
 				.on('end', function () {
 					const builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
-					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
+					expect(builtJs).to.contain('module.exports = "This is a test\\n"');
 					expect(builtJs).to.contain('\nmodule.exports = {\n\t"test": true\n};');
 					expect(builtJs).to.contain('var origami =\n');
 					done();
