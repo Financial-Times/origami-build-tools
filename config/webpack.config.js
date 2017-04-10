@@ -44,7 +44,7 @@ module.exports = {
 				exclude: /node_modules/,
 				use: [
 					// Disables AMD module loading
-					'imports-loader?define=>false',
+					'imports-loader?define=>false&requireText=>require',
 					{
 						loader: 'babel-loader',
 						options: {
