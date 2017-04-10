@@ -46,17 +46,17 @@ All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them
 	   test     Test if Sass silent compilation follows the Origami specification
 
 	Most used options include:
-	   [--watch]                    Re-run every time a file changes
-	   [--runServer]                Build demos locally and runs a server
-	   [--updateorigami]            Update origami.json with the latest demo files created
-	   [--js=<path>]                Main JavaScript file (default: ./src/main.js)
-	   [--sass=<path>]              Main Sass file (default: ./src/main.scss)
-	   [--buildJs=<file>]           Compiled JavaScript file (default: main.js)
-	   [--buildCss=<file>]          Compiled CSS file (default: main.css)
-	   [--buildFolder=<dir>]        Compiled assets directory (default: ./build/)
-	   [--sassLintPath=<path>]      Custom sass-lint configuration
-	   [--esLintPath=<path>]        Custom esLint configuration
-	   [--editorconfigPath=<path>]  Custom .editorconfig
+	   [--watch]                     Re-run every time a file changes
+	   [--run-server]                Build demos locally and runs a server
+	   [--updateorigami]             Update origami.json with the latest demo files created
+	   [--js=<path>]                 Main JavaScript file (default: ./src/main.js)
+	   [--sass=<path>]               Main Sass file (default: ./src/main.scss)
+	   [--build-js=<file>]           Compiled JavaScript file (default: main.js)
+	   [--build-css=<file>]          Compiled CSS file (default: main.css)
+	   [--build-folder=<dir>]        Compiled assets directory (default: ./build/)
+	   [--sasslint-path=<path>]      Custom sass-lint configuration
+	   [--eslint-path=<path>]        Custom eslint configuration
+	   [--editorconfig-path=<path>]  Custom .editorconfig
 
 ### `install`
 
