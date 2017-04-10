@@ -1,7 +1,18 @@
 const path = require('path');
 
 module.exports = {
+	// Fail out on the first error instead of tolerating it.
+	// By default webpack will log these errors in red in the terminal,
+	// as well as the browser console when using HMR,
+	// but continue bundling.
 	bail: true,
+
+	// Cache the generated webpack modules and chunks to improve build speed.
+	// Caching is enabled by default while in watch mode.
+	// If an object is passed, webpack will use this object for caching.
+	// Keeping a reference to this object will allow one to share the same cache between compiler calls:
+	cache: false,
+
 	resolve: {
 		// In which folders the resolver look for modules
 		// relative paths are looked up in every parent folder (like node_modules)
