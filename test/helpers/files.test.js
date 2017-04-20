@@ -1,4 +1,4 @@
-/* global describe, it, before, after, beforeEach, afterEach */
+/* eslint-env mocha */
 'use strict';
 
 const expect = require('expect.js');

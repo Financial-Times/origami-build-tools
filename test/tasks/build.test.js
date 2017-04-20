@@ -1,4 +1,4 @@
-/* global describe, it, before, after, afterEach */
+/* eslint-env mocha */
 'use strict';
 
 const denodeify = require('denodeify');
