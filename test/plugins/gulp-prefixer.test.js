@@ -1,4 +1,4 @@
-/* global describe, it */
+/* eslint-env mocha */
 
 // Code based on https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/testing.md
 'use strict';
