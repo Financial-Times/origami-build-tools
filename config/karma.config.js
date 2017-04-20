@@ -20,6 +20,11 @@ module.exports = {
 	// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
 	browsers: ['PhantomJS'],
 
+	client: {
+		// Capture all console output and pipe it to the terminal.
+		captureConsole: false
+	},
+
 	captureTimeout: 60 * 2000, // default 60000,
 
 	// enable / disable colors in the output (reporters and logs)
@@ -56,11 +61,6 @@ module.exports = {
 	preprocessors: {
 		'test/*.test.js': ['webpack', 'sourcemap']
 	},
-
-	// test results reporter to use
-	// possible values: 'dots', 'progress'
-	// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-	reporters: ['dots'],
 
 	// Continuous Integration mode
 	// if true, Karma captures browsers, runs the tests and exits

@@ -73,6 +73,7 @@ module.exports = function (config) {
 			startTunnel: true // let BrowserStack connect to our local server
 		},
 		customLaunchers,
+		logLevel: config.LOG_DISABLE
 	});
 
 	config.set(karmaConfig);
