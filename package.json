@@ -62,7 +62,7 @@
     "postcss": "^5.2.17",
     "raw-loader": "^0.5.1",
     "semver": "^5.1.0",
-    "sinon": "^1.17.7",
+    "sinon": "^2",
     "stream-combiner2": "1.0.2",
     "stream-from-promise": "^1.0.0",
     "sudo-block": "^1.2.0",
