@@ -6,7 +6,7 @@ node_js:
 script:
 - gulp install
 - gulp verify
-- gulp test
+- npm test
 cache:
   directories:
   - node_modules

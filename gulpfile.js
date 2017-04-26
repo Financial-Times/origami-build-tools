@@ -11,10 +11,6 @@ gulp.task('verify', function() {
 	});
 });
 
-gulp.task('test', function() {
-	return obt.test.npmTest(gulp);
-});
-
 gulp.task('install', function() {
 	return obt.install();
 });
