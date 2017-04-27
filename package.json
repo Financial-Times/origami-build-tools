@@ -63,7 +63,7 @@
     "portfinder": "^1.0.7",
     "raw-loader": "^0.5.1",
     "semver": "^5.1.0",
-    "sinon": "^1.17.7",
+    "sinon": "^2",
     "stream-combiner2": "1.0.2",
     "sudo-block": "^1.2.0",
     "through2": "^2.0.3",
