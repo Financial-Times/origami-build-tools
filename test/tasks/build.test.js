@@ -205,7 +205,8 @@ describe('Build task', function () {
 		});
 
 		it('should work with default options', function (done) {
-			build.sass(gulp)
+			build.sass()
+				.on('error', done)
 				.on('end', function () {
 					const builtCss = fs.readFileSync('build/main.css', 'utf8');
 					expect(builtCss).to.contain('div {\n  color: blue; }\n');
@@ -215,21 +216,24 @@ describe('Build task', function () {
 
 		it('should work with production option', function (done) {
 			build
-				.sass(gulp, {
+				.sass({
 					env: 'production'
 				})
+				.on('error', done)
 				.on('end', function () {
 					const builtCss = fs.readFileSync('build/main.css', 'utf8');
-					expect(builtCss).to.be('div{color:#00f}');
+					// blue doesn't need to change to hex as it is same amount of characters as #00f
+					expect(builtCss).to.be('div{color:blue}');
 					done();
 				});
 		});
 
 		it('should build from custom source', function (done) {
 			build
-				.sass(gulp, {
+				.sass({
 					sass: './src/scss/test.scss'
 				})
+				.on('error', done)
 				.on('end', function () {
 					const builtCss = fs.readFileSync('build/main.css', 'utf8');
 					expect(builtCss).to.contain('p {\n  color: #000000; }\n');
@@ -239,9 +243,10 @@ describe('Build task', function () {
 
 		it('should build to a custom directory', function (done) {
 			build
-				.sass(gulp, {
+				.sass({
 					buildFolder: 'test-build'
 				})
+				.on('error', done)
 				.on('end', function () {
 					const builtCss = fs.readFileSync('test-build/main.css', 'utf8');
 					expect(builtCss).to.contain('div {\n  color: blue; }\n');
@@ -254,9 +259,10 @@ describe('Build task', function () {
 
 		it('should build to a custom file', function (done) {
 			build
-				.sass(gulp, {
+				.sass({
 					buildCss: 'bundle.css'
 				})
+				.on('error', done)
 				.on('end', function () {
 					const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
 					expect(builtCss).to.contain('div {\n  color: blue; }\n');
