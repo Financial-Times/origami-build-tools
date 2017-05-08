@@ -127,7 +127,7 @@ describe.only('SpecReporter', function () {
 							'\u001b[31m\u001b[39m',
 							'1 tests failed across 1 browsers.'
 						]);
-					})
+					});
 				});
 			});
 		});
