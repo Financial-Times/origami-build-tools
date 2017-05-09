@@ -1,16 +1,13 @@
-/* global describe, it */
+/* eslint-env mocha */
 'use strict';
 
 const expect = require('expect.js');
-const File = require('vinyl');
 
-const silentSass = require('../../lib/plugins/gulp-silent-sass.js');
+const silentSass = require('../../lib/plugins/silent-sass.js');
 
-describe('Gulp silent Sass plugin', function() {
+describe('Silent Sass', function() {
 	it('Should succeed if silent is false and file has content', function(done) {
-		const fakeFile = new File({
-			contents: new Buffer('p{color:black;}')
-		});
+		const fakeFile = new Buffer('p{color:black;}');
 
 		const mySilentSass = silentSass({silent: false});
 		mySilentSass.write(fakeFile);
@@ -23,9 +20,7 @@ describe('Gulp silent Sass plugin', function() {
 	});
 
 	it('Should fail if silent is true and file has content', function(done) {
-		const fakeFile = new File({
-			contents: new Buffer('p{color:black;}')
-		});
+		const fakeFile = new Buffer('p{color:black;}');
 
 		const mySilentSass = silentSass({silent: true});
 
@@ -38,9 +33,7 @@ describe('Gulp silent Sass plugin', function() {
 	});
 
 	it('Should succeed if silent is true and file doesn not have content', function(done) {
-		const fakeFile = new File({
-			contents: new Buffer('')
-		});
+		const fakeFile = new Buffer('');
 
 		const mySilentSass = silentSass({silent: true});
 		mySilentSass.write(fakeFile);
@@ -53,9 +46,7 @@ describe('Gulp silent Sass plugin', function() {
 	});
 
 	it('Should fail if silent is false and file does not content', function(done) {
-		const fakeFile = new File({
-			contents: new Buffer('')
-		});
+		const fakeFile = new Buffer('');
 
 		const mySilentSass = silentSass({silent: false});
 
