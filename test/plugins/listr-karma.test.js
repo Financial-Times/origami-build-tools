@@ -10,7 +10,7 @@ const formatError = function (a, b) {
 
 const baseReporterDecorator = function () {};
 
-describe.only('SpecReporter', function () {
+describe('SpecReporter', function () {
 	let SpecReporter;
 	let errors;
 
