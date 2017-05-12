@@ -6,6 +6,7 @@ const proclaim = require('proclaim');
 const fs = require('fs-extra');
 const path = require('path');
 const rimraf = require('rimraf');
+const process = require('process');
 
 const verifyJavascript = require('../../lib/tasks/verify-javascript');
 

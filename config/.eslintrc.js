@@ -1,4 +1,6 @@
-{
+'use strict';
+
+module.exports = {
 	"ecmaFeatures": {
 		"modules": true
 	},
@@ -7,7 +9,8 @@
 	},
 	"env": {
 		"es6": true,
-		"browser": true
+		"browser": true,
+		"node": true
 	},
 	"rules": {
 		"no-unused-vars": 2,
@@ -68,11 +71,9 @@
 		"block-scoped-var": 2,
 		"class-methods-use-this": 2,
 		"default-case": 2,
-		"dot-location": 2,
 		"no-alert": 2,
 		"no-case-declarations": 2,
 		"no-div-regex": 2,
-		"no-else-return": 2,
 		"no-empty-function": 2,
 		"no-empty-pattern": 2,
 		"no-eq-null": 2,
@@ -110,7 +111,6 @@
 		"no-useless-concat": 2,
 		"no-useless-return": 2,
 		"no-void": 2,
-		"no-warning-comments": 2,
 		"no-with": 2,
 		"prefer-promise-reject-errors": 2,
 		"require-await": 2,
@@ -125,4 +125,4 @@
 		"exports": false,
 		"requireText": false
 	}
-}
+};

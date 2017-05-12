@@ -1,8 +1,9 @@
-/* global describe, it, before, after */
+/* eslint-env mocha */
 'use strict';
 
 const proclaim = require('proclaim');
 const gulp = require('gulp');
+const process = require('process');
 
 const fs = require('fs-extra');
 const path = require('path');
@@ -28,11 +29,10 @@ describe('Verify task', function() {
 	});
 
 	it('should run sassLint with default config', function(done) {
-		verify.sassLint(gulp)
-			.on('error', function(error) {
-				proclaim.equal(error.message, '3 errors detected in src/scss/verify.scss');
-				done();
-			});
+		verify.sassLint(gulp).on('error', function (error) {
+			proclaim.equal(error.message, '3 errors detected in src/scss/verify.scss');
+			done();
+		});
 	});
 
 	it('should run sassLint with custom config', function(done) {
