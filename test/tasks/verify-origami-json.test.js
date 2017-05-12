@@ -27,7 +27,7 @@ describe('verify-origami-json', function () {
 	});
 
 	describe('default title', () => {
-		it('should be "Executing Pa11y"', () => {
+		it('should be "Verifying your origami.json"', () => {
 			proclaim.equal(verifyOrigamiJson.title, 'Verifying your origami.json');
 		});
 	});
