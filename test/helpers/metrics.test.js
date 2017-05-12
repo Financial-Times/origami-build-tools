@@ -85,7 +85,7 @@ describe('metrics helper', function() {
 		it('exports a function', function() {
 			process.env.DISABLE_OBT_ANALYTICS_REPORTNG = 1;
 			expect(typeof require(moduleUnderTest)).to.equal('function');
-			expect(require(moduleUnderTest).length).to.equal(1);
+			expect(require(moduleUnderTest).length).to.equal(0);
 		});
 
 		it('does not create a graphite client', function() {

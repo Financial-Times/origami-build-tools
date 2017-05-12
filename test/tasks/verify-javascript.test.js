@@ -67,8 +67,8 @@ describe('verify-javascript', function() {
 				verifyJavascript.task();
 			},
 				'Failed linting: \n\n' +
-				'./src/js/syntax-error.js: line 1, col 6, Error - Parsing error: Unexpected token test\n' +
-				'./src/js/verify.js: line 1, col 7, Error - \'test\' is assigned a value but never used. (no-unused-vars)\n\n' +
+				'./src/js/syntax-error.js:1:6 Error - Parsing error: Unexpected token test\n' +
+				'./src/js/verify.js:1:7 Error - \'test\' is assigned a value but never used. (no-unused-vars)\n\n' +
 				'2 linting errors'
 			);
 		});
