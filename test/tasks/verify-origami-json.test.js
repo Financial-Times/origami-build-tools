@@ -60,12 +60,17 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify({}), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
-					proclaim.match(verifiedOrigamiJson, /A non-empty description property is required/);
-					proclaim.match(verifiedOrigamiJson, /The origamiType property needs to be set to either "module" or "service"/);
-					proclaim.match(verifiedOrigamiJson, /The origamiVersion property needs to be set to 1/);
-					proclaim.match(verifiedOrigamiJson, /The support property must be an email or url to an issue tracker for this module/);
-					proclaim.match(verifiedOrigamiJson, /The supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"/);
+				.catch(function (verifiedOrigamiJson) {
+					proclaim.equal(
+						verifiedOrigamiJson.message,
+						'Failed linting:\n\n' +
+						'A non-empty description property is required\n' +
+						'The origamiType property needs to be set to either "module" or "service"\n' +
+						'The origamiVersion property needs to be set to 1\n' +
+						'The support property must be an email or url to an issue tracker for this module\n' +
+						'The supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"\n\n' +
+						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
+					);
 				});
 		});
 
