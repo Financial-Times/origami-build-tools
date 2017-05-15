@@ -79,8 +79,8 @@ module.exports = {
 									},
 								],
 							],
-					}
-				}]
+						}
+					}]
 			},
 
 			// Components which are importing html/mustache/txt/text files into their JS:

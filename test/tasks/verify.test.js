@@ -1,8 +1,9 @@
-/* global describe, it, before, after */
+/* eslint-env mocha */
 'use strict';
 
-const expect = require('expect.js');
+const proclaim = require('proclaim');
 const gulp = require('gulp');
+const process = require('process');
 
 const fs = require('fs-extra');
 const path = require('path');
@@ -28,11 +29,10 @@ describe('Verify task', function() {
 	});
 
 	it('should run sassLint with default config', function(done) {
-		verify.sassLint(gulp)
-			.on('error', function(error) {
-				expect(error.message).to.be('3 errors detected in src/scss/verify.scss');
-				done();
-			});
+		verify.sassLint(gulp).on('error', function (error) {
+			proclaim.equal(error.message, '3 errors detected in src/scss/verify.scss');
+			done();
+		});
 	});
 
 	it('should run sassLint with custom config', function(done) {
@@ -41,29 +41,6 @@ describe('Verify task', function() {
 			// Verify only verify.scss:
 			excludeFiles: ['!**/demo.scss', '!**/test.scss', '!**/main.scss']
 		}).on('end', function() {
-			done();
-		});
-	});
-
-	it('should run esLint with default config', function(done) {
-		verify.esLint(gulp)
-		.on('error', function(error) {
-			expect(error.message).to.be('Failed with 2 errors');
-			done();
-		});
-	});
-
-	it('should run esLint with custom config', function(done) {
-		const stream = verify.esLint(gulp, {
-			esLintPath: '.eslintrc',
-			excludeFiles: ['!./src/js/syntax-error.js']
-		})
-		.on('error', function(error) {
-			expect(error.message).to.be(undefined);
-		});
-
-		stream.resume();
-		stream.on('end', function() {
 			done();
 		});
 	});
