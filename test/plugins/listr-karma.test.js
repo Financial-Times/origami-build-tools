@@ -8,7 +8,7 @@ const formatError = function (a, b) {
 	return a + b;
 };
 
-const baseReporterDecorator = function () {};
+const baseReporterDecorator = function () {}; // eslint-disable-line no-empty-function
 
 describe('SpecReporter', function () {
 	let SpecReporter;

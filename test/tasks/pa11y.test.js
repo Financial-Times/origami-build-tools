@@ -3,7 +3,7 @@
 
 const expect = require('expect.js');
 const gulp = require('gulp');
-
+const process = require('process');
 const fs = require('fs-extra');
 const path = require('path');
 

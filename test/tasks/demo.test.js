@@ -3,7 +3,7 @@
 
 const expect = require('expect.js');
 const gulp = require('gulp');
-
+const process = require('process');
 const fs = require('fs-extra');
 const path = require('path');
 
@@ -81,10 +81,10 @@ describe('Demo task', function() {
 			const demoStream = demo(gulp)
 				.on('error', function errorHandler(err) {
 						// It will throw a template not found error which is fixed in "should build html" test
-						expect(err.message).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js,origami.json');
-						demoStream.removeListener('error', errorHandler);
-						done();
-					});
+					expect(err.message).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js,origami.json');
+					demoStream.removeListener('error', errorHandler);
+					done();
+				});
 		});
 
 		it('should not fail if there is a config.js file', function(done) {
@@ -93,11 +93,11 @@ describe('Demo task', function() {
 			const demoStream = demo(gulp)
 				.on('error', function errorHandler(err) {
 						// It will throw a template not found error which is fixed in "should build html" test
-						expect(err.message).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js,origami.json');
-						fs.unlink('demos/src/config.js');
-						demoStream.removeListener('error', errorHandler);
-						done();
-					});
+					expect(err.message).to.not.be('Couldn\'t find demos config path, checked: demos/src/config.json,demos/src/config.js,origami.json');
+					fs.unlink('demos/src/config.js');
+					demoStream.removeListener('error', errorHandler);
+					done();
+				});
 		});
 
 		it('should not fail if it\'s using the old config format', function(done) {
@@ -133,16 +133,16 @@ describe('Demo task', function() {
 				dist: true
 			})
 			.on('end', function() {
-					const test1 = fs.readFileSync('demos/test1.html', 'utf8');
-					const test2 = fs.readFileSync('demos/test2.html', 'utf8');
-					expect(test1).to.contain('<div>test1</div>');
-					expect(test2).to.contain('<div>test2</div>');
-					expect(test1).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
-					expect(test2).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
-					fs.unlink('demos/test1.html');
-					fs.unlink('demos/test2.html');
-					done();
-				});
+				const test1 = fs.readFileSync('demos/test1.html', 'utf8');
+				const test2 = fs.readFileSync('demos/test2.html', 'utf8');
+				expect(test1).to.contain('<div>test1</div>');
+				expect(test2).to.contain('<div>test2</div>');
+				expect(test1).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+				expect(test2).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+				fs.unlink('demos/test1.html');
+				fs.unlink('demos/test2.html');
+				done();
+			});
 
 			demoStream.resume();
 		});
