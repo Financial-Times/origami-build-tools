@@ -58,6 +58,7 @@
     "node.extend": "^1.1.5",
     "npmconf": "^2.1.2",
     "pa11y": "^4.0.0",
+    "parse-gitignore": "^0.4.0",
     "portfinder": "^1.0.7",
     "postcss": "^5.2.17",
     "raw-loader": "^0.5.1",
