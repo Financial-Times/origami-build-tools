@@ -1,6 +1,7 @@
-/* global describe, it, before, after, beforeEach, afterEach */
+/* eslint-env mocha */
 'use strict';
 
+const process = require('process');
 const expect = require('expect.js');
 
 const fs = require('fs-extra');

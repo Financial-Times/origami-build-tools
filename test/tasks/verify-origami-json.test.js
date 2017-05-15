@@ -2,7 +2,7 @@
 'use strict';
 
 const proclaim = require('proclaim');
-
+const process = require('process');
 const fs = require('fs-extra');
 const path = require('path');
 
@@ -27,7 +27,7 @@ describe('verify-origami-json', function () {
 	});
 
 	describe('default title', () => {
-		it('should be "Executing Pa11y"', () => {
+		it('should be "Verifying your origami.json"', () => {
 			proclaim.equal(verifyOrigamiJson.title, 'Verifying your origami.json');
 		});
 	});
@@ -50,8 +50,8 @@ describe('verify-origami-json', function () {
 
 	describe('task', function () {
 		it('should run origami.json check successfully', function () {
-			return verifyOrigamiJson.task()
-				.then(function (verifiedOrigamiJson) {
+			return verifyOrigamiJson.task().
+				then(function (verifiedOrigamiJson) {
 					proclaim.equal(verifiedOrigamiJson.length, 0);
 				});
 		});
@@ -80,7 +80,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
@@ -96,7 +96,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
@@ -112,7 +112,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
@@ -128,7 +128,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
@@ -144,7 +144,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
@@ -176,7 +176,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
@@ -192,7 +192,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
@@ -216,7 +216,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
@@ -232,7 +232,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
@@ -270,7 +270,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
@@ -286,7 +286,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
@@ -346,7 +346,7 @@ describe('verify-origami-json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
 			return verifyOrigamiJson.task()
-				.then(function () {}, function (verifiedOrigamiJson) {
+				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
