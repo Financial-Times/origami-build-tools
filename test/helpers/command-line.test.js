@@ -1,4 +1,4 @@
-/* global describe, it */
+/* eslint-env mocha */
 'use strict';
 
 const expect = require('expect.js');
@@ -13,7 +13,7 @@ describe('Command line helper', function() {
 	});
 
 	it('should return output from stderr', function() {
-		return commandLine.run('node', ['error']).then(function () { }, function (output) {
+		return commandLine.run('node', ['error']).catch(function (output) {
 			expect(output.stderr).to.contain('throw err;');
 			expect(output.code).to.be(1);
 		});

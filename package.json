@@ -12,6 +12,7 @@
     "npm": ">= 2.0.0"
   },
   "scripts": {
+    "lint": "eslint .",
     "test": "mocha -t 50000 `find . -name '*.test.js' -path './test/*'`"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
     "babel-runtime": "^6.23.0",
     "colors": "^1.1.2",
     "cssnano": "^3.10.0",
+    "deglob": "^2.1.0",
     "denodeify": "^1.2.1",
     "execa": "^0.6.3",
     "falafel": "^1.2.0",
@@ -54,9 +56,11 @@
     "node.extend": "^1.1.5",
     "npmconf": "^2.1.2",
     "pa11y": "^4.0.0",
+    "parse-gitignore": "^0.4.0",
     "portfinder": "^1.0.7",
     "postcss": "^5.2.17",
     "raw-loader": "^0.5.1",
+    "sass-lint": "^1.10.2",
     "semver": "^5.1.0",
     "sinon": "^2",
     "stream-combiner2": "1.0.2",
@@ -73,10 +77,12 @@
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
+    "merge-deep": "^3.0.0",
     "mocha": "^3.0.2",
     "mockery": "^2.0.0",
     "npm-prepublish": "^1.2.2",
     "proclaim": "^3.4.4",
+    "rimraf": "^2.6.1",
     "vinyl": "^2.0.1"
   },
   "repository": {
