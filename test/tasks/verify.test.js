@@ -2,47 +2,70 @@
 'use strict';
 
 const proclaim = require('proclaim');
-const gulp = require('gulp');
-const process = require('process');
-
-const fs = require('fs-extra');
-const path = require('path');
-
-const verify = require('../../lib/tasks/verify');
-
-const obtPath = process.cwd();
-const oTestPath = 'test/fixtures/o-test';
-const pathSuffix = '-verify';
-const verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
+const mockery = require('mockery');
+const sinon = require('sinon');
+sinon.assert.expose(proclaim, {
+	includeFail: false,
+	prefix: ''
+});
 
 describe('Verify task', function() {
-	before(function() {
-		fs.copySync(path.resolve(obtPath, oTestPath), verifyTestPath);
-		process.chdir(verifyTestPath);
-		fs.writeFileSync('src/scss/verify.scss', '$color: #ccc;\n\np {\n  color: $color!important ;\n}\n', 'utf8');
-		fs.writeFileSync('src/js/verify.js', 'const test = \'We live in financial times\';\n');
+	let Listr;
+	let verifyOrigamiJsonFile;
+	let verifyJavaScript;
+	let verifySass;
+	let verify;
+	let listrInstance;
+
+	beforeEach(() => {
+		listrInstance = {
+			run: sinon.stub()
+		};
+		Listr = sinon.stub();
+		Listr.returns(listrInstance);
+		verifyOrigamiJsonFile = sinon.stub();
+		verifyJavaScript = sinon.stub();
+		verifySass = sinon.stub();
+
+		mockery.enable({
+			useCleanCache: true,
+			warnOnReplace: false,
+			warnOnUnregistered: false
+		});
+
+		mockery.registerMock('listr', Listr);
+
+		mockery.registerMock('./verify-origami-json', verifyOrigamiJsonFile);
+		mockery.registerMock('./verify-javascript', verifyJavaScript);
+		mockery.registerMock('./verify-sass', verifySass);
+
+		mockery.registerAllowable('../../lib/tasks/verify');
+
+		verify = require('../../lib/tasks/verify');
+
+		mockery.resetCache();
 	});
 
-	after(function() {
-		process.chdir(obtPath);
-		fs.removeSync(path.resolve(obtPath, verifyTestPath));
+	after(() => {
+		mockery.resetCache();
+		mockery.deregisterAll();
+		mockery.disable();
 	});
 
-	it('should run sassLint with default config', function(done) {
-		verify.sassLint(gulp).on('error', function (error) {
-			proclaim.equal(error.message, '3 errors detected in src/scss/verify.scss');
-			done();
+	it('should export a function', function() {
+		proclaim.isFunction(verify);
+	});
+
+	describe('when called', () => {
+		it('should create Listr object with verify tasks', function() {
+			verify();
+
+			proclaim.calledOnce(Listr);
+			proclaim.calledWithNew(Listr);
+			proclaim.isArray(Listr.firstCall.args[0]);
+			proclaim.include(Listr.firstCall.args[0], verifyJavaScript);
+			proclaim.include(Listr.firstCall.args[0], verifyOrigamiJsonFile);
+			proclaim.include(Listr.firstCall.args[0], verifySass);
 		});
 	});
-
-	it('should run sassLint with custom config', function(done) {
-		verify.sassLint(gulp, {
-			sassLintPath: 'scss-lint.yml',
-			// Verify only verify.scss:
-			excludeFiles: ['!**/demo.scss', '!**/test.scss', '!**/main.scss']
-		}).on('end', function() {
-			done();
-		});
-	});
-
 });
