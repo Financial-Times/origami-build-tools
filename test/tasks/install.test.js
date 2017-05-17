@@ -9,12 +9,11 @@ sinon.assert.expose(proclaim, {
 	prefix: ''
 });
 
-describe('Verify task', function() {
+describe('Install task', function() {
 	let Listr;
-	let verifyOrigamiJsonFile;
-	let verifyJavaScript;
-	let verifySass;
-	let verify;
+	let bowerInstall;
+	let npmInstall;
+	let install;
 	let listrInstance;
 
 	beforeEach(() => {
@@ -23,9 +22,8 @@ describe('Verify task', function() {
 		};
 		Listr = sinon.stub();
 		Listr.returns(listrInstance);
-		verifyOrigamiJsonFile = sinon.stub();
-		verifyJavaScript = sinon.stub();
-		verifySass = sinon.stub();
+		bowerInstall = sinon.stub();
+		npmInstall = sinon.stub();
 
 		mockery.enable({
 			useCleanCache: true,
@@ -35,37 +33,35 @@ describe('Verify task', function() {
 
 		mockery.registerMock('listr', Listr);
 
-		mockery.registerMock('./verify-origami-json', verifyOrigamiJsonFile);
-		mockery.registerMock('./verify-javascript', verifyJavaScript);
-		mockery.registerMock('./verify-sass', verifySass);
+		mockery.registerMock('./bower-install', bowerInstall);
+		mockery.registerMock('./npm-install', npmInstall);
 
-		mockery.registerAllowable('../../lib/tasks/verify');
+		mockery.registerAllowable('../../lib/tasks/install');
 
-		verify = require('../../lib/tasks/verify');
+		install = require('../../lib/tasks/install');
 
 		mockery.resetCache();
 	});
 
-	afterEach(() => {
+	after(() => {
 		mockery.resetCache();
 		mockery.deregisterAll();
 		mockery.disable();
 	});
 
 	it('should export a function', function() {
-		proclaim.isFunction(verify);
+		proclaim.isFunction(install);
 	});
 
 	describe('when called', () => {
-		it('should create Listr object with verify tasks', function() {
-			verify();
+		it('should create Listr object with install tasks', function() {
+			install();
 
 			proclaim.calledOnce(Listr);
 			proclaim.calledWithNew(Listr);
 			proclaim.isArray(Listr.firstCall.args[0]);
-			proclaim.include(Listr.firstCall.args[0], verifyJavaScript);
-			proclaim.include(Listr.firstCall.args[0], verifyOrigamiJsonFile);
-			proclaim.include(Listr.firstCall.args[0], verifySass);
+			proclaim.include(Listr.firstCall.args[0], npmInstall);
+			proclaim.include(Listr.firstCall.args[0], bowerInstall);
 		});
 	});
 });
