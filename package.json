@@ -32,7 +32,6 @@
     "elegant-spinner": "^1.0.1",
     "eslint": "^3.19.0",
     "execa": "^0.6.3",
-    "falafel": "^1.2.0",
     "figures": "^2.0.0",
     "findit": "^2.0.0",
     "flush-write-stream": "^1.0.2",
@@ -46,7 +45,6 @@
     "gulp-webserver": "^0.9.1",
     "imports-loader": "^0.7.0",
     "indent-string": "^3.1.0",
-    "isomorphic-fetch": "^2.1.0",
     "json-loader": "^0.5.3",
     "karma": "^1.5.0",
     "karma-browserstack-launcher": "^1.2.0",
@@ -58,9 +56,9 @@
     "listr": "^0.12.0",
     "log-symbols": "^1.0.2",
     "log-update": "^2.0.0",
+    "memory-fs": "^0.4.1",
     "meow": "^3.7.0",
     "merge-stream": "^1.0.0",
-    "minimist": "^1.1.1",
     "node-sass": "^4.5.0",
     "node.extend": "^1.1.5",
     "npmconf": "^2.1.2",
@@ -70,19 +68,14 @@
     "postcss": "^5.2.17",
     "raw-loader": "^0.5.1",
     "sass-lint": "^1.10.2",
-    "semver": "^5.1.0",
     "sinon": "^2",
     "stream-combiner2": "1.0.2",
     "stream-from-promise": "^1.0.0",
     "sudo-block": "^1.2.0",
     "through2": "^2.0.3",
     "update-notifier": "^2.1.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
     "webpack": "^2.3.2",
-    "webpack-merge": "^4.1.0",
-    "webpack-stream": "3.0.1",
-    "which": "^1.1.1"
+    "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
@@ -91,8 +84,7 @@
     "mockery": "^2.0.0",
     "npm-prepublish": "^1.2.2",
     "proclaim": "^3.4.4",
-    "rimraf": "^2.6.1",
-    "vinyl": "^2.0.1"
+    "rimraf": "^2.6.1"
   },
   "repository": {
     "type": "git",
