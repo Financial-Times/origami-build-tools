@@ -1,4 +1,4 @@
-/* global describe, it, before, after */
+/* eslint-env mocha */
 'use strict';
 
 const expect = require('expect.js');
@@ -43,7 +43,7 @@ describe('Demo task', function() {
 			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
 			demo(gulp)
 				.on('error', function(err) {
-					expect(err.message).to.be('Couldn\'t find demos config path, checked: origami.json,demos/src/config.js,demos/src/config.json');
+					expect(err.message).to.be('Couldn\'t find demos config path, checked: origami.json,demos/src/config.json');
 					fs.unlink(path.resolve(obtPath, 'bower.json'));
 					process.chdir(demoTestPath);
 					done();
