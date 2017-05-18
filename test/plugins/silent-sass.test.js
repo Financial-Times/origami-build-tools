@@ -1,60 +1,44 @@
 /* eslint-env mocha */
 'use strict';
 
-const expect = require('expect.js');
+const proclaim = require('proclaim');
 
 const silentSass = require('../../lib/plugins/silent-sass.js');
 
-describe('Silent Sass', function() {
-	it('Should succeed if silent is false and file has content', function(done) {
+describe('Silent Sass', function () {
+	it('Should succeed if silent is false and file has content', function () {
 		const fakeFile = new Buffer('p{color:black;}');
 
-		const mySilentSass = silentSass({silent: false});
-		mySilentSass.write(fakeFile);
-
-		mySilentSass.once('end', function() {
-			done();
-		});
-
-		mySilentSass.end();
+		proclaim.doesNotThrow(() => silentSass({
+			silent: false
+		})(fakeFile));
 	});
 
-	it('Should fail if silent is true and file has content', function(done) {
+	it('Should fail if silent is true and file has content', function () {
 		const fakeFile = new Buffer('p{color:black;}');
 
-		const mySilentSass = silentSass({silent: true});
-
-		mySilentSass.on('error', function(error) {
-			expect(error.message).to.be('sass compilation for silent mode: true failed.');
-			done();
+		const mySilentSass = silentSass({
+			silent: true
 		});
 
-		mySilentSass.write(fakeFile);
+		proclaim.throws(() => mySilentSass(fakeFile), 'sass compilation for silent mode: true failed.');
 	});
 
-	it('Should succeed if silent is true and file doesn not have content', function(done) {
+	it('Should succeed if silent is true and file doesn not have content', function () {
 		const fakeFile = new Buffer('');
 
-		const mySilentSass = silentSass({silent: true});
-		mySilentSass.write(fakeFile);
-
-		mySilentSass.once('end', function() {
-			done();
-		});
-
-		mySilentSass.end();
+		proclaim.doesNotThrow(() => silentSass({
+			silent: true
+		})(fakeFile));
 	});
 
-	it('Should fail if silent is false and file does not content', function(done) {
+	it('Should fail if silent is false and file does not have content', function () {
 		const fakeFile = new Buffer('');
 
-		const mySilentSass = silentSass({silent: false});
-
-		mySilentSass.on('error', function(error) {
-			expect(error.message).to.be('sass compilation for silent mode: false failed.');
-			done();
+		const mySilentSass = silentSass({
+			silent: false
 		});
 
-		mySilentSass.write(fakeFile);
+		proclaim.throws(() => mySilentSass(fakeFile), 'sass compilation for silent mode: false failed.');
 	});
 });
