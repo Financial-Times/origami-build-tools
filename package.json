@@ -31,6 +31,7 @@
     "denodeify": "^1.2.1",
     "elegant-spinner": "^1.0.1",
     "eslint": "^3.19.0",
+    "eslint-plugin-import": "^2.2.0",
     "execa": "^0.6.3",
     "figures": "^2.0.0",
     "findit": "^2.0.0",

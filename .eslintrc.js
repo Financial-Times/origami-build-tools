@@ -19,13 +19,15 @@ const origamiServicesConfig = merge({},
 		},
 		"rules": {
 			"no-console": 0,
+			"import/no-dynamic-require": 2
 		},
 		globals:
 		{
 			require: true,
 			module: true,
 			exports: true
-		}
+		},
+		plugins: ['import']
 	}
 );
 
