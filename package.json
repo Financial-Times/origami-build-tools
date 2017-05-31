@@ -8,8 +8,8 @@
     "obt": "./lib/origami-build-tools-cli.js"
   },
   "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 2.0.0"
+    "node": ">= 6.0.0",
+    "npm": ">= 4.0.0"
   },
   "scripts": {
     "lint": "eslint .",
@@ -68,11 +68,11 @@
     "portfinder": "^1.0.7",
     "postcss": "^5.2.17",
     "raw-loader": "^0.5.1",
+    "root-check": "^1.0.0",
     "sass-lint": "^1.10.2",
     "sinon": "^2",
     "stream-combiner2": "1.0.2",
     "stream-from-promise": "^1.0.0",
-    "sudo-block": "^1.2.0",
     "through2": "^2.0.3",
     "update-notifier": "^2.1.0",
     "webpack": "^2.3.2",

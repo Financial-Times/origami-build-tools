@@ -2,7 +2,7 @@
 'use strict';
 
 const expect = require('expect.js');
-
+const proclaim = require('proclaim');
 const fs = require('fs-extra');
 const path = require('path');
 const process = require('process');
@@ -36,6 +36,7 @@ describe('build-js', function () {
 	it('should work with default options', function () {
 		return build()
 			.then(function (result) {
+				proclaim.match(result, /^\/\*\*\*\*\*\*\/ \(function\(modules\)/);
 				expect(result).to.contain('sourceMappingURL');
 				expect(result).to.contain('var Test');
 				expect(result).to.contain('function Test() {\n\tvar name = \'test\';');
