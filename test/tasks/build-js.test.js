@@ -33,7 +33,7 @@ describe('build-js', function () {
 		});
 	});
 
-	it.only('should work with default options', function () {
+	it('should work with default options', function () {
 		return build()
 			.then(function (result) {
 				proclaim.match(result, /^\/\*\*\*\*\*\*\/ \(function\(modules\)/);
