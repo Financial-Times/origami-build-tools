@@ -60,17 +60,26 @@ describe('bower-install', function () {
 	});
 
 	describe('skip', () => {
-		it('should return true if bower.json does not exist', () => {
-			proclaim.ok(bowerInstall.skip());
+		it('should return true if bower.json does not exist', function() {
+			return bowerInstall.skip()
+			.then(skipped => {
+				proclaim.ok(skipped);
+			});
 		});
 
-		it('should return a helpful message if bower.json does not exist', () => {
-			proclaim.equal(bowerInstall.skip(), 'No bower.json found.');
+		it('should return a helpful message if bower.json does not exist', function() {
+			return bowerInstall.skip()
+			.then(skipped => {
+				proclaim.equal(skipped, 'No bower.json found.');
+			});
 		});
 
-		it('should return a falsey value if bower.json does exist', () => {
+		it('should return a falsey value if bower.json does exist', function() {
 			fs.writeFileSync('bower.json', '{}');
-			proclaim.notOk(bowerInstall.skip());
+			return bowerInstall.skip()
+			.then(skipped => {
+				proclaim.notOk(skipped);
+			});
 		});
 	});
 

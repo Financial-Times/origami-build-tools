@@ -60,22 +60,31 @@ describe('npm-install', function () {
 	});
 
 	describe('skip', () => {
-		it('should return true if package.json does not exist', () => {
-			proclaim.ok(npmInstall.skip());
+		it('should return true if package.json does not exist', function () {
+			return npmInstall.skip()
+				.then(skipped => {
+					proclaim.ok(skipped);
+				});
 		});
 
-		it('should return a helpful message if package.json does not exist', () => {
-			proclaim.equal(npmInstall.skip(), 'No package.json found.');
+		it('should return a helpful message if package.json does not exist', function () {
+			return npmInstall.skip()
+				.then(skipped => {
+					proclaim.equal(skipped, 'No package.json found.');
+				});
 		});
 
-		it('should return a falsey value if package.json does exist', () => {
+		it('should return a falsey value if package.json does exist', function () {
 			fs.writeFileSync('package.json', '{}');
-			proclaim.notOk(npmInstall.skip());
+			return npmInstall.skip()
+				.then(skipped => {
+					proclaim.notOk(skipped);
+				});
 		});
 	});
 
 	describe('task', function () {
-		it('should create Listr object with verify tasks', function() {
+		it('should create Listr object with verify tasks', function () {
 			npmInstall.task();
 
 			proclaim.calledOnce(Listr);
