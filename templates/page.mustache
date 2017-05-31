@@ -5,14 +5,29 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<title>{{oDemoTitle}}</title>
 	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-	<script src="//cdn.polyfill.io/v2/polyfill.min.js?features={{oDemoBrowserFeatures}}"></script>
-	<style>body { margin: 0; } .core .o--if-js, .enhanced .o--if-no-js { display: none !important; }</style>
-	<script>(function(d) { d.className = d.className + ' demo-js'; })(document.documentElement);</script>
+	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features={{oDemoBrowserFeatures}}"></script>
+	<style>
+		body {
+			margin: 0;
+		}
+
+		.core .o--if-js,
+		.enhanced .o--if-no-js {
+			display: none !important;
+		}
+
+	</style>
+	<script>
+		(function (d) {
+			d.className = d.className + ' demo-js';
+		})(document.documentElement);
+
+	</script>
 	{{{oDemoStyle}}}
 </head>
 <body>
-{{{oDemoTpl}}}
-{{{oDemoScript}}}
-<script src="//registry.origami.ft.com/embedapi?autoload=resize"></script>
+	{{{oDemoTpl}}}
+	{{{oDemoScript}}}
+	<script src="https://registry.origami.ft.com/embedapi?autoload=resize"></script>
 </body>
 </html>
