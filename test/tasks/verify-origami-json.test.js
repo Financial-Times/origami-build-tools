@@ -75,7 +75,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail if missing description property', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			delete origamiJSON.description;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -91,7 +91,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail if description property is an empty string', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.description = '';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -107,7 +107,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail if description property is a string containing only spaces', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.description = '      ';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -123,7 +123,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail if missing origamiType property', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			delete origamiJSON.origamiType;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -139,7 +139,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail if origamiType property is not "module" or "service"', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.origamiType = '';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -155,7 +155,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should pass if origamiType property is "module"', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.origamiType = 'module';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -163,7 +163,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should pass if origamiType property is "service"', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.origamiType = 'service';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -171,7 +171,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail if missing origamiVersion property', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			delete origamiJSON.origamiVersion;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -187,7 +187,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail if origamiVersion property is not 1', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.origamiVersion = 2;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -203,7 +203,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should pass if origamiVersion property is 1', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.origamiVersion = 1;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -211,7 +211,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail if missing support property', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			delete origamiJSON.support;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -227,7 +227,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail if support property is not an email address or url', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.support = '   ';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -249,7 +249,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should pass if support property is an email address', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.support = 'support@example.com';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -257,7 +257,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should pass if support property is a url', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.support = 'https://example.com';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -265,7 +265,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail if missing supportStatus property', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			delete origamiJSON.supportStatus;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -281,7 +281,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail if supportStatus property is not "active", "maintained", "deprecated", "dead" or "experimental"', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.supportStatus = '  ';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -297,7 +297,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should pass if supportStatus property is "active"', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.supportStatus = 'active';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -305,7 +305,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should pass if supportStatus property is "maintained"', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.supportStatus = 'maintained';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -313,7 +313,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should pass if supportStatus property is "deprecated"', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.supportStatus = 'deprecated';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -321,7 +321,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should pass if supportStatus property is "dead"', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.supportStatus = 'dead';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -329,7 +329,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should pass if supportStatus property is "experimental"', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.supportStatus = 'experimental';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
@@ -337,7 +337,7 @@ describe('verify-origami-json', function () {
 		});
 
 		it('should fail when an expanded property is found for a demo', function () {
-			const origamiJSON = require(path.join(process.cwd(), 'origami.json'));
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.demos = [{
 				expanded: false
 			}, {
