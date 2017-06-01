@@ -106,7 +106,7 @@ describe('SpecReporter', function () {
 							'\u001b[37mTest Browser failed specs:\u001b[39m',
 							'\u001b[37msuite name > description of test\u001b[39m',
 							'\u001b[31mlog message\t\u001b[39m',
-							'\u001b[31m\u001b[39m',
+							'',
 							'1 tests failed across 1 browsers.'
 						]);
 					});
@@ -124,7 +124,7 @@ describe('SpecReporter', function () {
 							'\u001b[37mTest Browser failed specs:\u001b[39m',
 							'\u001b[37msuite name > description of test\u001b[39m',
 							'\u001b[31mlog message\t\u001b[39m',
-							'\u001b[31m\u001b[39m',
+							'',
 							'1 tests failed across 1 browsers.'
 						]);
 					});
