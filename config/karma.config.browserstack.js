@@ -67,14 +67,18 @@ const browsers = Object.keys(customLaunchers);
 
 module.exports = function (config) {
 
-	const karmaConfig = Object.assign(karmaBaseConfig, {
-		browsers,
-		browserStack: {
-			startTunnel: true // let BrowserStack connect to our local server
-		},
-		customLaunchers,
-		logLevel: config.LOG_DISABLE
-	});
+	const karmaConfig = Object.assign(
+		{},
+		karmaBaseConfig,
+		{
+			browsers,
+			browserStack: {
+				startTunnel: true // let BrowserStack connect to our local server
+			},
+			customLaunchers,
+			logLevel: config.LOG_DISABLE
+		}
+	);
 
 	config.set(karmaConfig);
 };
