@@ -37,9 +37,9 @@ describe('npm-install', function () {
 
 		mockery.registerMock('listr', Listr);
 
-		mockery.registerAllowable('../../lib/tasks/npm-install');
+		mockery.registerAllowable('../../lib/tasks/install-npm');
 
-		npmInstall = require('../../lib/tasks/npm-install');
+		npmInstall = require('../../lib/tasks/install-npm');
 
 		mockery.resetCache();
 
@@ -84,12 +84,13 @@ describe('npm-install', function () {
 	});
 
 	describe('task', function () {
-		it('should create Listr object with verify tasks', function () {
+		it('should create Listr object with npm install function', function () {
 			npmInstall.task();
 
 			proclaim.calledOnce(Listr);
 			proclaim.calledWithNew(Listr);
 			proclaim.isArray(Listr.firstCall.args[0]);
 		});
+		// TODO: Should assert that npm install function is passed outputStreams or should this be done via integration tests?
 	});
 });
