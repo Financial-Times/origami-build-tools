@@ -2,12 +2,11 @@
 'use strict';
 
 const expect = require('expect.js');
-const gulp = require('gulp');
 const process = require('process');
 const fs = require('fs-extra');
 const path = require('path');
 
-const demo = require('../../lib/tasks/demo');
+const demo = require('../../lib/tasks/demo-build');
 const pa11y = require('../../lib/tasks/pa11y');
 
 const obtPath = process.cwd();
@@ -18,15 +17,13 @@ describe('Test task', function() {
 		const pathSuffix = '-test-pa11y';
 		const testTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
-		beforeEach(function(done) {
+		beforeEach(function() {
 			fs.copySync(path.resolve(obtPath, oTestPath), testTestPath);
 			process.chdir(testTestPath);
-			const demoStream = demo(gulp, {
+			return demo({
 				demoConfig: 'origami.json',
 				demoFilter: ['pa11y']
 			});
-			demoStream.on('end', done);
-			demoStream.resume();
 		});
 
 		afterEach(function() {

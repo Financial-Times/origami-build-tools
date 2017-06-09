@@ -38,13 +38,19 @@ describe('verify-origami-json', function () {
 			proclaim.ok(verifyOrigamiJson.skip());
 		});
 
-		it('should return a helpful message if the file does not exist', () => {
+		it('should return a helpful message if the file does not exist', function() {
 			fs.removeSync(path.join(process.cwd(), '/origami.json'));
-			proclaim.equal(verifyOrigamiJson.skip(), `No origami.json file found. To make this an origami component, create a file at ${path.join(process.cwd(), '/origami.json')} following the format defined at: http://origami.ft.com/docs/syntax/origamijson/`);
+			return verifyOrigamiJson.skip()
+				.then(skipped => {
+					proclaim.equal(skipped, `No origami.json file found. To make this an origami component, create a file at ${path.join(process.cwd(), '/origami.json')} following the format defined at: http://origami.ft.com/docs/syntax/origamijson/`);
+				});
 		});
 
-		it('should return a falsey value if the file does exist', () => {
-			proclaim.notOk(verifyOrigamiJson.skip());
+		it('should return a falsey value if the file does exist', function () {
+			return verifyOrigamiJson.skip()
+				.then(skipped => {
+					proclaim.notOk(skipped);
+				});
 		});
 	});
 
