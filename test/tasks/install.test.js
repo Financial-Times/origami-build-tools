@@ -34,7 +34,7 @@ describe('Install task', function() {
 		mockery.registerMock('listr', Listr);
 
 		mockery.registerMock('./install-bower', bowerInstall);
-		mockery.registerMock('./npm-install', npmInstall);
+		mockery.registerMock('./install-npm', npmInstall);
 
 		mockery.registerAllowable('../../lib/tasks/install');
 
