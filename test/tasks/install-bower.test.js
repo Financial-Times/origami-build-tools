@@ -17,7 +17,7 @@ const oTestPath = 'test/fixtures/o-test';
 const pathSuffix = '-verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
-describe('bower-install', function () {
+describe('install-bower', function () {
 	let bowerInstall;
 	let Listr;
 	let listrInstance;
@@ -37,9 +37,9 @@ describe('bower-install', function () {
 
 		mockery.registerMock('listr', Listr);
 
-		mockery.registerAllowable('../../lib/tasks/bower-install');
+		mockery.registerAllowable('../../lib/tasks/install-bower');
 
-		bowerInstall = require('../../lib/tasks/bower-install');
+		bowerInstall = require('../../lib/tasks/install-bower');
 
 		mockery.resetCache();
 
