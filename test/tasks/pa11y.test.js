@@ -38,18 +38,18 @@ describe('Test task', function() {
 		});
 
 		describe('skip', () => {
-			it('should return a truthy value if the file does not exist', () => {
+			it('should return a truthy value if the file does not exist', function() {
 				fs.removeSync(path.join(process.cwd(), '/demos/local/pa11y.html'));
-				expect(Boolean(pa11y.skip())).to.be(true);
+				return pa11y.skip().then(result => expect(Boolean(result)).to.be(true));
 			});
 
-			it('should return a helpful message if the file does not exist', () => {
+			it('should return a helpful message if the file does not exist', function() {
 				fs.removeSync(path.join(process.cwd(), '/demos/local/pa11y.html'));
-				expect(pa11y.skip()).to.be(`No Pa11y demo found. To run Pa11y against this project, create a file at ${path.join(process.cwd(), '/demos/local/pa11y.html')}`);
+				return pa11y.skip().then(result => expect(result).to.be(`No Pa11y demo found. To run Pa11y against this project, create a file at ${path.join(process.cwd(), '/demos/local/pa11y.html')}`));
 			});
 
-			it('should return a falsey value if the file does exist', () => {
-				expect(Boolean(pa11y.skip())).to.be(false);
+			it('should return a falsey value if the file does exist', function() {
+				return pa11y.skip().then(result => expect(Boolean(result)).to.be(false));
 			});
 		});
 
