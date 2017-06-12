@@ -55,6 +55,7 @@
     "memory-fs": "^0.4.1",
     "meow": "^3.7.0",
     "merge-stream": "^1.0.0",
+    "mustache": "^2.3.0",
     "node-sass": "^4.5.0",
     "node.extend": "^1.1.5",
     "npmconf": "^2.1.2",
