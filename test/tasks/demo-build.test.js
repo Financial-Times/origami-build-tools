@@ -58,22 +58,6 @@ describe('Demo task', function () {
 			return demo();
 		});
 
-		it.skip('should fail if there is a config.json file', function () {
-			// TODO implement this
-		});
-
-		it.skip('should fail if there is a config.js file', function () {
-			// TODO implement this
-			// const config = fs.readFileSync('demos/src/config.json');
-			// fs.writeFileSync('demos/src/config.js', 'module.exports = ' + config, 'utf8');
-			// return demo()
-			// 	.then(() => {
-			// 		throw new Error('promise resolved when it should have rejected');
-			// 	}, function () {
-			// 		expect(true).to.be.ok();
-			// 	});
-		});
-
 		it('should fail if it\'s using the old config format', function () {
 			return demo({
 				demoConfig: 'demos/src/oldconfig.json'
