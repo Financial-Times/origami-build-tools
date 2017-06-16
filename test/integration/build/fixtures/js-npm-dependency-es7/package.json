@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "es7module": "file:./js-node-modules/es7"
+  }
+}

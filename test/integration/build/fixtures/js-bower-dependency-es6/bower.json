@@ -1,0 +1,9 @@
+{
+  "name": "test-component",
+  "main": [
+    "main.js"
+  ],
+  "dependencies": {
+    "o-test-component": "1.0.25"
+  }
+}
