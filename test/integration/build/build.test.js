@@ -13,7 +13,7 @@ const fs = require('fs');
 
 describe('obt build', function () {
 
-	this.timeout(20 * 1000);
+	this.timeout(60 * 1000);
 
 	describe('js builds', function () {
 		describe('component with no js', function () {
