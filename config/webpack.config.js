@@ -63,7 +63,9 @@ module.exports = {
 							// TODO: Look into using preset-env instead and specifying our minimum versions
 							// for enhanced experience instead of making everything become ES5
 							presets: [
-								require.resolve('babel-preset-es2015')
+								require.resolve('babel-preset-es2015'),
+								require.resolve('babel-preset-es2016'),
+								require.resolve('babel-preset-es2017')
 							],
 							plugins: [
 								// Polyfills the runtime needed for async/await and generators
