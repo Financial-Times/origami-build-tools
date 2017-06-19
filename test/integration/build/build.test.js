@@ -10,6 +10,9 @@ const fileExists = require('../helpers/fileExists');
 const rimraf = require('../helpers/delete');
 const vm = require('vm');
 const fs = require('fs');
+const isEs5 = require('is-es5-syntax');
+const isEs6 = require('is-es6-syntax');
+const isEs7 = require('is-es7-syntax');
 
 describe('obt build', function () {
 
@@ -88,10 +91,13 @@ describe('obt build', function () {
 						proclaim.ok(exists);
 					})
 					.then(() => {
+						const code = fs.readFileSync('build/main.js', 'utf-8');
+
+						proclaim.isTrue(isEs5(code));
 
 						const sandbox = {};
 
-						const script = new vm.Script(fs.readFileSync('build/main.js', 'utf-8'));
+						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
@@ -125,10 +131,13 @@ describe('obt build', function () {
 						proclaim.ok(exists);
 					})
 					.then(() => {
+						const code = fs.readFileSync('build/main.js', 'utf-8');
+
+						proclaim.isTrue(isEs5(code));
 
 						const sandbox = {};
 
-						const script = new vm.Script(fs.readFileSync('build/main.js', 'utf-8'));
+						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
@@ -162,10 +171,13 @@ describe('obt build', function () {
 						proclaim.ok(exists);
 					})
 					.then(() => {
+						const code = fs.readFileSync('build/main.js', 'utf-8');
+
+						proclaim.isTrue(isEs5(code));
 
 						const sandbox = {};
 
-						const script = new vm.Script(fs.readFileSync('build/main.js', 'utf-8'));
+						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
@@ -206,9 +218,13 @@ describe('obt build', function () {
 					})
 					.then(() => {
 
+						const code = fs.readFileSync('build/main.js', 'utf-8');
+
+						proclaim.isTrue(isEs5(code));
+
 						const sandbox = {};
 
-						const script = new vm.Script(fs.readFileSync('build/main.js', 'utf-8'));
+						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
@@ -248,12 +264,17 @@ describe('obt build', function () {
 						proclaim.ok(exists);
 					})
 					.then(() => {
+						const code = fs.readFileSync('build/main.js', 'utf-8');
+
+						proclaim.isFalse(isEs5(code));
+						proclaim.isFalse(isEs6(code));
+						proclaim.isTrue(isEs7(code));
+
 						proclaim.throws(() => {
+
 							const sandbox = {};
 
-							const script = new vm.Script(fs.readFileSync('build/main.js', 'utf-8'));
-
-							const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
+							const script = new vm.Script(code);
 							script.runInContext(context);
 							proclaim.deepEqual(sandbox, { world: 100 });
 						});
@@ -292,10 +313,13 @@ describe('obt build', function () {
 						proclaim.ok(exists);
 					})
 					.then(() => {
+						const code = fs.readFileSync('build/main.js', 'utf-8');
+
+						proclaim.isTrue(isEs5(code));
 
 						const sandbox = {};
 
-						const script = new vm.Script(fs.readFileSync('build/main.js', 'utf-8'));
+						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
@@ -335,10 +359,13 @@ describe('obt build', function () {
 						proclaim.ok(exists);
 					})
 					.then(() => {
+						const code = fs.readFileSync('build/main.js', 'utf-8');
+
+						proclaim.isTrue(isEs5(code));
 
 						const sandbox = {};
 
-						const script = new vm.Script(fs.readFileSync('build/main.js', 'utf-8'));
+						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
@@ -378,10 +405,13 @@ describe('obt build', function () {
 						proclaim.ok(exists);
 					})
 					.then(() => {
+						const code = fs.readFileSync('build/main.js', 'utf-8');
+
+						proclaim.isTrue(isEs5(code));
 
 						const sandbox = {};
 
-						const script = new vm.Script(fs.readFileSync('build/main.js', 'utf-8'));
+						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
