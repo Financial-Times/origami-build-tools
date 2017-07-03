@@ -1,1 +1,3 @@
 test/fixtures/o-test/src/js/syntax-error.js
+test/integration/build/fixtures/
+test/integration/install/fixtures/
