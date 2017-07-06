@@ -240,6 +240,8 @@ describe('obt build', function () {
 				// Change the current working directory to the folder which contains the project we are testing against.
 				// We are doing this to replicate how obt is used when executed inside a terminal.
 				process.chdir(path.join(__dirname, '/fixtures/js-npm-dependency-es7'));
+				return rimraf(path.join(process.cwd(), '/build'))
+					.then(() => rimraf(path.join(process.cwd(), '/node_modules')));
 			});
 
 			afterEach(function () {
@@ -248,7 +250,7 @@ describe('obt build', function () {
 					.then(() => process.chdir(process.cwd()));
 			});
 
-			it('should not compile the dependency js using babel', function () {
+			it('should compile the dependency js using babel', function () {
 				let obt;
 				return obtBinPath()
 					.then(obtPath => {
@@ -267,9 +269,7 @@ describe('obt build', function () {
 					.then(() => {
 						const code = fs.readFileSync('build/main.js', 'utf-8');
 
-						proclaim.isFalse(isEs5(code));
-						proclaim.isFalse(isEs6(code));
-						proclaim.isTrue(isEs7(code));
+						proclaim.isTrue(isEs5(code));
 
 						if (currentVersion.major >= 7) {
 							const sandbox = {};
