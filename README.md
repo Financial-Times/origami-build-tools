@@ -15,9 +15,26 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 
 ## Usage
 
-Run the install task for the first time will to install required dependencies:
+	Usage
+		$ obt <command> [<options>]
 
-	origami-build-tools install
+	Commands
+		build   Build module in current directory
+		demo    Build demos into the demos directory
+		install Install system and local dependencies
+		test    Test if Sass silent compilation follows the Origami specification
+		verify  Lint code and verify if module structure follows the Origami specification
+
+	Options
+		-h, --help                 Print out this message
+		--watch                    Re-run every time a file changes
+		--run-server               Build demos locally and runs a server
+		--js=<path>                Main JavaScript file (default: ./src/main.js)
+		--sass=<path>              Main Sass file (default: ./src/main.scss)
+		--build-js=<file>          Compiled JavaScript file (default: main.js)
+		--build-css=<file>         Compiled CSS file (default: main.css)
+		--build-folder=<dir>       Compiled assets directory (default: ./build/)
+		--production               Compiled assets will be minified for production systems
 
 ### Developing products
 
@@ -32,28 +49,7 @@ automatically re-build the module's demos and assets every time a file changes:
 
 	origami-build-tools demo --runServer --watch
 
-## Tasks
-
-All the tasks are built using [gulp](http://gulpjs.com/), and almost all of them return a stream. They are structured in 5 higher level tasks, and each one has one or more subtasks.
-
-	Usage: origami-build-tools <command> [<options>]
-
-	Commands:
-	   install  Install system and local dependencies
-	   build    Build module in current directory
-	   demo     Build demos into the demos/ directory
-	   verify   Lint code and verify if module structure follows the Origami specification
-	   test     Test if Sass silent compilation follows the Origami specification
-
-	Most used options include:
-	   [--watch]                     Re-run every time a file changes
-	   [--run-server]                Build demos locally and runs a server
-	   [--updateorigami]             Update origami.json with the latest demo files created
-	   [--js=<path>]                 Main JavaScript file (default: ./src/main.js)
-	   [--sass=<path>]               Main Sass file (default: ./src/main.scss)
-	   [--build-js=<file>]           Compiled JavaScript file (default: main.js)
-	   [--build-css=<file>]          Compiled CSS file (default: main.css)
-	   [--build-folder=<dir>]        Compiled assets directory (default: ./build/)
+## Commands
 
 ### `install`
 
@@ -67,45 +63,15 @@ It comes with support for things like:
 
 * [Babel](https://github.com/babel/babel) so you can use ES2017 features in your modules and products
 * [autoprefixer](https://github.com/postcss/autoprefixer) so you don't have to worry about writing browser prefixes in your Sass
-* If `env` is set to `'production'`, JavaScript and CSS will be minified.
-
-Runs:
-
-* __js(config)__ Config accepts:
-	- js: `String` Path to your main JavaScript file. (Default: './main.js' and checks your bower.json to see if it's in its main key)
-	- buildJs: `String` Name of the built JavaScript bundle. (Default: 'main.js')
-	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: './build/')
-	- env: `String` It can be either `'production'` or `'development'`. If it's `'production'`, it will minify the file. If it's `'development'`, it will generate a sourcemap. (Default: `'development'`)
-	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: `process.cwd()`)
-	- sourcemaps: `Boolean | 'inline'` Set to `true` to output sourcemaps as a separate file, even if env is `'production'`. Set to `'inline'` to output sourcemaps inline (Default: `false` in production, `true` in development)
-	- standalone: `String` Export built file to a global variable with the name passed to this.
-* __sass(config)__ Config accepts:
-	- sass: `String` Path to your main Sass file. (Default: `'./main.scss'` and checks your bower.json to see if it's in its main key)
-	- autoprefixerBrowsers: `Array` An array of strings of [browser names for autoprefixer](https://github.com/postcss/autoprefixer#browsers) to check what prefixes it needs. (Default: `["> 1%", "last 2 versions", "ie > 6", "ff ESR"]`)
-	- autoprefixerCascade: `Boolean` Whether autoprefixer should display CSS prefixed properties [cascaded](https://github.com/postcss/autoprefixer#visual-cascade) (Default: `false`)
-	- autoprefixerRemove: `Boolean` Remove unneeded prefixes (Default: `true`)
-	- cwd: `String` The path to the working directory, in which the code to be built exists. (Default: `process.cwd()`)
-	- buildCss: `String` Name of the built CSS bundle. (Default: `'main.css'`)
-	- buildFolder: `String` Path to directory where the built file will be created. If set to `'disabled'`, files won't be saved. (Default: `'./build/'`)
-	- sourcemaps: `Boolean | 'inline'` Set to `true` to output sourcemaps as a separate file, even if env is `'production'`. Set to `'inline'` to output sourcemaps inline (Default: `false` in production, `true` in development)
-	- env: `String` It can be either `'production'` or `'development'`. If it's `'production'`, it will compile the Sass file with the `'compressed'` style option and will also run [clean-css](https://github.com/jakubpawlowicz/clean-css). (Default: `'development'`)
-	- sassIncludePaths: `Array` List of paths to search for Sass imports. (Default: `'[]'`)
+* If `--production` is set, JavaScript and CSS will be minified.
 
 ### `demo`
 
 Build demos found in the [demo config file](http://origami.ft.com/docs/component-spec/modules/#demo-config).
 
-Config:
+* If `--production` is set, demos are built to pull assets through the Origami Build Service.
 
-* dist: `Boolean` Builds demo HTML for the build service. Default: `false`
-* runServer: `Boolean` Whether you want to run a local server or not. Default: `false`
-* livereload: `Boolean` Will enable livereload on `runServer`. Default: `true`
-* demoFilter: `Array` List of files for OBT to build. If the array is empty or `undefined`, it will build all demos. This is something only used in the [build service](https://origami-build.ft.com). Default: `undefined`
-* cwd: `String` The path to the working directory, in which the code to be built exists. (Default: `process.cwd()`)
-
-Dist demos consist of only HTML, with build service URLs for static resources, and are created in `demos/`.
-
-Local demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add _demos/local/_ to your `.gitignore`.
+Non-production demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add _demos/local/_ to your `.gitignore`.
 
 ### `verify`
 

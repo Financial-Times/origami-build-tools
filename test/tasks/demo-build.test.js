@@ -100,7 +100,9 @@ describe('Demo task', function () {
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
 			return demo({
-				dist: true
+				flags: {
+					production: true
+				}
 			})
 				.then(function () {
 					const test1 = fs.readFileSync('demos/test1.html', 'utf8');
@@ -161,7 +163,9 @@ describe('Demo task', function () {
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>{{>partial1}}', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test1</div>{{>partials/partial2}}', 'utf8');
 			return demo({
-				dist: true
+				flags: {
+					production: true
+				}
 			})
 				.then(function () {
 					const test1 = fs.readFileSync('demos/test1.html', 'utf8');
