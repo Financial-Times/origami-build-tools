@@ -34,6 +34,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--build-js=<file>          Compiled JavaScript file (default: main.js)
 		--build-css=<file>         Compiled CSS file (default: main.css)
 		--build-folder=<dir>       Compiled assets directory (default: ./build/)
+		-v, --version              Print out version of origami-build-tools
 		--production               Compiled assets will be minified for production systems
 
 ### Developing products
