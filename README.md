@@ -19,11 +19,11 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		$ obt <command> [<options>]
 
 	Commands
-		build   Build module in current directory
+		build   Build CSS and JS in current directory
 		demo    Build demos into the demos directory
-		install Install system and local dependencies
-		test    Test if Sass silent compilation follows the Origami specification
-		verify  Lint code and verify if module structure follows the Origami specification
+		install Install dependencies in current directory
+		test    Run Origami specification tests and component specific tests
+		verify  Check folder and code structure follows Origami specification
 
 	Options
 		-h, --help                 Print out this message
