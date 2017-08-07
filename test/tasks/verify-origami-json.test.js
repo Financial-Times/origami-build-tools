@@ -28,26 +28,26 @@ describe('verify-origami-json', function () {
 
 	describe('default title', () => {
 		it('should be "Verifying your origami.json"', () => {
-			proclaim.equal(verifyOrigamiJson.title, 'Verifying your origami.json');
+			proclaim.equal(verifyOrigamiJson().title, 'Verifying your origami.json');
 		});
 	});
 
 	describe('skip', () => {
 		it('should return true if the file does not exist', () => {
 			fs.removeSync(path.join(process.cwd(), '/origami.json'));
-			proclaim.ok(verifyOrigamiJson.skip());
+			proclaim.ok(verifyOrigamiJson().skip());
 		});
 
 		it('should return a helpful message if the file does not exist', function() {
 			fs.removeSync(path.join(process.cwd(), '/origami.json'));
-			return verifyOrigamiJson.skip()
+			return verifyOrigamiJson().skip()
 				.then(skipped => {
 					proclaim.equal(skipped, `No origami.json file found. To make this an origami component, create a file at ${path.join(process.cwd(), '/origami.json')} following the format defined at: http://origami.ft.com/docs/syntax/origamijson/`);
 				});
 		});
 
 		it('should return a falsey value if the file does exist', function () {
-			return verifyOrigamiJson.skip()
+			return verifyOrigamiJson().skip()
 				.then(skipped => {
 					proclaim.notOk(skipped);
 				});
@@ -56,7 +56,7 @@ describe('verify-origami-json', function () {
 
 	describe('task', function () {
 		it('should run origami.json check successfully', function () {
-			return verifyOrigamiJson.task().
+			return verifyOrigamiJson().task().
 				then(function (verifiedOrigamiJson) {
 					proclaim.equal(verifiedOrigamiJson.length, 0);
 				});
@@ -65,7 +65,7 @@ describe('verify-origami-json', function () {
 		it('should fail with an empty origami.json', function () {
 			fs.writeFileSync('origami.json', JSON.stringify({}), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -85,7 +85,7 @@ describe('verify-origami-json', function () {
 			delete origamiJSON.description;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -101,7 +101,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.description = '';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -117,7 +117,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.description = '      ';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -133,7 +133,7 @@ describe('verify-origami-json', function () {
 			delete origamiJSON.origamiType;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -149,7 +149,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.origamiType = '';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -165,7 +165,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.origamiType = 'module';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task();
+			return verifyOrigamiJson().task();
 		});
 
 		it('should pass if origamiType property is "service"', function () {
@@ -173,7 +173,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.origamiType = 'service';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task();
+			return verifyOrigamiJson().task();
 		});
 
 		it('should fail if missing origamiVersion property', function () {
@@ -181,7 +181,7 @@ describe('verify-origami-json', function () {
 			delete origamiJSON.origamiVersion;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -197,7 +197,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.origamiVersion = 2;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -213,7 +213,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.origamiVersion = 1;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task();
+			return verifyOrigamiJson().task();
 		});
 
 		it('should fail if missing support property', function () {
@@ -221,7 +221,7 @@ describe('verify-origami-json', function () {
 			delete origamiJSON.support;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -237,7 +237,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.support = '   ';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -259,7 +259,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.support = 'support@example.com';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task();
+			return verifyOrigamiJson().task();
 		});
 
 		it('should pass if support property is a url', function () {
@@ -267,7 +267,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.support = 'https://example.com';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task();
+			return verifyOrigamiJson().task();
 		});
 
 		it('should fail if missing supportStatus property', function () {
@@ -275,7 +275,7 @@ describe('verify-origami-json', function () {
 			delete origamiJSON.supportStatus;
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -291,7 +291,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.supportStatus = '  ';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
@@ -307,7 +307,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.supportStatus = 'active';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task();
+			return verifyOrigamiJson().task();
 		});
 
 		it('should pass if supportStatus property is "maintained"', function () {
@@ -315,7 +315,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.supportStatus = 'maintained';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task();
+			return verifyOrigamiJson().task();
 		});
 
 		it('should pass if supportStatus property is "deprecated"', function () {
@@ -323,7 +323,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.supportStatus = 'deprecated';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task();
+			return verifyOrigamiJson().task();
 		});
 
 		it('should pass if supportStatus property is "dead"', function () {
@@ -331,7 +331,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.supportStatus = 'dead';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task();
+			return verifyOrigamiJson().task();
 		});
 
 		it('should pass if supportStatus property is "experimental"', function () {
@@ -339,7 +339,7 @@ describe('verify-origami-json', function () {
 			origamiJSON.supportStatus = 'experimental';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task();
+			return verifyOrigamiJson().task();
 		});
 
 		it('should fail when an expanded property is found for a demo', function () {
@@ -351,7 +351,7 @@ describe('verify-origami-json', function () {
 			}];
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 
-			return verifyOrigamiJson.task()
+			return verifyOrigamiJson().task()
 				.catch(function (verifiedOrigamiJson) {
 					proclaim.equal(
 						verifiedOrigamiJson.message,

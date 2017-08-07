@@ -30,27 +30,27 @@ describe('verify-javascript', function() {
 
 	describe('default title', () => {
 		it('should be "Linting Javascript"', () => {
-			proclaim.equal(verifyJavascript.title, 'Linting Javascript');
+			proclaim.equal(verifyJavascript().title, 'Linting Javascript');
 		});
 	});
 
 	describe('skip', () => {
 		it('should return true if the file does not exist', () => {
 			rimraf.sync('**/**.js');
-			return verifyJavascript.skip().then(skip => {
+			return verifyJavascript().skip().then(skip => {
 				proclaim.ok(skip);
 			});
 		});
 
 		it('should return a helpful message if the file does not exist', () => {
 			rimraf.sync('**/**.js');
-			return verifyJavascript.skip().then(skip => {
+			return verifyJavascript().skip().then(skip => {
 				proclaim.equal(skip, 'No Javascript files found.');
 			});
 		});
 
 		it('should return a falsey value if the file does exist', () => {
-			return verifyJavascript.skip().then(skip => {
+			return verifyJavascript().skip().then(skip => {
 				proclaim.notOk(skip);
 			});
 		});
@@ -59,12 +59,12 @@ describe('verify-javascript', function() {
 	describe('task', () => {
 		it('should not error if there are no Javascript files', () => {
 			rimraf.sync('**/**.js');
-			verifyJavascript.task();
+			verifyJavascript().task();
 		});
 
 		it('should throw error if there are linting violations', function() {
 			proclaim.throws(() => {
-				verifyJavascript.task();
+				verifyJavascript().task();
 			},
 				'Failed linting: \n\n' +
 				'./src/js/syntax-error.js:1:6 Error - Parsing error: Unexpected token test\n' +

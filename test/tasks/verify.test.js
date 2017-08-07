@@ -24,8 +24,11 @@ describe('Verify task', function() {
 		Listr = sinon.stub();
 		Listr.returns(listrInstance);
 		verifyOrigamiJsonFile = sinon.stub();
+		verifyOrigamiJsonFile.returns(verifyOrigamiJsonFile);
 		verifyJavaScript = sinon.stub();
+		verifyJavaScript.returns(verifyJavaScript);
 		verifySass = sinon.stub();
+		verifySass.returns(verifySass);
 
 		mockery.enable({
 			useCleanCache: true,
