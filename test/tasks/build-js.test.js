@@ -41,7 +41,7 @@ describe('build-js', function () {
 				expect(result).to.contain('var Test');
 				expect(result).to.contain('function Test() {\n\tvar name = \'test\';');
 				expect(result).to.contain('module.exports = "This is a test\\n"');
-				expect(result).to.contain('\n\nmodule.exports = {\n\t"test": true\n};');
+				expect(result).to.contain('module.exports = {"test":true}');
 			});
 	});
 
@@ -137,7 +137,7 @@ describe('build-js', function () {
 				expect(builtJs).to.contain('var Test');
 				expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 				expect(builtJs).to.contain('module.exports = "This is a test\\n"');
-				expect(builtJs).to.contain('\nmodule.exports = {\n\t"test": true\n};');
+				expect(builtJs).to.contain('module.exports = {"test":true}');
 				expect(builtJs).to.contain('var origami =\n');
 			});
 	});
