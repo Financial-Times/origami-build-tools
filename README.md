@@ -21,7 +21,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 	Commands
 		build   Build CSS and JS in current directory
 		demo    Build demos into the demos directory
-		install Install dependencies in current directory
+		install Install npm and bower dependencies required to build modules
 		test    Run Origami specification tests and component specific tests
 		verify  Check folder and code structure follows Origami specification
 
@@ -36,6 +36,8 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--build-folder=<dir>       Compiled assets directory (default: ./build/)
 		-v, --version              Print out version of origami-build-tools
 		--production               Compiled assets will be minified for production systems
+		--browserstack             Run tests using Browserstack instead of PhantomJS
+		--standalone               Create a named export for the built JavaScript
 
 ### Developing products
 
@@ -64,7 +66,15 @@ It comes with support for things like:
 
 * [Babel](https://github.com/babel/babel) so you can use ES2017 features in your modules and products
 * [autoprefixer](https://github.com/postcss/autoprefixer) so you don't have to worry about writing browser prefixes in your Sass
-* If `--production` is set, JavaScript and CSS will be minified.
+
+Set the main JavaScript file with the `--js` option. _(default: ./src/main.js)_
+Set the main Sass file with the `--sass` option. _(default: ./src/main.scss)_
+Set the name of the built JS file with the `--build-js` option. _(default: main.js)_
+Set the name of the built CSS file with the `--build-css` option. _(default: main.css)_
+Set the name of the folder to store the built CSS and JS with the `--build-folder` option. _(default: ./build/)_
+Build the files for production environments with the `--production` option. _(default: off)_
+
+If building a library use the `--standalone` option to specify the name you want the library to be accessed with. _(default: off)_
 
 ### `demo`
 
@@ -80,9 +90,12 @@ Lints JavaScript, Sass and configuration files against [Origami coding standards
 
 ### `test`
 
+Run Origami specification tests and component specific tests.
+
 Checks Sass supports [silent and non-silent compilation modes](http://origami.ft.com/docs/syntax/scss/#silent-styles).
-If `pa11y.html` demo exists, confirms it is accessible.
+If `pa11y.html` demo exists, confirms it is accessible using [Pa11y](http://pa11y.org/).
 If `package.json` contains a `test` script, confirms it exits with a 0 exit code.
+Runs tests using [Karma](https://karma-runner.github.io) defaulting to PhantomJS, can be configured to use BrowserStack by using the `--browserstack` flag.
 
 ## Migration guide
 
