@@ -23,7 +23,9 @@ describe('Install task', function() {
 		Listr = sinon.stub();
 		Listr.returns(listrInstance);
 		bowerInstall = sinon.stub();
+		bowerInstall.returns(bowerInstall);
 		npmInstall = sinon.stub();
+		npmInstall.returns(npmInstall);
 
 		mockery.enable({
 			useCleanCache: true,

@@ -33,29 +33,29 @@ describe('Test task', function() {
 
 		describe('default title', () => {
 			it('should be "Executing Pa11y"', () => {
-				expect(pa11y.title).to.be('Executing Pa11y');
+				expect(pa11y().title).to.be('Executing Pa11y');
 			});
 		});
 
 		describe('skip', () => {
 			it('should return a truthy value if the file does not exist', function() {
 				fs.removeSync(path.join(process.cwd(), '/demos/local/pa11y.html'));
-				return pa11y.skip().then(result => expect(Boolean(result)).to.be(true));
+				return pa11y().skip().then(result => expect(Boolean(result)).to.be(true));
 			});
 
 			it('should return a helpful message if the file does not exist', function() {
 				fs.removeSync(path.join(process.cwd(), '/demos/local/pa11y.html'));
-				return pa11y.skip().then(result => expect(result).to.be(`No Pa11y demo found. To run Pa11y against this project, create a file at ${path.join(process.cwd(), '/demos/local/pa11y.html')}`));
+				return pa11y().skip().then(result => expect(result).to.be(`No Pa11y demo found. To run Pa11y against this project, create a file at ${path.join(process.cwd(), '/demos/local/pa11y.html')}`));
 			});
 
 			it('should return a falsey value if the file does exist', function() {
-				return pa11y.skip().then(result => expect(Boolean(result)).to.be(false));
+				return pa11y().skip().then(result => expect(Boolean(result)).to.be(false));
 			});
 		});
 
 		describe('task', () => {
 			it('should run pa11y correctly', function() {
-				return pa11y.task()
+				return pa11y().task()
 					.catch(function (results) {
 						expect(results).to.be.an(Error);
 					});
