@@ -36,7 +36,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--build-folder=<dir>       Compiled assets directory (default: ./build/)
 		-v, --version              Print out version of origami-build-tools
 		--production               Compiled assets will be minified for production systems
-		--browserstack             Run tests using Browserstack instead of PhantomJS
+		--browserstack             Run tests using Browserstack instead of Chrome Stable
 		--standalone               Create a named export for the built JavaScript
 
 ### Developing products
@@ -95,7 +95,7 @@ Run Origami specification tests and component specific tests.
 Checks Sass supports [silent and non-silent compilation modes](http://origami.ft.com/docs/syntax/scss/#silent-styles).
 If `pa11y.html` demo exists, confirms it is accessible using [Pa11y](http://pa11y.org/).
 If `package.json` contains a `test` script, confirms it exits with a 0 exit code.
-Runs tests using [Karma](https://karma-runner.github.io) defaulting to PhantomJS, can be configured to use BrowserStack by using the `--browserstack` flag.
+Runs tests using [Karma](https://karma-runner.github.io) defaulting to Chrome Stable, can be configured to use BrowserStack by using the `--browserstack` flag.
 
 ## Migration guide
 
