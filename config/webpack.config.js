@@ -52,16 +52,19 @@ module.exports = {
 			// Process JS with Babel.
 			{
 				test: /\.js$/,
+				exclude: /node_modules/,
 				use: [
 					// Disables AMD module loading and swaps requireText() for require()
 					'imports-loader?define=>false&requireText=>require',
 					{
 						loader: 'babel-loader',
 						options: {
+							compact: false,
 
 							// TODO: Look into using preset-env instead and specifying our minimum versions
 							// for enhanced experience instead of making everything become ES5
 							presets: [
+								require.resolve('babel-preset-es3'),
 								require.resolve('babel-preset-es2015'),
 								require.resolve('babel-preset-es2016'),
 								require.resolve('babel-preset-es2017')
