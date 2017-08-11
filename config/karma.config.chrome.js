@@ -6,7 +6,7 @@ module.exports = function (config) {
 		{},
 		karmaBaseConfig,
 		{
-			browsers: ['PhantomJS'],
+			browsers: ['ChromeHeadless'],
 			logLevel: config.LOG_DISABLE
 		}
 	);

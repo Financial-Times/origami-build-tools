@@ -47,7 +47,7 @@ describe('Build Sass', function () {
 
 	it('should work with production option', function () {
 		return build({
-			env: 'production'
+			production: true
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/main.css', 'utf8');

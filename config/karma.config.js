@@ -18,7 +18,7 @@ module.exports = {
 	browserNoActivityTimeout: 60 * 1000, // default 10000
 
 	// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-	browsers: ['PhantomJS'],
+	browsers: ['ChromeHeadless'],
 
 	client: {
 		// Capture all console output and pipe it to the terminal.
@@ -47,9 +47,9 @@ module.exports = {
 	plugins: [
 		'karma-mocha',
 		'karma-sinon',
-		'karma-phantomjs-launcher',
 		'karma-webpack',
 		'karma-browserstack-launcher',
+		'karma-chrome-launcher',
 		'karma-sourcemap-loader'
 	],
 

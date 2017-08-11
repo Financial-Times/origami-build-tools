@@ -40,7 +40,7 @@ describe('run-npm-install', function() {
 		return runNpmInstall()
 			.then(() => {
 				proclaim.calledOnce(commandLine.run);
-				proclaim.calledWithExactly(commandLine.run, 'npm', ['install'], undefined);
+				proclaim.calledWithExactly(commandLine.run, 'npm', ['install', '--no-shrinkwrap'], undefined);
 			});
 	});
 

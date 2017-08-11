@@ -30,27 +30,27 @@ describe('verify-sass', function() {
 
 	describe('default title', () => {
 		it('should be "Linting Sass"', () => {
-			proclaim.equal(verify.title, 'Linting Sass');
+			proclaim.equal(verify().title, 'Linting Sass');
 		});
 	});
 
 	describe('skip', () => {
 		it('should return true if the file does not exist', () => {
 			rimraf.sync('**/**.scss');
-			return verify.skip().then(skip => {
+			return verify().skip().then(skip => {
 				proclaim.ok(skip);
 			});
 		});
 
 		it('should return a helpful message if the file does not exist', () => {
 			rimraf.sync('**/**.scss');
-			return verify.skip().then(skip => {
+			return verify().skip().then(skip => {
 				proclaim.equal(skip, 'No Sass files found.');
 			});
 		});
 
 		it('should return a falsey value if the file does exist', () => {
-			return verify.skip().then(skip => {
+			return verify().skip().then(skip => {
 				proclaim.notOk(skip);
 			});
 		});
@@ -59,18 +59,18 @@ describe('verify-sass', function() {
 	describe('task', () => {
 		it('should not error if there are no Sass files', () => {
 			rimraf.sync('**/**.scss');
-			verify.task();
+			verify().task();
 		});
 
 		it('should throw error if there are linting violations', function() {
 			proclaim.throws(() => {
-				verify.task();
+				verify().task();
 			},
 				'Failed linting: \n\n' +
-				'src/scss/verify.scss:1:9 Error - Hex values should use the long-form format - 6 characters (hex-length)\n' +
-				'src/scss/verify.scss:4:10 Error - Trailing semicolons required (trailing-semicolon)\n' +
-				'src/scss/verify.scss:4:16, Warning - !important not allowed (no-important)\n' +
-				'src/scss/verify.scss:4:16 Error - Whitespace required before !important (space-before-bang)\n\n' +
+				'./src/scss/verify.scss:1:9 Error - Hex values should use the long-form format - 6 characters (hex-length)\n' +
+				'./src/scss/verify.scss:4:10 Error - Trailing semicolons required (trailing-semicolon)\n' +
+				'./src/scss/verify.scss:4:16, Warning - !important not allowed (no-important)\n' +
+				'./src/scss/verify.scss:4:16 Error - Whitespace required before !important (space-before-bang)\n\n' +
 				'4 linting errors'
 			);
 		});

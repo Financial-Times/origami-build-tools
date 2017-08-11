@@ -41,15 +41,13 @@ describe('build-js', function () {
 				expect(result).to.contain('var Test');
 				expect(result).to.contain('function Test() {\n\tvar name = \'test\';');
 				expect(result).to.contain('module.exports = "This is a test\\n"');
-				expect(result).to.contain('\n\nmodule.exports = {\n\t"test": true\n};');
+				expect(result).to.contain('module.exports = {"test":true}');
 			});
 	});
 
 	it('should work with production option', function () {
 		return build({
-			flags: {
-				production: true
-			}
+			production: true
 		})
 			.then(function (builtJs) {
 				expect(builtJs).to.not.contain('sourceMappingURL');
@@ -62,9 +60,7 @@ describe('build-js', function () {
 
 	it('should build from custom source', function () {
 		return build({
-			flags: {
-				js: './src/js/test.js'
-			}
+			js: './src/js/test.js'
 		})
 			.then(function (builtJs) {
 				expect(builtJs).to.contain('sourceMappingURL');
@@ -75,9 +71,7 @@ describe('build-js', function () {
 
 	it('should build to a custom directory', function () {
 		return build({
-			flags: {
-				buildFolder: 'test-build'
-			}
+			buildFolder: 'test-build'
 		})
 			.then(function (builtJs) {
 				expect(builtJs).to.contain('sourceMappingURL');
@@ -90,9 +84,7 @@ describe('build-js', function () {
 
 	it('should build to a custom file', function () {
 		return build({
-			flags: {
-				buildJs: 'bundle.js'
-			}
+			buildJs: 'bundle.js'
 		})
 			.then(function (builtJs) {
 				expect(builtJs).to.contain('sourceMappingURL');
@@ -105,9 +97,7 @@ describe('build-js', function () {
 
 	it('should fail on syntax error', function () {
 		return build({
-			flags: {
-				js: './src/js/syntax-error.js'
-			}
+			js: './src/js/syntax-error.js'
 		})
 			.then(function () {}, function (e) { // eslint-disable-line no-empty-function
 				expect(e.message).to.contain('SyntaxError');
@@ -117,9 +107,7 @@ describe('build-js', function () {
 
 	it('should fail when a dependency is not found', function () {
 		return build({
-			flags: {
-				js: './src/js/missing-dep.js'
-			}
+			js: './src/js/missing-dep.js'
 		})
 			.then(function () {}, function (e) { // eslint-disable-line no-empty-function
 				expect(e.message).to.contain('Module not found: Error: Can\'t resolve \'dep\'');
@@ -128,16 +116,14 @@ describe('build-js', function () {
 
 	it('should support a standalone option which creates a global variable', function () {
 		return build({
-			flags: {
-				standalone: 'origami'
-			}
+			standalone: 'origami'
 		})
 			.then(function (builtJs) {
 				expect(builtJs).to.contain('sourceMappingURL');
 				expect(builtJs).to.contain('var Test');
 				expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 				expect(builtJs).to.contain('module.exports = "This is a test\\n"');
-				expect(builtJs).to.contain('\nmodule.exports = {\n\t"test": true\n};');
+				expect(builtJs).to.contain('module.exports = {"test":true}');
 				expect(builtJs).to.contain('var origami =\n');
 			});
 	});

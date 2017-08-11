@@ -56,19 +56,19 @@ describe('install-bower', function () {
 	});
 
 	it('has a default title', () => {
-		proclaim.equal(bowerInstall.title, 'Installing Bower components');
+		proclaim.equal(bowerInstall().title, 'Installing Bower components');
 	});
 
 	describe('skip', () => {
 		it('should return true if bower.json does not exist', function() {
-			return bowerInstall.skip()
+			return bowerInstall().skip()
 			.then(skipped => {
 				proclaim.ok(skipped);
 			});
 		});
 
 		it('should return a helpful message if bower.json does not exist', function() {
-			return bowerInstall.skip()
+			return bowerInstall().skip()
 			.then(skipped => {
 				proclaim.equal(skipped, 'No bower.json found.');
 			});
@@ -76,7 +76,7 @@ describe('install-bower', function () {
 
 		it('should return a falsey value if bower.json does exist', function() {
 			fs.writeFileSync('bower.json', '{}');
-			return bowerInstall.skip()
+			return bowerInstall().skip()
 			.then(skipped => {
 				proclaim.notOk(skipped);
 			});
@@ -85,7 +85,7 @@ describe('install-bower', function () {
 
 	describe('task', function () {
 		it('should create Listr object with verify tasks', function() {
-			bowerInstall.task();
+			bowerInstall().task();
 
 			proclaim.calledOnce(Listr);
 			proclaim.calledWithNew(Listr);

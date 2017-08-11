@@ -56,19 +56,19 @@ describe('npm-install', function () {
 	});
 
 	it('has a default title', () => {
-		proclaim.equal(npmInstall.title, 'Installing NPM components');
+		proclaim.equal(npmInstall().title, 'Installing NPM components');
 	});
 
 	describe('skip', () => {
 		it('should return true if package.json does not exist', function () {
-			return npmInstall.skip()
+			return npmInstall().skip()
 				.then(skipped => {
 					proclaim.ok(skipped);
 				});
 		});
 
 		it('should return a helpful message if package.json does not exist', function () {
-			return npmInstall.skip()
+			return npmInstall().skip()
 				.then(skipped => {
 					proclaim.equal(skipped, 'No package.json found.');
 				});
@@ -76,7 +76,7 @@ describe('npm-install', function () {
 
 		it('should return a falsey value if package.json does exist', function () {
 			fs.writeFileSync('package.json', '{}');
-			return npmInstall.skip()
+			return npmInstall().skip()
 				.then(skipped => {
 					proclaim.notOk(skipped);
 				});
@@ -85,7 +85,7 @@ describe('npm-install', function () {
 
 	describe('task', function () {
 		it('should create Listr object with npm install function', function () {
-			npmInstall.task();
+			npmInstall().task();
 
 			proclaim.calledOnce(Listr);
 			proclaim.calledWithNew(Listr);
