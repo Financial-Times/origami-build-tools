@@ -94,7 +94,7 @@
     "mockery": "^2.0.0",
     "node-version": "^1.0.0",
     "npm-prepublish": "^1.2.2",
-    "proclaim": "^3.4.4",
+    "proclaim": "^3.4.6",
     "rimraf": "^2.6.1"
   },
   "repository": {
