@@ -19,11 +19,11 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		$ obt <command> [<options>]
 
 	Commands
-		build   Build CSS and JS in current directory
-		demo    Build demos into the demos directory
-		install Install npm and bower dependencies required to build modules
-		test    Run Origami specification tests and component specific tests
-		verify  Check folder and code structure follows Origami specification
+		build, b   Build CSS and JS in current directory
+		demo, d    Build demos into the demos directory
+		install, i Install npm and bower dependencies required to build modules
+		test, t    Run Origami specification tests and component specific tests
+		verify,v   Check folder and code structure follows Origami specification
 
 	Options
 		-h, --help                 Print out this message
@@ -54,11 +54,11 @@ automatically re-build the module's demos and assets every time a file changes:
 
 ## Commands
 
-### `install`
+### `install` or `i`
 
 Install npm and bower dependencies required to build modules.
 
-### `build`
+### `build` or `b`
 
 Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
 
@@ -76,7 +76,7 @@ Build the files for production environments with the `--production` option. _(de
 
 If building a library use the `--standalone` option to specify the name you want the library to be accessed with. _(default: off)_
 
-### `demo`
+### `demo` or `d`
 
 Build demos found in the [demo config file](http://origami.ft.com/docs/component-spec/modules/#demo-config).
 
@@ -84,11 +84,11 @@ Build demos found in the [demo config file](http://origami.ft.com/docs/component
 
 Non-production demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add _demos/local/_ to your `.gitignore`.
 
-### `verify`
+### `verify` or `v`
 
 Lints JavaScript, Sass and configuration files against [Origami coding standards](http://origami.ft.com/docs/syntax/).
 
-### `test`
+### `test` or `t`
 
 Run Origami specification tests and component specific tests.
 
