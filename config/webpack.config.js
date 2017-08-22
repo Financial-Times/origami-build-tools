@@ -26,6 +26,8 @@ module.exports = {
 		descriptionFiles: ['bower.json', 'package.json'],
 		// These fields in the description files are looked up when trying to resolve the package directory
 		mainFields: ['browser', 'main'],
+		// These files are tried when trying to resolve a directory
+		mainFiles: ['index', 'main'],
 		// These extensions are tried when resolving a file
 		extensions: ['.js', '.json']
 	},
