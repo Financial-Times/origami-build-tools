@@ -11,6 +11,8 @@ const rimraf = require('../helpers/delete');
 const vm = require('vm');
 const fs = require('fs');
 const isEs5 = require('is-es5-syntax');
+const isEs6 = require('is-es6-syntax');
+const isEs7 = require('is-es7-syntax');
 const currentVersion = require('node-version');
 
 describe('obt build', function () {
@@ -248,7 +250,7 @@ describe('obt build', function () {
 					.then(() => process.chdir(process.cwd()));
 			});
 
-			it('should compile the dependency js using babel', function () {
+			it('should not compile the dependency js using babel', function () {
 				let obt;
 				return obtBinPath()
 					.then(obtPath => {
@@ -267,7 +269,9 @@ describe('obt build', function () {
 					.then(() => {
 						const code = fs.readFileSync('build/main.js', 'utf-8');
 
-						proclaim.isTrue(isEs5(code));
+						proclaim.isFalse(isEs5(code));
+						proclaim.isFalse(isEs6(code));
+						proclaim.isTrue(isEs7(code));
 
 						if (currentVersion.major >= 7) {
 							const sandbox = {};
