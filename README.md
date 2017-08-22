@@ -92,8 +92,6 @@ Lints JavaScript, Sass and configuration files against [Origami coding standards
 
 Run Origami specification tests and component specific tests.
 
-Run Origami specification tests and component specific tests.
-
 Checks Sass supports [silent and non-silent compilation modes](http://origami.ft.com/docs/syntax/scss/#silent-styles).
 If `pa11y.html` demo exists, confirms it is accessible using [Pa11y](http://pa11y.org/).
 If `package.json` contains a `test` script, confirms it exits with a 0 exit code.
