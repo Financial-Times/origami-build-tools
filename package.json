@@ -13,7 +13,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "mocha -t 50000 `find . -name '*.test.js' -path './test/*'`"
+    "test": "mocha -t 50000 ./test/tasks/demo-build.test.js"
   },
   "dependencies": {
     "aliases": "^0.1.0",
@@ -67,6 +67,8 @@
     "portfinder": "^1.0.7",
     "postcss": "^5.2.17",
     "raw-loader": "^0.5.1",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4",
     "root-check": "^1.0.0",
     "sass-lint": "^1.10.2",
     "serve": "^6.0.2",

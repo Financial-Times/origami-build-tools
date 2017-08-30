@@ -96,21 +96,33 @@ describe('Demo task', function () {
 				"hidden": true,
 				"description": "Second test"
 			});
+			demoConfig.demos.push({
+				"name": "test3",
+				"template": "demos/src/test3.mustache",
+				"path": "/demos/test3.html",
+				"description": "Third test",
+				"data": "https://www.ft.com/__origami/service/navigation/v2/menus/footer/?source=test"
+			});
 			fs.writeFileSync('origami.json', JSON.stringify(demoConfig));
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
+			fs.writeFileSync('demos/src/test3.mustache', '<div>{{{label}}}</div>', 'utf8');
 			return demo({
 				production: true
 			})
 				.then(function () {
 					const test1 = fs.readFileSync('demos/test1.html', 'utf8');
 					const test2 = fs.readFileSync('demos/test2.html', 'utf8');
+					const test3 = fs.readFileSync('demos/test3.html', 'utf8');
 					expect(test1).to.contain('<div>test1</div>');
 					expect(test2).to.contain('<div>test2</div>');
+					expect(test3).to.contain('<div>Footer</div>');
 					expect(test1).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
 					expect(test2).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+					expect(test3).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
 					fs.unlinkSync('demos/test1.html');
 					fs.unlinkSync('demos/test2.html');
+					fs.unlinkSync('demos/test3.html');
 				});
 		});
 
