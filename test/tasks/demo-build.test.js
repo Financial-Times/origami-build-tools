@@ -5,6 +5,7 @@ const expect = require('expect.js');
 const process = require('process');
 const fs = require('fs-extra');
 const path = require('path');
+const sinon = require('sinon');
 
 const demo = require('../../lib/tasks/demo-build');
 
@@ -82,6 +83,10 @@ describe('Demo task', function () {
 		});
 
 		it('should build demo html', function () {
+			const request = require('request-promise-native');
+			const demoDataLabel = 'Footer';
+			sinon.stub(request, 'get').callsFake(() => Promise.resolve({"label": demoDataLabel, "items": []}));
+
 			const demoConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
 			demoConfig.demos.push({
 				"name": "test1",
@@ -97,32 +102,32 @@ describe('Demo task', function () {
 				"description": "Second test"
 			});
 			demoConfig.demos.push({
-				"name": "test3",
-				"template": "demos/src/test3.mustache",
-				"path": "/demos/test3.html",
+				"name": "remote-data",
+				"template": "demos/src/remote-data.mustache",
+				"path": "/demos/remote-data.html",
 				"description": "Third test",
-				"data": "https://www.ft.com/__origami/service/navigation/v2/menus/footer/?source=test"
+				"data": "http://origami.ft.com/#stubedRequest"
 			});
 			fs.writeFileSync('origami.json', JSON.stringify(demoConfig));
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
-			fs.writeFileSync('demos/src/test3.mustache', '<div>{{{label}}}</div>', 'utf8');
+			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
 			return demo({
 				production: true
 			})
 				.then(function () {
 					const test1 = fs.readFileSync('demos/test1.html', 'utf8');
 					const test2 = fs.readFileSync('demos/test2.html', 'utf8');
-					const test3 = fs.readFileSync('demos/test3.html', 'utf8');
+					const remoteData = fs.readFileSync('demos/remote-data.html', 'utf8');
 					expect(test1).to.contain('<div>test1</div>');
 					expect(test2).to.contain('<div>test2</div>');
-					expect(test3).to.contain('<div>Footer</div>');
+					expect(remoteData).to.contain(`<div>Footer</div>`);
 					expect(test1).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
 					expect(test2).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
-					expect(test3).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+					expect(remoteData).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
 					fs.unlinkSync('demos/test1.html');
 					fs.unlinkSync('demos/test2.html');
-					fs.unlinkSync('demos/test3.html');
+					fs.unlinkSync('demos/remote-data.html');
 				});
 		});
 
