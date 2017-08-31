@@ -85,7 +85,10 @@ describe('Demo task', function () {
 		it('should build demo html', function () {
 			const request = require('request-promise-native');
 			const demoDataLabel = 'Footer';
-			sinon.stub(request, 'get').callsFake(() => Promise.resolve({"label": demoDataLabel, "items": []}));
+			sinon.stub(request, 'get').callsFake(() => Promise.resolve({
+				"label": demoDataLabel,
+				"items": []
+			}));
 
 			const demoConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
 			demoConfig.demos.push({
@@ -114,21 +117,20 @@ describe('Demo task', function () {
 			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
 			return demo({
 				production: true
-			})
-				.then(function () {
-					const test1 = fs.readFileSync('demos/test1.html', 'utf8');
-					const test2 = fs.readFileSync('demos/test2.html', 'utf8');
-					const remoteData = fs.readFileSync('demos/remote-data.html', 'utf8');
-					expect(test1).to.contain('<div>test1</div>');
-					expect(test2).to.contain('<div>test2</div>');
-					expect(remoteData).to.contain(`<div>Footer</div>`);
-					expect(test1).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
-					expect(test2).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
-					expect(remoteData).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
-					fs.unlinkSync('demos/test1.html');
-					fs.unlinkSync('demos/test2.html');
-					fs.unlinkSync('demos/remote-data.html');
-				});
+			}).then(function () {
+				const test1 = fs.readFileSync('demos/test1.html', 'utf8');
+				const test2 = fs.readFileSync('demos/test2.html', 'utf8');
+				const testRemoteData = fs.readFileSync('demos/remote-data.html', 'utf8');
+				expect(test1).to.contain('<div>test1</div>');
+				expect(test2).to.contain('<div>test2</div>');
+				expect(testRemoteData).to.contain(`<div>Footer</div>`);
+				expect(test1).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+				expect(test2).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+				expect(testRemoteData).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+				fs.unlinkSync('demos/test1.html');
+				fs.unlinkSync('demos/test2.html');
+				fs.unlinkSync('demos/remote-data.html');
+			});
 		});
 
 		it('should build local demos', function () {
