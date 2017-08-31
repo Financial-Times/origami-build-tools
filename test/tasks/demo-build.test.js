@@ -123,7 +123,7 @@ describe('Demo task', function () {
 				const testRemoteData = fs.readFileSync('demos/remote-data.html', 'utf8');
 				expect(test1).to.contain('<div>test1</div>');
 				expect(test2).to.contain('<div>test2</div>');
-				expect(testRemoteData).to.contain(`<div>Footer</div>`);
+				expect(testRemoteData).to.contain(`<div>${demoDataLabel}</div>`);
 				expect(test1).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
 				expect(test2).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
 				expect(testRemoteData).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
