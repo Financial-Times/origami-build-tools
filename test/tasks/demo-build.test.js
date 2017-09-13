@@ -14,6 +14,8 @@ const oTestPath = 'test/fixtures/o-test';
 const pathSuffix = '-demo';
 const demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
+const sandbox = sinon.sandbox.create();
+
 describe('Demo task', function () {
 
 	beforeEach(function () {
@@ -24,6 +26,7 @@ describe('Demo task', function () {
 	afterEach(function () {
 		process.chdir(obtPath);
 		fs.removeSync(demoTestPath);
+		sandbox.restore(); // restore all fakes created through the sandbox
 	});
 
 	describe('Build demos', function () {
@@ -51,7 +54,6 @@ describe('Demo task', function () {
 				}, function errorHandler(err) {
 					// It will throw a template not found error which is fixed in "should build html" test
 					expect(err.message).to.not.be('Couldn\'t find demos config path, checked: demos/src/mysupercoolconfigs.json');
-					fs.unlinkSync('demos/src/mysupercoolconfig.json');
 				});
 		});
 
@@ -85,7 +87,7 @@ describe('Demo task', function () {
 		it('should build demo html', function () {
 			const request = require('request-promise-native');
 			const demoDataLabel = 'Footer';
-			sinon.stub(request, 'get').callsFake(() => Promise.resolve({
+			sandbox.stub(request, 'get').callsFake(() => Promise.resolve({
 				"label": demoDataLabel,
 				"items": []
 			}));
@@ -130,6 +132,7 @@ describe('Demo task', function () {
 				fs.unlinkSync('demos/test1.html');
 				fs.unlinkSync('demos/test2.html');
 				fs.unlinkSync('demos/remote-data.html');
+				request.get.restore();
 			});
 		});
 
@@ -159,6 +162,87 @@ describe('Demo task', function () {
 					expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  color: blue; }\n');
 					fs.removeSync('demos/local');
 				});
+		});
+
+		it('should fail if a remote url does not return valid json', function () {
+			// Stub for invalid json.
+			const request = require('request-promise-native');
+			sandbox.stub(request, 'get').callsFake(() => Promise.resolve(`{
+				"label": none valid json,
+				"items": []}}}
+			}`));
+			// Create demo config.
+			const demoConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
+			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
+			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
+			demoConfig.demos.push({
+				"name": "remote-data",
+				"template": "demos/src/remote-data.mustache",
+				"path": "/demos/remote-data.html",
+				"description": "Invalid remote data test",
+				"data": remoteDataUrl
+			});
+			fs.writeFileSync('origami.json', JSON.stringify(demoConfig));
+			// Run invalid json test.
+			return demo({
+				production: true
+			}).then(function () {
+				throw new Error('promise resolved when it should have rejected');
+			}).catch(function (err) {
+				expect(err.message).to.be(`Could not load remote demo data. ${remoteDataUrl} did not provide valid JSON.`);
+			});
+		});
+
+		it('should fail if a remote url is invalid', function () {
+			// Create demo config.
+			const demoConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
+			const remoteDataUrl = 'https://!@£$%^&*()';
+			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
+			demoConfig.demos.push({
+				"name": "remote-data",
+				"template": "demos/src/remote-data.mustache",
+				"path": "/demos/remote-data.html",
+				"description": "Invalid url",
+				"data": remoteDataUrl
+			});
+			fs.writeFileSync('origami.json', JSON.stringify(demoConfig));
+			// Run remote url test.
+			return demo({
+				production: true
+			}).then(function () {
+				throw new Error('promise resolved when it should have rejected');
+			}).catch(function (err) {
+				expect(err.message).to.be(`Could not load remote demo data. ${remoteDataUrl} does not appear to be valid.`);
+			});
+		});
+
+		it('should show a helpful error message for http status code errors', function () {
+			// Stub for request/request-promise-native StatusCodeError.
+			const request = require('request-promise-native');
+			const mockHttpError = new Error('Mock StatusCodeError');
+			mockHttpError.name = 'StatusCodeError';
+			mockHttpError.statusCode = '500';
+			sandbox.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
+			// Create demo config.
+			const demoConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
+			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
+			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
+			demoConfig.demos.push({
+				"name": "remote-data",
+				"template": "demos/src/remote-data.mustache",
+				"path": "/demos/remote-data.html",
+				"description": "Remote data url http error.",
+				"data": remoteDataUrl
+			});
+			fs.writeFileSync('origami.json', JSON.stringify(demoConfig));
+			// Error HTTP status code.
+			return demo({
+				production: true
+			}).then(function () {
+				throw new Error('promise resolved when it should have rejected');
+			}).catch(function (err) {
+				expect(err.message).to.be(`Could not load remote demo data. ${remoteDataUrl} returned a ${mockHttpError.statusCode} status code.`);
+			});
 		});
 
 		it('should load local partials', function () {

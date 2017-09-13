@@ -13,7 +13,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "mocha -t 50000 `find . -name '*.test.js' -path './test/*'`"
+    "test": "mocha -t 50000 `find . -name '*.test.js' -path './test/*'`",
+    "mocha": "mocha"
   },
   "dependencies": {
     "aliases": "^0.1.0",
