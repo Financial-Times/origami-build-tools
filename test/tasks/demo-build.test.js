@@ -129,10 +129,6 @@ describe('Demo task', function () {
 				expect(test1).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
 				expect(test2).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
 				expect(testRemoteData).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
-				fs.unlinkSync('demos/test1.html');
-				fs.unlinkSync('demos/test2.html');
-				fs.unlinkSync('demos/remote-data.html');
-				request.get.restore();
 			});
 		});
 
@@ -271,8 +267,6 @@ describe('Demo task', function () {
 					const test2 = fs.readFileSync('demos/test2.html', 'utf8');
 					expect(test1).to.contain('<div>partial1</div>');
 					expect(test2).to.contain('<div>partial2</div>');
-					fs.unlinkSync('demos/test1.html');
-					fs.unlinkSync('demos/test2.html');
 				});
 		});
 	});
