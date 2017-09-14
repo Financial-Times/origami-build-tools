@@ -176,6 +176,7 @@ describe('Demo task', function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
 				expect(err.message).to.be(`Could not load remote demo data. ${remoteDataUrl} did not provide valid JSON.`);
+				expect(err.stack).to.be('');
 			});
 		});
 
@@ -196,6 +197,7 @@ describe('Demo task', function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
 				expect(err.message).to.be(`Could not load remote demo data. ${remoteDataUrl} does not appear to be valid.`);
+				expect(err.stack).to.be('');
 			});
 		});
 
@@ -223,6 +225,34 @@ describe('Demo task', function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
 				expect(err.message).to.be(`Could not load remote demo data. ${remoteDataUrl} returned a ${mockHttpError.statusCode} status code.`);
+				expect(err.stack).to.be('');
+			});
+		});
+
+
+		it('should show a stack trace if remote demo data retrieval fails for an unknown reason', function () {
+			// Stub for request/request-promise-native StatusCodeError.
+			const request = require('request-promise-native');
+			const mockHttpError = new Error('Mock Unknown Error');
+			mockHttpError.name = 'UnknownError';
+			sandbox.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
+			// Create demo config.
+			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
+			addDemoToOrigamiConfig({
+				"name": "remote-data",
+				"template": "demos/src/remote-data.mustache",
+				"path": "/demos/remote-data.html",
+				"description": "Remote data url unknown error.",
+				"data": remoteDataUrl
+			});
+			// Run error HTTP status code test. Tests the request/request-promise-native
+			// error is caught and transformed, but not that the library throws the error.
+			return demo({
+				production: true
+			}).then(function () {
+				throw new Error('promise resolved when it should have rejected');
+			}).catch(function (err) {
+				expect(err.stack).not.to.be('');
 			});
 		});
 
