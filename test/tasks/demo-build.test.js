@@ -91,29 +91,24 @@ describe('Demo task', function () {
 				"label": demoDataLabel,
 				"items": []
 			}));
-
-			const demoConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
-			demoConfig.demos.push({
+			addDemoToOrigamiConfig([{
 				"name": "test1",
 				"template": "demos/src/test1.mustache",
 				"path": "/demos/test1.html",
 				"description": "First test"
-			});
-			demoConfig.demos.push({
+			}, {
 				"name": "test2",
 				"template": "demos/src/test2.mustache",
 				"path": "/demos/test2.html",
 				"hidden": true,
 				"description": "Second test"
-			});
-			demoConfig.demos.push({
+			}, {
 				"name": "remote-data",
 				"template": "demos/src/remote-data.mustache",
 				"path": "/demos/remote-data.html",
 				"description": "Third test",
 				"data": "http://origami.ft.com/#stubedRequest"
-			});
-			fs.writeFileSync('origami.json', JSON.stringify(demoConfig));
+			}]);
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
 			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
@@ -121,33 +116,30 @@ describe('Demo task', function () {
 				production: true
 			}).then(function () {
 				const test1 = fs.readFileSync('demos/test1.html', 'utf8');
-				const test2 = fs.readFileSync('demos/test2.html', 'utf8');
-				const testRemoteData = fs.readFileSync('demos/remote-data.html', 'utf8');
 				expect(test1).to.contain('<div>test1</div>');
-				expect(test2).to.contain('<div>test2</div>');
-				expect(testRemoteData).to.contain(`<div>${demoDataLabel}</div>`);
 				expect(test1).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+				const test2 = fs.readFileSync('demos/test2.html', 'utf8');
+				expect(test2).to.contain('<div>test2</div>');
 				expect(test2).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+				const testRemoteData = fs.readFileSync('demos/remote-data.html', 'utf8');
+				expect(testRemoteData).to.contain(`<div>${demoDataLabel}</div>`);
 				expect(testRemoteData).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
 			});
 		});
 
 		it('should build local demos', function () {
-			const demoConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
-			demoConfig.demos.push({
+			addDemoToOrigamiConfig([{
 				"name": "test1",
 				"template": "demos/src/test1.mustache",
 				"path": "/demos/test1.html",
 				"description": "First test"
-			});
-			demoConfig.demos.push({
+			}, {
 				"name": "test2",
 				"template": "demos/src/test2.mustache",
 				"path": "/demos/test2.html",
 				"hidden": true,
 				"description": "Second test"
-			});
-			fs.writeFileSync('origami.json', JSON.stringify(demoConfig));
+			}]);
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
 			return demo()
@@ -168,17 +160,15 @@ describe('Demo task', function () {
 				"items": []}}}
 			}`));
 			// Create demo config.
-			const demoConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
 			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
 			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
-			demoConfig.demos.push({
+			addDemoToOrigamiConfig({
 				"name": "remote-data",
 				"template": "demos/src/remote-data.mustache",
 				"path": "/demos/remote-data.html",
 				"description": "Invalid remote data test",
 				"data": remoteDataUrl
 			});
-			fs.writeFileSync('origami.json', JSON.stringify(demoConfig));
 			// Run invalid json test.
 			return demo({
 				production: true
@@ -190,18 +180,15 @@ describe('Demo task', function () {
 		});
 
 		it('should fail if a remote url is invalid', function () {
-			// Create demo config.
-			const demoConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
+			// Create invalid demo data config.
 			const remoteDataUrl = 'https://!@£$%^&*()';
-			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
-			demoConfig.demos.push({
+			addDemoToOrigamiConfig({
 				"name": "remote-data",
 				"template": "demos/src/remote-data.mustache",
 				"path": "/demos/remote-data.html",
 				"description": "Invalid url",
 				"data": remoteDataUrl
 			});
-			fs.writeFileSync('origami.json', JSON.stringify(demoConfig));
 			// Run remote url test.
 			return demo({
 				production: true
@@ -220,18 +207,16 @@ describe('Demo task', function () {
 			mockHttpError.statusCode = '500';
 			sandbox.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
 			// Create demo config.
-			const demoConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
 			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
-			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
-			demoConfig.demos.push({
+			addDemoToOrigamiConfig({
 				"name": "remote-data",
 				"template": "demos/src/remote-data.mustache",
 				"path": "/demos/remote-data.html",
 				"description": "Remote data url http error.",
 				"data": remoteDataUrl
 			});
-			fs.writeFileSync('origami.json', JSON.stringify(demoConfig));
-			// Error HTTP status code.
+			// Run error HTTP status code test. Tests the request/request-promise-native
+			// error is caught and transformed, but not that the library throws the error.
 			return demo({
 				production: true
 			}).then(function () {
@@ -242,21 +227,20 @@ describe('Demo task', function () {
 		});
 
 		it('should load local partials', function () {
-			const demoConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
-			demoConfig.demos.push({
-				"name": "test1",
-				"template": "demos/src/test1.mustache",
-				"path": "/demos/test1.html",
-				"description": "First test"
-			});
-			demoConfig.demos.push({
-				"name": "test2",
-				"template": "demos/src/test2.mustache",
-				"path": "/demos/test2.html",
-				"hidden": true,
-				"description": "Second test"
-			});
-			fs.writeFileSync('origami.json', JSON.stringify(demoConfig));
+			addDemoToOrigamiConfig([
+				{
+					"name": "test1",
+					"template": "demos/src/test1.mustache",
+					"path": "/demos/test1.html",
+					"description": "First test"
+				}, {
+					"name": "test2",
+					"template": "demos/src/test2.mustache",
+					"path": "/demos/test2.html",
+					"hidden": true,
+					"description": "Second test"
+				}
+			]);
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>{{>partial1}}', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test1</div>{{>partials/partial2}}', 'utf8');
 			return demo({
@@ -269,5 +253,14 @@ describe('Demo task', function () {
 					expect(test2).to.contain('<div>partial2</div>');
 				});
 		});
+
+		function addDemoToOrigamiConfig (demosConfig) {
+			if (!Array.isArray(demosConfig)) {
+				demosConfig = [demosConfig];
+			}
+			const origamiConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
+			demosConfig.forEach((demoConfig) => origamiConfig.demos.push(demoConfig));
+			fs.writeFileSync('origami.json', JSON.stringify(origamiConfig));
+		}
 	});
 });
