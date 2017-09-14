@@ -68,6 +68,8 @@
     "portfinder": "^1.0.7",
     "postcss": "^5.2.17",
     "raw-loader": "^0.5.1",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4",
     "root-check": "^1.0.0",
     "sass-lint": "^1.10.2",
     "serve": "^6.0.2",
