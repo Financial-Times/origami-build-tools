@@ -229,9 +229,8 @@ describe('Demo task', function () {
 			});
 		});
 
-
 		it('should show a stack trace if remote demo data retrieval fails for an unknown reason', function () {
-			// Stub for request/request-promise-native StatusCodeError.
+			// Stub for request/request-promise-native UnknownError.
 			const request = require('request-promise-native');
 			const mockHttpError = new Error('Mock Unknown Error');
 			mockHttpError.name = 'UnknownError';
@@ -245,14 +244,35 @@ describe('Demo task', function () {
 				"description": "Remote data url unknown error.",
 				"data": remoteDataUrl
 			});
-			// Run error HTTP status code test. Tests the request/request-promise-native
-			// error is caught and transformed, but not that the library throws the error.
+			// Test for a stack trace.
 			return demo({
 				production: true
 			}).then(function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
 				expect(err.stack).not.to.be('');
+			});
+		});
+
+		it('should throw an error if local demo data cannot be found', function () {
+			fs.writeFileSync('demos/src/local-data.mustache', '<div>{{{label}}}</div>', 'utf8');
+			const demoDataUri = 'demos/src/does-not-exist-data.mustache';
+			// Create demo config.
+			addDemoToOrigamiConfig({
+				"name": "local-data",
+				"template": "demos/src/local-data.mustache",
+				"path": "/demos/local-data.html",
+				"description": "Remote data url unknown error.",
+				"data": demoDataUri
+			});
+
+			// Test for a "no local demo data" error.
+			return demo({
+				production: true
+			}).then(function () {
+				throw new Error('promise resolved when it should have rejected');
+			}).catch(function (err) {
+				expect(err.message).to.be(`Demo data not found: ${demoTestPath}/${demoDataUri}`);
 			});
 		});
 
