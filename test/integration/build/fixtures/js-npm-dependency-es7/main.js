@@ -1,3 +1,3 @@
 'use strict';
 
-global.world = require('es7module')();
+global.world = require('o-test-component');
