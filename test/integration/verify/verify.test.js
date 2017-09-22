@@ -4,16 +4,8 @@
 const execa = require('execa');
 const path = require('path');
 const process = require('process');
-const proclaim = require('proclaim');
 const obtBinPath = require('../helpers/obtpath');
-const fileExists = require('../helpers/fileExists');
 const rimraf = require('../helpers/delete');
-const vm = require('vm');
-const fs = require('fs');
-const isEs5 = require('is-es5-syntax');
-const isEs6 = require('is-es6-syntax');
-const isEs7 = require('is-es7-syntax');
-const currentVersion = require('node-version');
 
 describe('obt verify', function () {
 
