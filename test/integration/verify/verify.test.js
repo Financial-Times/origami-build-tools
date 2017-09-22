@@ -15,7 +15,7 @@ const isEs6 = require('is-es6-syntax');
 const isEs7 = require('is-es7-syntax');
 const currentVersion = require('node-version');
 
-describe.only('obt verify', function () {
+describe('obt verify', function () {
 
 	this.timeout(60 * 1000);
 
