@@ -5,6 +5,7 @@ module.exports = {
 		"modules": true
 	},
 	"parserOptions": {
+		"ecmaVersion": 7,
 		"sourceType": "module"
 	},
 	"env": {
