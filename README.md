@@ -105,6 +105,13 @@ Runs tests using [Karma](https://karma-runner.github.io) defaulting to Chrome St
 The ability to use OBT via it's programmatic API has been removed, if you were using OBT via `gulp`, you will need to migrate to the commandline version of OBT.
 OBT has removed the ability to configure the way it installs/builds/verifies code, this is to ensure that systems built with OBT follows the Origami specifcation and conventions.
 
+OBT no longer turns ES6 modules which have a default export into conventional CommonJS modules. If requiring an ES6 module and wanting to use the default exported property, you will need to access it explicity, like so:
+
+```diff
+-const util = require('es6-module-with-default-export');
++const util = require('es6-module-with-default-export').default;
+```
+
 ### Migrating from 5.X.X to 6.X.X
 
 #### OBT build
