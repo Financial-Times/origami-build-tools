@@ -1,6 +1,6 @@
 {
   "name": "origami-build-tools",
-  "version": "7.0.0-beta.2",
+  "version": "7.0.0-beta.8",
   "description": "Origami component development tools.",
   "main": "./lib/origami-build-tools",
   "bin": {
