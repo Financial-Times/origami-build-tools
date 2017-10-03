@@ -71,7 +71,7 @@ describe('verify-origami-json', function () {
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
 						'A non-empty description property is required\n' +
-						'The origamiType property needs to be set to either "module" or "service"\n' +
+						'The origamiType property needs to be set to either "imageset", "module" or "service"\n' +
 						'The origamiVersion property needs to be set to 1\n' +
 						'The support property must be an email or url to an issue tracker for this module\n' +
 						'The supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"\n\n' +
@@ -138,13 +138,13 @@ describe('verify-origami-json', function () {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
-						'The origamiType property needs to be set to either "module" or "service"\n\n' +
+						'The origamiType property needs to be set to either "imageset", "module" or "service"\n\n' +
 						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
 					);
 				});
 		});
 
-		it('should fail if origamiType property is not "module" or "service"', function () {
+		it('should fail if origamiType property is not "module" or "service" or "imageset"', function () {
 			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.origamiType = '';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
@@ -154,10 +154,18 @@ describe('verify-origami-json', function () {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
-						'The origamiType property needs to be set to either "module" or "service"\n\n' +
+						'The origamiType property needs to be set to either "imageset", "module" or "service"\n\n' +
 						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
 					);
 				});
+		});
+
+		it('should pass if origamiType property is "imageset"', function () {
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
+			origamiJSON.origamiType = 'imageset';
+			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
+
+			return verifyOrigamiJson().task();
 		});
 
 		it('should pass if origamiType property is "module"', function () {
