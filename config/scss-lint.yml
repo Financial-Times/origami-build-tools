@@ -88,6 +88,7 @@ rules:
         - appearance
         - font-smoothing
         - osx-font-smoothing
+    - ignore-non-standard: true
   placeholder-in-extend: 2
   placeholder-name-format:
     - 2
