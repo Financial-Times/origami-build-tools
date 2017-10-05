@@ -1,23 +1,27 @@
-/* global describe, it */
+/* eslint-env mocha */
 'use strict';
 
-const expect = require('expect.js');
+const proclaim = require('proclaim');
 
 const commandLine = require('../../lib/helpers/command-line');
 
-describe('Command line helper', function() {
-	it('should return output from stdout', function(done) {
-		commandLine.run('echo', ['test']).then(function(output) {
-			expect(output.stdout).to.be('test');
-			done();
+describe('Command line helper', function () {
+	it('should return output from stdout', function () {
+		return commandLine.run('echo', ['test'], {
+			stdout: false,
+			stderr: false
+		}).then(function (output) {
+			proclaim.equal(output.stdout, 'test');
 		});
 	});
 
-	it('should return output from stderr', function(done) {
-		commandLine.run('node', ['error']).then(function() {}, function(output) {
-			expect(output.stderr).to.contain('throw err;');
-			expect(output.code).to.be(1);
-			done();
+	it('should return output from stderr', function () {
+		return commandLine.run('node', ['error'], {
+			stdout: false,
+			stderr: false
+		}).catch(function (output) {
+			proclaim.include(output.stderr, 'throw err;');
+			proclaim.equal(output.code, 1);
 		});
 	});
 });

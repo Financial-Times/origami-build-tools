@@ -3,3 +3,5 @@ node_modules/
 npm-debug.log*
 .DS_Store
 .editorconfig
+bower_components/
+/test/integration/*/fixtures/*/package-lock.json

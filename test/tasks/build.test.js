@@ -1,253 +1,70 @@
-/* global describe, it, before, after, afterEach */
+/* eslint-env mocha */
 'use strict';
 
-const denodeify = require('denodeify');
-const exec = denodeify(require('child_process').exec, function (err, stdout) {
-	return [err, stdout];
+const proclaim = require('proclaim');
+const mockery = require('mockery');
+const sinon = require('sinon');
+sinon.assert.expose(proclaim, {
+	includeFail: false,
+	prefix: ''
 });
 
-const expect = require('expect.js');
-const gulp = require('gulp');
+describe('Build task', function() {
+	let Listr;
+	let buildJS;
+	let buildSass;
+	let build;
+	let listrInstance;
 
-const fs = require('fs-extra');
-const path = require('path');
+	beforeEach(() => {
+		listrInstance = {
+			run: sinon.stub()
+		};
+		Listr = sinon.stub();
+		Listr.returns(listrInstance);
+		buildJS = sinon.stub();
+		buildSass = sinon.stub();
 
-const build = require('../../lib/tasks/build');
-
-const obtPath = process.cwd();
-const oTestPath = 'test/fixtures/o-test';
-
-describe('Build task', function () {
-	describe('Build Js', function () {
-		const pathSuffix = '-build-js';
-		const buildTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
-
-		before(function () {
-			fs.copySync(path.resolve(obtPath, oTestPath), buildTestPath);
-			process.chdir(buildTestPath);
-			fs.writeFileSync('bower.json', JSON.stringify({
-				name: 'o-test',
-				main: 'main.js'
-			}), 'utf8');
+		mockery.enable({
+			useCleanCache: true,
+			warnOnReplace: false,
+			warnOnUnregistered: false
 		});
 
-		after(function () {
-			process.chdir(obtPath);
-			fs.removeSync(buildTestPath);
-		});
+		mockery.registerMock('listr', Listr);
 
-		afterEach(function () {
-			return fs.emptydirSync('build', function () {
-				fs.removeSync('build');
-			});
-		});
+		mockery.registerMock('./build-js', buildJS);
+		mockery.registerMock('./build-sass', buildSass);
 
-		it('should work with default options', function (done) {
-			build.js(gulp)
-				.on('end', function () {
-					const builtJs = fs.readFileSync('build/main.js', 'utf8');
-					expect(builtJs).to.contain('sourceMappingURL');
-					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
-					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
-					expect(builtJs).to.contain('\tmodule.exports = {\n\t\t"test": true\n\t};');
-					done();
-				});
-		});
+		mockery.registerAllowable('../../lib/tasks/build');
 
-		it('should work with production option', function (done) {
-			build
-				.js(gulp, {
-					env: 'production'
-				})
-				.on('end', function () {
-					const builtJs = fs.readFileSync('build/main.js', 'utf8');
-					expect(builtJs).to.not.contain('sourceMappingURL');
-					expect(builtJs).to.not.contain('var Test');
-					expect(builtJs).to.not.contain('function Test() {\n\t\tvar name = \'test\';');
-					expect(builtJs).to.not.contain('"This is a test"');
-					expect(builtJs).to.not.contain('function Test() {\n\t\tvar name = \'test\';');
-					done();
-				});
-		});
+		build = require('../../lib/tasks/build');
 
-		it('should build from custom source', function (done) {
-			build
-				.js(gulp, {
-					js: './src/js/test.js'
-				})
-				.on('end', function () {
-					const builtJs = fs.readFileSync('build/main.js', 'utf8');
-					expect(builtJs).to.contain('sourceMappingURL');
-					expect(builtJs).to.not.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
-					done();
-				});
-		});
-
-		it('should build to a custom directory', function (done) {
-			build
-				.js(gulp, {
-					buildFolder: 'test-build'
-				})
-				.on('end', function () {
-					const builtJs = fs.readFileSync('test-build/main.js', 'utf8');
-					expect(builtJs).to.contain('sourceMappingURL');
-					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
-					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
-					done();
-				});
-		});
-
-		it('should build to a custom file', function (done) {
-			build
-				.js(gulp, {
-					buildJs: 'bundle.js'
-				})
-				.on('end', function () {
-					const builtJs = fs.readFileSync('build/bundle.js', 'utf8');
-					expect(builtJs).to.contain('sourceMappingURL');
-					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
-					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
-					done();
-				});
-		});
-
-		it('should fail on syntax error', function (done) {
-			build
-				.js(gulp, {
-					js: './src/js/syntax-error.js'
-				})
-				.on('error', function (e) {
-					expect(e.message).to.contain('SyntaxError');
-					expect(e.message).to.contain('Unexpected token');
-					done();
-				})
-				.on('end', function () {
-					// Fail quickly to not wait for test to timeout
-					expect(true).to.be(false);
-					done();
-				});
-		});
-
-		it('should fail when a dependency is not found', function (done) {
-			build
-				.js(gulp, {
-					js: './src/js/missing-dep.js'
-				})
-				.on('error', function (e) {
-					expect(e.message).to.contain('ModuleNotFoundError: Module not found: Error: Cannot resolve module \'dep\'');
-					done();
-				})
-				.on('end', function () {
-					// Fail quickly to not wait for test to timeout
-					expect(true).to.be(false);
-					done();
-				});
-		});
-
-		it('should support a standalone option which creates a global variable', function (done) {
-			build
-				.js(gulp, {
-					standalone: 'origami'
-				})
-				.on('end', function () {
-					const builtJs = fs.readFileSync('build/main.js', 'utf8');
-					expect(builtJs).to.contain('sourceMappingURL');
-					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
-					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
-					expect(builtJs).to.contain('\tmodule.exports = {\n\t\t"test": true\n\t};');
-					expect(builtJs).to.contain('var origami =\n');
-					done();
-				});
-		});
+		mockery.resetCache();
 	});
 
-	describe('Build Sass', function () {
-		const pathSuffix = '-build-sass';
-		const buildTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
+	after(() => {
+		mockery.resetCache();
+		mockery.deregisterAll();
+		mockery.disable();
+	});
 
-		before(function () {
-			fs.copySync(path.resolve(obtPath, oTestPath), buildTestPath);
-			process.chdir(buildTestPath);
-			fs.writeFileSync('bower.json', JSON.stringify({
-				name: 'o-test',
-				main: 'main.scss'
-			}), 'utf8');
-		});
+	it('should export a function', function() {
+		proclaim.isFunction(build);
+	});
 
-		after(function () {
-			process.chdir(obtPath);
-			fs.removeSync(path.resolve(obtPath, buildTestPath));
-		});
+	describe('when called', () => {
+		it('should create Listr object with build tasks', function() {
+			build();
 
-		afterEach(function () {
-			return exec('rm -rf build');
-		});
+			Listr.firstCall.args[0][0].task();
+			Listr.firstCall.args[0][1].task();
 
-		it('should work with default options', function (done) {
-			build.sass(gulp)
-				.on('end', function () {
-					const builtCss = fs.readFileSync('build/main.css', 'utf8');
-					expect(builtCss).to.contain('div {\n  color: blue; }\n');
-					done();
-				});
-		});
-
-		it('should work with production option', function (done) {
-			build
-				.sass(gulp, {
-					env: 'production'
-				})
-				.on('end', function () {
-					const builtCss = fs.readFileSync('build/main.css', 'utf8');
-					expect(builtCss).to.be('div{color:#00f}');
-					done();
-				});
-		});
-
-		it('should build from custom source', function (done) {
-			build
-				.sass(gulp, {
-					sass: './src/scss/test.scss'
-				})
-				.on('end', function () {
-					const builtCss = fs.readFileSync('build/main.css', 'utf8');
-					expect(builtCss).to.contain('p {\n  color: #000000; }\n');
-					done();
-				});
-		});
-
-		it('should build to a custom directory', function (done) {
-			build
-				.sass(gulp, {
-					buildFolder: 'test-build'
-				})
-				.on('end', function () {
-					const builtCss = fs.readFileSync('test-build/main.css', 'utf8');
-					expect(builtCss).to.contain('div {\n  color: blue; }\n');
-					exec('rm -rf test-build')
-						.then(function () {
-							done();
-						}, done);
-				});
-		});
-
-		it('should build to a custom file', function (done) {
-			build
-				.sass(gulp, {
-					buildCss: 'bundle.css'
-				})
-				.on('end', function () {
-					const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
-					expect(builtCss).to.contain('div {\n  color: blue; }\n');
-					done();
-				});
+			proclaim.calledOnce(Listr);
+			proclaim.calledWithNew(Listr);
+			proclaim.isArray(Listr.firstCall.args[0]);
+			proclaim.calledOnce(buildJS);
+			proclaim.calledOnce(buildSass);
 		});
 	});
 });

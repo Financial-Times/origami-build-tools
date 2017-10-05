@@ -1,103 +1,74 @@
-/* global describe, it, before, after */
+/* eslint-env mocha */
 'use strict';
 
-const expect = require('expect.js');
-const gulp = require('gulp');
-
-const fs = require('fs-extra');
-const path = require('path');
-
-const verify = require('../../lib/tasks/verify');
-
-const obtPath = process.cwd();
-const oTestPath = 'test/fixtures/o-test';
-const pathSuffix = '-verify';
-const verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
+const proclaim = require('proclaim');
+const mockery = require('mockery');
+const sinon = require('sinon');
+sinon.assert.expose(proclaim, {
+	includeFail: false,
+	prefix: ''
+});
 
 describe('Verify task', function() {
-	before(function() {
-		fs.copySync(path.resolve(obtPath, oTestPath), verifyTestPath);
-		process.chdir(verifyTestPath);
-		fs.writeFileSync('src/scss/verify.scss', '$color: #ccc;\n\np {\n  color: $color!important ;\n}\n', 'utf8');
-		fs.writeFileSync('src/js/verify.js', 'const test = \'We live in financial times\';\n');
-	});
+	let Listr;
+	let verifyOrigamiJsonFile;
+	let verifyJavaScript;
+	let verifySass;
+	let verify;
+	let listrInstance;
 
-	after(function() {
-		process.chdir(obtPath);
-		fs.removeSync(path.resolve(obtPath, verifyTestPath));
-	});
+	beforeEach(() => {
+		listrInstance = {
+			run: sinon.stub()
+		};
+		Listr = sinon.stub();
+		Listr.returns(listrInstance);
+		verifyOrigamiJsonFile = sinon.stub();
+		verifyOrigamiJsonFile.returns(verifyOrigamiJsonFile);
+		verifyJavaScript = sinon.stub();
+		verifyJavaScript.returns(verifyJavaScript);
+		verifySass = sinon.stub();
+		verifySass.returns(verifySass);
 
-	it('should run sassLint with default config', function(done) {
-		verify.sassLint(gulp)
-			.on('error', function(error) {
-				expect(error.message).to.be('3 errors detected in src/scss/verify.scss');
-				done();
-			});
-	});
-
-	it('should run sassLint with custom config', function(done) {
-		verify.sassLint(gulp, {
-			sassLintPath: 'scss-lint.yml',
-			// Verify only verify.scss:
-			excludeFiles: ['!**/demo.scss', '!**/test.scss', '!**/main.scss']
-		}).on('end', function() {
-			done();
-		});
-	});
-
-	it('should run esLint with default config', function(done) {
-		verify.esLint(gulp)
-		.on('error', function(error) {
-			expect(error.message).to.be('Failed with 2 errors');
-			done();
-		});
-	});
-
-	it('should run esLint with custom config', function(done) {
-		const stream = verify.esLint(gulp, {
-			esLintPath: '.eslintrc',
-			excludeFiles: ['!./src/js/syntax-error.js']
-		})
-		.on('error', function(error) {
-			expect(error.message).to.be(undefined);
+		mockery.enable({
+			useCleanCache: true,
+			warnOnReplace: false,
+			warnOnUnregistered: false
 		});
 
-		stream.resume();
-		stream.on('end', function() {
-			done();
-		});
+		mockery.registerMock('listr', Listr);
+
+		mockery.registerMock('./verify-origami-json', verifyOrigamiJsonFile);
+		mockery.registerMock('./verify-javascript', verifyJavaScript);
+		mockery.registerMock('./verify-sass', verifySass);
+
+		mockery.registerAllowable('../../lib/tasks/verify');
+
+		verify = require('../../lib/tasks/verify');
+
+		mockery.resetCache();
 	});
 
-	describe('verify origami.json', function() {
-		it('should run origami.json check successfully', function() {
-			return verify.origamiJson()
-				.then(function(verifiedOrigamiJson) {
-					expect(verifiedOrigamiJson.length).to.be(0);
-				});
-		});
-
-		it('should fail with an empty origami.json', function() {
-			fs.writeFileSync('origami.json', JSON.stringify({}), 'utf8');
-
-			return verify.origamiJson()
-				.then(function() {}, function(verifiedOrigamiJson) {
-					expect(verifiedOrigamiJson).to.contain('A non-empty description property is required');
-					expect(verifiedOrigamiJson).to.contain('The origamiType property needs to be set to either "module" or "service"');
-					expect(verifiedOrigamiJson).to.contain('A non-empty description property is required');
-					expect(verifiedOrigamiJson).to.contain('The origamiVersion property needs to be set to 1');
-					expect(verifiedOrigamiJson).to.contain('The support property must be an email or url to an issue tracker for this module');
-					expect(verifiedOrigamiJson).to.contain('The supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"');
-				});
-		});
-
-		it('should fail when an expanded property is found for a demo', function() {
-			fs.writeFileSync('origami.json', JSON.stringify({ demos: [ { expanded: false }, { expanded: true } ] }), 'utf8');
-
-			return verify.origamiJson()
-				.then(function() {}, function(verifiedOrigamiJson) {
-					expect(verifiedOrigamiJson).to.contain('The expanded property has been deprecated. Use the "hidden" property when a demo should not appear in the Registry.');
-				});
-		});
+	afterEach(() => {
+		mockery.resetCache();
+		mockery.deregisterAll();
+		mockery.disable();
 	});
 
+	it('should export a function', function() {
+		proclaim.isFunction(verify);
+	});
+
+	describe('when called', () => {
+		it('should create Listr object with verify tasks', function() {
+			verify();
+
+			proclaim.calledOnce(Listr);
+			proclaim.calledWithNew(Listr);
+			proclaim.isArray(Listr.firstCall.args[0]);
+			proclaim.include(Listr.firstCall.args[0], verifyJavaScript);
+			proclaim.include(Listr.firstCall.args[0], verifyOrigamiJsonFile);
+			proclaim.include(Listr.firstCall.args[0], verifySass);
+		});
+	});
 });

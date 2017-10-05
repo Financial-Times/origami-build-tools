@@ -1,0 +1,7 @@
+{
+  "name": "with-dependencies",
+  "private": true,
+  "dependencies": {
+    "test-component": "o-test-component#1.0.0"
+  }
+}
