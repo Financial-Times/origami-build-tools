@@ -65,9 +65,10 @@ module.exports = {
 								require.resolve('babel-preset-es2017')
 							],
 							plugins: [
-								// Polyfills the runtime needed for async/await and generators
-								// Useful for applications rather than components.
 								[
+									require.resolve('babel-plugin-add-module-exports'),
+									// Polyfills the runtime needed for async/await and generators
+									// Useful for applications rather than components.
 									require.resolve('babel-plugin-transform-runtime'),
 									{
 										helpers: false,
