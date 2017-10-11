@@ -44,7 +44,7 @@ describe('run-bower-install', function() {
 				proclaim.calledWithExactly(commandLine.run, require.resolve('bower/bin/bower'), [
 					'install',
 					'--config.registry.search=http://registry.origami.ft.com',
-					'--config.registry.search=https://bower.herokuapp.com'
+					'--config.registry.search=https://registry.bower.io'
 				], undefined);
 			});
 	});
