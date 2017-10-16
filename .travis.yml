@@ -19,7 +19,7 @@ deploy:
   provider: npm
   email: strategic.products@ft.com
   api_key:
-    secure: F6dADkgQEyEkuchSvzwzgDvbk99e2ZR+3e8PRLJGOoyr15igmAc6QoNlFwyfFMVDafQr27wheF5Ab7+GYXhlIWJZHRmJrpUy9McDg0g1XhGQxAS6bo2Q6EHI6IRS0xbYN5RarVb0NlX7PxJiecrcCv3rJwbxnq8nJ1SnI7T8rBI=
+    secure: dQViz4cR32rwRzEFbkzorNYvH3ydxjFb4NK9xh41FbGsT9gufVYLQrRpSnAgSDhkjbfPKa6uQWiSFJKZ00RrLhXaotHPjJSogkjaI82aE4jyeOasZRAuCTzNOd7pYxYU9H7hUkPjVmaEKKZIIbyDY1MzmftRgZX8TIpIKX8lrFc=
   on:
     all_branches: true
     tags: true
