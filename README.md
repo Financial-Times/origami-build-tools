@@ -38,6 +38,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--production               Compiled assets will be minified for production systems
 		--browserstack             Run tests using Browserstack instead of Chrome Stable
 		--standalone               Create a named export for the built JavaScript
+		--demo-filter=<demo-name>  Build a specific demo. E.G. --demo-filter=pa11y to build only the pa11y.html demo.
 
 ### Developing products
 
@@ -79,6 +80,8 @@ If building a library use the `--standalone` option to specify the name you want
 ### `demo` or `d`
 
 Build demos found in the [demo config file](http://origami.ft.com/docs/component-spec/modules/#demo-config).
+
+Build a specific demo with the `--demo-filter` option.
 
 * If `--production` is set, demos are built to pull assets through the Origami Build Service.
 
