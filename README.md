@@ -39,6 +39,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--browserstack             Run tests using Browserstack instead of Chrome Stable
 		--standalone               Create a named export for the built JavaScript
 		--demo-filter=<demo-name>  Build a specific demo. E.G. --demo-filter=pa11y to build only the pa11y.html demo.
+		--suppress-errors          Do not error if no demos are found when using the --demo-filter option.
 
 ### Developing products
 
