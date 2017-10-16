@@ -16,6 +16,7 @@ matrix:
 before_deploy:
 - npm-prepublish --verbose
 deploy:
+  skip_cleanup: true
   provider: npm
   email: strategic.products@ft.com
   api_key:
