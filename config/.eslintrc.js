@@ -1,9 +1,6 @@
 'use strict';
 
 module.exports = {
-	"ecmaFeatures": {
-		"modules": true
-	},
 	"parserOptions": {
 		"ecmaVersion": 7,
 		"sourceType": "module"
