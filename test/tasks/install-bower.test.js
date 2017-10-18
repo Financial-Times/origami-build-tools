@@ -62,24 +62,24 @@ describe('install-bower', function () {
 	describe('skip', () => {
 		it('should return true if bower.json does not exist', function() {
 			return bowerInstall().skip()
-			.then(skipped => {
-				proclaim.ok(skipped);
-			});
+				.then(skipped => {
+					proclaim.ok(skipped);
+				});
 		});
 
 		it('should return a helpful message if bower.json does not exist', function() {
 			return bowerInstall().skip()
-			.then(skipped => {
-				proclaim.equal(skipped, 'No bower.json found.');
-			});
+				.then(skipped => {
+					proclaim.equal(skipped, 'No bower.json found.');
+				});
 		});
 
 		it('should return a falsey value if bower.json does exist', function() {
 			fs.writeFileSync('bower.json', '{}');
 			return bowerInstall().skip()
-			.then(skipped => {
-				proclaim.notOk(skipped);
-			});
+				.then(skipped => {
+					proclaim.notOk(skipped);
+				});
 		});
 	});
 
