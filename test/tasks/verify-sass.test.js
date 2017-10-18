@@ -66,7 +66,7 @@ describe('verify-sass', function() {
 			proclaim.throws(() => {
 				verify().task();
 			},
-				'Failed linting: \n\n' +
+			'Failed linting: \n\n' +
 				'./src/scss/verify.scss:1:9 Error - Hex values should use the long-form format - 6 characters (hex-length)\n' +
 				'./src/scss/verify.scss:4:10 Error - Trailing semicolons required (trailing-semicolon)\n' +
 				'./src/scss/verify.scss:4:16, Warning - !important not allowed (no-important)\n' +
