@@ -140,7 +140,7 @@ describe('Build task', function() {
 					js: './src/js/missing-dep.js'
 				})
 				.on('error', function(e) {
-					expect(e.message).to.contain('ModuleNotFoundError: Module not found: Error: Cannot resolve module \'dep\'');
+					expect(e.message).to.contain('Module not found: Error: Cannot resolve module \'dep\'');
 					done();
 				})
 				.on('end', function() {
