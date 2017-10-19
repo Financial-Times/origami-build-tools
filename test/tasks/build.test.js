@@ -50,7 +50,7 @@ describe('Build task', function() {
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
 					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
-					expect(builtJs).to.contain('\tmodule.exports = {\n\t\t"test": true\n\t};');
+					expect(builtJs).to.contain('\n\n\tmodule.exports = {"test":true}\n\n');
 					done();
 				});
 		});
@@ -161,7 +161,7 @@ describe('Build task', function() {
 					expect(builtJs).to.contain('var Test');
 					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
 					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
-					expect(builtJs).to.contain('\tmodule.exports = {\n\t\t"test": true\n\t};');
+					expect(builtJs).to.contain('\n\n\tmodule.exports = {"test":true}\n\n');
 					expect(builtJs).to.contain('var origami =\n');
 					done();
 				});
