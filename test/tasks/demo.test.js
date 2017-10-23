@@ -29,7 +29,8 @@ describe('Demo task', function() {
 	describe('Run server', function() {
 		it('should run a server', function(done) {
 			demo.runServer(gulp)
-				.then(function(server) {
+				.then(function (server) {
+					server.emit('kill');
 					server.on('end', function() {
 						done();
 					});
