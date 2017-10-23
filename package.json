@@ -55,7 +55,7 @@
     "minimist": "^1.1.1",
     "nightwatch": "^0.9.16",
     "node-sass": "^4.5.3",
-    "node.extend": "^1.1.5",
+    "node.extend": "^2.0.0",
     "npmconf": "^2.1.2",
     "pa11y": "^4.0.0",
     "phantomjs-prebuilt": "^2.1.12",
