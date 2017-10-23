@@ -54,7 +54,7 @@
     "loader-utils": "^1.1.0",
     "merge-stream": "^1.0.0",
     "minimist": "^1.1.1",
-    "nightwatch": "^0.9.0",
+    "nightwatch": "^0.9.16",
     "node-sass": "^3.9.0",
     "node.extend": "^1.1.5",
     "npmconf": "^2.1.2",
