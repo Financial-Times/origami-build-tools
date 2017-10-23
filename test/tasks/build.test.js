@@ -48,9 +48,9 @@ describe('Build task', function() {
 					const builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
-					expect(builtJs).to.contain('\n\n\tmodule.exports = {"test":true}\n\n');
+					expect(builtJs).to.contain('\n\nmodule.exports = {"test":true}\n\n');
 					done();
 				});
 		});
@@ -64,9 +64,9 @@ describe('Build task', function() {
 					const builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.not.contain('sourceMappingURL');
 					expect(builtJs).to.not.contain('var Test');
-					expect(builtJs).to.not.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.not.contain('function Test() {\n\tvar name = \'test\';');
 					expect(builtJs).to.not.contain('"This is a test"');
-					expect(builtJs).to.not.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.not.contain('function Test() {\n\tvar name = \'test\';');
 					done();
 			});
 		});
@@ -80,7 +80,7 @@ describe('Build task', function() {
 					const builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.not.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					done();
 				});
 		});
@@ -94,9 +94,9 @@ describe('Build task', function() {
 					const builtJs = fs.readFileSync('test-build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					done();
 				});
 		});
@@ -110,9 +110,9 @@ describe('Build task', function() {
 					const builtJs = fs.readFileSync('build/bundle.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					done();
 				});
 		});
@@ -140,7 +140,7 @@ describe('Build task', function() {
 					js: './src/js/missing-dep.js'
 				})
 				.on('error', function(e) {
-					expect(e.message).to.contain('Module not found: Error: Cannot resolve module \'dep\'');
+					expect(e.message).to.contain('Module not found: Error: Can\'t resolve \'dep\'');
 					done();
 				})
 				.on('end', function() {
@@ -159,9 +159,9 @@ describe('Build task', function() {
 					const builtJs = fs.readFileSync('build/main.js', 'utf8');
 					expect(builtJs).to.contain('sourceMappingURL');
 					expect(builtJs).to.contain('var Test');
-					expect(builtJs).to.contain('function Test() {\n\t\tvar name = \'test\';');
+					expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
 					expect(builtJs).to.contain('var textTest = "This is a test\\n";');
-					expect(builtJs).to.contain('\n\n\tmodule.exports = {"test":true}\n\n');
+					expect(builtJs).to.contain('\n\nmodule.exports = {"test":true}\n\n');
 					expect(builtJs).to.contain('var origami =\n');
 					done();
 				});
