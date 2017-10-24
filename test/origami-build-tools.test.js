@@ -16,10 +16,10 @@ describe('obt', function() {
 	const metricsMock = sinon.stub();
 
 	beforeEach(function() {
-		fetchMock.reset();
-		logMock.reset();
-		updateNotifierMock.reset();
-		metricsMock.reset();
+		fetchMock.resetHistory();
+		logMock.resetHistory();
+		updateNotifierMock.resetHistory();
+		metricsMock.resetHistory();
 
 		mockery.enable({
 			useCleanCache: true,

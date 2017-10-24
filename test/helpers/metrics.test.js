@@ -14,7 +14,7 @@ describe('metrics helper', function() {
 	};
 
 	beforeEach(function() {
-		graphiteMock.createClient.reset();
+		graphiteMock.createClient.resetHistory();
 
 		mockery.enable({
 			useCleanCache: true,

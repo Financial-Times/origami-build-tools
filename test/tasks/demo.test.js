@@ -29,7 +29,8 @@ describe('Demo task', function() {
 	describe('Run server', function() {
 		it('should run a server', function(done) {
 			demo.runServer(gulp)
-				.then(function(server) {
+				.then(function (server) {
+					server.emit('kill');
 					server.on('end', function() {
 						done();
 					});
@@ -152,7 +153,7 @@ describe('Demo task', function() {
 			.on('end', function() {
 				expect(fs.readFileSync('demos/local/test1.html', 'utf8')).to.contain('<div>test1</div>');
 				expect(fs.readFileSync('demos/local/test2.html', 'utf8')).to.contain('<div>test2</div>');
-				expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\t\tvar name = \'test\';');
+				expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\tvar name = \'test\';');
 				expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  color: blue; }\n');
 				fs.unlink('demos/test1.html');
 				fs.unlink('demos/test2.html');
