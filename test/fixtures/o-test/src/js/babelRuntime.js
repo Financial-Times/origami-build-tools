@@ -1,6 +1,8 @@
-/* eslint-disable */
-async function babelFunction() {
-	return await Promise.resolve(new Set());
+/* eslint-disable strict */
+'use strict';
+
+function babelFunction() {
+	return Promise.resolve(new Set());
 }
 
-module.exports = babelFunction
+module.exports = babelFunction;

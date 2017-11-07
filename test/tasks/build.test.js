@@ -93,7 +93,6 @@ describe('Build task', function() {
 				})
 				.on('end', function() {
 					const builtJs = fs.readFileSync('build/main.js', 'utf8');
-					console.dir(builtJs);
 					expect(builtJs).to.not.contain(CORE_JS_IDENTIFIER);
 					done();
 				});
