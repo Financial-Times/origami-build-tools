@@ -15,6 +15,8 @@ const build = require('../../lib/tasks/build');
 const obtPath = process.cwd();
 const oTestPath = 'test/fixtures/o-test';
 
+const CORE_JS_IDENTIFIER = '__core-js_shared__';
+
 describe('Build task', function() {
 	describe('Build Js', function() {
 		const pathSuffix = '-build-js';
@@ -69,6 +71,32 @@ describe('Build task', function() {
 					expect(builtJs).to.not.contain('function Test() {\n\tvar name = \'test\';');
 					done();
 			});
+		});
+
+		it('should include the the babel-runtime polyfills by default', function(done) {
+			build
+				.js(gulp, {
+					js: './src/js/babelRuntime.js'
+				})
+				.on('end', function() {
+					const builtJs = fs.readFileSync('build/main.js', 'utf8');
+					expect(builtJs).to.contain(CORE_JS_IDENTIFIER);
+					done();
+				});
+		});
+
+		it('should not include the the babel-runtime polyfills if \'babelRuntime\' is falsey', function(done) {
+			build
+				.js(gulp, {
+					js: './src/js/babelRuntime.js',
+					babelRuntime: false
+				})
+				.on('end', function() {
+					const builtJs = fs.readFileSync('build/main.js', 'utf8');
+					console.dir(builtJs);
+					expect(builtJs).to.not.contain(CORE_JS_IDENTIFIER);
+					done();
+				});
 		});
 
 		it('should build from custom source', function(done) {
