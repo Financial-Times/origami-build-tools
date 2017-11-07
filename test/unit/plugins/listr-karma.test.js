@@ -15,7 +15,7 @@ describe('SpecReporter', function () {
 	let errors;
 
 	beforeEach(() => {
-		const listrKarmaReporter = require('../../lib/plugins/listr-karma.js')();
+		const listrKarmaReporter = require('../../../lib/plugins/listr-karma.js')();
 		SpecReporter = listrKarmaReporter.reporter['reporter:listr'];
 		errors = listrKarmaReporter.errors;
 	});

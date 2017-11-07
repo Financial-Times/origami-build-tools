@@ -7,10 +7,10 @@ const fs = require('fs-extra');
 const path = require('path');
 const process = require('process');
 
-const build = require('../../lib/tasks/build-js');
+const build = require('../../../lib/tasks/build-js');
 
 const obtPath = process.cwd();
-const oTestPath = 'test/fixtures/o-test';
+const oTestPath = 'test/unit/fixtures/o-test';
 
 describe('build-js', function () {
 	const pathSuffix = '-build-js';

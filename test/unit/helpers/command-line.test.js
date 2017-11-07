@@ -3,7 +3,7 @@
 
 const proclaim = require('proclaim');
 
-const commandLine = require('../../lib/helpers/command-line');
+const commandLine = require('../../../lib/helpers/command-line');
 
 describe('Command line helper', function () {
 	it('should return output from stdout', function () {

@@ -31,9 +31,9 @@ describe('construct-polyfill-url', function() {
 
 		mockery.registerMock('globby', globby);
 
-		mockery.registerAllowable('../../lib/helpers/construct-polyfill-url');
+		mockery.registerAllowable('../../../lib/helpers/construct-polyfill-url');
 
-		constructPolyfillUrl = require('../../lib/helpers/construct-polyfill-url');
+		constructPolyfillUrl = require('../../../lib/helpers/construct-polyfill-url');
 	});
 
 	afterEach(() => {
@@ -104,8 +104,8 @@ describe('construct-polyfill-url', function() {
 			});
 
 			it('does not duplicate features in the polyfill url', () => {
-				fs.readFile.withArgs(path.join(__dirname, '../../', '/origami.json'), 'utf-8').resolves('{"browserFeatures": {"required": ["Array.prototype.every"]}}');
-				fs.readFile.withArgs(path.join(__dirname, '../../', '/bower_components/example/origami.json'), 'utf-8').resolves('{"browserFeatures": {"required": ["Array.prototype.every","Array.prototype.some"]}}');
+				fs.readFile.withArgs(path.join(__dirname, '../../../', '/origami.json'), 'utf-8').resolves('{"browserFeatures": {"required": ["Array.prototype.every"]}}');
+				fs.readFile.withArgs(path.join(__dirname, '../../../', '/bower_components/example/origami.json'), 'utf-8').resolves('{"browserFeatures": {"required": ["Array.prototype.every","Array.prototype.some"]}}');
 				globby.resolves(['/origami.json', '/bower_components/example/origami.json']);
 
 				return constructPolyfillUrl()

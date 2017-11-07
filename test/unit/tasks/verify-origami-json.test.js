@@ -6,10 +6,10 @@ const process = require('process');
 const fs = require('fs-extra');
 const path = require('path');
 
-const verifyOrigamiJson = require('../../lib/tasks/verify-origami-json');
+const verifyOrigamiJson = require('../../../lib/tasks/verify-origami-json');
 
 const obtPath = process.cwd();
-const oTestPath = 'test/fixtures/o-test';
+const oTestPath = 'test/unit/fixtures/o-test';
 const pathSuffix = '-verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 

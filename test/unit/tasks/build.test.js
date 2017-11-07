@@ -9,11 +9,11 @@ sinon.assert.expose(proclaim, {
 	prefix: ''
 });
 
-describe('Install task', function() {
+describe('Build task', function() {
 	let Listr;
-	let bowerInstall;
-	let npmInstall;
-	let install;
+	let buildJS;
+	let buildSass;
+	let build;
 	let listrInstance;
 
 	beforeEach(() => {
@@ -22,10 +22,8 @@ describe('Install task', function() {
 		};
 		Listr = sinon.stub();
 		Listr.returns(listrInstance);
-		bowerInstall = sinon.stub();
-		bowerInstall.returns(bowerInstall);
-		npmInstall = sinon.stub();
-		npmInstall.returns(npmInstall);
+		buildJS = sinon.stub();
+		buildSass = sinon.stub();
 
 		mockery.enable({
 			useCleanCache: true,
@@ -35,12 +33,12 @@ describe('Install task', function() {
 
 		mockery.registerMock('listr', Listr);
 
-		mockery.registerMock('./install-bower', bowerInstall);
-		mockery.registerMock('./install-npm', npmInstall);
+		mockery.registerMock('./build-js', buildJS);
+		mockery.registerMock('./build-sass', buildSass);
 
-		mockery.registerAllowable('../../lib/tasks/install');
+		mockery.registerAllowable('../../../lib/tasks/build');
 
-		install = require('../../lib/tasks/install');
+		build = require('../../../lib/tasks/build');
 
 		mockery.resetCache();
 	});
@@ -52,18 +50,21 @@ describe('Install task', function() {
 	});
 
 	it('should export a function', function() {
-		proclaim.isFunction(install);
+		proclaim.isFunction(build);
 	});
 
 	describe('when called', () => {
-		it('should create Listr object with install tasks', function() {
-			install();
+		it('should create Listr object with build tasks', function() {
+			build();
+
+			Listr.firstCall.args[0][0].task();
+			Listr.firstCall.args[0][1].task();
 
 			proclaim.calledOnce(Listr);
 			proclaim.calledWithNew(Listr);
 			proclaim.isArray(Listr.firstCall.args[0]);
-			proclaim.include(Listr.firstCall.args[0], npmInstall);
-			proclaim.include(Listr.firstCall.args[0], bowerInstall);
+			proclaim.calledOnce(buildJS);
+			proclaim.calledOnce(buildSass);
 		});
 	});
 });

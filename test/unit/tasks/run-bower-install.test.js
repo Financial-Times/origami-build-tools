@@ -22,9 +22,9 @@ describe('run-bower-install', function() {
 
 		mockery.registerMock('../helpers/command-line', commandLine);
 
-		mockery.registerAllowable('../../lib/helpers/run-bower-install');
+		mockery.registerAllowable('../../../lib/helpers/run-bower-install');
 
-		runBowerInstall = require('../../lib/tasks/run-bower-install');
+		runBowerInstall = require('../../../lib/tasks/run-bower-install');
 	});
 
 	afterEach(() => {
