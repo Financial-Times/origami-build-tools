@@ -25,3 +25,6 @@ deploy:
     tags: true
     node: '6'
     repo: Financial-Times/origami-build-tools
+env:
+  matrix:
+    secure: AQxsQuxjPpHLC48eezr/uHSthqT7x2R37HkbUT1co1YNtFad5bNYkS8dbbskoW33s8MX8DGZ0YFVB2W2j5VidXwby6Vbg2xBeHt7eIw23D3XeePZOUBgdbM9rpq7yB2nI0tJv+VmKdiFLFHc0EALnu1GMlvw7+n9KA8FO6IFxZM=
