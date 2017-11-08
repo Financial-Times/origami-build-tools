@@ -3,7 +3,7 @@
 
 const proclaim = require('proclaim');
 
-const silentSass = require('../../lib/plugins/silent-sass.js');
+const silentSass = require('../../../lib/plugins/silent-sass.js');
 
 describe('Silent Sass', function () {
 	it('Should succeed if silent is false and file has content', function () {

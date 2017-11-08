@@ -6,11 +6,11 @@ const process = require('process');
 const fs = require('fs-extra');
 const path = require('path');
 
-const demo = require('../../lib/tasks/demo-build');
-const pa11y = require('../../lib/tasks/pa11y');
+const demo = require('../../../lib/tasks/demo-build');
+const pa11y = require('../../../lib/tasks/pa11y');
 
 const obtPath = process.cwd();
-const oTestPath = 'test/fixtures/o-test';
+const oTestPath = 'test/unit/fixtures/o-test';
 
 describe('Test task', function() {
 	describe('Pa11y', function() {
@@ -54,7 +54,8 @@ describe('Test task', function() {
 		});
 
 		describe('task', () => {
-			it('should run pa11y correctly', function() {
+			it('should run pa11y correctly', function () {
+				this.timeout(10000);
 				return pa11y().task()
 					.catch(function (results) {
 						expect(results).to.be.an(Error);

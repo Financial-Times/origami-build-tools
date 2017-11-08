@@ -8,10 +8,10 @@ const rimraf = require('rimraf');
 const fs = require('fs-extra');
 const path = require('path');
 
-const verify = require('../../lib/tasks/verify-sass');
+const verify = require('../../../lib/tasks/verify-sass');
 
 const obtPath = process.cwd();
-const oTestPath = 'test/fixtures/o-test';
+const oTestPath = 'test/unit/fixtures/o-test';
 const pathSuffix = '-verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 

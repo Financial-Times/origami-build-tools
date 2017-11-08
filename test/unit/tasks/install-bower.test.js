@@ -13,12 +13,12 @@ sinon.assert.expose(proclaim, {
 });
 
 const obtPath = process.cwd();
-const oTestPath = 'test/fixtures/o-test';
+const oTestPath = 'test/unit/fixtures/o-test';
 const pathSuffix = '-verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
-describe('npm-install', function () {
-	let npmInstall;
+describe('install-bower', function () {
+	let bowerInstall;
 	let Listr;
 	let listrInstance;
 
@@ -37,9 +37,9 @@ describe('npm-install', function () {
 
 		mockery.registerMock('listr', Listr);
 
-		mockery.registerAllowable('../../lib/tasks/install-npm');
+		mockery.registerAllowable('../../../lib/tasks/install-bower');
 
-		npmInstall = require('../../lib/tasks/install-npm');
+		bowerInstall = require('../../../lib/tasks/install-bower');
 
 		mockery.resetCache();
 
@@ -56,27 +56,27 @@ describe('npm-install', function () {
 	});
 
 	it('has a default title', () => {
-		proclaim.equal(npmInstall().title, 'Installing NPM components');
+		proclaim.equal(bowerInstall().title, 'Installing Bower components');
 	});
 
 	describe('skip', () => {
-		it('should return true if package.json does not exist', function () {
-			return npmInstall().skip()
+		it('should return true if bower.json does not exist', function() {
+			return bowerInstall().skip()
 				.then(skipped => {
 					proclaim.ok(skipped);
 				});
 		});
 
-		it('should return a helpful message if package.json does not exist', function () {
-			return npmInstall().skip()
+		it('should return a helpful message if bower.json does not exist', function() {
+			return bowerInstall().skip()
 				.then(skipped => {
-					proclaim.equal(skipped, 'No package.json found.');
+					proclaim.equal(skipped, 'No bower.json found.');
 				});
 		});
 
-		it('should return a falsey value if package.json does exist', function () {
-			fs.writeFileSync('package.json', '{}');
-			return npmInstall().skip()
+		it('should return a falsey value if bower.json does exist', function() {
+			fs.writeFileSync('bower.json', '{}');
+			return bowerInstall().skip()
 				.then(skipped => {
 					proclaim.notOk(skipped);
 				});
@@ -84,13 +84,12 @@ describe('npm-install', function () {
 	});
 
 	describe('task', function () {
-		it('should create Listr object with npm install function', function () {
-			npmInstall().task();
+		it('should create Listr object with verify tasks', function() {
+			bowerInstall().task();
 
 			proclaim.calledOnce(Listr);
 			proclaim.calledWithNew(Listr);
 			proclaim.isArray(Listr.firstCall.args[0]);
 		});
-		// TODO: Should assert that npm install function is passed outputStreams or should this be done via integration tests?
 	});
 });

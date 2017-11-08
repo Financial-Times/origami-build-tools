@@ -42,9 +42,9 @@ describe('Verify task', function() {
 		mockery.registerMock('./verify-javascript', verifyJavaScript);
 		mockery.registerMock('./verify-sass', verifySass);
 
-		mockery.registerAllowable('../../lib/tasks/verify');
+		mockery.registerAllowable('../../../lib/tasks/verify');
 
-		verify = require('../../lib/tasks/verify');
+		verify = require('../../../lib/tasks/verify');
 
 		mockery.resetCache();
 	});

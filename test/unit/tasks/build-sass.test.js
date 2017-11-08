@@ -12,10 +12,10 @@ const fs = require('fs-extra');
 const path = require('path');
 const process = require('process');
 
-const build = require('../../lib/tasks/build-sass');
+const build = require('../../../lib/tasks/build-sass');
 
 const obtPath = process.cwd();
-const oTestPath = 'test/fixtures/o-test';
+const oTestPath = 'test/unit/fixtures/o-test';
 
 describe('Build Sass', function () {
 	const pathSuffix = '-build-sass';

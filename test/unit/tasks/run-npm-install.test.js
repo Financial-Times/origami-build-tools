@@ -21,9 +21,9 @@ describe('run-npm-install', function() {
 
 		mockery.registerMock('../helpers/command-line', commandLine);
 
-		mockery.registerAllowable('../../lib/helpers/run-npm-install');
+		mockery.registerAllowable('../../../lib/helpers/run-npm-install');
 
-		runNpmInstall = require('../../lib/tasks/run-npm-install');
+		runNpmInstall = require('../../../lib/tasks/run-npm-install');
 	});
 
 	afterEach(() => {

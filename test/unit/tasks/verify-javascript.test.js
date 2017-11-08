@@ -8,10 +8,10 @@ const path = require('path');
 const rimraf = require('rimraf');
 const process = require('process');
 
-const verifyJavascript = require('../../lib/tasks/verify-javascript');
+const verifyJavascript = require('../../../lib/tasks/verify-javascript');
 
 const obtPath = process.cwd();
-const oTestPath = 'test/fixtures/o-test';
+const oTestPath = 'test/unit/fixtures/o-test';
 const pathSuffix = '-verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 

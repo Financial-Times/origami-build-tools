@@ -5,3 +5,4 @@ npm-debug.log*
 .editorconfig
 bower_components/
 /test/integration/*/fixtures/*/package-lock.json
+ws-*

@@ -15,7 +15,7 @@ describe('SpecReporter', function () {
 	let errors;
 
 	beforeEach(() => {
-		const listrKarmaReporter = require('../../lib/plugins/listr-karma.js')();
+		const listrKarmaReporter = require('../../../lib/plugins/listr-karma.js')();
 		SpecReporter = listrKarmaReporter.reporter['reporter:listr'];
 		errors = listrKarmaReporter.errors;
 	});
@@ -103,9 +103,9 @@ describe('SpecReporter', function () {
 
 					it('should add error message to the errors array', function () {
 						proclaim.deepEqual(errors, [
-							'\u001b[37mTest Browser failed specs:\u001b[39m',
-							'\u001b[37msuite name > description of test\u001b[39m',
-							'\u001b[31mlog message\t\u001b[39m',
+							'Test Browser failed specs:',
+							'suite name > description of test',
+							'log message\t',
 							'',
 							'1 tests failed across 1 browsers.'
 						]);
@@ -121,9 +121,9 @@ describe('SpecReporter', function () {
 						});
 
 						proclaim.deepEqual(errors, [
-							'\u001b[37mTest Browser failed specs:\u001b[39m',
-							'\u001b[37msuite name > description of test\u001b[39m',
-							'\u001b[31mlog message\t\u001b[39m',
+							'Test Browser failed specs:',
+							'suite name > description of test',
+							'log message\t',
 							'',
 							'1 tests failed across 1 browsers.'
 						]);
