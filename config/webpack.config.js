@@ -56,13 +56,11 @@ module.exports = {
 						options: {
 							compact: false,
 
-							// TODO: Look into using preset-env instead and specifying our minimum versions
+							// TODO: Look into specifying our minimum versions in preset-env
 							// for enhanced experience instead of making everything become ES5
 							presets: [
 								require.resolve('babel-preset-es3'),
-								require.resolve('babel-preset-es2015'),
-								require.resolve('babel-preset-es2016'),
-								require.resolve('babel-preset-es2017')
+								require.resolve('babel-preset-env')
 							],
 							plugins: [
 								[
