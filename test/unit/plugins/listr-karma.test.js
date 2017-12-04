@@ -2,6 +2,7 @@
 
 'use strict';
 
+const colors = require('colors/safe');
 const proclaim = require('proclaim');
 
 const formatError = function (a, b) {
@@ -103,9 +104,9 @@ describe('SpecReporter', function () {
 
 					it('should add error message to the errors array', function () {
 						proclaim.deepEqual(errors, [
-							'Test Browser failed specs:',
-							'suite name > description of test',
-							'log message\t',
+							colors.white('Test Browser failed specs:'),
+							colors.white('suite name > description of test'),
+							colors.red('log message\t'),
 							'',
 							'1 tests failed across 1 browsers.'
 						]);
@@ -121,9 +122,9 @@ describe('SpecReporter', function () {
 						});
 
 						proclaim.deepEqual(errors, [
-							'Test Browser failed specs:',
-							'suite name > description of test',
-							'log message\t',
+							colors.white('Test Browser failed specs:'),
+							colors.white('suite name > description of test'),
+							colors.red('log message\t'),
 							'',
 							'1 tests failed across 1 browsers.'
 						]);
