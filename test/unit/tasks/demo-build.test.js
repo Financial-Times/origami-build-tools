@@ -11,6 +11,7 @@ const demo = require('../../../lib/tasks/demo-build');
 
 const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/o-test';
+const oNoManifestPath = path.resolve(obtPath, 'test/unit/fixtures/o-no-manifest');
 const pathSuffix = '-demo';
 const demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
@@ -31,14 +32,14 @@ describe('Demo task', function () {
 
 	describe('Build demos', function () {
 		it('should fail if there is not a config file', function () {
-			process.chdir(obtPath);
+			process.chdir(oNoManifestPath);
 			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
 			return demo()
 				.then(() => {
 					throw new Error('promise resolved when it should have rejected');
 				}, function (err) {
 					expect(err.message).to.be(`Couldn\'t find demos config path, checked: ${path.join(process.cwd(),'origami.json')}`);
-					fs.unlinkSync(path.resolve(obtPath, 'bower.json'));
+					fs.unlinkSync(path.resolve(oNoManifestPath, 'bower.json'));
 					process.chdir(demoTestPath);
 				});
 		});
