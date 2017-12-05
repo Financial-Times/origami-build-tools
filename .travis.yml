@@ -16,13 +16,11 @@ matrix:
 before_deploy:
 - npm-prepublish --verbose
 deploy:
-  skip_cleanup: true
   provider: npm
   email: strategic.products@ft.com
   api_key:
-    secure: dQViz4cR32rwRzEFbkzorNYvH3ydxjFb4NK9xh41FbGsT9gufVYLQrRpSnAgSDhkjbfPKa6uQWiSFJKZ00RrLhXaotHPjJSogkjaI82aE4jyeOasZRAuCTzNOd7pYxYU9H7hUkPjVmaEKKZIIbyDY1MzmftRgZX8TIpIKX8lrFc=
+    secure: BjJgXH0fOaPSlaDYNfFFDRn1i3nQpz7DfXLMgiesJWsMQnnbYjiHB1WFssm2Pnmkw6rlQn3RMMXMZEflD3X/rFEsdHMaubaz6uDD82GKkScLCgY08zGJGTMFJcXrLYx9+G2Qoq1AawlziA28qOIb/1Wb0UOnEW7slJceApR6cEI=
   on:
-    all_branches: true
     tags: true
     node: '6'
     repo: Financial-Times/origami-build-tools
