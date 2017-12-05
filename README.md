@@ -40,6 +40,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--standalone               Create a named export for the built JavaScript
 		--demo-filter=<demo-name>  Build a specific demo. E.G. --demo-filter=pa11y to build only the pa11y.html demo.
 		--suppress-errors          Do not error if no demos are found when using the --demo-filter option.
+		--debug                    Keep the test runner open to enable debugging in any browser.
 
 ### Developing products
 
@@ -95,6 +96,8 @@ Lints JavaScript, Sass and configuration files against [Origami coding standards
 ### `test` or `t`
 
 Run Origami specification tests and component specific tests.
+
+* If `--debug` is set, the test runner will not exit automatically to allow debugging of the tests.
 
 Checks Sass supports [silent and non-silent compilation modes](http://origami.ft.com/docs/syntax/scss/#silent-styles).
 If `pa11y.html` demo exists, confirms it is accessible using [Pa11y](http://pa11y.org/).
