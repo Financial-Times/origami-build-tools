@@ -1,11 +1,22 @@
 @mixin oTestComponent() {
 	.o-test {
 		font-size: 18px;
-
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr;
 		&--error {
 			background-color: red;
 			color: white;
 		}
+	}
+	.test__content {
+		grid-column: 1 / span 2;
+		grid-row: 1;
+		box-sizing: border-box;
+		align-self: center;
+	}
+	.test__visual {
+		grid-row: 1;
 	}
 }
 
