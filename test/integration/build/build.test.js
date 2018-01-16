@@ -498,11 +498,26 @@ describe('obt build', function () {
 					})
 					.then(() => {
 						proclaim.deepEqual(fs.readFileSync('build/main.css', 'utf-8'), `.o-test {
-  font-size: 18px; }
+  font-size: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr; }
   .o-test--error {
     background-color: red;
     color: white; }
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0ZGluIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNDO0VBQ0MsZ0JBQWUsRUFNZjtFQUpBO0lBQ0Msc0JBQXFCO0lBQ3JCLGFBQVksRUFDWiIsImZpbGUiOiJtYWluLmNzcyJ9 */`);
+
+.test__content {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center; }
+
+.test__visual {
+  grid-row: 1; }
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0ZGluIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNDO0VBQ0MsZ0JBQWU7RUFDZixjQUFhO0VBQ2IsK0JBQThCO0VBQzlCLHdCQUF1QixFQUt2QjtFQUpBO0lBQ0Msc0JBQXFCO0lBQ3JCLGFBQVksRUFDWjs7QUFFRjtFQUNDLHdCQUF1QjtFQUN2QixZQUFXO0VBQ1gsK0JBQXNCO0VBQXRCLHVCQUFzQjtFQUN0QiwyQkFBa0I7RUFBbEIsNEJBQWtCO0VBQWxCLG1CQUFrQixFQUNsQjs7QUFDRDtFQUNDLFlBQVcsRUFDWCIsImZpbGUiOiJtYWluLmNzcyJ9 */`);
 					});
 			});
 		});
