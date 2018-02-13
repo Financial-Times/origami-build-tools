@@ -353,8 +353,10 @@ describe('verify-origami-json', function () {
 		it('should fail when an expanded property is found for a demo', function () {
 			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.demos = [{
+				title: 'Expanded property in use.',
 				expanded: false
 			}, {
+				title: 'Expanded property in use.',
 				expanded: true
 			}];
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
@@ -365,6 +367,24 @@ describe('verify-origami-json', function () {
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
 						'The expanded property has been deprecated. Use the "hidden" property when a demo should not appear in the Registry.\n\n' +
+						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
+					);
+				});
+		});
+
+		it('should fail when a demo does not have a title property', function () {
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
+			origamiJSON.demos = [{
+				'name': 'a name but no user friendly title for this demo'
+			}];
+			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
+
+			return verifyOrigamiJson().task()
+				.catch(function (verifiedOrigamiJson) {
+					proclaim.equal(
+						verifiedOrigamiJson.message,
+						'Failed linting:\n\n' +
+						'All demos require a title property.\n\n' +
 						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
 					);
 				});

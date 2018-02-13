@@ -11,6 +11,7 @@
     },
     "demos": [
         {
+              "title": "Test module",
               "name": "pa11y",
               "template": "demos/src/pa11y.mustache",
               "description": "Pa11y test"
