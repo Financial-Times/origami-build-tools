@@ -2,7 +2,7 @@
   "name": "origami-build-tools",
   "version": "0.0.0",
   "description": "Origami component development tools.",
-  "main": "./lib/origami-build-tools",
+  "main": "./lib/origami-build-tools-cli.js",
   "bin": {
     "origami-build-tools": "./lib/origami-build-tools-cli.js",
     "obt": "./lib/origami-build-tools-cli.js"
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "aliases": "^0.1.0",
+    "app-root-path": "^2.0.1",
     "autoprefixer": "^7.1.5",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

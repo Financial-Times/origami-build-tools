@@ -1,5 +1,6 @@
 const path = require('path');
 const BowerResolvePlugin = require('bower-resolve-webpack-plugin');
+const appRoot = require('app-root-path');
 
 module.exports = {
 	// Fail out on the first error instead of tolerating it.
@@ -31,10 +32,13 @@ module.exports = {
 		// These extensions are tried when resolving a file
 		extensions: ['.js', '.json']
 	},
-	// Resolve loaders (webpack plugins) from the
-	// directory of `OBT` itself rather than the project directory.
 	resolveLoader: {
 		modules: [
+			// Resolve loaders from the project directory. This is used for Origami Build Service as dependencies are
+			// flattened by npm which causes the loaders to not be found.
+			appRoot + '/node_modules',
+			// Fallback to resolving loaders from OBT's node_modules folder if it has one. In most cases this is the
+			// resolver that will return the loaders.
 			path.resolve(__dirname, '../node_modules'),
 			'node_modules',
 			'bower_components'
