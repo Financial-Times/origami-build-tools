@@ -430,7 +430,7 @@ describe('verify-origami-json', function () {
 				fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 				return verifyOrigamiJson().task()
 					.then(function () {
-						proclaim.notOk(true, `origami.json validated when one of its demos is not a non-empty string`);
+						proclaim.notOk(true, `origami.json validated but one of its demos is not a non-empty string`);
 					},function (verifiedOrigamiJson) {
 						proclaim.equal(verifiedOrigamiJson.message, expectedError);
 					});
