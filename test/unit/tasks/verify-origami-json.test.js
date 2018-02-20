@@ -353,8 +353,10 @@ describe('verify-origami-json', function () {
 		it('should fail when an expanded property is found for a demo', function () {
 			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.demos = [{
+				title: 'Expanded property in use.',
 				expanded: false
 			}, {
+				title: 'Expanded property in use.',
 				expanded: true
 			}];
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
@@ -369,6 +371,71 @@ describe('verify-origami-json', function () {
 					);
 				});
 		});
-	});
 
+		describe('demo title', function() {
+			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
+			origamiJSON.origamiType = 'module';
+			const expectedError = 'Failed linting:\n\n' +
+				'All demos require a title property which is non-empty and of type "string".\n\n' +
+				'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/';
+
+			it('should fail when a demo does not have a title property', function () {
+				origamiJSON.demos = [{
+					name: 'a name but no user friendly title for this demo'
+				}];
+				fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
+				return verifyOrigamiJson().task()
+					.then(function () {
+						proclaim.notOk(true, `origami.json validated when one of its demos is not a non-empty string`);
+					},
+					function (verifiedOrigamiJson) {
+						proclaim.equal(verifiedOrigamiJson.message, expectedError);
+					});
+			});
+
+			it('should fail when a demo has a empty title', function () {
+				origamiJSON.demos = [{
+					name: 'an unhelpful empty title for this demo',
+					title: ''
+				}];
+				fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
+				return verifyOrigamiJson().task()
+					.then(function () {
+						proclaim.notOk(true, `origami.json validated when one of its demos is not a non-empty string`);
+					},
+					function (verifiedOrigamiJson) {
+						proclaim.equal(verifiedOrigamiJson.message, expectedError);
+					});
+			});
+
+			it('should fail when a demo has a blank title', function () {
+				origamiJSON.demos = [{
+					name: 'an unhelpful blank title for this demo',
+					title: ' '
+				}];
+				fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
+				return verifyOrigamiJson().task()
+					.then(function () {
+						proclaim.notOk(true, `origami.json validated when one of its demos is not a non-empty string`);
+					},
+					function (verifiedOrigamiJson) {
+						proclaim.equal(verifiedOrigamiJson.message, expectedError);
+					});
+			});
+
+			it('should fail when a demo has a non-string title', function () {
+				origamiJSON.demos = [{
+					title: ['array here']
+				}];
+				fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
+				return verifyOrigamiJson().task()
+					.then(function () {
+						proclaim.notOk(true, `origami.json validated but one of its demos is not a non-empty string`);
+					},function (verifiedOrigamiJson) {
+						proclaim.equal(verifiedOrigamiJson.message, expectedError);
+					});
+			});
+
+		});
+	});
 });
