@@ -1,8 +1,6 @@
 sudo: false
 language: node_js
 node_js:
-- '6'
-- '7'
 - '8'
 script:
 - npm i -g npm@^5
@@ -24,7 +22,7 @@ deploy:
     secure: BjJgXH0fOaPSlaDYNfFFDRn1i3nQpz7DfXLMgiesJWsMQnnbYjiHB1WFssm2Pnmkw6rlQn3RMMXMZEflD3X/rFEsdHMaubaz6uDD82GKkScLCgY08zGJGTMFJcXrLYx9+G2Qoq1AawlziA28qOIb/1Wb0UOnEW7slJceApR6cEI=
   on:
     tags: true
-    node: '6'
+    node: '8'
     repo: Financial-Times/origami-build-tools
 env:
   matrix:
