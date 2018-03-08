@@ -41,6 +41,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--demo-filter=<demo-name>  Build a specific demo. E.G. --demo-filter=pa11y to build only the pa11y.html demo.
 		--suppress-errors          Do not error if no demos are found when using the --demo-filter option.
 		--debug                    Keep the test runner open to enable debugging in any browser.
+		--verbose                  Output sass warnings with backtraces.
 
 ### Developing products
 
