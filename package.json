@@ -72,6 +72,7 @@
     "request-promise-native": "^1.0.5",
     "root-check": "^1.0.0",
     "sass-lint": "^1.12.1",
+    "sass-true": "^4.0.0",
     "serve": "^6.3.0",
     "sinon": "^4",
     "stream-combiner2": "1.1.1",
