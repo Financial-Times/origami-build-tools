@@ -1,10 +1,9 @@
 const process = require('process');
-
+const path = require('path');
 const webpackConfig = require('./webpack.config.dev');
 
 // https://github.com/webpack/webpack/issues/3324#issuecomment-289720345
 delete webpackConfig.bail;
-
 module.exports = {
 
 	// enable / disable watching file and executing tests whenever any file changes
@@ -38,7 +37,8 @@ module.exports = {
 	// list of files / patterns to load in the browser
 	files: [
 		'test/*.js',
-		'test/**/*.js'
+		'test/**/*.js',
+		'main.scss'
 	],
 
 	// frameworks to use
@@ -51,7 +51,8 @@ module.exports = {
 		'karma-webpack',
 		'karma-browserstack-launcher',
 		'karma-chrome-launcher',
-		'karma-sourcemap-loader'
+		'karma-sourcemap-loader',
+		'karma-scss-preprocessor'
 	],
 
 	// web server port
@@ -61,7 +62,13 @@ module.exports = {
 	// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 	preprocessors: {
 		'test/*.js': ['webpack', 'sourcemap'],
-		'test/**/*.js': ['webpack', 'sourcemap']
+		'test/**/*.js': ['webpack', 'sourcemap'],
+		'main.scss': ['scss']
+	},
+	scssPreprocessor: {
+		options: {
+			includePaths: [process.cwd(), path.join(process.cwd(), 'bower_components')]
+		}
 	},
 
 	// Continuous Integration mode
