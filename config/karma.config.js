@@ -1,7 +1,7 @@
 const process = require('process');
 const path = require('path');
 const webpackConfig = require('./webpack.config.dev');
-// const sass = require('karma-scss-preprocessor');
+
 // https://github.com/webpack/webpack/issues/3324#issuecomment-289720345
 delete webpackConfig.bail;
 module.exports = {
