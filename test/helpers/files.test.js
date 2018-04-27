@@ -108,7 +108,7 @@ describe('Files helper', function() {
 	describe('Package.json', function() {
 		beforeEach(function() {
 			if (fs.existsSync(path.resolve(filesTestPath, 'package.json'))) {
-				fs.unlink(path.resolve(filesTestPath, 'package.json'));
+				fs.unlinkSync(path.resolve(filesTestPath, 'package.json'));
 			}
 		});
 
