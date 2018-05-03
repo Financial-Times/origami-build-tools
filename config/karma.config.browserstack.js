@@ -66,20 +66,21 @@ const customLaunchers = {
 
 const browsers = Object.keys(customLaunchers);
 
-module.exports.getBrowserStackKarmaConfig = async function () {
-	const karmaBaseConfig = await getBaseKarmaConfig();
-	const karmaConfig = Object.assign(
-		{},
-		karmaBaseConfig,
-		{
-			browsers,
-			browserStack: {
-				startTunnel: true // let BrowserStack connect to our local server
-			},
-			customLaunchers,
-			logLevel: constants.LOG_DISABLE
-		}
-	);
+module.exports.getBrowserStackKarmaConfig = function () {
+	return getBaseKarmaConfig().then(karmaBaseConfig => {
+		const karmaConfig = Object.assign(
+			{},
+			karmaBaseConfig,
+			{
+				browsers,
+				browserStack: {
+					startTunnel: true // let BrowserStack connect to our local server
+				},
+				customLaunchers,
+				logLevel: constants.LOG_DISABLE
+			}
+		);
 
-	return karmaConfig;
+		return karmaConfig;
+	});
 };
