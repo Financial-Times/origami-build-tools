@@ -1,4 +1,5 @@
-const karmaBaseConfig = require('./karma.config');
+const { getBaseKarmaConfig } = require('./karma.config');
+const constants = require('karma').constants;
 
 const customLaunchers = {
 	// If browser_version is not set, uses latest stable version
@@ -65,8 +66,8 @@ const customLaunchers = {
 
 const browsers = Object.keys(customLaunchers);
 
-module.exports = function (config) {
-
+module.exports.getBrowserStackKarmaConfig = async function () {
+	const karmaBaseConfig = await getBaseKarmaConfig();
 	const karmaConfig = Object.assign(
 		{},
 		karmaBaseConfig,
@@ -76,9 +77,9 @@ module.exports = function (config) {
 				startTunnel: true // let BrowserStack connect to our local server
 			},
 			customLaunchers,
-			logLevel: config.LOG_DISABLE
+			logLevel: constants.LOG_DISABLE
 		}
 	);
 
-	config.set(karmaConfig);
+	return karmaConfig;
 };
