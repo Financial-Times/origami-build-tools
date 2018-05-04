@@ -1,13 +1,14 @@
 const process = require('process');
 const path = require('path');
 const webpackConfig = require('./webpack.config.dev');
-const { getModuleName } = require('../lib/helpers/files');
-const fs = require('fs');
+const { getModuleName, readIfExists } = require('../lib/helpers/files');
 
 // https://github.com/webpack/webpack/issues/3324#issuecomment-289720345
 delete webpackConfig.bail;
 module.exports.getBaseKarmaConfig = function() {
-	return getModuleName().then((moduleName) => {
+	return Promise.all([getModuleName(), readIfExists(path.resolve('main.scss'))]).then(values => {
+		const moduleName = values[0];
+		const mainScssContent = values[1];
 		return {
 			// enable / disable watching file and executing tests whenever any file changes
 			autoWatch: false,
@@ -71,7 +72,7 @@ module.exports.getBaseKarmaConfig = function() {
 			scssPreprocessor: {
 				options: {
 					file: '',
-					data: `$${moduleName}-is-silent: false; ` + fs.readFileSync('main.scss'),
+					data: `$${moduleName}-is-silent: false; ${mainScssContent}`,
 					includePaths: [process.cwd(), path.join(process.cwd(), 'bower_components')]
 				}
 			},
