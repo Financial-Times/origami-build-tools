@@ -14,6 +14,8 @@ const isEs5 = require('is-es5-syntax');
 const isEs6 = require('is-es6-syntax');
 const isEs7 = require('is-es7-syntax');
 const currentVersion = require('node-version');
+let originalPkgJson = '';
+
 
 describe('obt build', function () {
 
@@ -30,7 +32,8 @@ describe('obt build', function () {
 
 			afterEach(function () {
 				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
+				return rimraf(path.join(process.cwd(), 'package.json'))
+					.then(() => process.chdir(process.cwd()));
 			});
 
 			it('should not error', function () {
@@ -77,6 +80,7 @@ describe('obt build', function () {
 
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
+					.then(() => rimraf(path.join(process.cwd(), 'package.json')))
 					.then(() => process.chdir(process.cwd()));
 			});
 
@@ -103,6 +107,13 @@ describe('obt build', function () {
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
 						proclaim.deepEqual(sandbox, { world: 2 });
+					})
+					.then(() => fileExists('package.json'))
+					.then(exists => {
+						proclaim.ok(exists);
+
+						const pkg = require(`${process.cwd()}/package.json`); // eslint-disable-line import/no-dynamic-require
+						proclaim.equal(pkg.main, 'build/main.js');
 					});
 			});
 		});
@@ -117,6 +128,7 @@ describe('obt build', function () {
 
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
+					.then(() => rimraf(path.join(process.cwd(), 'package.json')))
 					.then(() => process.chdir(process.cwd()));
 			});
 
@@ -143,6 +155,13 @@ describe('obt build', function () {
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
 						proclaim.deepEqual(sandbox, { world: 2 });
+					})
+					.then(() => fileExists('package.json'))
+					.then(exists => {
+						proclaim.ok(exists);
+
+						const pkg = require(`${process.cwd()}/package.json`); // eslint-disable-line import/no-dynamic-require
+						proclaim.equal(pkg.main, 'build/main.js');
 					});
 			});
 		});
@@ -157,6 +176,7 @@ describe('obt build', function () {
 
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
+					.then(() => rimraf(path.join(process.cwd(), 'package.json')))
 					.then(() => process.chdir(process.cwd()));
 			});
 
@@ -183,6 +203,13 @@ describe('obt build', function () {
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
 						proclaim.deepEqual(sandbox, { world: 100 });
+					})
+					.then(() => fileExists('package.json'))
+					.then(exists => {
+						proclaim.ok(exists);
+
+						const pkg = require(`${process.cwd()}/package.json`); // eslint-disable-line import/no-dynamic-require
+						proclaim.equal(pkg.main, 'build/main.js');
 					});
 			});
 		});
@@ -193,11 +220,18 @@ describe('obt build', function () {
 				// Change the current working directory to the folder which contains the project we are testing against.
 				// We are doing this to replicate how obt is used when executed inside a terminal.
 				process.chdir(path.join(__dirname, '/fixtures/js-npm-dependency'));
+
+				// Store original package.json as a string to restore afterwards.
+				originalPkgJson = fs.readFileSync(path.join(process.cwd(), 'package.json'));
 			});
 
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
 					.then(() => rimraf(path.join(process.cwd(), '/node_modules')))
+					.then(() => {
+						fs.writeFileSync(path.join(process.cwd(), 'package.json'), originalPkgJson, 'utf-8');
+						originalPkgJson = '';
+					})
 					.then(() => process.chdir(process.cwd()));
 			});
 
@@ -230,6 +264,13 @@ describe('obt build', function () {
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
 						proclaim.deepEqual(sandbox, { world: 'fooBar' });
+					})
+					.then(() => fileExists('package.json'))
+					.then(exists => {
+						proclaim.ok(exists);
+
+						const pkg = require(`${process.cwd()}/package.json`); // eslint-disable-line import/no-dynamic-require
+						proclaim.equal(pkg.main, 'build/main.js');
 					});
 			});
 		});
@@ -240,13 +281,18 @@ describe('obt build', function () {
 				// Change the current working directory to the folder which contains the project we are testing against.
 				// We are doing this to replicate how obt is used when executed inside a terminal.
 				process.chdir(path.join(__dirname, '/fixtures/js-npm-dependency-es7'));
-				return rimraf(path.join(process.cwd(), '/build'))
-					.then(() => rimraf(path.join(process.cwd(), '/node_modules')));
+
+				// Store original package.json as a string to restore afterwards.
+				originalPkgJson = fs.readFileSync(path.join(process.cwd(), 'package.json'));
 			});
 
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
 					.then(() => rimraf(path.join(process.cwd(), '/node_modules')))
+					.then(() => {
+						fs.writeFileSync(path.join(process.cwd(), 'package.json'), originalPkgJson, 'utf-8');
+						originalPkgJson = '';
+					})
 					.then(() => process.chdir(process.cwd()));
 			});
 
@@ -281,6 +327,13 @@ describe('obt build', function () {
 							script.runInContext(context);
 							proclaim.deepEqual(sandbox, { world: 100 });
 						}
+					})
+					.then(() => fileExists('package.json'))
+					.then(exists => {
+						proclaim.ok(exists);
+
+						const pkg = require(`${process.cwd()}/package.json`); // eslint-disable-line import/no-dynamic-require
+						proclaim.equal(pkg.main, 'build/main.js');
 					});
 			});
 		});
@@ -296,6 +349,7 @@ describe('obt build', function () {
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
 					.then(() => rimraf(path.join(process.cwd(), '/bower_components')))
+					.then(() => rimraf(path.join(process.cwd(), 'package.json')))
 					.then(() => process.chdir(process.cwd()));
 			});
 
@@ -327,6 +381,13 @@ describe('obt build', function () {
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
 						proclaim.deepEqual(sandbox, { world: 'fooBar' });
+					})
+					.then(() => fileExists('package.json'))
+					.then(exists => {
+						proclaim.ok(exists);
+
+						const pkg = require(`${process.cwd()}/package.json`); // eslint-disable-line import/no-dynamic-require
+						proclaim.equal(pkg.main, 'build/main.js');
 					});
 			});
 		});
@@ -342,6 +403,7 @@ describe('obt build', function () {
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
 					.then(() => rimraf(path.join(process.cwd(), '/bower_components')))
+					.then(() => rimraf(path.join(process.cwd(), 'package.json')))
 					.then(() => process.chdir(process.cwd()));
 			});
 
@@ -373,6 +435,13 @@ describe('obt build', function () {
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
 						proclaim.deepEqual(sandbox, { world: 2 });
+					})
+					.then(() => fileExists('package.json'))
+					.then(exists => {
+						proclaim.ok(exists);
+
+						const pkg = require(`${process.cwd()}/package.json`); // eslint-disable-line import/no-dynamic-require
+						proclaim.equal(pkg.main, 'build/main.js');
 					});
 			});
 		});
@@ -388,6 +457,7 @@ describe('obt build', function () {
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
 					.then(() => rimraf(path.join(process.cwd(), '/bower_components')))
+					.then(() => rimraf(path.join(process.cwd(), 'package.json')))
 					.then(() => process.chdir(process.cwd()));
 			});
 
@@ -419,6 +489,13 @@ describe('obt build', function () {
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
 						proclaim.deepEqual(sandbox, { world: 100 });
+					})
+					.then(() => fileExists('package.json'))
+					.then(exists => {
+						proclaim.ok(exists);
+
+						const pkg = require(`${process.cwd()}/package.json`); // eslint-disable-line import/no-dynamic-require
+						proclaim.equal(pkg.main, 'build/main.js');
 					});
 			});
 		});
@@ -435,7 +512,8 @@ describe('obt build', function () {
 
 			afterEach(function () {
 				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
+				return rimraf(path.join(process.cwd(), 'package.json'))
+					.then(() => process.chdir(process.cwd()));
 			});
 
 			it('should not error', function () {
@@ -456,7 +534,8 @@ describe('obt build', function () {
 
 			afterEach(function () {
 				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
+				return rimraf(path.join(process.cwd(), 'package.json'))
+					.then(() => process.chdir(process.cwd()));
 			});
 
 			it('should error', function () {
@@ -482,6 +561,7 @@ describe('obt build', function () {
 
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
+					.then(() => rimraf(path.join(process.cwd(), '/package.json')))
 					.then(() => process.chdir(process.cwd()));
 			});
 
@@ -526,6 +606,12 @@ describe('obt build', function () {
   -ms-grid-row: 1;
   grid-row: 1; }
 /*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4uc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQztFQUNDLGdCQUFlO0VBQ2Ysa0JBQWE7RUFBYixjQUFhO0VBQ2IsMEJBQThCO0VBQTlCLCtCQUE4QjtFQUM5QixtQkFBdUI7RUFBdkIsd0JBQXVCLEVBS3ZCO0VBSkE7SUFDQyxzQkFBcUI7SUFDckIsYUFBWSxFQUNaOztBQUVGO0VBQ0Msd0JBQXVCO0VBQXZCLG1CQUF1QjtFQUF2Qix3QkFBdUI7RUFDdkIsZ0JBQVc7RUFBWCxZQUFXO0VBQ1gsK0JBQXNCO0VBQXRCLHVCQUFzQjtFQUN0QiwyQkFBa0I7RUFBbEIsNEJBQWtCO0VBQWxCLDJCQUFrQjtFQUFsQixtQkFBa0IsRUFDbEI7O0FBQ0Q7RUFDQyxnQkFBVztFQUFYLFlBQVcsRUFDWCIsImZpbGUiOiJtYWluLmNzcyJ9 */`);
+					})
+					.then(() => {
+						return fileExists('package.json');
+					})
+					.then(exists => {
+						proclaim.ok(exists);
 					});
 			});
 		});
@@ -541,6 +627,7 @@ describe('obt build', function () {
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
 					.then(() => rimraf(path.join(process.cwd(), '/bower_components')))
+					.then(() => rimraf(path.join(process.cwd(), '/package.json')))
 					.then(() => process.chdir(process.cwd()));
 			});
 
@@ -564,6 +651,10 @@ describe('obt build', function () {
 						proclaim.deepEqual(fs.readFileSync('build/main.css', 'utf-8'), `#test-compile-error {
   color: red; }
 /*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImJvd2VyX2NvbXBvbmVudHMvby10ZXN0LWNvbXBvbmVudC9tYWluLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDQyxXQUFVLEVBQ1YiLCJmaWxlIjoibWFpbi5jc3MifQ== */`);
+					})
+					.then(() => fileExists('package.json'))
+					.then(exists => {
+						proclaim.ok(exists);
 					});
 			});
 		});
@@ -574,11 +665,18 @@ describe('obt build', function () {
 				// Change the current working directory to the folder which contains the project we are testing against.
 				// We are doing this to replicate how obt is used when executed inside a terminal.
 				process.chdir(path.join(__dirname, '/fixtures/sass-npm-dependency'));
+
+				// Store original package.json as a string to restore afterwards.
+				originalPkgJson = fs.readFileSync(path.join(process.cwd(), 'package.json'));
 			});
 
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
 					.then(() => rimraf(path.join(process.cwd(), '/node_modules')))
+					.then(() => {
+						fs.writeFileSync(path.join(process.cwd(), '/package.json'), originalPkgJson, 'utf-8');
+						originalPkgJson = '';
+					})
 					.then(() => process.chdir(process.cwd()));
 			});
 
@@ -596,6 +694,13 @@ describe('obt build', function () {
 						return Promise.reject(new Error('obt build should error when trying to build sass which uses files in node_modules directory.'));
 					}, () => {
 						return Promise.resolve(); // obt build exited with a non-zero exit code, which is what we expected.
+					})
+					.then(() => fileExists('package.json'))
+					.then(exists => {
+						proclaim.ok(exists);
+
+						const pkg = require(`${process.cwd()}/package.json`); // eslint-disable-line import/no-dynamic-require
+						proclaim.notOk(pkg.main, 'build/main.js');
 					});
 			});
 		});
