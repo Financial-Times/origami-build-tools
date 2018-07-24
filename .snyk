@@ -6,3 +6,18 @@ patch:
   'npm:tunnel-agent:20170305':
     - node-sass > request > tunnel-agent:
         patched: '2018-06-25T22:50:23.154Z'
+  'npm:debug:20170905':
+    - karma > socket.io > socket.io-adapter > socket.io-parser > debug:
+        patched: '2018-07-24T15:10:00.906Z'
+  'npm:hoek:20180212':
+    - node-sass > node-gyp > request > hawk > hoek:
+        patched: '2018-07-24T15:10:00.906Z'
+    - node-sass > node-gyp > request > hawk > boom > hoek:
+        patched: '2018-07-24T15:10:00.906Z'
+    - node-sass > node-gyp > request > hawk > sntp > hoek:
+        patched: '2018-07-24T15:10:00.906Z'
+    - node-sass > node-gyp > request > hawk > cryptiles > boom > hoek:
+        patched: '2018-07-24T15:10:00.906Z'
+  'npm:ms:20170412':
+    - karma > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        patched: '2018-07-24T15:10:00.906Z'
