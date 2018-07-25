@@ -1,9 +1,0 @@
-@import 'scss/variables';
-@import 'scss/mixins';
-
-@if ($abra-cada-bra-is-silent == false) {
-@include abraCadaBra();
-
-// Set to silent again to avoid being output twice
-$abra-cada-bra-is-silent: true !global;
-}
