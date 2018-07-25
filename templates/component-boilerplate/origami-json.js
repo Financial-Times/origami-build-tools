@@ -1,0 +1,35 @@
+'use strict';
+
+module.exports = (name) => {
+	return `{
+	"description": "component description",
+	"keywords": "",
+	"origamiType": "module",
+	"origamiCategory": "components",
+	"origamiVersion": 1,
+	"support": "https://github.com/Financial-Times/${name.original}/issues",
+	"supportContact": {
+		"email": "origami.support@ft.com",
+		"slack": "financialtimes/ft-origami"
+	},
+	"supportStatus": "active",
+	"browserFeatures": {},
+	"ci": {
+		"circle": "https://circleci.com/api/v1/project/Financial-Times/${name.original}"
+	},
+	"demosDefaults": {
+		"sass": "demos/src/demo.scss",
+		"js": "demos/src/demo.js",
+		"documentClasses": "",
+		"dependencies": ""
+	},
+	"demos": [
+		{
+			"title": "A Useful Demo",
+			"name": "demo",
+			"template": "demos/src/demo.mustache",
+			"description": "Description of the demo"
+		}
+	]
+}`;
+};
