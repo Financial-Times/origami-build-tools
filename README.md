@@ -19,11 +19,12 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		$ obt <command> [<options>]
 
 	Commands
-		build, b   Build CSS and JS in current directory
-		demo, d    Build demos into the demos directory
-		install, i Install npm and bower dependencies required to build modules
-		test, t    Run Origami specification tests and component specific tests
-		verify,v   Check folder and code structure follows Origami specification
+		build, b          Build CSS and JS in current directory
+		boilerplate, bp   Build a boilerplate folder structure for a new component
+		demo, d           Build demos into the demos directory
+		install, i        Install npm and bower dependencies required to build modules
+		test, t           Run Origami specification tests and component specific tests
+		verify, v         Check folder and code structure follows Origami specification
 
 	Options
 		-h, --help                 Print out this message
@@ -104,6 +105,18 @@ Checks Sass supports [silent and non-silent compilation modes](http://origami.ft
 If `pa11y.html` demo exists, confirms it is accessible using [Pa11y](http://pa11y.org/).
 If `package.json` contains a `test` script, confirms it exits with a 0 exit code.
 Runs tests using [Karma](https://karma-runner.github.io) defaulting to Chrome Stable, can be configured to use BrowserStack by using the `--browserstack` flag. You will need the environment variables `BROWSER_STACK_USERNAME` and `BROWSER_STACK_ACCESS_KEY` set. This will run the tests on the minimum version for enhanced experience based on the [FT Browser Support Policy[(https://docs.google.com/document/d/1mByh6sT8zI4XRyPKqWVsC2jUfXHZvhshS5SlHErWjXU).
+
+
+### `boilerplate` or `bp`
+
+Build a full boilerplate folder structure for a new component.
+
+This command takes an argument in the form of a component name, which will populate all of the relevant files within that tree. Defaults to `o-component-boilerplate`.
+
+e.g.
+```
+obt boilerplate o-my-new-component
+```
 
 ## Migration guide
 
