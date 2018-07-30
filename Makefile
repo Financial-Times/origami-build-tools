@@ -7,8 +7,9 @@ include node_modules/@financial-times/origami-service-makefile/index.mk
 # [edit below this line]
 # ------------------------
 
+# Verify security and licensing of production dependencies
 whitesource:
-	whitesource "origami services and node modules"
+	snyk test
 
 # Configuration
 # -------------

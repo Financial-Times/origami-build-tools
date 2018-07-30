@@ -75,15 +75,14 @@
     "root-check": "^1.0.0",
     "sass-lint": "^1.12.1",
     "sass-true": "^4.0.0",
-    "serve": "^6.3.0",
-    "sinon": "^4",
+    "serve": "^7.0.0",
+    "sinon": "^4.5.0",
     "stream-combiner2": "1.1.1",
     "stream-from-promise": "^1.0.0",
     "through2": "^2.0.3",
     "update-notifier": "^2.3.0",
     "webpack": "^3.8.1",
-    "webpack-merge": "^4.1.0",
-    "snyk": "^1.85.0"
+    "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
     "@financial-times/di2-whitesource": "^2.0.1",
@@ -101,7 +100,8 @@
     "merge-deep": "^3.0.0",
     "node-version": "^1.1.0",
     "npm-prepublish": "^1.2.3",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "snyk": "^1.89.1"
   },
   "repository": {
     "type": "git",
