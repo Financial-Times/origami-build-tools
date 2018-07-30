@@ -14,6 +14,8 @@ describe('obt boilerplate', function () {
 	this.timeout(10 * 1000);
 
 	describe('builds boilerplate tree structure', function () {
+		const defaultName = 'o-component-boilerplate';
+
 		describe('with component name', function () {
 			const componentName = 'o-my-test';
 
@@ -52,8 +54,6 @@ describe('obt boilerplate', function () {
 		});
 
 		describe('without component name', function () {
-			const defaultName = 'o-component-boilerplate';
-
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), defaultName))
 					.then(() => process.chdir(process.cwd()));
@@ -71,17 +71,24 @@ describe('obt boilerplate', function () {
 						proclaim.ok(exists);
 					});
 			});
+		});
 
-			it('should error if component folder exists', function () {
+		describe('obt install && demo && build && verify && test', () => {
+			it('should not error', function () {
+				this.timeout (100 * 1000);
 				return obtBinPath()
 					.then(obt => {
-						return execa(obt, ['boilerplate']);
-					})
-					.then(obt => {
-						return execa(obt, ['boilerplate']);
-					})
-					.then(() => {
-						return Promise.reject(new Error('obt boilerplate should error instead of overwriting an existing file'));
+						return execa(obt, ['boilerplate'])
+							.then(() => process.chdir(defaultName))
+							.then(() => execa(obt, ['install']))
+							.then(() => execa(obt, ['demo']))
+							.then(() => execa(obt, ['build']))
+							.then(() => execa(obt, ['verify']))
+							.then(() => execa(obt, ['test']))
+							.then(() => {
+								return rimraf(path.join(process.cwd(), defaultName))
+									.then(() => process.chdir(process.cwd()));
+							});
 					}, () => {
 						return Promise.resolve(); // obt boilerplate exited with a non-zero exit code, which is what we expected.
 					});

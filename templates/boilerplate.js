@@ -2,6 +2,7 @@
 
 const ciConfigYml = require('./component-boilerplate/ci-config-yml');
 const demoJs = require('./component-boilerplate/demo-js');
+const demoMustache = require('./component-boilerplate/demo-mustache');
 const demoSass = require('./component-boilerplate/demo-sass');
 const gitIgnore = require('./component-boilerplate/git-ignore');
 const mainJs = require('./component-boilerplate/main-js');
@@ -13,6 +14,7 @@ const srcJs = require('./component-boilerplate/src-js');
 module.exports = {
 	ciConfigYml,
 	demoJs,
+	demoMustache,
 	demoSass,
 	gitIgnore,
 	mainJs,
@@ -20,5 +22,8 @@ module.exports = {
 	origamiJson,
 	readMe,
 	srcJs,
-	srcSassVariables: (name) => `$${name.original}-is-silent: true !default;`,
+	srcSassVariables: (name) => `$${name.original}-is-silent: true !default;
+	`,
+	srcSassMixins: (name) => `@mixin ${name.camelCase} () {}
+	`
 };

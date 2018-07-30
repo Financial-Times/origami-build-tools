@@ -1,13 +1,14 @@
 'use strict';
 
 module.exports = (name) => {
-	return `@import 'scss/variables';
-@import 'scss/mixins';
+	return `@import 'src/scss/variables';
+@import 'src/scss/mixins';
 
 @if ($${name.original}-is-silent == false) {
-@include ${name.camelCase}();
+	@include ${name.camelCase}();
 
-// Set to silent again to avoid being output twice
-$${name.original}-is-silent: true !global;
-}`;
+	// Set to silent again to avoid being output twice
+	$${name.original}-is-silent: true !global;
+}
+`;
 };
