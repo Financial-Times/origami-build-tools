@@ -3,7 +3,7 @@
 module.exports = (name) => {
 	return `import ${name.camelCase} from './src/js/${name.original}';
 
-const constructAll = function() {
+const constructAll = function () {
 	${name.camelCase}.init();
 	document.removeEventListener('o.DOMContentLoaded', constructAll);
 };
