@@ -6,12 +6,21 @@ ignore:
     - karma > chokidar > anymatch > micromatch > braces:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      chokidar > anymatch > micromatch > braces:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > expand-braces > braces:
         reason: Will update to newer karma which will fix this
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > chokidar > anymatch > micromatch > braces:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
     - karma-browserstack-launcher > karma > expand-braces > braces:
         reason: will updaet to newer karma which will fix this
         expires: '2018-08-29T17:52:20.470Z'
+      karma-sinon > karma > chokidar > anymatch > micromatch > braces:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
     - karma-sinon > karma > expand-braces > braces:
         reason: Will update to newer karma which will fix this
         expires: '2018-08-29T17:52:20.470Z'
@@ -19,61 +28,169 @@ ignore:
     - karma > socket.io > engine.io > debug:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > socket.io > socket.io-adapter > debug:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > engine.io > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > socket.io > socket.io-client > debug:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > socket.io-adapter > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > socket.io > socket.io-client > engine.io-client > debug:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > socket.io-client > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > socket.io > socket.io-parser > debug:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > socket.io-client > engine.io-client > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > socket.io > debug:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > socket.io-parser > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > socket.io > socket.io-client > socket.io-parser > debug:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > socket.io-client > socket.io-parser > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > socket.io-client > socket.io-parser > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > socket.io-parser > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > socket.io-client > engine.io-client > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > socket.io-client > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > socket.io-adapter > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > engine.io > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > debug:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
   'npm:ws:20171108':
     - karma > socket.io > socket.io-client > engine.io-client > ws:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > socket.io-client > engine.io-client > ws:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > socket.io > engine.io > ws:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > engine.io > ws:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
+    - karma-sinon > karma > socket.io > socket.io-client > engine.io-client > ws:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > engine.io > ws:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
   'npm:ms:20170412':
     - karma > socket.io > socket.io-client > socket.io-parser > debug > ms:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > socket.io-client > socket.io-parser > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > socket.io > socket.io-parser > debug > ms:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > socket.io-parser > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > socket.io > socket.io-client > engine.io-client > debug > ms:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > socket.io-client > engine.io-client > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > socket.io > debug > ms:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > socket.io-client > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
     - karma > socket.io > engine.io > debug > ms:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > socket.io-adapter > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
     - karma > socket.io > socket.io-adapter > debug > ms:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > engine.io > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
     - karma > socket.io > socket.io-client > debug > ms:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > socket.io > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > socket.io-client > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > engine.io > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > socket.io-adapter > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > socket.io-client > engine.io-client > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > socket.io-parser > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - karma-sinon > karma > socket.io > socket.io-client > socket.io-parser > debug > ms:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
   'npm:lodash:20180130':
     - karma > lodash:
         reason: It is a big breaking change in karma
         expires: '2018-08-29T17:52:20.470Z'
+      karma-browserstack-launcher > karma > lodash:
+        reason: None given
+        expires: '2018-08-29T18:14:24.724Z'
+    - karma-sinon > karma > lodash:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
   'npm:cryptiles:20180710':
     - karma-scss-preprocessor > node-sass > node-gyp > request > hawk > cryptiles:
         reason: Will update to newer karma which will fix this
         expires: '2018-08-29T17:52:20.470Z'
+      node-sass > node-gyp > request > hawk > cryptiles:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - sass-true > node-sass > node-gyp > request > hawk > cryptiles:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
   'npm:parsejson:20170908':
     - karma > socket.io > socket.io-client > engine.io-client > parsejson:
         reason: Will update to newer karma which will fix this
@@ -84,6 +201,32 @@ ignore:
     - karma-sinon > karma > socket.io > socket.io-client > engine.io-client > parsejson:
         reason: Will update to newer karma which will fix this
         expires: '2018-08-29T17:52:20.471Z'
+  'npm:diff:20180305':
+    - karma-sinon > sinon > diff:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - mocha > diff:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+    - sinon > diff:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+  'npm:serve:20180531':
+    - serve:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+  'npm:eslint:20180222':
+    - sass-lint > eslint:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+  'npm:https-proxy-agent:20180402':
+    - karma-browserstack-launcher > browserstack > https-proxy-agent:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
+  'npm:shelljs:20140723':
+    - sass-lint > eslint > shelljs:
+        reason: None given
+        expires: '2018-08-29T18:14:24.725Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:tunnel-agent:20170305':
