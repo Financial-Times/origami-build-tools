@@ -29,6 +29,13 @@ module.exports = (name) => {
 			"name": "demo",
 			"template": "demos/src/demo.mustache",
 			"description": "Description of the demo"
+		},
+		{
+			"title": "Pa11y",
+			"name": "pa11y",
+			"template": "demos/src/pa11y.mustache",
+			"description": "Accessibility test will be run against this demo",
+			"hidden": true
 		}
 	]
 }`;

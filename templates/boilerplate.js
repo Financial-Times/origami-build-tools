@@ -15,6 +15,8 @@ const srcSassMixins = require('./component-boilerplate/src-sass-mixins');
 const srcSassVariables = require('./component-boilerplate/src-sass-variables');
 const testFixtures = require('./component-boilerplate/test-fixtures');
 const testMain = require('./component-boilerplate/test-main');
+const testSassMain = require('./component-boilerplate/test-sass-main');
+const testSassMixins = require('./component-boilerplate/test-sass-mixins');
 
 module.exports = {
 	ciConfigYml,
@@ -31,5 +33,7 @@ module.exports = {
 	srcSassMixins,
 	srcSassVariables,
 	testFixtures,
-	testMain
+	testMain,
+	testSassMain,
+	testSassMixins
 };
