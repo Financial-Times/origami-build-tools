@@ -9,7 +9,7 @@ include node_modules/@financial-times/origami-service-makefile/index.mk
 
 # Verify security and licensing of production dependencies
 whitesource:
-	snyk test
+	snyk test --severity-threshold=high
 
 snyk-monitor:
 	snyk monitor
