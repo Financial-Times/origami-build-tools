@@ -4,26 +4,26 @@ module.exports = (name) => {
 	return `class ${name.titleCase} {
 	/**
 	 * Class constructor.
-	 * @param {HTMLElement} [${name.camelCase}Element] - The component element in the DOM
+	 * @param {HTMLElement} [${name.camelCase}El] - The component element in the DOM
 	 * @param {Object} [options={}] - An options object for configuring the component
 	 */
 	constructor (${name.camelCase}El, opts) {
 		this.${name.camelCase}El = ${name.camelCase}El;
 		this.options = Object.assign({}, {
 
-		}, opts || ${name.titleCase}.getDataAttributes(${name.camelCase}Element));
+		}, opts || ${name.titleCase}.getDataAttributes(${name.camelCase}El));
 	}
 
 	/**
 	 * Get the data attributes from the ${name.titleCase}Element. If the message is being set up
 	 * declaratively, this method is used to extract the data attributes from the DOM.
-	 * @param {HTMLElement} ${name.camelCase}Element - The component element in the DOM
+	 * @param {HTMLElement} ${name.camelCase}El - The component element in the DOM
 	 */
-	static getDataAttributes (${name.camelCase}Element) {
-		if (!(${name.camelCase}Element instanceof HTMLElement)) {
+	static getDataAttributes (${name.camelCase}El) {
+		if (!(${name.camelCase}El instanceof HTMLElement)) {
 			return {};
 		}
-		return Object.keys(${name.camelCase}Element.dataset).reduce((options, key) => {
+		return Object.keys(${name.camelCase}El.dataset).reduce((options, key) => {
 
 			// Ignore data-o-component
 			if (key === 'oComponent') {
@@ -32,7 +32,7 @@ module.exports = (name) => {
 
 			// Build a concise key and get the option value
 			const shortKey = key.replace(/^${name.camelCase}(\w)(\w+)$/, (m, m1, m2) => m1.toLowerCase() + m2);
-			const value = ${name.camelCase}Element.dataset[key];
+			const value = ${name.camelCase}El.dataset[key];
 
 			// Try parsing the value as JSON, otherwise just set it as a string
 			try {

@@ -3,6 +3,7 @@
 const ciConfigYml = require('./component-boilerplate/ci-config-yml');
 const demoJs = require('./component-boilerplate/demo-js');
 const demoMustache = require('./component-boilerplate/demo-mustache');
+const demoPa11y = require('./component-boilerplate/demo-pa11y');
 const demoSass = require('./component-boilerplate/demo-sass');
 const gitIgnore = require('./component-boilerplate/git-ignore');
 const mainJs = require('./component-boilerplate/main-js');
@@ -18,6 +19,7 @@ module.exports = {
 	ciConfigYml,
 	demoJs,
 	demoMustache,
+	demoPa11y,
 	demoSass,
 	gitIgnore,
 	mainJs,

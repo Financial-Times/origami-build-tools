@@ -74,6 +74,12 @@ describe('obt boilerplate', function () {
 		});
 
 		describe('obt install && demo && build && verify && test', () => {
+			afterEach(function () {
+				process.chdir('../');
+				return rimraf(path.join(process.cwd(), defaultName))
+					.then(() => process.chdir(process.cwd()));
+			});
+
 			it('should not error', function () {
 				this.timeout (100 * 1000);
 				return obtBinPath()
@@ -84,12 +90,7 @@ describe('obt boilerplate', function () {
 							.then(() => execa(obt, ['demo']))
 							.then(() => execa(obt, ['build']))
 							.then(() => execa(obt, ['verify']))
-							.then(() => execa(obt, ['test']))
-							.then(() => {
-								process.chdir('../');
-								return rimraf(path.join(process.cwd(), defaultName))
-									.then(() => process.chdir(process.cwd()));
-							});
+							.then(() => execa(obt, ['test']));
 					}, () => {
 						return Promise.resolve(); // obt boilerplate exited with a non-zero exit code, which is what we expected.
 					});
