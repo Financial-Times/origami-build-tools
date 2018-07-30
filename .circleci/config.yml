@@ -2,16 +2,9 @@ workflows:
   version: 2
   node-multi-build:
     jobs:
-      - cancel-builds
-      - node-v6:
-          requires:
-            - cancel-builds
-      - node-v8:
-          requires:
-            - cancel-builds
-      - node-v10:
-          requires:
-            - cancel-builds
+      - node-v6
+      - node-v8
+      - node-v10
       - publish:
           requires:
             - node-v6
@@ -66,13 +59,6 @@ jobs:
       - *test
       - *save_cache_local
       - *save_cache_global
-  cancel-builds:
-    <<: *node-base
-    steps:
-      - *versions
-      - run:
-          name:
-          command: .circleci/cancel_redundant_builds.sh
   node-v6:
     <<: *node-base
     docker:
