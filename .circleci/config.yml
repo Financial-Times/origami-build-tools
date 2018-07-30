@@ -18,10 +18,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v{{ .Environment.CIRCLE_CACHE_VERSION }}-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
-            - v{{ .Environment.CIRCLE_CACHE_VERSION }}-npm-lock-master-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
-            - v{{ .Environment.CIRCLE_CACHE_VERSION }}-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}
-            - v{{ .Environment.CIRCLE_CACHE_VERSION }}-npm-cache-master-{{ .Environment.CIRCLE_JOB }}
+            - npm-lock-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - npm-lock-{{ .Branch }}-{{ .Revision }}-{{ checksum "package-lock.json" }}
+            - npm-cache-{{ .Branch }}{{ .Revision }}-{{ checksum "package.json" }}
+            - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Install dependencies
           command: npm install
@@ -29,11 +29,11 @@ jobs:
           name: Test
           command: make ci
       - save_cache:
-          key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+          key: npm-lock-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
       - save_cache:
-          key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+          key: npm-cache-{{ .Branch }}{{ .Revision }}-{{ checksum "package.json" }}
           paths:
             - ~/.npm/_cacache
 
