@@ -86,6 +86,7 @@ describe('obt boilerplate', function () {
 							.then(() => execa(obt, ['verify']))
 							.then(() => execa(obt, ['test']))
 							.then(() => {
+								process.chdir('../');
 								return rimraf(path.join(process.cwd(), defaultName))
 									.then(() => process.chdir(process.cwd()));
 							});
