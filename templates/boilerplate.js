@@ -12,6 +12,7 @@ const origamiJson = require('./component-boilerplate/origami-json');
 const readMe = require('./component-boilerplate/read-me');
 const srcJs = require('./component-boilerplate/src-js');
 const srcSassMixins = require('./component-boilerplate/src-sass-mixins');
+const srcSassVariables = require('./component-boilerplate/src-sass-variables');
 const testFixtures = require('./component-boilerplate/test-fixtures');
 const testMain = require('./component-boilerplate/test-main');
 
@@ -28,8 +29,7 @@ module.exports = {
 	readMe,
 	srcJs,
 	srcSassMixins,
-	srcSassVariables: (name) => `$${name.original}-is-silent: true !default;
-	`,
+	srcSassVariables,
 	testFixtures,
 	testMain
 };
