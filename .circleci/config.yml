@@ -72,7 +72,7 @@ jobs:
       - *versions
       - run:
           name:
-          command: ./circleci/cancel_redundant_builds.sh
+          command: .circleci/cancel_redundant_builds.sh
   node-v6:
     <<: *node-base
     docker:
