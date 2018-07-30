@@ -19,10 +19,10 @@ references:
   restore_npm_cache: &restore_npm_cache
     restore_cache:
       keys:
-        - npm-lock-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Revision }}
-        - npm-lock-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}
-        - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Revision }}
-        - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}
+        - npm-lock-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
+        - npm-lock-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}
+        - npm-cache-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
+        - npm-cache-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}
   versions: &versions
     run:
       name: Versions
@@ -37,12 +37,12 @@ references:
       command: make ci
   save_cache_local: &save_cache_local
     save_cache:
-      key: npm-lock-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Revision }}
+      key: npm-lock-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
       paths:
         - node_modules
   save_cache_global: &save_cache_global
     save_cache:
-      key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Revision }}
+      key: npm-cache-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
       paths:
         - ~/.npm/_cacache
 
