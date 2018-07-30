@@ -5,37 +5,60 @@ workflows:
       - node-v6
       - node-v8
       - node-v10
+      - publish:
+          requires:
+            - node-v6
+            - node-v8
+            - node-v10
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+references:
+  restore_npm_cache: &restore_npm_cache
+    restore_cache:
+      keys:
+        - npm-lock-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}
+        - npm-lock-{{ .Branch }}-{{ .Revision }}-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}
+        - npm-cache-{{ .Branch }}{{ .Revision }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}
+        - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}
+  versions: &versions
+    run:
+      name: Versions
+      command: npm version
+  install: &install
+    run:
+      name: Install dependencies
+      command: npm install
+  test: &test
+    run:
+      name: Test
+      command: make ci
+  save_cache_local: &save_cache_local
+    save_cache:
+      key: npm-lock-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}
+      paths:
+        - node_modules
+  save_cache_global: &save_cache_global
+    save_cache:
+      key: npm-cache-{{ .Branch }}{{ .Revision }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}
+      paths:
+        - ~/.npm/_cacache
 
 version: 2
 jobs:
   node-base: &node-base
     docker:
       - image: latest-browsers
-    steps:
-      - run:
-          name: Versions
-          command: npm version
+    steps: &steps
+      - *versions
       - checkout
-      - restore_cache:
-          keys:
-            - npm-lock-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}
-            - npm-lock-{{ .Branch }}-{{ .Revision }}-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}
-            - npm-cache-{{ .Branch }}{{ .Revision }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}
-            - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Test
-          command: make ci
-      - save_cache:
-          key: npm-lock-{{ .Branch }}-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}
-          paths:
-            - node_modules
-      - save_cache:
-          key: npm-cache-{{ .Branch }}{{ .Revision }}-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}
-          paths:
-            - ~/.npm/_cacache
+      - *restore_npm_cache
+      - *install
+      - *test
+      - *save_cache_local
+      - *save_cache_global
 
   node-v6:
     <<: *node-base
@@ -49,3 +72,22 @@ jobs:
     <<: *node-base
     docker:
       - image: circleci/node:10-browsers
+  # Publish the module to npm
+  publish:
+    <<: *node-base
+    docker:
+      - image: circleci/node:6-browsers
+    steps:
+      - *versions
+      - checkout
+      - *restore_npm_cache
+      - *install
+      - *test
+      - *save_cache_local
+      - *save_cache_global
+      - run:
+          name: Authenticate with npm
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
+      - run:
+          name: Publish to npm
+          command: make npm-publish
