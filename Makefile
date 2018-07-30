@@ -11,7 +11,7 @@ include node_modules/@financial-times/origami-service-makefile/index.mk
 whitesource:
 	snyk test
 
-snyk-monitr:
+snyk-monitor:
 	snyk monitor
 
 # Configuration
