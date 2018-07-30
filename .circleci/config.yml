@@ -57,7 +57,7 @@ version: 2
 jobs:
   node-base: &node-base
     docker:
-      - image: latest-browsers
+      - image: circleci/node:latest-browsers
     steps:
       - *versions
       - checkout
