@@ -510,7 +510,7 @@ describe('obt build', function () {
     color: white; }
 
 .test__content {
-	-ms-grid-column: 1;
+  -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-column: 1 / span 2;
   -ms-grid-row: 1;
