@@ -12,7 +12,7 @@ whitesource:
 	snyk test --severity-threshold=high
 
 snyk-monitor:
-	snyk monitor
+	snyk monitor --org=jakechampion
 
 # Configuration
 # -------------
