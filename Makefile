@@ -7,6 +7,9 @@ include node_modules/@financial-times/origami-service-makefile/index.mk
 # [edit below this line]
 # ------------------------
 
+whitesource:
+	whitesource "origami services and node modules"
+
 # Configuration
 # -------------
 
