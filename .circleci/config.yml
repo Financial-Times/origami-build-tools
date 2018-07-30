@@ -86,6 +86,9 @@ jobs:
       - *save_cache_local
       - *save_cache_global
       - run:
+          name: Update dependencies database in Snyk
+          command: make snyk-monitor
+      - run:
           name: Authenticate with npm
           command: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
       - run:
