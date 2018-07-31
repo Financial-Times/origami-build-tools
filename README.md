@@ -4,6 +4,12 @@ Standardised build tools for Origami modules and products developed based on the
 
 If you have any issues with OBT, please check out [troubleshooting guide](https://github.com/Financial-Times/origami-build-tools/blob/master/TROUBLESHOOT.md) before raising an issue.
 
+- [Installation](#installation)
+- [Usage](#usage)
+- [Commands](#commands)
+- [Migration guide](#migration-guide)
+- [Licence](#licence)
+
 ## Installation
 
 1. Install these dependencies:
@@ -19,12 +25,12 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		$ obt <command> [<options>]
 
 	Commands
-		build, b          Build CSS and JS in current directory
-		boilerplate, bp   Build a boilerplate folder structure for a new component
-		demo, d           Build demos into the demos directory
-		install, i        Install npm and bower dependencies required to build modules
-		test, t           Run Origami specification tests and component specific tests
-		verify, v         Check folder and code structure follows Origami specification
+		build, b    Build CSS and JS in current directory
+		demo, d     Build demos into the demos directory
+		init        Initialise a new component with a boilerplate folder structure
+		install, i  Install npm and bower dependencies required to build modules
+		test, t     Run Origami specification tests and component specific tests
+		verify, v   Check folder and code structure follows Origami specification
 
 	Options
 		-h, --help                 Print out this message
@@ -107,15 +113,15 @@ If `package.json` contains a `test` script, confirms it exits with a 0 exit code
 Runs tests using [Karma](https://karma-runner.github.io) defaulting to Chrome Stable, can be configured to use BrowserStack by using the `--browserstack` flag. You will need the environment variables `BROWSER_STACK_USERNAME` and `BROWSER_STACK_ACCESS_KEY` set. This will run the tests on the minimum version for enhanced experience based on the [FT Browser Support Policy[(https://docs.google.com/document/d/1mByh6sT8zI4XRyPKqWVsC2jUfXHZvhshS5SlHErWjXU).
 
 
-### `boilerplate` or `bp`
+### `init`
 
-Build a full boilerplate folder structure for a new component.
+Initialises a new component with a full boilerplate folder structure.
 
 This command takes an argument in the form of a component name, which will populate all of the relevant files within that tree. Defaults to `o-component-boilerplate`.
 
 e.g.
 ```
-obt boilerplate o-my-new-component
+obt init o-my-new-component
 ```
 
 ## Migration guide
@@ -123,8 +129,8 @@ obt boilerplate o-my-new-component
 ### Migrating from 6.X.X to 7.X.X
 
 
-The ability to use OBT via it's programmatic API has been removed, if you were using OBT via `gulp`, you will need to migrate to the commandline version of OBT.
-OBT has removed the ability to configure the way it installs/builds/verifies code, this is to ensure that systems built with OBT follows the Origami specifcation and conventions.
+The ability to use OBT via it's programmatic API has been removed, if you were using OBT via `gulp`, you will need to migrate to the command line version of OBT.
+OBT has removed the ability to configure the way it installs/builds/verifies code, this is to ensure that systems built with OBT follows the Origami specification and conventions.
 
 
 ### Migrating from 5.X.X to 6.X.X
@@ -135,7 +141,7 @@ The 6.0.0 release removes the ability for OBT to include the Babel/Core-JS polyf
 #### OBT verify
 The 6.0.0 release swapped out [`scss-lint`](https://www.npmjs.com/package/gulp-scss-lint) for [`sass-lint`](https://www.npmjs.com/package/gulp-sass-lint).
 
-If you are supplying your own custom scss-lint configuration you need to convert it to an equivalent sass-lint configuration, [here is a tool which can do this for you](https://sasstools.github.io/make-sass-lint-config/). The progammatic API and CLI flag has also changed from `scssLintPath` to `sassLintPath`.
+If you are supplying your own custom scss-lint configuration you need to convert it to an equivalent sass-lint configuration, [here is a tool which can do this for you](https://sasstools.github.io/make-sass-lint-config/). The programatic API and CLI flag has also changed from `scssLintPath` to `sassLintPath`.
 
 ## Licence
 This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
