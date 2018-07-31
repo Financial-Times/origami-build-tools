@@ -2,9 +2,18 @@ workflows:
   version: 2
   node-multi-build:
     jobs:
-      - node-v6
-      - node-v8
-      - node-v10
+      - node-v6:
+          filters:
+            tags:
+              only: /^v.*/
+      - node-v8:
+          filters:
+            tags:
+              only: /^v.*/
+      - node-v10:
+          filters:
+            tags:
+              only: /^v.*/
       - publish:
           requires:
             - node-v6
