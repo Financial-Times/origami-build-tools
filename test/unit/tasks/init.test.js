@@ -12,8 +12,8 @@ sinon.assert.expose(proclaim, {
 
 describe('Boilerplate task', function() {
 	let Listr;
-	let boilerplate;
-	let buildBoilerplateTree;
+	let init;
+	let buildBoilerplate;
 	let listrInstance;
 
 	beforeEach(() => {
@@ -22,7 +22,7 @@ describe('Boilerplate task', function() {
 		};
 		Listr = sinon.stub();
 		Listr.returns(listrInstance);
-		buildBoilerplateTree = sinon.stub();
+		buildBoilerplate = sinon.stub();
 
 		mockery.enable({
 			useCleanCache: true,
@@ -32,11 +32,11 @@ describe('Boilerplate task', function() {
 
 		mockery.registerMock('listr', Listr);
 
-		mockery.registerMock('./boilerplate-tree', buildBoilerplateTree);
+		mockery.registerMock('./boilerplate', buildBoilerplate);
 
-		mockery.registerAllowable('../../../lib/tasks/boilerplate');
+		mockery.registerAllowable('../../../lib/tasks/init');
 
-		boilerplate = require('../../../lib/tasks/boilerplate');
+		init = require('../../../lib/tasks/init');
 
 		mockery.resetCache();
 	});
@@ -48,19 +48,19 @@ describe('Boilerplate task', function() {
 	});
 
 	it('should export a function', function() {
-		proclaim.isFunction(boilerplate);
+		proclaim.isFunction(init);
 	});
 
 	describe('when called', () => {
 		it('should create Listr object with build tasks', function() {
-			boilerplate();
+			init();
 
 			Listr.firstCall.args[0][0].task();
 
 			proclaim.calledOnce(Listr);
 			proclaim.calledWithNew(Listr);
 			proclaim.isArray(Listr.firstCall.args[0]);
-			proclaim.calledOnce(buildBoilerplateTree);
+			proclaim.calledOnce(buildBoilerplate);
 		});
 	});
 });

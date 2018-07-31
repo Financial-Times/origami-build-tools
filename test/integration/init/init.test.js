@@ -27,7 +27,7 @@ describe('obt boilerplate', function () {
 			it('should build boilerplate folder', function () {
 				return obtBinPath()
 					.then(obt => {
-						return execa(obt, ['boilerplate', componentName]);
+						return execa(obt, ['init', componentName]);
 					})
 					.then(() => {
 						return fileExists(`${componentName}/src/js/${componentName}.js`);
@@ -40,15 +40,15 @@ describe('obt boilerplate', function () {
 			it('should error if component folder exists', function () {
 				return obtBinPath()
 					.then(obt => {
-						return execa(obt, ['boilerplate', componentName]);
+						return execa(obt, ['init', componentName]);
 					})
 					.then(obt => {
-						return execa(obt, ['boilerplate', componentName]);
+						return execa(obt, ['init', componentName]);
 					})
 					.then(() => {
-						return Promise.reject(new Error('obt boilerplate should error instead of overwriting an existing file'));
+						return Promise.reject(new Error('obt init should error instead of overwriting an existing file'));
 					}, () => {
-						return Promise.resolve(); // obt boilerplate exited with a non-zero exit code, which is what we expected.
+						return Promise.resolve(); // obt init exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
@@ -59,10 +59,10 @@ describe('obt boilerplate', function () {
 					.then(() => process.chdir(process.cwd()));
 			});
 
-			it('should build boilerplate folder', function () {
+			it('should build init folder', function () {
 				return obtBinPath()
 					.then(obt => {
-						return execa(obt, ['boilerplate']);
+						return execa(obt, ['init']);
 					})
 					.then(() => {
 						return fileExists(`${defaultName}/src/js/${defaultName}.js`);
@@ -84,7 +84,7 @@ describe('obt boilerplate', function () {
 				this.timeout (100 * 1000);
 				return obtBinPath()
 					.then(obt => {
-						return execa(obt, ['boilerplate'])
+						return execa(obt, ['init'])
 							.then(() => process.chdir(defaultName))
 							.then(() => execa(obt, ['install']))
 							.then(() => execa(obt, ['demo']))
@@ -92,7 +92,7 @@ describe('obt boilerplate', function () {
 							.then(() => execa(obt, ['verify']))
 							.then(() => execa(obt, ['test']));
 					}, () => {
-						return Promise.resolve(); // obt boilerplate exited with a non-zero exit code, which is what we expected.
+						return Promise.resolve(); // obt init exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
