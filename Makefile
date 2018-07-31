@@ -18,6 +18,14 @@ whitesource:
 snyk-monitor:
 	snyk monitor --org=jakechampion
 
+# npm publishing tasks
+# --------------------
+
+# Publish the module to npm
+npm-publish:
+	npm-prepublish --verbose
+	npm publish --access public
+
 # Configuration
 # -------------
 
