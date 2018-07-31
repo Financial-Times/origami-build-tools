@@ -1,0 +1,95 @@
+workflows:
+  version: 2
+  node-multi-build:
+    jobs:
+      - node-v6
+      - node-v8
+      - node-v10
+      - publish:
+          requires:
+            - node-v6
+            - node-v8
+            - node-v10
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+references:
+  restore_npm_cache: &restore_npm_cache
+    restore_cache:
+      keys:
+        - npm-lock-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
+        - npm-lock-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}
+        - npm-cache-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
+        - npm-cache-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}
+  versions: &versions
+    run:
+      name: Versions
+      command: npm version
+  install: &install
+    run:
+      name: Install dependencies
+      command: npm install
+  test: &test
+    run:
+      name: Test
+      command: make ci
+  save_cache_local: &save_cache_local
+    save_cache:
+      key: npm-lock-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
+      paths:
+        - node_modules
+  save_cache_global: &save_cache_global
+    save_cache:
+      key: npm-cache-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
+      paths:
+        - ~/.npm/_cacache
+
+version: 2
+jobs:
+  node-base: &node-base
+    docker:
+      - image: circleci/node:latest-browsers
+    steps:
+      - *versions
+      - checkout
+      - *restore_npm_cache
+      - *install
+      - *test
+      - *save_cache_local
+      - *save_cache_global
+  node-v6:
+    <<: *node-base
+    docker:
+      - image: circleci/node:6-browsers
+  node-v8:
+    <<: *node-base
+    docker:
+      - image: circleci/node:8-browsers
+  node-v10:
+    <<: *node-base
+    docker:
+      - image: circleci/node:10-browsers
+  # Publish the module to npm
+  publish:
+    <<: *node-base
+    docker:
+      - image: circleci/node:6-browsers
+    steps:
+      - *versions
+      - checkout
+      - *restore_npm_cache
+      - *install
+      - *test
+      - *save_cache_local
+      - *save_cache_global
+      - run:
+          name: Update dependencies database in Snyk
+          command: make snyk-monitor
+      - run:
+          name: Authenticate with npm
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
+      - run:
+          name: Publish to npm
+          command: make npm-publish
