@@ -1,7 +1,0 @@
-{
-	"checkPolicies": true,
-	"projectName": "origami-build-tools",
-	"productName": "origami services and node modules",
-	"devDep": false,
-	"failOnError": true
-}
