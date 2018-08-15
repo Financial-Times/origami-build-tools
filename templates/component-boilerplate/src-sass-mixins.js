@@ -3,7 +3,9 @@
 module.exports = (name) => {
 	return `/// Output All oMessage Features
 @mixin ${name.camelCase} ($class: '${name.original}') {
-
+	.#{$class} {
+		display: block;
+	}
 }
 
 /// Provide a component specific error message
