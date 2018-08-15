@@ -12,7 +12,8 @@ module.exports = (name) => {
 				};
 
 				@include expect($selector: false) {
-					.test-colors {
+					.test-mixin .${name.original} {
+						display: block;
 					}
 				};
 			};

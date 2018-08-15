@@ -45,13 +45,14 @@ You must either construct an \`${name.original}\` object or fire the \`o.DOMCont
 
 \`\`\`js
 const ${name.camelCase} = require('${name.original}');
-
-const ${name.camelCase} = new ${name.camelCase}();
+${name.camelCase}.init();
 \`\`\`
 
 #### Firing an oDomContentLoaded event
 
 \`\`\`js
+require('${name.original}');
+
 document.addEventListener('DOMContentLoaded', function() {
 	document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));
 });

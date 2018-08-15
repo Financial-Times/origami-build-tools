@@ -1,5 +1,6 @@
 'use strict';
 module.exports = {
+	bowerJson: require('./component-boilerplate/bower-json'),
 	ciConfigYml: require('./component-boilerplate/ci-config-yml'),
 	demoJs: require('./component-boilerplate/demo-js'),
 	demoMustache: require('./component-boilerplate/demo-mustache'),
