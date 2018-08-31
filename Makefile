@@ -12,11 +12,10 @@ include node_modules/@financial-times/origami-service-makefile/index.mk
 snyk:
 	snyk test --severity-threshold=high
 
-whitesource:
-	echo "We use Snyk GitHub integration" 
-
 snyk-monitor:
 	snyk monitor --org=jakechampion
+
+ci: verify test
 
 # npm publishing tasks
 # --------------------
