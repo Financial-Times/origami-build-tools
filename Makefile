@@ -13,7 +13,7 @@ snyk:
 	snyk test --severity-threshold=high
 
 whitesource:
-	snyk test --severity-threshold=high
+	echo "We use Snyk GitHub integration" 
 
 snyk-monitor:
 	snyk monitor --org=jakechampion
