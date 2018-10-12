@@ -107,6 +107,24 @@ ignore:
     - karma-browserstack-launcher > karma > socket.io > engine.io > ws:
         reason: None given
         expires: '2018-08-29T18:14:24.724Z'
+    - karma > socket.io > engine.io > ws:
+        reason: It is a big breaking change in karma
+        expires: '2018-11-10T14:52:13.412Z'
+    - karma > socket.io > socket.io-client > engine.io-client > ws:
+        reason: It is a big breaking change in karma
+        expires: '2018-11-10T14:52:13.412Z'
+    - karma-browserstack-launcher > karma > socket.io > engine.io > ws:
+        reason: None given
+        expires: '2018-11-10T14:52:13.412Z'
+    - karma-browserstack-launcher > karma > socket.io > socket.io-client > engine.io-client > ws:
+        reason: None given
+        expires: '2018-11-10T14:52:13.412Z'
+    - karma-sinon > karma > socket.io > engine.io > ws:
+        reason: None given
+        expires: '2018-11-10T14:52:13.412Z'
+    - karma-sinon > karma > socket.io > socket.io-client > engine.io-client > ws:
+        reason: None given
+        expires: '2018-11-10T14:52:13.412Z'
   'npm:ms:20170412':
     - karma > socket.io > socket.io-client > socket.io-parser > debug > ms:
         reason: It is a big breaking change in karma
@@ -194,13 +212,13 @@ ignore:
   'npm:parsejson:20170908':
     - karma > socket.io > socket.io-client > engine.io-client > parsejson:
         reason: Will update to newer karma which will fix this
-        expires: '2018-08-29T17:52:20.470Z'
+        expires: '2018-11-10T14:52:13.412Z'
     - karma-browserstack-launcher > karma > socket.io > socket.io-client > engine.io-client > parsejson:
         reason: Will update to newer karma which will fix this
-        expires: '2018-08-29T17:52:20.471Z'
+        expires: '2018-11-10T14:52:13.412Z'
     - karma-sinon > karma > socket.io > socket.io-client > engine.io-client > parsejson:
         reason: Will update to newer karma which will fix this
-        expires: '2018-08-29T17:52:20.471Z'
+        expires: '2018-11-10T14:52:13.413Z'
   'npm:diff:20180305':
     - karma-sinon > sinon > diff:
         reason: None given
@@ -213,8 +231,8 @@ ignore:
         expires: '2018-08-29T18:14:24.725Z'
   'npm:serve:20180531':
     - serve:
-        reason: None given
-        expires: '2018-08-29T18:14:24.725Z'
+        reason: Vulnerability isn't exploitable on production systems
+        expires: '2018-11-10T15:11:07.083Z'
   'npm:eslint:20180222':
     - sass-lint > eslint:
         reason: None given
@@ -222,15 +240,17 @@ ignore:
   'npm:https-proxy-agent:20180402':
     - karma-browserstack-launcher > browserstack > https-proxy-agent:
         reason: None given
-        expires: '2018-08-29T18:14:24.725Z'
+        expires: '2018-11-10T14:52:13.412Z'
   'npm:shelljs:20140723':
     - sass-lint > eslint > shelljs:
-        reason: None given
-        expires: '2018-08-29T18:14:24.725Z'
+        reason: >-
+          No patch yet, looks like a dev dependancy of a sub dependancy and not
+          exploitabl
+        expires: '2018-11-10T14:52:13.413Z'
   'npm:serve:20180529':
     - serve:
         reason: Vulnerability isn't exploitable on production systems
-        expires: '2018-09-28T11:36:47.937Z'
+        expires: '2018-11-10T15:11:07.083Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:tunnel-agent:20170305':
