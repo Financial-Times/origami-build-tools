@@ -60,7 +60,7 @@
     "mocha": "^4.0.1",
     "mockery": "^2.1.0",
     "mustache": "^2.3.0",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.9.2",
     "node.extend": "^2.0.0",
     "npmconf": "^2.1.2",
     "pa11y": "^4.13.1",
