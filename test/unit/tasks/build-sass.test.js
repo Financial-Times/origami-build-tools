@@ -90,4 +90,17 @@ describe('Build Sass', function () {
 				expect(result).to.contain('div {\n  color: blue; }\n');
 			});
 	});
+
+
+	it('should set the brand variable', function () {
+		return build({
+			buildCss: 'bundle.css',
+			brand: 'internal'
+		})
+			.then(function (result) {
+				const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
+				expect(builtCss).to.contain('div {\n  content: Brand is set to internal;\n  color: blue; }\n');
+				expect(result).to.contain('div {\n  content: Brand is set to internal;\n  color: blue; }\n');
+			});
+	});
 });
