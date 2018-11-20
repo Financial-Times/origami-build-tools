@@ -1,4 +1,4 @@
-# origami-build-tools [![Build Status](https://travis-ci.org/Financial-Times/origami-build-tools.svg?branch=master)](https://travis-ci.org/Financial-Times/origami-build-tools)
+# origami-build-tools [![Build Status](https://circleci.com/gh/Financial-Times/origami-build-tools/tree/master.svg?style=svg)](https://circleci.com/gh/Financial-Times/origami-build-tools/tree/master)
 
 Standardised build tools for Origami modules and products developed based on these modules.
 
@@ -46,6 +46,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--browserstack             Run tests using Browserstack instead of Chrome Stable
 		--standalone               Create a named export for the built JavaScript
 		--demo-filter=<demo-name>  Build a specific demo. E.G. --demo-filter=pa11y to build only the pa11y.html demo.
+		--brand=<brand-name>       Build SCSS for a given brand. E.G. --brand=internal to build the component for the internal brand.
 		--suppress-errors          Do not error if no demos are found when using the --demo-filter option.
 		--debug                    Keep the test runner open to enable debugging in any browser.
 		--verbose                  Output sass warnings with backtraces.
