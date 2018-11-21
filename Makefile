@@ -7,6 +7,8 @@ include node_modules/@financial-times/origami-service-makefile/index.mk
 # [edit below this line]
 # ------------------------
 
+ci: verify test
+
 # npm publishing tasks
 # --------------------
 
