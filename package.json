@@ -85,7 +85,6 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
-    "@financial-times/di2-whitesource": "^2.0.1",
     "@financial-times/origami-service-makefile": "^6.0.0",
     "eslint-plugin-filenames": "^1.2.0",
     "eslint-plugin-json": "^1.2.0",
