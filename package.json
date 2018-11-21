@@ -85,7 +85,7 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
-    "@financial-times/origami-service-makefile": "^6.0.0",
+    "@financial-times/origami-service-makefile": "^6.3.0",
     "eslint-plugin-filenames": "^1.2.0",
     "eslint-plugin-json": "^1.2.0",
     "eslint-plugin-mocha": "^4.11.0",
