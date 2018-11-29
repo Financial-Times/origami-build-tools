@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (name) => {
-	return `${name.original} [![Circle CI](https://circleci.com/gh/Financial-Times/${name.original}/tree/master.svg?style=svg)](https://circleci.com/gh/Financial-Times/${name.original}/tree/master)
+	return `${name.original} [![Circle CI](https://circleci.com/gh/Financial-Times/${name.original}/tree/master.svg?style=svg)](https://circleci.com/gh/Financial-Times/${name.original}/tree/master)[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](#licence)
 =================
 
 _A short description of what this component does._
@@ -9,17 +9,16 @@ _A short description of what this component does._
 
 _A table of contents to help people find things_
 
-- [Usage](#usage)
-	- [Markup](#markup)
-	- [JavaScript](#javascript)
-	- [Sass](#sass)
+
+- [Markup](#markup)
+- [JavaScript](#javascript)
+- [Sass](#sass)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
-- [Migration guide](#migration-guide)
+- [Migration](#migration)
 - [Contact](#contact)
 - [Licence](#licence)
 
-## Usage
 _Whatever usage instructions your component has. We've broken this down by Markup, JavaScript and Sass, but it depends how complex your component is._
 
 ### Markup
@@ -75,27 +74,19 @@ Fix it by turning it off and on again
 If your component is particularly complicated (image sets fall into this category) then a contributing section or even a contributing.md might be useful.
 
 
-## Migration guide
-_Migration guides are very important! Always include one for major releases. To create a codeblock that has diff highligting, use three backticks followed by the word diff_
+## Migration
 
-### Migrating from 1.X.X to 2.X.X
+_We use tables to represent our migration guides. Be sure to update it when there is a major release, and update MIGRATION.md, as well_
 
-The 2.0.0 release changes the default behaviour of ${name.original}.
-
-\`\`\`diff
-<div class="${name.original}__container">
-- remove this line
-+ add this line
-</div>
-\`\`\`
-
----
+State | Major Version | Last Minor Release | Migration guide |
+:---: | :---: | :---: | :---:
+✨ active | 3 | N/A | [migrate to v3](MIGRATION.md#migrating-from-v2-to-v3) |
+⚠ maintained | 2 | 2.0 | [migrate to v2](MIGRATION.md#migrating-from-v1-to-v2) |
+╳ deprecated | 1 | 1.0 | N/A |
 
 ## Contact
 
 If you have any questions or comments about this component, or need help using it, please either [raise an issue](https://github.com/Financial-Times/${name.original}/issues), visit [#ft-origami](https://financialtimes.slack.com/messages/ft-origami/) or email [Origami Support](mailto:origami-support@ft.com).
-
-----
 
 ## Licence
 

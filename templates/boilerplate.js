@@ -10,6 +10,7 @@ module.exports = {
 	gitIgnore: require('./component-boilerplate/git-ignore'),
 	mainJs: require('./component-boilerplate/main-js'),
 	mainScss: require('./component-boilerplate/main-scss'),
+	migration: require('./component-boilerplate/migration'),
 	origamiJson: require('./component-boilerplate/origami-json'),
 	readMe: require('./component-boilerplate/read-me'),
 	srcJs: require('./component-boilerplate/src-js'),
