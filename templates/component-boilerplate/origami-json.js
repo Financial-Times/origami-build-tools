@@ -9,10 +9,10 @@ module.exports = (name) => {
 	"origamiVersion": 1,
 	"support": "https://github.com/Financial-Times/${name.original}/issues",
 	"supportContact": {
-		"email": "origami.support@ft.com",
-		"slack": "financialtimes/ft-origami"
+		"email": "YOUR-TEAM@ft.com",
+		"slack": "financialtimes/YOUR-SLACK-CHANNEL"
 	},
-	"supportStatus": "active",
+	"supportStatus": "experimental",
 	"browserFeatures": {},
 	"ci": {
 		"circle": "https://circleci.com/api/v1/project/Financial-Times/${name.original}"
