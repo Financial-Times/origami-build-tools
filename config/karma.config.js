@@ -25,7 +25,11 @@ module.exports.getBaseKarmaConfig = function() {
 
 			client: {
 				// Capture all console output and pipe it to the terminal.
-				captureConsole: false
+				captureConsole: false,
+				mocha: {
+					// change Karma's debug.html to the mocha web reporter so we can see the test results in page instead of in the console
+					reporter: 'html'
+				}
 			},
 
 			captureTimeout: 60 * 2000, // default 60000,
