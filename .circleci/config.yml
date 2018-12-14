@@ -24,36 +24,6 @@ workflows:
               only: /^v.*/
             branches:
               ignore: /.*/
-references:
-  restore_npm_cache: &restore_npm_cache
-    restore_cache:
-      keys:
-        - npm-lock-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
-        - npm-lock-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}
-        - npm-cache-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
-        - npm-cache-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}
-  versions: &versions
-    run:
-      name: Versions
-      command: npm version
-  install: &install
-    run:
-      name: Install dependencies
-      command: npm install
-  test: &test
-    run:
-      name: Test
-      command: make ci
-  save_cache_local: &save_cache_local
-    save_cache:
-      key: npm-lock-{{ checksum "package-lock.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
-      paths:
-        - node_modules
-  save_cache_global: &save_cache_global
-    save_cache:
-      key: npm-cache-{{ checksum "package.json" }}-{{ .Environment.CIRCLE_JOB }}-{{ .Branch }}-{{ .Revision }}
-      paths:
-        - ~/.npm/_cacache
 
 version: 2
 jobs:
@@ -61,13 +31,9 @@ jobs:
     docker:
       - image: circleci/node:latest-browsers
     steps:
-      - *versions
       - checkout
-      - *restore_npm_cache
-      - *install
-      - *test
-      - *save_cache_local
-      - *save_cache_global
+      - run: npm ci || npm i
+      - run: make ci
   node-v6:
     <<: *node-base
     docker:
@@ -86,13 +52,9 @@ jobs:
     docker:
       - image: circleci/node:6-browsers
     steps:
-      - *versions
       - checkout
-      - *restore_npm_cache
-      - *install
-      - *test
-      - *save_cache_local
-      - *save_cache_global
+      - run: npm ci || npm i
+      - run: make ci
       - run:
           name: Authenticate with npm
           command: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
