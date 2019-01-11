@@ -6,9 +6,10 @@ const fileHelpers = require('../lib/helpers/files');
 // https://github.com/webpack/webpack/issues/3324#issuecomment-289720345
 delete webpackConfig.bail;
 module.exports.getBaseKarmaConfig = function() {
-	return Promise.all([fileHelpers.getModuleName(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
+	return Promise.all([fileHelpers.getModuleName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
 		const moduleName = values[0];
-		const mainScssContent = values[1];
+		const brands = values[1];
+		const mainScssContent = values[2];
 		return {
 			// enable / disable watching file and executing tests whenever any file changes
 			autoWatch: false,
@@ -72,7 +73,7 @@ module.exports.getBaseKarmaConfig = function() {
 			scssPreprocessor: {
 				options: {
 					file: '',
-					data: `$${moduleName}-is-silent: false; ${mainScssContent}`,
+					data: `${brands.length ? `$o-brand: ${brands[0]};` : ''}$${moduleName}-is-silent: false; ${mainScssContent}`,
 					includePaths: [process.cwd(), path.join(process.cwd(), 'bower_components')]
 				}
 			},
