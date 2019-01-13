@@ -1,5 +1,4 @@
 const path = require('path');
-const BowerResolvePlugin = require('bower-resolve-webpack-plugin');
 const appRoot = require('app-root-path');
 
 module.exports = {
