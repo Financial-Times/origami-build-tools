@@ -74,7 +74,7 @@ module.exports.getBaseKarmaConfig = function() {
 				options: {
 					file: '',
 					data: `${brands.length ? `$o-brand: ${brands[0]};` : ''}$${moduleName}-is-silent: false; ${mainScssContent}`,
-					includePaths: [process.cwd(), path.join(process.cwd(), 'bower_components')]
+					includePaths: fileHelpers.getSassIncludePaths(process.cwd(), {})
 				}
 			},
 
