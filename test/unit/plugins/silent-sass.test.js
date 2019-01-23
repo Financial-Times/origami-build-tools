@@ -31,14 +31,4 @@ describe('Silent Sass', function () {
 			silent: true
 		})(fakeFile));
 	});
-
-	it('Should fail if silent is false and file does not have content', function () {
-		const fakeFile = Buffer.from('');
-
-		const mySilentSass = silentSass({
-			silent: false
-		});
-
-		proclaim.throws(() => mySilentSass(fakeFile), 'CSS was not output with silent mode off.');
-	});
 });
