@@ -11,6 +11,9 @@ jobs:
       - run:
           name: Ensure package.json exists for caching
           command: if [[ ! -f package.json ]]; then echo "{}" > package.json; fi
+      - run:
+          name: Ensure bower.json exists for caching
+          command: if [[ ! -f bower.json ]]; then echo "{}" > bower.json; fi
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}-{{ checksum "bower.json" }}
       - run:
