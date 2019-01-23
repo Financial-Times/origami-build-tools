@@ -8,9 +8,15 @@ const sinon = require('sinon');
 describe('run-npm-install', function() {
 	let runNpmInstall;
 	let commandLine;
+	let files;
+
 	beforeEach(function() {
 		commandLine = {
 			run: sinon.stub().resolves()
+		};
+
+		files = {
+			packageLockJsonExists: sinon.stub().resolves()
 		};
 
 		mockery.enable({
@@ -20,6 +26,7 @@ describe('run-npm-install', function() {
 		});
 
 		mockery.registerMock('../helpers/command-line', commandLine);
+		mockery.registerMock('../helpers/files', files);
 
 		mockery.registerAllowable('../../../lib/helpers/run-npm-install');
 
@@ -40,7 +47,24 @@ describe('run-npm-install', function() {
 		return runNpmInstall()
 			.then(() => {
 				proclaim.calledOnce(commandLine.run);
-				proclaim.calledWithExactly(commandLine.run, 'npm', ['install', '--no-shrinkwrap'], undefined);
+			});
+	});
+
+	it('uses `npm ci` if there is a package-lock.json', () => {
+		files.packageLockJsonExists.resolves(true);
+		return runNpmInstall()
+			.then(() => {
+				proclaim.calledOnce(commandLine.run);
+				proclaim.calledWithExactly(commandLine.run, 'npm', ['ci'], {});
+			});
+	});
+
+	it('uses `npm install --no-shrinkwrap` if there is no package-lock.json', () => {
+		files.packageLockJsonExists.resolves(false);
+		return runNpmInstall()
+			.then(() => {
+				proclaim.calledOnce(commandLine.run);
+				sinon.assert.calledWithExactly(commandLine.run, 'npm', ['install', '--no-shrinkwrap'], {});
 			});
 	});
 
