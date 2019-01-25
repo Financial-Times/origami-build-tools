@@ -1,10 +1,12 @@
 const process = require('process');
 const path = require('path');
-const webpackConfig = require('./webpack.config.dev');
+const webpackConfigDev = require('./webpack.config.dev');
+const webpackConfigBower = require('../config/webpack.config.bower');
+const webpackMerge = require('webpack-merge');
 const fileHelpers = require('../lib/helpers/files');
 
 // https://github.com/webpack/webpack/issues/3324#issuecomment-289720345
-delete webpackConfig.bail;
+delete webpackConfigDev.bail;
 module.exports.getBaseKarmaConfig = function() {
 	return Promise.all([fileHelpers.getModuleName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
 		const moduleName = values[0];
@@ -82,7 +84,7 @@ module.exports.getBaseKarmaConfig = function() {
 			// if true, Karma captures browsers, runs the tests and exits
 			singleRun: true,
 
-			webpack: webpackConfig,
+			webpack: webpackMerge(webpackConfigDev, webpackConfigBower),
 
 			// Hide webpack output logging
 			webpackMiddleware: {
