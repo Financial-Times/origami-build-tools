@@ -23,7 +23,7 @@ jobs:
         - image: circleci/node:10
       steps:
         - checkout
-        - run: npx occ ${CIRCLE_TAG##v}
+        - run: npx occ \$\{CIRCLE_TAG##v}
         - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > $HOME/.npmrc
         - run: npm publish --access public 
 workflows:
