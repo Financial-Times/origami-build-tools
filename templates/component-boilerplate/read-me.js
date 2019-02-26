@@ -17,7 +17,7 @@ _A table of contents to help people find things_
 - [Contributing](#contributing)
 - [Migration](#migration)
 - [Contact](#contact)
-- [License](#license)
+- [Licence](#licence)
 
 _Whatever usage instructions your component has. We've broken this down by Markup, JavaScript and Sass, but it depends how complex your component is._
 
