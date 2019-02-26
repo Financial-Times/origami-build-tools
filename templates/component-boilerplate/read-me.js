@@ -17,7 +17,7 @@ _A table of contents to help people find things_
 - [Contributing](#contributing)
 - [Migration](#migration)
 - [Contact](#contact)
-- [Licence](#licence)
+- [License](#license)
 
 _Whatever usage instructions your component has. We've broken this down by Markup, JavaScript and Sass, but it depends how complex your component is._
 
@@ -67,12 +67,8 @@ As with all Origami components, ${name.original} has a [silent mode](http://orig
 ## Troubleshooting
 _This is a good place to put problems that come up repeatedly_
 
-### The thing with the thing isn't working
-Fix it by turning it off and on again
-
 ## Contributing
 If your component is particularly complicated (image sets fall into this category) then a contributing section or even a contributing.md might be useful.
-
 
 ## Migration
 
@@ -88,7 +84,7 @@ State | Major Version | Last Minor Release | Migration guide |
 
 If you have any questions or comments about this component, or need help using it, please either [raise an issue](https://github.com/Financial-Times/${name.original}/issues), visit [#ft-origami](https://financialtimes.slack.com/messages/ft-origami/) or email [Origami Support](mailto:origami-support@ft.com).
 
-## Licence
+## License
 
-This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).`;
+This software is published by the Financial Times under the [MIT license](http://opensource.org/licenses/MIT).`;
 };
