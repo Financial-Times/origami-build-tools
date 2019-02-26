@@ -15,7 +15,7 @@ module.exports = (name) => {
 	}
 
 	/**
-	 * Get the data attributes from the ${name.titleCase}Element. If the message is being set up
+	 * Get the data attributes from the ${name.titleCase}Element. If the component is being set up
 	 * declaratively, this method is used to extract the data attributes from the DOM.
 	 * @param {HTMLElement} ${name.camelCase}El - The component element in the DOM
 	 * @returns {Object} - Data attributes as an object
@@ -47,7 +47,7 @@ module.exports = (name) => {
 	}
 
 	/**
-	 * Initialise message component.
+	 * Initialise the component.
 	 * @param {(HTMLElement|String)} rootElement - The root element to intialise the component in, or a CSS selector for the root element
 	 * @param {Object} [opts={}] - An options object for configuring the component
 	 * @returns {(${name.titleCase}|Array<${name.titleCase}>)} - ${name.titleCase} instance(s)
