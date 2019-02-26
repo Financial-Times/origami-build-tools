@@ -86,5 +86,5 @@ If you have any questions or comments about this component, or need help using i
 
 ## Licence
 
-This software is published by the Financial Times under the [MIT license](http://opensource.org/licenses/MIT).`;
+This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).`;
 };
