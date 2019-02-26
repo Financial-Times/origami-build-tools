@@ -3,7 +3,7 @@
 module.exports = (name) => {
 	return `{
 	"description": "component description",
-	"keywords": "",
+	"keywords": [],
 	"origamiType": "module",
 	"origamiCategory": "components",
 	"origamiVersion": 1,
