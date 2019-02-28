@@ -40,8 +40,8 @@ describe('Build Sass', function () {
 		return build()
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/main.css', 'utf8');
-				expect(builtCss).to.contain('div {\n  color: blue; }\n');
-				expect(result).to.contain('div {\n  color: blue; }\n');
+				expect(builtCss).to.contain('div {\n  color: LightSalmon; }\n');
+				expect(result).to.contain('div {\n  color: LightSalmon; }\n');
 			});
 	});
 
@@ -52,8 +52,8 @@ describe('Build Sass', function () {
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/main.css', 'utf8');
 				// blue doesn't need to change to hex as it is same amount of characters as #00f
-				expect(builtCss).to.be('div{color:blue}');
-				expect(result).to.be('div{color:blue}');
+				expect(builtCss).to.be('div{color:#ffa07a}');
+				expect(result).to.be('div{color:#ffa07a}');
 			});
 	});
 
@@ -74,8 +74,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('test-build/main.css', 'utf8');
-				expect(builtCss).to.contain('div {\n  color: blue; }\n');
-				expect(result).to.contain('div {\n  color: blue; }\n');
+				expect(builtCss).to.contain('div {\n  color: LightSalmon; }\n');
+				expect(result).to.contain('div {\n  color: LightSalmon; }\n');
 				return exec('rm -rf test-build');
 			});
 	});
@@ -86,8 +86,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
-				expect(builtCss).to.contain('div {\n  color: blue; }\n');
-				expect(result).to.contain('div {\n  color: blue; }\n');
+				expect(builtCss).to.contain('div {\n  color: LightSalmon; }\n');
+				expect(result).to.contain('div {\n  color: LightSalmon; }\n');
 			});
 	});
 
@@ -99,8 +99,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
-				expect(builtCss).to.contain('div {\n  content: Brand is set to internal;\n  color: blue; }\n');
-				expect(result).to.contain('div {\n  content: Brand is set to internal;\n  color: blue; }\n');
+				expect(builtCss).to.contain('div {\n  content: Brand is set to internal;\n  color: LightSalmon; }\n');
+				expect(result).to.contain('div {\n  content: Brand is set to internal;\n  color: LightSalmon; }\n');
 			});
 	});
 });
