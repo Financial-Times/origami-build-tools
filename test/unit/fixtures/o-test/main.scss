@@ -5,6 +5,6 @@
 		@if global-variable-exists(o-brand) {
 			content: Brand is set to #{$o-brand};
 		}
-		color: blue;
+		color: LightSalmon;
 	}
 }
