@@ -6,7 +6,7 @@ const merge = require('merge-deep');
 const origamiServicesConfig = merge({},
 	origamiComponentConfig, {
 		"parserOptions": {
-			"ecmaVersion": 6,
+			"ecmaVersion": 2017,
 			"sourceType": "script"
 		},
 		"env": {

@@ -8,7 +8,7 @@
     "obt": "./lib/origami-build-tools-cli.js"
   },
   "engines": {
-    "node": ">= 6.0.0",
+    "node": ">= 8.0.0",
     "npm": ">= 4.0.0"
   },
   "dependencies": {
@@ -63,7 +63,7 @@
     "node-sass": "^4.9.2",
     "node.extend": "^2.0.0",
     "npmconf": "^2.1.2",
-    "pa11y": "^4.13.1",
+    "pa11y": "^5.0.2",
     "parse-gitignore": "^0.4.0",
     "portfinder": "^1.0.13",
     "postcss": "^6.0.13",

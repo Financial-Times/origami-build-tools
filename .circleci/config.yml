@@ -2,7 +2,7 @@ workflows:
   version: 2
   node-multi-build:
     jobs:
-      - node-v6:
+      - node-latest:
           filters:
             tags:
               only: /^v.*/
@@ -16,7 +16,7 @@ workflows:
               only: /^v.*/
       - publish:
           requires:
-            - node-v6
+            - node-latest
             - node-v8
             - node-v10
           filters:
@@ -34,10 +34,10 @@ jobs:
       - checkout
       - run: npm ci || npm i
       - run: make ci
-  node-v6:
+  node-latest:
     <<: *node-base
     docker:
-      - image: circleci/node:6-browsers
+      - image: circleci/node:latest-browsers
   node-v8:
     <<: *node-base
     docker:
