@@ -18,7 +18,7 @@ const origamiServicesConfig = merge({},
 			"no-console": "off",
 			"no-await-in-loop": "off",
 
-			"filenames/match-regex": [2, "^[a-z0-9-]+(\.test|(\.config(\.browserstack|\.dev|\.chrome|\.prod)?))?$", true],
+			"filenames/match-regex": [2, "^[a-z0-9-]+(\.test|(\.config(\.browserstack|\.bower|\.dev|\.chrome|\.prod)?))?$", true],
 
 			"import/no-dynamic-require": "error",
 			"import/no-unresolved": "error",

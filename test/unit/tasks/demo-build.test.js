@@ -148,7 +148,24 @@ describe('Demo task', function () {
 					expect(fs.readFileSync('demos/local/test1.html', 'utf8')).to.contain('<div>test1</div>');
 					expect(fs.readFileSync('demos/local/test2.html', 'utf8')).to.contain('<div>test2</div>');
 					expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\tvar name = \'test\';');
-					expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  color: blue; }\n');
+					expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  color: LightSalmon; }\n');
+					fs.removeSync('demos/local');
+				});
+		});
+
+		it('should build local demos for brand', function () {
+			addDemoToOrigamiConfig([{
+				"name": "test1",
+				"template": "demos/src/test1.mustache",
+				"path": "/demos/test1.html",
+				"description": "First test"
+			}]);
+			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
+			return demo({
+				brand: 'internal'
+			})
+				.then(function () {
+					expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  content: Brand is set to internal;\n  color: LightSalmon; }\n');
 					fs.removeSync('demos/local');
 				});
 		});

@@ -21,7 +21,7 @@ describe('Silent Sass', function () {
 			silent: true
 		});
 
-		proclaim.throws(() => mySilentSass(fakeFile), 'sass compilation for silent mode: true failed.');
+		proclaim.throws(() => mySilentSass(fakeFile), 'CSS was output with silent mode on.');
 	});
 
 	it('Should succeed if silent is true and file doesn not have content', function () {
@@ -30,15 +30,5 @@ describe('Silent Sass', function () {
 		proclaim.doesNotThrow(() => silentSass({
 			silent: true
 		})(fakeFile));
-	});
-
-	it('Should fail if silent is false and file does not have content', function () {
-		const fakeFile = Buffer.from('');
-
-		const mySilentSass = silentSass({
-			silent: false
-		});
-
-		proclaim.throws(() => mySilentSass(fakeFile), 'sass compilation for silent mode: false failed.');
 	});
 });

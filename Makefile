@@ -7,6 +7,14 @@ include node_modules/@financial-times/origami-service-makefile/index.mk
 # [edit below this line]
 # ------------------------
 
+# npm publishing tasks
+# --------------------
+
+# Publish the module to npm
+npm-publish:
+	npm-prepublish --verbose
+	npm publish --access public
+
 # Configuration
 # -------------
 

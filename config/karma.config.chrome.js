@@ -1,15 +1,17 @@
-const karmaBaseConfig = require('./karma.config');
+const { getBaseKarmaConfig } = require('./karma.config');
+const constants = require('karma').constants;
 
-module.exports = function (config) {
+module.exports.getChromeKarmaConfig = function () {
+	return getBaseKarmaConfig().then(karmaBaseConfig => {
+		const karmaConfig = Object.assign(
+			{},
+			karmaBaseConfig,
+			{
+				browsers: ['ChromeHeadless'],
+				logLevel: constants.LOG_DISABLE
+			}
+		);
 
-	const karmaConfig = Object.assign(
-		{},
-		karmaBaseConfig,
-		{
-			browsers: ['ChromeHeadless'],
-			logLevel: config.LOG_DISABLE
-		}
-	);
-
-	config.set(karmaConfig);
+		return karmaConfig;
+	});
 };

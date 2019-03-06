@@ -1,0 +1,63 @@
+workflows:
+  version: 2
+  node-multi-build:
+    jobs:
+      - node-v6:
+          filters:
+            tags:
+              only: /^v.*/
+      - node-v8:
+          filters:
+            tags:
+              only: /^v.*/
+      - node-v10:
+          filters:
+            tags:
+              only: /^v.*/
+      - publish:
+          requires:
+            - node-v6
+            - node-v8
+            - node-v10
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+
+version: 2
+jobs:
+  node-base: &node-base
+    docker:
+      - image: circleci/node:latest-browsers
+    steps:
+      - checkout
+      - run: npm ci || npm i
+      - run: make ci
+  node-v6:
+    <<: *node-base
+    docker:
+      - image: circleci/node:6-browsers
+  node-v8:
+    <<: *node-base
+    docker:
+      - image: circleci/node:8-browsers
+  node-v10:
+    <<: *node-base
+    docker:
+      - image: circleci/node:10-browsers
+  # Publish the module to npm
+  publish:
+    <<: *node-base
+    docker:
+      - image: circleci/node:6-browsers
+    steps:
+      - checkout
+      - run: npm ci || npm i
+      - run: make ci
+      - run:
+          name: Authenticate with npm
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
+      - run:
+          name: Publish to npm
+          command: make npm-publish

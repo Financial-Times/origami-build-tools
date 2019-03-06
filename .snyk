@@ -1,0 +1,119 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.3
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'npm:braces:20180219':
+    - karma > chokidar > anymatch > micromatch > braces:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.917Z'
+    - karma > expand-braces > braces:
+        reason: None given
+        expires: '2019-02-03T15:08:10.921Z'
+  'npm:ws:20171108':
+    - karma > socket.io > socket.io-client > engine.io-client > ws:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.918Z'
+    - karma > socket.io > engine.io > ws:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.919Z'
+  'npm:debug:20170905':
+    - karma > socket.io > engine.io > debug:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.918Z'
+    - karma > socket.io > socket.io-adapter > debug:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.918Z'
+    - karma > socket.io > socket.io-client > debug:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.918Z'
+    - karma > socket.io > socket.io-client > engine.io-client > debug:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.918Z'
+    - karma > socket.io > socket.io-parser > debug:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.918Z'
+    - karma > socket.io > socket.io-client > socket.io-parser > debug:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.919Z'
+    - karma > socket.io > debug:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.920Z'
+    - karma > socket.io > socket.io-adapter > socket.io-parser > debug:
+        reason: None given
+        expires: '2019-02-03T15:08:10.921Z'
+  'npm:ms:20170412':
+    - karma > socket.io > socket.io-client > socket.io-parser > debug > ms:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.920Z'
+    - karma > socket.io > debug > ms:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.920Z'
+    - karma > socket.io > engine.io > debug > ms:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.920Z'
+    - karma > socket.io > socket.io-adapter > debug > ms:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.920Z'
+    - karma > socket.io > socket.io-client > debug > ms:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.920Z'
+    - karma > socket.io > socket.io-client > engine.io-client > debug > ms:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.920Z'
+    - karma > socket.io > socket.io-parser > debug > ms:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.920Z'
+    - karma > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        reason: None given
+        expires: '2019-02-03T15:08:10.921Z'
+  'npm:lodash:20180130':
+    - karma > lodash:
+        reason: Big Karma update scheduled.
+        expires: '2019-02-03T15:08:10.920Z'
+  'npm:diff:20180305':
+    - mocha > diff:
+        reason: Big Mocha update scheduled.
+        expires: '2019-02-03T15:08:10.921Z'
+  'npm:serve:20180529':
+    - serve:
+        reason: Update scheduled.
+        expires: '2019-02-03T15:08:10.921Z'
+  'npm:serve:20180531':
+    - serve:
+        reason: Update scheduled.
+        expires: '2019-02-03T15:08:10.921Z'
+  'npm:mem:20180117':
+    - webpack > yargs > os-locale > mem:
+        reason: Webpack update scheduled.
+        expires: '2019-02-03T15:08:10.921Z'
+  'npm:chownr:20180731':
+    - chokidar > fsevents > node-pre-gyp > tar > chownr:
+        reason: None given
+        expires: '2019-02-03T15:08:10.921Z'
+    - karma > chokidar > fsevents > node-pre-gyp > tar > chownr:
+        reason: None given
+        expires: '2019-02-03T15:08:10.921Z'
+    - webpack > watchpack > chokidar > fsevents > node-pre-gyp > tar > chownr:
+        reason: None given
+        expires: '2019-02-03T15:08:10.921Z'
+  'npm:eslint:20180222':
+    - sass-lint > eslint:
+        reason: None given
+        expires: '2019-02-03T15:08:10.921Z'
+  'npm:https-proxy-agent:20180402':
+    - karma-browserstack-launcher > browserstack > https-proxy-agent:
+        reason: None given
+        expires: '2019-02-03T15:08:10.921Z'
+  'npm:parsejson:20170908':
+    - karma > socket.io > socket.io-client > engine.io-client > parsejson:
+        reason: None given
+        expires: '2019-02-03T15:08:10.922Z'
+  'npm:shelljs:20140723':
+    - sass-lint > eslint > shelljs:
+        reason: None given
+        expires: '2019-02-03T15:08:10.922Z'
+  'snyk:lic:npm:pa11y:LGPL-3.0':
+    - pa11y:
+        reason: None given
+        expires: '2019-02-03T15:08:10.922Z'
+patch: {}
