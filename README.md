@@ -127,6 +127,12 @@ obt init o-my-new-component
 
 ## Migration guide
 
+
+### Migrating from 7.X.X to 8.X.X
+
+
+OBT no longer supports NodeJS v6 because it uses async functions. To use this version of OBT, you will need NodeJS v8 or above.
+
 ### Migrating from 6.X.X to 7.X.X
 
 
