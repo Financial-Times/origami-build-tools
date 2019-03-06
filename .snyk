@@ -116,4 +116,11 @@ ignore:
     - pa11y:
         reason: None given
         expires: '2019-02-03T15:08:10.922Z'
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - karma > socket.io > socket.io-adapter > socket.io-parser > debug:
+        patched: '2019-03-06T18:21:02.598Z'
+  'npm:ms:20170412':
+    - karma > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        patched: '2019-03-06T18:21:02.598Z'
