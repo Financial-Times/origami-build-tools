@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (name) => {
-	return `class ${name.titleCase} {
+	return `class ${name.plainTitleCase} {
 	/**
 	 * Class constructor.
 	 * @param {HTMLElement} [${name.camelCase}El] - The component element in the DOM
@@ -11,11 +11,11 @@ module.exports = (name) => {
 		this.${name.camelCase}El = ${name.camelCase}El;
 		this.options = Object.assign({}, {
 
-		}, opts || ${name.titleCase}.getDataAttributes(${name.camelCase}El));
+		}, opts || ${name.plainTitleCase}.getDataAttributes(${name.camelCase}El));
 	}
 
 	/**
-	 * Get the data attributes from the ${name.titleCase}Element. If the message is being set up
+	 * Get the data attributes from the ${name.plainTitleCase}Element. If the component is being set up
 	 * declaratively, this method is used to extract the data attributes from the DOM.
 	 * @param {HTMLElement} ${name.camelCase}El - The component element in the DOM
 	 * @returns {Object} - Data attributes as an object
@@ -47,10 +47,10 @@ module.exports = (name) => {
 	}
 
 	/**
-	 * Initialise message component.
+	 * Initialise the component.
 	 * @param {(HTMLElement|String)} rootElement - The root element to intialise the component in, or a CSS selector for the root element
 	 * @param {Object} [opts={}] - An options object for configuring the component
-	 * @returns {(${name.titleCase}|Array<${name.titleCase}>)} - ${name.titleCase} instance(s)
+	 * @returns {(${name.plainTitleCase}|Array<${name.plainTitleCase}>)} - ${name.plainTitleCase} instance(s)
 	 */
 	static init (rootEl, opts) {
 		if (!rootEl) {
@@ -60,11 +60,11 @@ module.exports = (name) => {
 			rootEl = document.querySelector(rootEl);
 		}
 		if (rootEl instanceof HTMLElement && rootEl.matches('[data-o-component=${name.original}]')) {
-			return new ${name.titleCase}(rootEl, opts);
+			return new ${name.plainTitleCase}(rootEl, opts);
 		}
-		return Array.from(rootEl.querySelectorAll('[data-o-component="${name.original}"]'), rootEl => new ${name.titleCase}(rootEl, opts));
+		return Array.from(rootEl.querySelectorAll('[data-o-component="${name.original}"]'), rootEl => new ${name.plainTitleCase}(rootEl, opts));
 	}
 }
 
-export default ${name.titleCase};`;
+export default ${name.plainTitleCase};`;
 };

@@ -16,6 +16,7 @@ module.exports = {
 	srcJs: require('./component-boilerplate/src-js'),
 	srcSassMixins: require('./component-boilerplate/src-sass-mixins'),
 	srcSassVariables: require('./component-boilerplate/src-sass-variables'),
+	srcSassBrand: require('./component-boilerplate/src-sass-brand'),
 	packageJson: require('./component-boilerplate/package-json'),
 	testFixtures: require('./component-boilerplate/test-fixtures'),
 	testMain: require('./component-boilerplate/test-main'),

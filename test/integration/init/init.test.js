@@ -15,9 +15,11 @@ describe('obt boilerplate', function () {
 
 	describe('builds boilerplate tree structure', function () {
 		const defaultName = 'o-component-boilerplate';
+		const plainDefaultName = 'component-boilerplate';
 
 		describe('with component name', function () {
 			const componentName = 'o-my-test';
+			const plainComponentName = 'my-test';
 
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), componentName))
@@ -30,7 +32,7 @@ describe('obt boilerplate', function () {
 						return execa(obt, ['init', componentName]);
 					})
 					.then(() => {
-						return fileExists(`${componentName}/src/js/${componentName}.js`);
+						return fileExists(`${componentName}/src/js/${plainComponentName}.js`);
 					})
 					.then(exists => {
 						proclaim.ok(exists);
@@ -65,7 +67,7 @@ describe('obt boilerplate', function () {
 						return execa(obt, ['init']);
 					})
 					.then(() => {
-						return fileExists(`${defaultName}/src/js/${defaultName}.js`);
+						return fileExists(`${defaultName}/src/js/${plainDefaultName}.js`);
 					})
 					.then(exists => {
 						proclaim.ok(exists);

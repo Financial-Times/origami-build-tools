@@ -67,12 +67,8 @@ As with all Origami components, ${name.original} has a [silent mode](http://orig
 ## Troubleshooting
 _This is a good place to put problems that come up repeatedly_
 
-### The thing with the thing isn't working
-Fix it by turning it off and on again
-
 ## Contributing
 If your component is particularly complicated (image sets fall into this category) then a contributing section or even a contributing.md might be useful.
-
 
 ## Migration
 
