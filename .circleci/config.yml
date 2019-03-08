@@ -15,10 +15,6 @@ workflows:
             tags:
               only: /^v.*/
       - publish:
-          requires:
-            - node-latest
-            - node-v8
-            - node-v10
           filters:
             tags:
               only: /^v.*/
