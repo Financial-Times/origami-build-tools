@@ -148,7 +148,7 @@ describe('Demo task', function () {
 					expect(fs.readFileSync('demos/local/test1.html', 'utf8')).to.contain('<div>test1</div>');
 					expect(fs.readFileSync('demos/local/test2.html', 'utf8')).to.contain('<div>test2</div>');
 					expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\tvar name = \'test\';');
-					expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  color: LightSalmon; }\n');
+					expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  color: blue; }\n');
 					fs.removeSync('demos/local');
 				});
 		});
@@ -165,7 +165,7 @@ describe('Demo task', function () {
 				brand: 'internal'
 			})
 				.then(function () {
-					expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  content: Brand is set to internal;\n  color: LightSalmon; }\n');
+					expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  content: Brand is set to internal;\n  color: blue; }\n');
 					fs.removeSync('demos/local');
 				});
 		});
