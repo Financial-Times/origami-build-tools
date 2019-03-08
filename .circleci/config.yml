@@ -46,9 +46,10 @@ jobs:
   publish:
     <<: *node-base
     docker:
-      - image: circleci/node:6-browsers
+      - image: circleci/node:latest-browsers
     steps:
       - checkout
+      - run: npm ci
       - run:
           name: Authenticate with npm
           command: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
