@@ -53,8 +53,6 @@ jobs:
       - image: circleci/node:6-browsers
     steps:
       - checkout
-      - run: npm ci || npm i
-      - run: make ci
       - run:
           name: Authenticate with npm
           command: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
