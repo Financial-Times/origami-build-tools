@@ -12,42 +12,37 @@ describe('obt test', function () {
 
 	this.timeout(10 * 1000);
 
+	const bowerPath = path.join(__dirname, '/fixtures/with-bower-dependency-installed');
+	const npmPath = path.join(__dirname, '/fixtures/with-npm-dependency-installed');
+
 	before(function () {
 		return obtBinPath()
 			.then((obt) => {
 				// Install npm fixtures.
-				process.chdir(path.join(__dirname, '/fixtures/with-npm-dependency-installed'));
+				process.chdir(npmPath);
 				return execa(obt, ['install', '--ignore-bower']);
 			})
 			.then(obtBinPath)
 			.then((obt) => {
 				// Install bower fixtures.
-				process.chdir(path.join(__dirname, '/fixtures/with-bower-dependency-installed'));
+				process.chdir(bowerPath);
 				execa(obt, ['install']);
 			});
 	});
 
 	after(function () {
-		// Clear npm install.
-		process.chdir(path.join(__dirname, '/fixtures/with-npm-dependency-installed'));
-		return rimraf(path.join(process.cwd(), '/node_modules'))
-			.then(() => {
-				// Clear bower install.
-				process.chdir(path.join(__dirname, '/fixtures/with-bower-dependency-installed'));
-				rimraf(path.join(process.cwd(), '/bower_components'));
-			});
+		// Clear installs and correct path.
+		return rimraf(path.join(bowerPath, '/bower_components'))
+			.then(() => rimraf(path.join(npmPath, '/node_modules')))
+			.then(() => process.chdir(process.cwd()));
 	});
 
 	describe('with the --ignore-bower flag', function () {
 
 		it('passes Sass compilation tests for a component installed via npm', function () {
-			process.chdir(path.join(__dirname, '/fixtures/with-npm-dependency-installed'));
+			process.chdir(npmPath);
 
 			return obtBinPath()
-				.then(obt => {
-					return execa(obt, ['install', '--ignore-bower']);
-				})
-				.then(obtBinPath)
 				.then(obt => {
 					return execa(obt, ['test', '--ignore-bower']);
 				})
@@ -58,12 +53,8 @@ describe('obt test', function () {
 
 
 		it('fails Sass compilation tests for a component installed via bower', function (done) {
-			process.chdir(path.join(__dirname, '/fixtures/with-bower-dependency-installed'));
+			process.chdir(bowerPath);
 			obtBinPath()
-				.then(obt => {
-					return execa(obt, ['install', '--ignore-bower']);
-				})
-				.then(obtBinPath)
 				.then(obt => {
 					return execa(obt, ['test', '--ignore-bower']);
 				})
@@ -78,12 +69,8 @@ describe('obt test', function () {
 	describe('without the --ignore-bower flag', function () {
 
 		it('passes Sass compilation tests for a component installed via bower', function () {
-			process.chdir(path.join(__dirname, '/fixtures/with-bower-dependency-installed'));
+			process.chdir(bowerPath);
 			return obtBinPath()
-				.then(obt => {
-					return execa(obt, ['install']);
-				})
-				.then(obtBinPath)
 				.then(obt => {
 					return execa(obt, ['test']);
 				})
@@ -93,12 +80,8 @@ describe('obt test', function () {
 		});
 
 		it('fails Sass compilation tests for a component with an npm dependency', function (done) {
-			process.chdir(path.join(__dirname, '/fixtures/with-npm-dependency-installed'));
+			process.chdir(npmPath);
 			obtBinPath()
-				.then(obt => {
-					return execa(obt, ['install']);
-				})
-				.then(obtBinPath)
 				.then(obt => {
 					return execa(obt, ['test']);
 				})
