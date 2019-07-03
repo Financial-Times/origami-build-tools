@@ -8,7 +8,7 @@ const process = require('process');
 const rimraf = require('../helpers/delete');
 const obtBinPath = require('../helpers/obtpath');
 
-describe('obt test', function () {
+describe.only('obt test', function () {
 
 	this.timeout(10 * 1000);
 
@@ -79,7 +79,7 @@ describe('obt test', function () {
 				});
 		});
 
-		it('fails Sass compilation tests for a component with an npm dependency', function (done) {
+		it('fails Sass compilation tests for a component installed via npm', function (done) {
 			process.chdir(npmPath);
 			obtBinPath()
 				.then(obt => {

@@ -2,6 +2,6 @@
 
 $test-component-is-silent: true !default;
 @if($test-component-is-silent == false) {
-    @include oTestComponent();
+    @include oTestComponentHelloWorld();
     $test-component-is-silent: true;
 }
