@@ -8,7 +8,7 @@ const process = require('process');
 const rimraf = require('../helpers/delete');
 const obtBinPath = require('../helpers/obtpath');
 
-describe.only('obt test', function () {
+describe('obt test', function () {
 
 	this.timeout(10 * 1000);
 
