@@ -1,0 +1,5 @@
+{
+    "dependencies": {
+        "o-test-component": "file:./sass-node-modules/o-test-component"
+    }
+}
