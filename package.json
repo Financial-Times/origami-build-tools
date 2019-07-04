@@ -31,7 +31,7 @@
     "denodeify": "^1.2.1",
     "elegant-spinner": "^1.0.1",
     "eslint": "^4.9.0",
-    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-import": "^2.18.0",
     "execa": "^0.8.0",
     "figures": "^2.0.0",
     "findit": "^2.0.0",
@@ -73,7 +73,6 @@
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
     "root-check": "^1.0.0",
-    "sass": "^1.20.1",
     "sass-lint": "^1.13.1",
     "sass-true": "^4.0.0",
     "serve": "^6.5.8",
@@ -101,7 +100,7 @@
     "node-version": "^1.2.0",
     "npm-prepublish": "^1.2.3",
     "rimraf": "^2.6.3",
-    "snyk": "^1.166.1"
+    "snyk": "^1.189.0"
   },
   "repository": {
     "type": "git",
