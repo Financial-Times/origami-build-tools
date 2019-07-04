@@ -73,6 +73,7 @@
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
     "root-check": "^1.0.0",
+    "sass": "^1.22.3",
     "sass-lint": "^1.13.1",
     "sass-true": "^4.0.0",
     "serve": "^6.5.8",
