@@ -31,7 +31,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 				captureConsole: false
 			},
 
-			captureTimeout: 60 * 3000, // default 60000,
+			captureTimeout: 60 * 2000, // default 60000,
 
 			// enable / disable colors in the output (reporters and logs)
 			colors: true,
