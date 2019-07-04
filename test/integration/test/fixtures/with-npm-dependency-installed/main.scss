@@ -1,0 +1,7 @@
+@import "o-test-component/main";
+
+$test-component-is-silent: true !default;
+@if($test-component-is-silent == false) {
+    @include oTestComponentHelloWorld();
+    $test-component-is-silent: true;
+}

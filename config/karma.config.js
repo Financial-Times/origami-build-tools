@@ -7,7 +7,7 @@ const fileHelpers = require('../lib/helpers/files');
 
 // https://github.com/webpack/webpack/issues/3324#issuecomment-289720345
 delete webpackConfigDev.bail;
-module.exports.getBaseKarmaConfig = function() {
+module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 	return Promise.all([fileHelpers.getModuleName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
 		const moduleName = values[0];
 		const brands = values[1];
@@ -76,7 +76,7 @@ module.exports.getBaseKarmaConfig = function() {
 				options: {
 					file: '',
 					data: `${brands.length ? `$o-brand: ${brands[0]};` : ''}$${moduleName}-is-silent: false; ${mainScssContent}`,
-					includePaths: fileHelpers.getSassIncludePaths(process.cwd(), {})
+					includePaths: fileHelpers.getSassIncludePaths(process.cwd(), opts)
 				}
 			},
 
