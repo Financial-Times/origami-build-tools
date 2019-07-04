@@ -1,0 +1,7 @@
+{
+	"name": "test-component",
+	"main": ["main.scss"],
+	"dependencies": {
+		"o-test-component": "v1.0.33"
+	}
+}
