@@ -101,7 +101,7 @@
     "node-version": "^1.2.0",
     "npm-prepublish": "^1.2.3",
     "rimraf": "^2.6.3",
-    "snyk": "^1.189.0"
+    "snyk": "^1.191.0"
   },
   "repository": {
     "type": "git",
