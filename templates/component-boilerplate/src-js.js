@@ -62,7 +62,7 @@ module.exports = (name) => {
 		if (rootEl instanceof HTMLElement && rootEl.matches('[data-o-component=${name.original}]')) {
 			return new ${name.plainTitleCase}(rootEl, opts);
 		}
-		return Array.from(rootEl.querySelectorAll('[data-o-component="${name.original}"]'), rootEl => new ${name.plainTitleCase}(rootEl, opts));
+		return [].slice.call(rootEl.querySelectorAll('[data-o-component="${name.original}"]')).map(rootEl => new ${name.plainTitleCase}(rootEl, opts));
 	}
 }
 
