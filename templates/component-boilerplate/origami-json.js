@@ -13,7 +13,11 @@ module.exports = (name) => {
 		"slack": "financialtimes/YOUR-SLACK-CHANNEL"
 	},
 	"supportStatus": "experimental",
-	"browserFeatures": {},
+	"browserFeatures": {
+		"required": [
+			"Array.from"
+		]
+	},
 	"ci": {
 		"circle": "https://circleci.com/api/v1/project/Financial-Times/${name.original}"
 	},
