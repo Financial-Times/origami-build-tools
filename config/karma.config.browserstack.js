@@ -77,7 +77,7 @@ module.exports.getBrowserStackKarmaConfig = function (opts = { ignoreBower: fals
 					startTunnel: true // let BrowserStack connect to our local server
 				},
 				customLaunchers,
-				logLevel: constants.LOG_DISABLE
+				logLevel: constants.LOG_ERROR
 			}
 		);
 
