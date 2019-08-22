@@ -4,8 +4,8 @@ const constants = require('karma').constants;
 const customLaunchers = {
 	// If browser_version is not set, uses latest stable version
 
-	// Tesing on minimum version for enhanced experience based on
-	// https://docs.google.com/document/d/1mByh6sT8zI4XRyPKqWVsC2jUfXHZvhshS5SlHErWjXU
+	// Testing on minimum version for enhanced experience based on
+	// https://docs.google.com/document/d/1AG4uZEFiWOkXfy0pdE3-3NCUP2No4MkoiZMLlJnO5lI/edit?ts=5d498574
 
 	// Firefox latest
 	bs_firefox: {
