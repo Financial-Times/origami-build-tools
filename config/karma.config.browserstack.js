@@ -12,7 +12,7 @@ const customLaunchers = {
 		base: 'BrowserStack',
 		browser: 'firefox',
 		os: 'OS X',
-		os_version: 'Sierra'
+		os_version: 'Mojave'
 	},
 
 	// Chrome latest
@@ -20,15 +20,15 @@ const customLaunchers = {
 		base: 'BrowserStack',
 		browser: 'chrome',
 		os: 'OS X',
-		os_version: 'Sierra'
+		os_version: 'Mojave'
 	},
 
-	// Safari 10
+	// Safari latest
 	bs_safari: {
 		base: 'BrowserStack',
 		browser: 'safari',
 		os: 'OS X',
-		os_version: 'Sierra'
+		os_version: 'High Sierra'
 	},
 
 	// IE 11
@@ -47,20 +47,20 @@ const customLaunchers = {
 		os_version: '10'
 	},
 
-	// iOS 8
-	bs_iphone6: {
+	// iOS 10
+	bs_iphone7: {
 		base: 'BrowserStack',
-		device: 'iPhone 6',
+		device: 'iPhone 7',
 		os: 'ios',
-		os_version: '8.3'
+		os_version: '10'
 	},
 
-	// Android 4.4
-	bs_android4_4: {
+	// Android 5
+	bs_android5: {
 		base: 'BrowserStack',
 		os: 'android',
-		device: 'Samsung Galaxy S5',
-		os_version: '4.4'
+		device: 'Google Nexus 6',
+		os_version: '5.0'
 	}
 };
 
