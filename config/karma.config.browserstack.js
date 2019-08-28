@@ -51,16 +51,18 @@ const customLaunchers = {
 	bs_iphone7: {
 		base: 'BrowserStack',
 		device: 'iPhone 7',
+		os: 'ios',
 		os_version: '10',
-		real_mobile: true
+		real_mobile: 'true'
 	},
 
 	// Android 5
 	bs_android5: {
 		base: 'BrowserStack',
 		device: 'Google Nexus 6',
+		os: 'android',
 		os_version: '5.0',
-		real_mobile: true
+		real_mobile: 'true'
 	}
 };
 
