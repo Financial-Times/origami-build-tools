@@ -6,6 +6,23 @@ const customLaunchers = {
 
 	// Testing on minimum version for enhanced experience based on
 	// https://docs.google.com/document/d/1AG4uZEFiWOkXfy0pdE3-3NCUP2No4MkoiZMLlJnO5lI/edit?ts=5d498574
+	// Android 5
+	bs_android5: {
+		base: 'BrowserStack',
+		device: 'Google Nexus 6',
+		os: 'android',
+		os_version: '5.0',
+		real_mobile: true
+	},
+
+	// iOS 10
+	bs_iphone7: {
+		base: 'BrowserStack',
+		device: 'iPhone 7',
+		os: 'ios',
+		os_version: '10.0',
+		real_mobile: true
+	},
 
 	// Firefox latest
 	bs_firefox: {
@@ -46,24 +63,6 @@ const customLaunchers = {
 		os: 'Windows',
 		os_version: '10'
 	},
-
-	// iOS 10
-	bs_iphone7: {
-		base: 'BrowserStack',
-		device: 'iPhone 7',
-		os: 'ios',
-		os_version: '10',
-		real_mobile: 'true'
-	},
-
-	// Android 5
-	bs_android5: {
-		base: 'BrowserStack',
-		device: 'Google Nexus 6',
-		os: 'android',
-		os_version: '5.0',
-		real_mobile: 'true'
-	}
 };
 
 const browsers = Object.keys(customLaunchers);
