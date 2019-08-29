@@ -75,7 +75,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			scssPreprocessor: {
 				options: {
 					file: '',
-					data: `${brands.length ? `$o-brand: ${brands[0]};` : ''}$${moduleName}-is-silent: false; ${mainScssContent}`,
+					data: `$system-code: "origami-build-tools";${brands.length ? `$o-brand: ${brands[0]};` : ''}$${moduleName}-is-silent: false; ${mainScssContent}`,
 					includePaths: fileHelpers.getSassIncludePaths(process.cwd(), opts)
 				}
 			},
