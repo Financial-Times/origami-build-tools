@@ -84,7 +84,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			// if true, Karma captures browsers, runs the tests and exits
 			singleRun: true,
 
-			webpack: webpackMerge(webpackConfigDev, webpackConfigBower),
+			webpack: opts.ignoreBower ? webpackConfigDev : webpackMerge(webpackConfigDev, webpackConfigBower),
 
 			// Hide webpack output logging
 			webpackMiddleware: {
