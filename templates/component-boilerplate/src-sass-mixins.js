@@ -2,8 +2,8 @@
 
 module.exports = (name) => {
 	return `/// Output All oMessage Features
-@mixin ${name.camelCase} ($class: '${name.original}') {
-	.#{$class} {
+@mixin ${name.camelCase}() {
+	.${name.original} {
 		display: block;
 	}
 }
