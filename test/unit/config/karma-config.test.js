@@ -35,7 +35,7 @@ describe('base karma config', () => {
 			const actualScssConfig = actualConfig.scssPreprocessor.options.data;
 			proclaim.equal(
 				actualScssConfig,
-				`$${mockName}-is-silent: false; ${mockScss}`
+				`$system-code: "origami-build-tools";$${mockName}-is-silent: false; ${mockScss}`
 			);
 		});
 	});

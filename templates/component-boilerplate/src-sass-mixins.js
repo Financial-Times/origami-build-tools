@@ -1,12 +1,12 @@
 'use strict';
 
 module.exports = (name) => {
-	return `/// Output All oMessage Features
-@mixin ${name.camelCase} ($class: '${name.original}') {
-	.#{$class} {
+	return `/// Output All ${name.camelCase} Features
+@mixin ${name.camelCase}() {
+	.${name.original} {
 		display: block;
 	}
-}
+};
 
 /// Provide a component specific error message
 ///
