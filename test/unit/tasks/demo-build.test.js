@@ -118,13 +118,13 @@ describe('Demo task', function () {
 			}).then(function () {
 				const test1 = fs.readFileSync('demos/test1.html', 'utf8');
 				expect(test1).to.contain('<div>test1</div>');
-				expect(test1).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+				expect(test1).to.match(/\/v3\/polyfill\.min\.js\?features=.*promises/);
 				const test2 = fs.readFileSync('demos/test2.html', 'utf8');
 				expect(test2).to.contain('<div>test2</div>');
-				expect(test2).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+				expect(test2).to.match(/\/v3\/polyfill\.min\.js\?features=.*promises/);
 				const testRemoteData = fs.readFileSync('demos/remote-data.html', 'utf8');
 				expect(testRemoteData).to.contain(`<div>${demoDataLabel}</div>`);
-				expect(testRemoteData).to.match(/\/v2\/polyfill\.min\.js\?features=.*promises/);
+				expect(testRemoteData).to.match(/\/v3\/polyfill\.min\.js\?features=.*promises/);
 			});
 		});
 
