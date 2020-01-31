@@ -62,7 +62,7 @@ describe('construct-polyfill-url', function() {
 			globby.resolves([]);
 			return constructPolyfillUrl()
 				.then(polyfillUrl => {
-					expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?features=default&flags=gated&unknown=polyfill');
+					expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
 				});
 		});
 	});
@@ -75,7 +75,7 @@ describe('construct-polyfill-url', function() {
 
 				return constructPolyfillUrl()
 					.then(polyfillUrl => {
-						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?features=default&flags=gated&unknown=polyfill');
+						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
 					});
 			});
 		});
@@ -87,7 +87,7 @@ describe('construct-polyfill-url', function() {
 
 				return constructPolyfillUrl()
 					.then(polyfillUrl => {
-						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?features=default&flags=gated&unknown=polyfill');
+						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
 					});
 			});
 		});
@@ -99,7 +99,7 @@ describe('construct-polyfill-url', function() {
 
 				return constructPolyfillUrl()
 					.then(polyfillUrl => {
-						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?features=default,Array.prototype.every&flags=gated&unknown=polyfill');
+						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?features=,Array.prototype.every&flags=gated&unknown=polyfill');
 					});
 			});
 
@@ -110,7 +110,7 @@ describe('construct-polyfill-url', function() {
 
 				return constructPolyfillUrl()
 					.then(polyfillUrl => {
-						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?features=default,Array.prototype.every,Array.prototype.some&flags=gated&unknown=polyfill');
+						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?features=,Array.prototype.every,Array.prototype.some&flags=gated&unknown=polyfill');
 					});
 			});
 
@@ -121,7 +121,7 @@ describe('construct-polyfill-url', function() {
 
 					return constructPolyfillUrl()
 						.then(polyfillUrl => {
-							expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?features=default&flags=gated&unknown=polyfill');
+							expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
 						});
 				});
 			});
