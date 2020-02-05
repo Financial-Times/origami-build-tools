@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (name) => {
-	return `_Migration guides are very important! Always include one for major releases. To create a codeblock that has diff highligting, use three backticks followed by the word diff_
+	return `_Migration guides are very important! Always include one for major releases. To create a codeblock that has diff highlighting, use three backticks followed by the word diff_
 
 ### Migrating from 1.X.X to 2.X.X
 
