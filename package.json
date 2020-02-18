@@ -56,7 +56,7 @@
     "log-update": "^2.1.0",
     "memory-fs": "^0.4.1",
     "meow": "^3.7.0",
-    "merge-stream": "^1.0.1",
+    "merge-stream": "^2.0.0",
     "mocha": "^4.0.1",
     "mockery": "^2.1.0",
     "mustache": "^2.3.2",
