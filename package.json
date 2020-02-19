@@ -90,7 +90,7 @@
     "eslint-plugin-filenames": "^1.2.0",
     "eslint-plugin-json": "^1.4.0",
     "eslint-plugin-mocha": "^4.11.0",
-    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-objects": "^1.1.1",
     "eslint-plugin-promise": "^3.6.0",
     "expect.js": "^0.3.1",
