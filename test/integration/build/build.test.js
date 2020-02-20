@@ -62,7 +62,7 @@ describe('obt build', function () {
 					.then(() => {
 						throw new Error('obt build should error when trying to build a dependency which has invalid js.');
 					}, () => {
-						return Promise.resolve(); // obt build exited with a non-zero exit code, which is what we expected.
+						return; // obt build exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
@@ -467,7 +467,7 @@ describe('obt build', function () {
 					.then(() => {
 						throw new Error('obt build should error when trying to build a dependency which has invalid sass.');
 					}, () => {
-						return Promise.resolve(); // obt build exited with a non-zero exit code, which is what we expected.
+						return; // obt build exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
@@ -595,7 +595,7 @@ describe('obt build', function () {
 					.then(() => {
 						throw new Error('obt build should error when trying to build sass which uses files in node_modules directory.');
 					}, () => {
-						return Promise.resolve(); // obt build exited with a non-zero exit code, which is what we expected.
+						return; // obt build exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
