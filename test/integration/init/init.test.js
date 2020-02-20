@@ -48,7 +48,7 @@ describe('obt boilerplate', function () {
 						return execa(obt, ['init', componentName]);
 					})
 					.then(() => {
-						return Promise.reject(new Error('obt init should error instead of overwriting an existing file'));
+						throw new Error('obt init should error instead of overwriting an existing file');
 					}, () => {
 						return Promise.resolve(); // obt init exited with a non-zero exit code, which is what we expected.
 					});
