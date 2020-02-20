@@ -225,7 +225,9 @@ describe('Demo task', function () {
 			const mockHttpError = new Error('Mock StatusCodeError');
 			mockHttpError.name = 'StatusCodeError';
 			mockHttpError.statusCode = '500';
-			sandbox.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
+			sandbox.stub(request, 'get').callsFake(() => {
+				throw mockHttpError;
+			});
 			// Create demo config.
 			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
 			addDemoToOrigamiConfig({
@@ -252,7 +254,9 @@ describe('Demo task', function () {
 			const request = require('request-promise-native');
 			const mockHttpError = new Error('Mock Unknown Error');
 			mockHttpError.name = 'UnknownError';
-			sandbox.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
+			sandbox.stub(request, 'get').callsFake(() => {
+				throw mockHttpError;
+			});
 			// Create demo config.
 			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
 			addDemoToOrigamiConfig({

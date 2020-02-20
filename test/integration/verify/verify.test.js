@@ -52,7 +52,7 @@ describe('obt verify', function () {
 						return execa(obt, ['verify']);
 					})
 					.then(() => {
-						return Promise.reject(new Error('obt verify should error.'));
+						throw new Error('obt verify should error.');
 					}, () => {
 						return Promise.resolve(); // obt verify exited with a non-zero exit code, which is what we expected.
 					});
@@ -218,7 +218,7 @@ describe('obt verify', function () {
 						return execa(obt, ['verify']);
 					})
 					.then(() => {
-						return Promise.reject(new Error('obt verify should error when trying to verify a component which has invalid sass.'));
+						throw new Error('obt verify should error when trying to verify a component which has invalid sass.');
 					}, () => {
 						return Promise.resolve(); // obt verify exited with a non-zero exit code, which is what we expected.
 					});
