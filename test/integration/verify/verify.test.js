@@ -54,7 +54,7 @@ describe('obt verify', function () {
 					.then(() => {
 						throw new Error('obt verify should error.');
 					}, () => {
-						return; // obt verify exited with a non-zero exit code, which is what we expected.
+						// obt verify exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
@@ -220,7 +220,7 @@ describe('obt verify', function () {
 					.then(() => {
 						throw new Error('obt verify should error when trying to verify a component which has invalid sass.');
 					}, () => {
-						return; // obt verify exited with a non-zero exit code, which is what we expected.
+						// obt verify exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});

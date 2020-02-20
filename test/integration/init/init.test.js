@@ -50,7 +50,7 @@ describe('obt boilerplate', function () {
 					.then(() => {
 						throw new Error('obt init should error instead of overwriting an existing file');
 					}, () => {
-						return; // obt init exited with a non-zero exit code, which is what we expected.
+						// obt init exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
@@ -94,7 +94,7 @@ describe('obt boilerplate', function () {
 							.then(() => execa(obt, ['verify']))
 							.then(() => execa(obt, ['test']));
 					}, () => {
-						return; // obt init exited with a non-zero exit code, which is what we expected.
+						// obt init exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
