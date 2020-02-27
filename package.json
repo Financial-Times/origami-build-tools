@@ -32,7 +32,7 @@
     "elegant-spinner": "^1.0.1",
     "eslint": "^4.9.0",
     "eslint-plugin-import": "^2.18.0",
-    "execa": "^0.8.0",
+    "execa": "^4.0.0",
     "figures": "^3.2.0",
     "findit": "^2.0.0",
     "flush-write-stream": "^2.0.0",
