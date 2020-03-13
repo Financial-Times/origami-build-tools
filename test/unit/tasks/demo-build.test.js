@@ -6,6 +6,7 @@ const process = require('process');
 const fs = require('fs-extra');
 const path = require('path');
 const sinon = require('sinon');
+const proclaim = require('proclaim');
 
 const demo = require('../../../lib/tasks/demo-build');
 
@@ -150,6 +151,34 @@ describe('Demo task', function () {
 					expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\tvar name = \'test\';');
 					expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  color: blue; }\n');
 					fs.removeSync('demos/local');
+				});
+		});
+
+		it('should build Sass once when shared by multiple local demos', function () {
+			const testDemoConfig = [];
+			for (let i = 0; i < 5; i++) {
+				testDemoConfig.push({
+					"name": `test${i}`,
+					"template": "demos/src/test1.mustache",
+					"path": `/demos/test${i}.html`,
+					"description": `Test number ${i}`
+				});
+			}
+			addDemoToOrigamiConfig(testDemoConfig);
+			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
+			// Sass library should be called only once, as all the test demos
+			// share one Sass file
+			const nodeSass = require('node-sass');
+			const sassSpy = sinon.spy(nodeSass, 'render');
+
+			// Build the test demos.
+			// Confirm assets built once.
+			return demo()
+				.then(function () {
+					proclaim.isTrue(
+						sassSpy.calledOnce,
+						'Attempted to build demo Sass more than once.'
+					);
 				});
 		});
 
