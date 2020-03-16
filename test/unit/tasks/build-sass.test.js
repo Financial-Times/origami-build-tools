@@ -40,8 +40,8 @@ describe('Build Sass', function () {
 		return build()
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/main.css', 'utf8');
-				expect(builtCss).to.contain('div {\n  color: blue; }\n');
-				expect(result).to.contain('div {\n  color: blue; }\n');
+				expect(builtCss).to.contain('div {\n  color: blue; \n}\n');
+				expect(result).to.contain('div {\n  color: blue; \n}\n');
 			});
 	});
 

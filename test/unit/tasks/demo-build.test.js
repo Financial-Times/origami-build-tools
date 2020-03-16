@@ -7,6 +7,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const sinon = require('sinon');
 const proclaim = require('proclaim');
+const mockery = require('mockery');
 
 const demo = require('../../../lib/tasks/demo-build');
 
@@ -29,6 +30,9 @@ describe('Demo task', function () {
 		process.chdir(obtPath);
 		fs.removeSync(demoTestPath);
 		sandbox.restore(); // restore all fakes created through the sandbox
+		mockery.resetCache();
+		mockery.deregisterAll();
+		mockery.disable();
 	});
 
 	describe('Build demos', function () {
@@ -166,10 +170,10 @@ describe('Demo task', function () {
 			}
 			addDemoToOrigamiConfig(testDemoConfig);
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
-			// Sass library should be called only once, as all the test demos
+			// Sass should be built only once, as all the test demos
 			// share one Sass file
-			const nodeSass = require('node-sass');
-			const sassSpy = sinon.spy(nodeSass, 'render');
+			const sassSpy = sinon.spy();
+			mockery.registerMock('./build-sass', sassSpy);
 
 			// Build the test demos.
 			// Confirm assets built once.
