@@ -128,10 +128,15 @@ obt init o-my-new-component
 ## Migration guide
 
 
+### Migrating from 8.X.X to 9.X.X
+
+- NodeJS v8 is no longer supported. Use NodeJS v10 or above.
+- [Dart Sass](https://github.com/sass/dart-sass), the reference implementation of Sass, is used instead of [Node Sass](https://github.com/sass/node-sass). You may need to update your Sass to be compatible with Dart Sass if an error is thrown during build.
+
 ### Migrating from 7.X.X to 8.X.X
 
 
-OBT no longer supports NodeJS v6 because it uses async functions. To use this version of OBT, you will need NodeJS v10 or above.
+OBT no longer supports NodeJS v6 because it uses async functions. To use this version of OBT, you will need NodeJS v8 or above.
 
 ### Migrating from 6.X.X to 7.X.X
 
