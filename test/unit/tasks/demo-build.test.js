@@ -8,12 +8,12 @@ const path = require('path');
 const sinon = require('sinon');
 const proclaim = require('proclaim');
 const mockery = require('mockery');
-const demo = require('../../../lib/tasks/demo-build');
 const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/o-test';
 const oNoManifestPath = path.resolve(obtPath, 'test/unit/fixtures/o-no-manifest');
 const pathSuffix = '-demo';
 const demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
+let demo = require('../../../lib/tasks/demo-build');
 
 const sandbox = sinon.sandbox.create();
 
@@ -100,6 +100,7 @@ describe('Demo task', function () {
 				"label": demoDataLabel,
 				"items": []
 			}));
+			demo = require('../../../lib/tasks/demo-build');
 			addDemoToOrigamiConfig([{
 				"name": "test1",
 				"template": "demos/src/test1.mustache",
@@ -265,6 +266,7 @@ describe('Demo task', function () {
 			mockHttpError.name = 'StatusCodeError';
 			mockHttpError.statusCode = '500';
 			sandbox.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
+			demo = require('../../../lib/tasks/demo-build');
 			// Create demo config.
 			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
 			addDemoToOrigamiConfig({
@@ -292,6 +294,7 @@ describe('Demo task', function () {
 			const mockHttpError = new Error('Mock Unknown Error');
 			mockHttpError.name = 'UnknownError';
 			sandbox.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
+			demo = require('../../../lib/tasks/demo-build');
 			// Create demo config.
 			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
 			addDemoToOrigamiConfig({
