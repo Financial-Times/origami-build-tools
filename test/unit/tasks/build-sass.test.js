@@ -63,8 +63,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/main.css', 'utf8');
-				proclaim.include(builtCss, 'p {\n  color: #000000; }\n');
-				proclaim.include(result, 'p {\n  color: #000000; }\n');
+				proclaim.include(builtCss, 'p {\n  color: #000000;\n}\n');
+				proclaim.include(result, 'p {\n  color: #000000;\n}\n');
 			});
 	});
 
@@ -74,8 +74,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('test-build/main.css', 'utf8');
-				proclaim.include(builtCss, 'div {\n  color: blue; }\n');
-				proclaim.include(result, 'div {\n  color: blue; }\n');
+				proclaim.include(builtCss, 'div {\n  color: blue;\n}\n');
+				proclaim.include(result, 'div {\n  color: blue;\n}\n');
 				return exec('rm -rf test-build');
 			});
 	});
@@ -86,8 +86,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
-				proclaim.include(builtCss, 'div {\n  color: blue; }\n');
-				proclaim.include(result, 'div {\n  color: blue; }\n');
+				proclaim.include(builtCss, 'div {\n  color: blue;\n}\n');
+				proclaim.include(result, 'div {\n  color: blue;\n}\n');
 			});
 	});
 
@@ -99,8 +99,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
-				proclaim.include(builtCss, 'div {\n  content: Brand is set to internal;\n  color: blue; }\n');
-				proclaim.include(result, 'div {\n  content: Brand is set to internal;\n  color: blue; }\n');
+				proclaim.include(builtCss, 'div {\n  content: Brand is set to internal;\n  color: blue;\n}\n');
+				proclaim.include(result, 'div {\n  content: Brand is set to internal;\n  color: blue;\n}\n');
 			});
 	});
 });
