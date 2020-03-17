@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 'use strict';
 
-const expect = require('expect.js');
 const proclaim = require('proclaim');
 const fs = require('fs-extra');
 const path = require('path');
@@ -37,11 +36,11 @@ describe('build-js', function () {
 		return build()
 			.then(function (result) {
 				proclaim.match(result, /^\/\*\*\*\*\*\*\/ \(function\(modules\)/);
-				expect(result).to.contain('sourceMappingURL');
-				expect(result).to.contain('var Test');
-				expect(result).to.contain('function Test() {\n\tvar name = \'test\';');
-				expect(result).to.contain('module.exports = "This is a test\\n"');
-				expect(result).to.contain('module.exports = {"test":true}');
+				proclaim.include(result, 'sourceMappingURL');
+				proclaim.include(result, 'var Test');
+				proclaim.include(result, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.include(result, 'module.exports = "This is a test\\n"');
+				proclaim.include(result, 'module.exports = {"test":true}');
 			});
 	});
 
@@ -50,11 +49,11 @@ describe('build-js', function () {
 			production: true
 		})
 			.then(function (builtJs) {
-				expect(builtJs).to.not.contain('sourceMappingURL');
-				expect(builtJs).to.not.contain('var Test');
-				expect(builtJs).to.not.contain('function Test() {\n\tvar name = \'test\';');
-				expect(builtJs).to.not.contain('"This is a test"');
-				expect(builtJs).to.not.contain('function Test() {\n\tvar name = \'test\';');
+				proclaim.doesNotInclude(builtJs, 'sourceMappingURL');
+				proclaim.doesNotInclude(builtJs, 'var Test');
+				proclaim.doesNotInclude(builtJs, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.doesNotInclude(builtJs, '"This is a test"');
+				proclaim.doesNotInclude(builtJs, 'function Test() {\n\tvar name = \'test\';');
 			});
 	});
 
@@ -63,9 +62,9 @@ describe('build-js', function () {
 			js: './src/js/test.js'
 		})
 			.then(function (builtJs) {
-				expect(builtJs).to.contain('sourceMappingURL');
-				expect(builtJs).to.not.contain('var Test');
-				expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, 'sourceMappingURL');
+				proclaim.doesNotInclude(builtJs, 'var Test');
+				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
 			});
 	});
 
@@ -74,11 +73,11 @@ describe('build-js', function () {
 			buildFolder: 'test-build'
 		})
 			.then(function (builtJs) {
-				expect(builtJs).to.contain('sourceMappingURL');
-				expect(builtJs).to.contain('var Test');
-				expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
-				expect(builtJs).to.contain('module.exports = "This is a test\\n"');
-				expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, 'sourceMappingURL');
+				proclaim.include(builtJs, 'var Test');
+				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, 'module.exports = "This is a test\\n"');
+				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
 			});
 	});
 
@@ -87,11 +86,11 @@ describe('build-js', function () {
 			buildJs: 'bundle.js'
 		})
 			.then(function (builtJs) {
-				expect(builtJs).to.contain('sourceMappingURL');
-				expect(builtJs).to.contain('var Test');
-				expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
-				expect(builtJs).to.contain('module.exports = "This is a test\\n"');
-				expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, 'sourceMappingURL');
+				proclaim.include(builtJs, 'var Test');
+				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, 'module.exports = "This is a test\\n"');
+				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
 			});
 	});
 
@@ -100,8 +99,8 @@ describe('build-js', function () {
 			js: './src/js/syntax-error.js'
 		})
 			.then(function () {}, function (e) { // eslint-disable-line no-empty-function
-				expect(e.message).to.contain('SyntaxError');
-				expect(e.message).to.contain('Unexpected token');
+				proclaim.include(e.message, 'SyntaxError');
+				proclaim.include(e.message, 'Unexpected token');
 			});
 	});
 
@@ -110,7 +109,7 @@ describe('build-js', function () {
 			js: './src/js/missing-dep.js'
 		})
 			.then(function () {}, function (e) { // eslint-disable-line no-empty-function
-				expect(e.message).to.contain('Module not found: Error: Can\'t resolve \'dep\'');
+				proclaim.include(e.message, 'Module not found: Error: Can\'t resolve \'dep\'');
 			});
 	});
 
@@ -119,12 +118,12 @@ describe('build-js', function () {
 			standalone: 'origami'
 		})
 			.then(function (builtJs) {
-				expect(builtJs).to.contain('sourceMappingURL');
-				expect(builtJs).to.contain('var Test');
-				expect(builtJs).to.contain('function Test() {\n\tvar name = \'test\';');
-				expect(builtJs).to.contain('module.exports = "This is a test\\n"');
-				expect(builtJs).to.contain('module.exports = {"test":true}');
-				expect(builtJs).to.contain('var origami =\n');
+				proclaim.include(builtJs, 'sourceMappingURL');
+				proclaim.include(builtJs, 'var Test');
+				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, 'module.exports = "This is a test\\n"');
+				proclaim.include(builtJs, 'module.exports = {"test":true}');
+				proclaim.include(builtJs, 'var origami =\n');
 			});
 	});
 });

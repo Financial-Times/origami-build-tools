@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 'use strict';
 
-const expect = require('expect.js');
+const proclaim = require('proclaim');
 const process = require('process');
 const fs = require('fs-extra');
 const path = require('path');
@@ -33,23 +33,23 @@ describe('Test task', function() {
 
 		describe('default title', () => {
 			it('should be "Executing Pa11y"', () => {
-				expect(pa11y().title).to.be('Executing Pa11y');
+				proclaim.equal(pa11y().title, 'Executing Pa11y');
 			});
 		});
 
 		describe('skip', () => {
 			it('should return a truthy value if the file does not exist', function() {
 				fs.removeSync(path.join(process.cwd(), '/demos/local/pa11y.html'));
-				return pa11y().skip().then(result => expect(Boolean(result)).to.be(true));
+				return pa11y().skip().then(result => proclaim.isTrue(Boolean(result)));
 			});
 
 			it('should return a helpful message if the file does not exist', function() {
 				fs.removeSync(path.join(process.cwd(), '/demos/local/pa11y.html'));
-				return pa11y().skip().then(result => expect(result).to.be(`No Pa11y demo found. To run Pa11y against this project, create a file at ${path.join(process.cwd(), '/demos/local/pa11y.html')}`));
+				return pa11y().skip().then(result => proclaim.equal(result, `No Pa11y demo found. To run Pa11y against this project, create a file at ${path.join(process.cwd(), '/demos/local/pa11y.html')}`));
 			});
 
 			it('should return a falsey value if the file does exist', function() {
-				return pa11y().skip().then(result => expect(Boolean(result)).to.be(false));
+				return pa11y().skip().then(result => proclaim.isFalse(Boolean(result)));
 			});
 		});
 
@@ -58,7 +58,7 @@ describe('Test task', function() {
 				this.timeout(10000);
 				return pa11y().task()
 					.catch(function (results) {
-						expect(results).to.be.an(Error);
+						proclaim.isInstanceOf(results, Error);
 					});
 			});
 		});

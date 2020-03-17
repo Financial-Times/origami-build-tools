@@ -2,7 +2,7 @@
 'use strict';
 
 const process = require('process');
-const expect = require('expect.js');
+const proclaim = require('proclaim');
 
 const fs = require('fs-extra');
 const path = require('path');
@@ -26,13 +26,13 @@ describe('Files helper', function () {
 	});
 
 	it('should return correct build folder', function () {
-		expect(files.getBuildFolderPath()).to.be(process.cwd() + '/build/');
+		proclaim.equal(files.getBuildFolderPath(), process.cwd() + '/build/');
 	});
 
 	it('should return module name', function () {
 		return files.getModuleName()
 			.then(name => {
-				expect(name).to.be('');
+				proclaim.equal(name, '');
 			})
 			.then(() => {
 				fs.writeFileSync('bower.json', JSON.stringify({
@@ -40,7 +40,7 @@ describe('Files helper', function () {
 				}), 'utf8');
 				return files.getModuleName()
 					.then(name => {
-						expect(name).to.be('o-test');
+						proclaim.equal(name, 'o-test');
 						fs.unlinkSync(path.resolve(filesTestPath, 'bower.json'));
 					});
 			});
@@ -49,8 +49,8 @@ describe('Files helper', function () {
 	it('should return a list of Sass files', function () {
 		return files.getSassFilesList().then(function (sassFiles) {
 			const testResults = [path.join(process.cwd() + '/main.scss'), path.join(process.cwd() + '/src/scss/_variables.scss')];
-			expect(sassFiles).to.contain(testResults[0]);
-			expect(sassFiles).to.contain(testResults[1]);
+			proclaim.include(sassFiles, testResults[0]);
+			proclaim.include(sassFiles, testResults[1]);
 		});
 	});
 
@@ -61,7 +61,7 @@ describe('Files helper', function () {
 		return files.getSassFilesList()
 			.then(files.sassSupportsSilent)
 			.then(function (supportsSilent) {
-				expect(supportsSilent).to.be(true);
+				proclaim.equal(supportsSilent, true);
 				fs.unlinkSync(path.resolve(filesTestPath, 'bower.json'));
 			});
 	});
@@ -80,7 +80,7 @@ describe('Files helper', function () {
 		it('should get the path of main.scss', function () {
 			return files.getMainSassPath()
 				.then(sassPath => {
-					expect(sassPath).to.be(null);
+					proclaim.equal(sassPath, null);
 					return files.getBowerJson()
 						.then(bowerJson => {
 							bowerJson.main = bowerJson.main || [];
@@ -88,7 +88,7 @@ describe('Files helper', function () {
 							fs.writeFileSync('bower.json', JSON.stringify(bowerJson), 'utf8');
 							return files.getMainSassPath()
 								.then(sassPath => {
-									expect(sassPath).to.be(process.cwd() + '/main.scss');
+									proclaim.equal(sassPath, process.cwd() + '/main.scss');
 								});
 						});
 				});
@@ -97,7 +97,7 @@ describe('Files helper', function () {
 		it('should get the path of main.js', function () {
 			return files.getMainJsPath()
 				.then(jsPath => {
-					expect(jsPath).to.be(null);
+					proclaim.equal(jsPath, null);
 					return files.getBowerJson()
 						.then(bowerJson => {
 
@@ -107,7 +107,7 @@ describe('Files helper', function () {
 							return files.getMainJsPath()
 								.then(jsPath => {
 
-									expect(jsPath).to.be(process.cwd() + '/main.js');
+									proclaim.equal(jsPath, process.cwd() + '/main.js');
 								});
 						});
 				});
@@ -128,11 +128,11 @@ describe('Files helper', function () {
 		it('should get bower.json', function () {
 			return files.getBowerJson()
 				.then(bowerJson => {
-					expect(typeof bowerJson).to.be('undefined');
+					proclaim.equal(typeof bowerJson, 'undefined');
 					fs.writeFileSync('bower.json', JSON.stringify({}), 'utf8');
 					return files.getBowerJson()
 						.then(bowerJson => {
-							expect(typeof bowerJson).to.not.be('undefined');
+							proclaim.notEqual(typeof bowerJson, 'undefined');
 						});
 				});
 		});
@@ -140,11 +140,11 @@ describe('Files helper', function () {
 		it('should check if bower.json is present', function () {
 			return files.bowerJsonExists()
 				.then(exists => {
-					expect(exists).to.be(false);
+					proclaim.equal(exists, false);
 					fs.writeFileSync('bower.json', JSON.stringify({}), 'utf8');
 					return files.bowerJsonExists()
 						.then(exists => {
-							expect(exists).to.be(true);
+							proclaim.equal(exists, true);
 						});
 				});
 		});
@@ -165,12 +165,12 @@ describe('Files helper', function () {
 			return files.getPackageJson()
 				.then(packageJson => {
 
-					expect(typeof packageJson).to.be('undefined');
+					proclaim.equal(typeof packageJson, 'undefined');
 					fs.writeFileSync('package.json', JSON.stringify({}), 'utf8');
 					return files.getPackageJson()
 						.then(packageJson => {
 
-							expect(typeof packageJson).to.not.be('undefined');
+							proclaim.notEqual(typeof packageJson, 'undefined');
 						});
 				});
 		});
@@ -179,12 +179,12 @@ describe('Files helper', function () {
 			return files.packageJsonExists()
 				.then(exists => {
 
-					expect(exists).to.be(false);
+					proclaim.equal(exists, false);
 					fs.writeFileSync('package.json', JSON.stringify({}), 'utf8');
 					return files.packageJsonExists()
 						.then(exists => {
 
-							expect(exists).to.be(true);
+							proclaim.equal(exists, true);
 						});
 				});
 		});
@@ -196,13 +196,13 @@ describe('Files helper', function () {
 		const nestedMustacheFiles = path.resolve(mustacheTestPath, 'nested');
 
 		it('is a function', () => {
-			expect(files.getMustacheFilesList).to.be.a('function');
+			proclaim.isTypeOf(files.getMustacheFilesList, 'function');
 		});
 
 		it('returns an array', function () {
 			return files.getMustacheFilesList(flatMustacheFiles)
 				.then(mustacheFiles => {
-					expect(mustacheFiles).to.be.an('array');
+					proclaim.isInstanceOf(mustacheFiles, Array);
 				});
 		});
 
@@ -211,7 +211,7 @@ describe('Files helper', function () {
 			it('returns an array of all of the mustache files in the directory', function () {
 				return files.getMustacheFilesList(flatMustacheFiles)
 					.then(mustacheFiles => {
-						expect(mustacheFiles).to.eql([
+						proclaim.deepEqual(mustacheFiles, [
 							path.join(flatMustacheFiles, 'example-1.mustache'),
 							path.join(flatMustacheFiles, 'example-2.mustache')
 						]);
@@ -225,7 +225,7 @@ describe('Files helper', function () {
 			it('returns an array of all of the mustache files in the directory and all subdirectories', function () {
 				return files.getMustacheFilesList(nestedMustacheFiles)
 					.then(mustacheFiles => {
-						expect(mustacheFiles).to.eql([
+						proclaim.deepEqual(mustacheFiles, [
 							path.join(nestedMustacheFiles, 'example-1.mustache'),
 							path.join(nestedMustacheFiles, 'example-2.mustache'),
 							path.join(nestedMustacheFiles, 'folder-1/example-3.mustache'),
