@@ -21,7 +21,7 @@ describe('Command line helper', function () {
 			stderr: false
 		}).catch(function (output) {
 			proclaim.include(output.stderr, 'throw err;');
-			proclaim.equal(output.code, 1);
+			proclaim.equal(output.exitCode, 1);
 		});
 	});
 });
