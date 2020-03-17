@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 'use strict';
 
-const expect = require('expect.js');
+const proclaim = require('proclaim');
 const mockery = require('mockery');
 const sinon = require('sinon');
 const path = require('path');
@@ -43,7 +43,7 @@ describe('construct-polyfill-url', function() {
 	});
 
 	it('exports a function', function() {
-		expect(typeof constructPolyfillUrl).to.equal('function');
+		proclaim.equal(typeof constructPolyfillUrl, 'function');
 	});
 
 	it('returns a rejected promise if globby returns a rejected promise', () => {
@@ -51,9 +51,11 @@ describe('construct-polyfill-url', function() {
 
 		return constructPolyfillUrl()
 			.then(() => {
-				expect().fail();
+				// should not resolve
+				proclaim.notOk(true);
 			}, () => {
-				expect(true).ok();
+				// we expect this to reject
+				proclaim.ok(true);
 			});
 	});
 
@@ -62,7 +64,7 @@ describe('construct-polyfill-url', function() {
 			globby.resolves([]);
 			return constructPolyfillUrl()
 				.then(polyfillUrl => {
-					expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
+					proclaim.equal(polyfillUrl, 'https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
 				});
 		});
 	});
@@ -75,7 +77,7 @@ describe('construct-polyfill-url', function() {
 
 				return constructPolyfillUrl()
 					.then(polyfillUrl => {
-						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
+						proclaim.equal(polyfillUrl, 'https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
 					});
 			});
 		});
@@ -87,7 +89,7 @@ describe('construct-polyfill-url', function() {
 
 				return constructPolyfillUrl()
 					.then(polyfillUrl => {
-						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
+						proclaim.equal(polyfillUrl, 'https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
 					});
 			});
 		});
@@ -99,7 +101,7 @@ describe('construct-polyfill-url', function() {
 
 				return constructPolyfillUrl()
 					.then(polyfillUrl => {
-						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?features=,Array.prototype.every&flags=gated&unknown=polyfill');
+						proclaim.equal(polyfillUrl, 'https://polyfill.io/v2/polyfill.js?features=,Array.prototype.every&flags=gated&unknown=polyfill');
 					});
 			});
 
@@ -110,7 +112,7 @@ describe('construct-polyfill-url', function() {
 
 				return constructPolyfillUrl()
 					.then(polyfillUrl => {
-						expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?features=,Array.prototype.every,Array.prototype.some&flags=gated&unknown=polyfill');
+						proclaim.equal(polyfillUrl, 'https://polyfill.io/v2/polyfill.js?features=,Array.prototype.every,Array.prototype.some&flags=gated&unknown=polyfill');
 					});
 			});
 
@@ -121,7 +123,7 @@ describe('construct-polyfill-url', function() {
 
 					return constructPolyfillUrl()
 						.then(polyfillUrl => {
-							expect(polyfillUrl).to.equal('https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
+							proclaim.equal(polyfillUrl, 'https://polyfill.io/v2/polyfill.js?flags=gated&unknown=polyfill');
 						});
 				});
 			});

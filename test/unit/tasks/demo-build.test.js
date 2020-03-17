@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 'use strict';
 
-const expect = require('expect.js');
 const process = require('process');
 const fs = require('fs-extra');
 const path = require('path');
@@ -46,7 +45,7 @@ describe('Demo task', function () {
 				.then(() => {
 					throw new Error('promise resolved when it should have rejected');
 				}, function (err) {
-					expect(err.message).to.be(`Couldn\'t find demos config path, checked: ${path.join(process.cwd(),'origami.json')}`);
+					proclaim.equal(err.message, `Couldn\'t find demos config path, checked: ${path.join(process.cwd(),'origami.json')}`);
 					fs.unlinkSync(path.resolve(oNoManifestPath, 'bower.json'));
 					process.chdir(demoTestPath);
 				});
@@ -62,7 +61,7 @@ describe('Demo task', function () {
 					throw new Error('promise resolved when it should have rejected');
 				}, function errorHandler(err) {
 					// It will throw a template not found error which is fixed in "should build html" test
-					expect(err.message).to.not.be('Couldn\'t find demos config path, checked: demos/src/mysupercoolconfigs.json');
+					proclaim.notEqual(err.message, 'Couldn\'t find demos config path, checked: demos/src/mysupercoolconfigs.json');
 				});
 		});
 
@@ -77,7 +76,7 @@ describe('Demo task', function () {
 				.then(() => {
 					throw new Error('promise resolved when it should have rejected');
 				}, function () {
-					expect(true).to.be.ok();
+					proclaim.ok(true);
 				});
 		});
 
@@ -89,7 +88,7 @@ describe('Demo task', function () {
 				.then(() => {
 					throw new Error('promise resolved when it should have rejected');
 				}, function errorHandler(err) {
-					expect(err.message).to.be('Demos with the same name were found. Give them unique names and try again.');
+					proclaim.equal(err.message, 'Demos with the same name were found. Give them unique names and try again.');
 				});
 		});
 
@@ -126,14 +125,14 @@ describe('Demo task', function () {
 				production: true
 			}).then(function () {
 				const test1 = fs.readFileSync('demos/test1.html', 'utf8');
-				expect(test1).to.contain('<div>test1</div>');
-				expect(test1).to.match(/\/v3\/polyfill\.min\.js\?features=.*promises/);
+				proclaim.include(test1, '<div>test1</div>');
+				proclaim.match(test1, /\/v3\/polyfill\.min\.js\?features=.*promises/);
 				const test2 = fs.readFileSync('demos/test2.html', 'utf8');
-				expect(test2).to.contain('<div>test2</div>');
-				expect(test2).to.match(/\/v3\/polyfill\.min\.js\?features=.*promises/);
+				proclaim.include(test2, '<div>test2</div>');
+				proclaim.match(test2, /\/v3\/polyfill\.min\.js\?features=.*promises/);
 				const testRemoteData = fs.readFileSync('demos/remote-data.html', 'utf8');
-				expect(testRemoteData).to.contain(`<div>${demoDataLabel}</div>`);
-				expect(testRemoteData).to.match(/\/v3\/polyfill\.min\.js\?features=.*promises/);
+				proclaim.include(testRemoteData, `<div>${demoDataLabel}</div>`);
+				proclaim.match(testRemoteData, /\/v3\/polyfill\.min\.js\?features=.*promises/);
 			});
 		});
 
@@ -154,10 +153,10 @@ describe('Demo task', function () {
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
 			return demo()
 				.then(function () {
-					expect(fs.readFileSync('demos/local/test1.html', 'utf8')).to.contain('<div>test1</div>');
-					expect(fs.readFileSync('demos/local/test2.html', 'utf8')).to.contain('<div>test2</div>');
-					expect(fs.readFileSync('demos/local/demo.js', 'utf8')).to.contain('function Test() {\n\tvar name = \'test\';');
-					expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  color: blue;\n}\n');
+					proclaim.include(fs.readFileSync('demos/local/test1.html', 'utf8'), '<div>test1</div>');
+					proclaim.include(fs.readFileSync('demos/local/test2.html', 'utf8'), '<div>test2</div>');
+					proclaim.include(fs.readFileSync('demos/local/demo.js', 'utf8'), 'function Test() {\n\tvar name = \'test\';');
+					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div {\n  color: blue;\n}\n');
 					fs.removeSync('demos/local');
 				});
 		});
@@ -205,7 +204,7 @@ describe('Demo task', function () {
 				brand: 'internal'
 			})
 				.then(function () {
-					expect(fs.readFileSync('demos/local/demo.css', 'utf8')).to.contain('div {\n  content: Brand is set to internal;\n  color: blue;\n}\n');
+					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div {\n  content: Brand is set to internal;\n  color: blue;\n}\n');
 					fs.removeSync('demos/local');
 				});
 		});
@@ -233,8 +232,8 @@ describe('Demo task', function () {
 			}).then(function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
-				expect(err.message).to.be(`Could not load remote demo data. ${remoteDataUrl} did not provide valid JSON.`);
-				expect(err.stack).to.be('');
+				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} did not provide valid JSON.`);
+				proclaim.equal(err.stack, '');
 			});
 		});
 
@@ -254,8 +253,8 @@ describe('Demo task', function () {
 			}).then(function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
-				expect(err.message).to.be(`Could not load remote demo data. ${remoteDataUrl} does not appear to be valid.`);
-				expect(err.stack).to.be('');
+				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} does not appear to be valid.`);
+				proclaim.equal(err.stack, '');
 			});
 		});
 
@@ -283,8 +282,8 @@ describe('Demo task', function () {
 			}).then(function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
-				expect(err.message).to.be(`Could not load remote demo data. ${remoteDataUrl} returned a ${mockHttpError.statusCode} status code.`);
-				expect(err.stack).to.be('');
+				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} returned a ${mockHttpError.statusCode} status code.`);
+				proclaim.equal(err.stack, '');
 			});
 		});
 
@@ -310,7 +309,7 @@ describe('Demo task', function () {
 			}).then(function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
-				expect(err.stack).not.to.be('');
+				proclaim.notEqual(err.stack, '');
 			});
 		});
 
@@ -332,7 +331,7 @@ describe('Demo task', function () {
 			}).then(function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
-				expect(err.message).to.be(`Demo data not found: ${demoTestPath}/${demoDataUri}`);
+				proclaim.equal(err.message, `Demo data not found: ${demoTestPath}/${demoDataUri}`);
 			});
 		});
 
@@ -359,8 +358,8 @@ describe('Demo task', function () {
 				.then(function () {
 					const test1 = fs.readFileSync('demos/test1.html', 'utf8');
 					const test2 = fs.readFileSync('demos/test2.html', 'utf8');
-					expect(test1).to.contain('<div>partial1</div>');
-					expect(test2).to.contain('<div>partial2</div>');
+					proclaim.include(test1, '<div>partial1</div>');
+					proclaim.include(test2, '<div>partial2</div>');
 				});
 		});
 
