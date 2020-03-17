@@ -6,7 +6,7 @@ const exec = denodeify(require('child_process').exec, function (err, stdout) {
 	return [err, stdout];
 });
 
-const expect = require('expect.js');
+const proclaim = require('proclaim');
 
 const fs = require('fs-extra');
 const path = require('path');
@@ -40,8 +40,8 @@ describe('Build Sass', function () {
 		return build()
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/main.css', 'utf8');
-				expect(builtCss).to.contain('div {\n  color: blue; \n}\n');
-				expect(result).to.contain('div {\n  color: blue; \n}\n');
+				proclaim.include(builtCss, 'div {\n  color: blue;\n}\n');
+				proclaim.include(result, 'div {\n  color: blue;\n}\n');
 			});
 	});
 
@@ -52,8 +52,8 @@ describe('Build Sass', function () {
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/main.css', 'utf8');
 				// blue doesn't need to change to hex as it is same amount of characters as #00f
-				expect(builtCss).to.be('div{color:blue}');
-				expect(result).to.be('div{color:blue}');
+				proclaim.equal(builtCss, 'div{color:blue}', 'Sass build did not write css to file.');
+				proclaim.equal(result, 'div{color:blue}', 'Sass build did not return css.');
 			});
 	});
 
@@ -63,8 +63,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/main.css', 'utf8');
-				expect(builtCss).to.contain('p {\n  color: #000000; }\n');
-				expect(result).to.contain('p {\n  color: #000000; }\n');
+				proclaim.include(builtCss, 'p {\n  color: #000000; }\n');
+				proclaim.include(result, 'p {\n  color: #000000; }\n');
 			});
 	});
 
@@ -74,8 +74,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('test-build/main.css', 'utf8');
-				expect(builtCss).to.contain('div {\n  color: blue; }\n');
-				expect(result).to.contain('div {\n  color: blue; }\n');
+				proclaim.include(builtCss, 'div {\n  color: blue; }\n');
+				proclaim.include(result, 'div {\n  color: blue; }\n');
 				return exec('rm -rf test-build');
 			});
 	});
@@ -86,8 +86,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
-				expect(builtCss).to.contain('div {\n  color: blue; }\n');
-				expect(result).to.contain('div {\n  color: blue; }\n');
+				proclaim.include(builtCss, 'div {\n  color: blue; }\n');
+				proclaim.include(result, 'div {\n  color: blue; }\n');
 			});
 	});
 
@@ -99,8 +99,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
-				expect(builtCss).to.contain('div {\n  content: Brand is set to internal;\n  color: blue; }\n');
-				expect(result).to.contain('div {\n  content: Brand is set to internal;\n  color: blue; }\n');
+				proclaim.include(builtCss, 'div {\n  content: Brand is set to internal;\n  color: blue; }\n');
+				proclaim.include(result, 'div {\n  content: Brand is set to internal;\n  color: blue; }\n');
 			});
 	});
 });
