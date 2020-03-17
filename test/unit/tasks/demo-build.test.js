@@ -8,9 +8,7 @@ const path = require('path');
 const sinon = require('sinon');
 const proclaim = require('proclaim');
 const mockery = require('mockery');
-
 const demo = require('../../../lib/tasks/demo-build');
-
 const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/o-test';
 const oNoManifestPath = path.resolve(obtPath, 'test/unit/fixtures/o-no-manifest');
@@ -24,6 +22,11 @@ describe('Demo task', function () {
 	beforeEach(function () {
 		fs.copySync(path.resolve(obtPath, oTestPath), demoTestPath);
 		process.chdir(demoTestPath);
+		mockery.enable({
+			useCleanCache: true,
+			warnOnReplace: false,
+			warnOnUnregistered: false
+		});
 	});
 
 	afterEach(function () {
@@ -172,16 +175,19 @@ describe('Demo task', function () {
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			// Sass should be built only once, as all the test demos
 			// share one Sass file
-			const sassSpy = sinon.spy();
-			mockery.registerMock('./build-sass', sassSpy);
+			const sassStub = sinon.stub().returns('');
+			mockery.registerMock('../tasks/build-sass', sassStub);
+			const demoWithSassMock = require('../../../lib/tasks/demo-build');
 
 			// Build the test demos.
 			// Confirm assets built once.
-			return demo()
+			return demoWithSassMock()
 				.then(function () {
-					proclaim.isTrue(
-						sassSpy.calledOnce,
-						'Attempted to build demo Sass more than once.'
+					proclaim.equal(
+						sassStub.callCount,
+						1,
+						`Attempted to build demo Sass ${sassStub.callCount} times. ` +
+						'Expected to build Sass only once.'
 					);
 				});
 		});
