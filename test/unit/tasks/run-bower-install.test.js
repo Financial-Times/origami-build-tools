@@ -41,7 +41,7 @@ describe('run-bower-install', function() {
 		return runBowerInstall()
 			.then(() => {
 				proclaim.calledOnce(commandLine.run);
-				proclaim.calledWithExactly(commandLine.run, require.resolve('bower/bin/bower'), [
+				proclaim.calledWithExactly(commandLine.run, 'bower', [
 					'install',
 					'--config.registry.search=https://origami-bower-registry.ft.com',
 					'--config.registry.search=https://registry.bower.io'
