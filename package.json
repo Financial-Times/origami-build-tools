@@ -24,7 +24,7 @@
     "babel-preset-es3": "^1.0.1",
     "bower": "^1.8.8",
     "bower-resolve-webpack-plugin": "^1.0.5",
-    "chalk": "^2.4.2",
+    "chalk": "^3.0.0",
     "chokidar": "^2.1.8",
     "colors": "^1.4.0",
     "cssnano": "^4.1.10",
