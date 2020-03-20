@@ -50,9 +50,9 @@ describe('obt install', function () {
 						return execa(obt, ['install']);
 					})
 					.then(() => {
-						return Promise.reject(new Error('obt install should error when trying to install a dependency which does not exist.'));
+						throw new Error('obt install should error when trying to install a dependency which does not exist.');
 					}, () => {
-						return Promise.resolve(); // obt install exited with a non-zero exit code, which is what we expected.
+						// obt install exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
@@ -122,9 +122,9 @@ describe('obt install', function () {
 						return execa(obt, ['install']);
 					})
 					.then(() => {
-						return Promise.reject(new Error('obt install should error when trying to install a dependency which does not exist.'));
+						throw new Error('obt install should error when trying to install a dependency which does not exist.');
 					}, () => {
-						return Promise.resolve(); // obt install exited with a non-zero exit code, which is what we expected.
+						// obt install exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
