@@ -1,6 +1,6 @@
 'use strict';
 
-const denodeify = require('denodeify');
+const denodeify = require('util').promisify;
 const open = denodeify(require('fs-extra').open);
 
 /**
