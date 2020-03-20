@@ -57,20 +57,20 @@ describe('verify-javascript', function() {
 	});
 
 	describe('task', () => {
-		it('should not error if there are no Javascript files', () => {
+		it('should not error if there are no Javascript files', async () => {
 			rimraf.sync('**/**.js');
-			verifyJavascript().task();
+			await verifyJavascript().task();
 		});
 
-		it('should throw error if there are linting violations', function() {
-			proclaim.throws(() => {
-				verifyJavascript().task();
-			},
-			'Failed linting: \n\n' +
+		it('should throw error if there are linting violations', async function() {
+			try {
+				await verifyJavascript().task();
+			} catch (e) {
+				proclaim.deepEqual(e.message, 'Failed linting: \n\n' +
 				'./src/js/syntax-error.js:1:6 Error - Parsing error: Unexpected token test\n' +
 				'./src/js/verify.js:1:7 Error - \'test\' is assigned a value but never used. (no-unused-vars)\n\n' +
-				'2 linting errors'
-			);
+				'2 linting errors');
+			}
 		});
 	});
 });
