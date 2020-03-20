@@ -55,7 +55,7 @@ describe('run-npm-install', function() {
 		return runNpmInstall()
 			.then(() => {
 				proclaim.calledOnce(commandLine.run);
-				proclaim.calledWithExactly(commandLine.run, 'npm', ['ci'], {});
+				proclaim.calledWithExactly(commandLine.run, 'npm', ['i'], {});
 			});
 	});
 
