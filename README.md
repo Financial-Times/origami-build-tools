@@ -128,6 +128,11 @@ obt init o-my-new-component
 ## Migration guide
 
 
+### Migrating from 9.X.X to 10.X.X
+
+- NodeJS v10 is no longer supported. Use NodeJS v12 or above.
+
+
 ### Migrating from 8.X.X to 9.X.X
 
 - NodeJS v8 is no longer supported. Use NodeJS v10 or above.

@@ -27,7 +27,7 @@ describe('construct-polyfill-url', function() {
 
 		mockery.registerMock('fs-extra', fs);
 
-		mockery.registerMock('denodeify', denodeify);
+		mockery.registerMock('util', {promisify:denodeify});
 
 		mockery.registerMock('globby', globby);
 

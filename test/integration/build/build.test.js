@@ -60,9 +60,9 @@ describe('obt build', function () {
 						return execa(obt, ['build']);
 					})
 					.then(() => {
-						return Promise.reject(new Error('obt build should error when trying to build a dependency which has invalid js.'));
+						throw new Error('obt build should error when trying to build a dependency which has invalid js.');
 					}, () => {
-						return Promise.resolve(); // obt build exited with a non-zero exit code, which is what we expected.
+						// obt build exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
@@ -465,9 +465,9 @@ describe('obt build', function () {
 						return execa(obt, ['build']);
 					})
 					.then(() => {
-						return Promise.reject(new Error('obt build should error when trying to build a dependency which has invalid sass.'));
+						throw new Error('obt build should error when trying to build a dependency which has invalid sass.');
 					}, () => {
-						return Promise.resolve(); // obt build exited with a non-zero exit code, which is what we expected.
+						// obt build exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});
@@ -519,7 +519,6 @@ describe('obt build', function () {
   grid-row: 1;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  -ms-flex-item-align: center;
   -ms-grid-row-align: center;
   align-self: center;
 }
@@ -528,7 +527,7 @@ describe('obt build', function () {
   -ms-grid-row: 1;
   grid-row: 1;
 }
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRhdGE6O2NoYXJzZXQ9dXRmLTgsJHN5c3RlbS1jb2RlOiUyMCUyMm9yaWdhbWktYnVpbGQtdG9vbHMlMjI7QG1peGluJTIwb1Rlc3RDb21wb25lbnQoKSUyMCU3QiUwQSUwOS5vLXRlc3QlMjAlN0IlMEElMDklMDlmb250LXNpemU6JTIwMThweDslMEElMDklMDlkaXNwbGF5OiUyMGdyaWQ7JTBBJTA5JTA5Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiUyMDFmciUyMDFmcjslMEElMDklMDlncmlkLXRlbXBsYXRlLXJvd3M6JTIwMWZyOyUwQSUwOSUwOSYtLWVycm9yJTIwJTdCJTBBJTA5JTA5JTA5YmFja2dyb3VuZC1jb2xvcjolMjByZWQ7JTBBJTA5JTA5JTA5Y29sb3I6JTIwd2hpdGU7JTBBJTA5JTA5JTdEJTBBJTA5JTdEJTBBJTA5LnRlc3RfX2NvbnRlbnQlMjAlN0IlMEElMDklMDlncmlkLWNvbHVtbjolMjAxJTIwLyUyMHNwYW4lMjAyOyUwQSUwOSUwOWdyaWQtcm93OiUyMDE7JTBBJTA5JTA5Ym94LXNpemluZzolMjBib3JkZXItYm94OyUwQSUwOSUwOWFsaWduLXNlbGY6JTIwY2VudGVyOyUwQSUwOSU3RCUwQSUwOS50ZXN0X192aXN1YWwlMjAlN0IlMEElMDklMDlncmlkLXJvdzolMjAxOyUwQSUwOSU3RCUwQSU3RCUwQSUwQUBpbmNsdWRlJTIwb1Rlc3RDb21wb25lbnQ7JTBBIiwibWFpbi5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNDO0VBQ0MsZUFBQTtFQUNBLGlCQUFBO0VBQUEsYUFBQTtFQUNBLHlCQUFBO0VBQUEsOEJBQUE7RUFDQSxrQkFBQTtFQUFBLHVCQUFBO0FDQUY7QURDRTtFQUNDLHFCQUFBO0VBQ0EsWUFBQTtBQ0NIOztBREVDO0VBQ0Msa0JBQUE7RUFBQSx1QkFBQTtFQUFBLHFCQUFBO0VBQ0EsZUFBQTtFQUFBLFdBQUE7RUFDQSw4QkFBQTtFQUFBLHNCQUFBO0VBQ0EsMkJBQUE7RUFBQSwwQkFBQTtFQUFBLGtCQUFBO0FDQ0Y7O0FEQ0M7RUFDQyxlQUFBO0VBQUEsV0FBQTtBQ0VGIiwiZmlsZSI6Im1haW4uY3NzIn0= */`);
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRhdGE6O2NoYXJzZXQ9dXRmLTgsJHN5c3RlbS1jb2RlOiUyMCUyMm9yaWdhbWktYnVpbGQtdG9vbHMlMjI7QG1peGluJTIwb1Rlc3RDb21wb25lbnQoKSUyMCU3QiUwQSUwOS5vLXRlc3QlMjAlN0IlMEElMDklMDlmb250LXNpemU6JTIwMThweDslMEElMDklMDlkaXNwbGF5OiUyMGdyaWQ7JTBBJTA5JTA5Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiUyMDFmciUyMDFmcjslMEElMDklMDlncmlkLXRlbXBsYXRlLXJvd3M6JTIwMWZyOyUwQSUwOSUwOSYtLWVycm9yJTIwJTdCJTBBJTA5JTA5JTA5YmFja2dyb3VuZC1jb2xvcjolMjByZWQ7JTBBJTA5JTA5JTA5Y29sb3I6JTIwd2hpdGU7JTBBJTA5JTA5JTdEJTBBJTA5JTdEJTBBJTA5LnRlc3RfX2NvbnRlbnQlMjAlN0IlMEElMDklMDlncmlkLWNvbHVtbjolMjAxJTIwLyUyMHNwYW4lMjAyOyUwQSUwOSUwOWdyaWQtcm93OiUyMDE7JTBBJTA5JTA5Ym94LXNpemluZzolMjBib3JkZXItYm94OyUwQSUwOSUwOWFsaWduLXNlbGY6JTIwY2VudGVyOyUwQSUwOSU3RCUwQSUwOS50ZXN0X192aXN1YWwlMjAlN0IlMEElMDklMDlncmlkLXJvdzolMjAxOyUwQSUwOSU3RCUwQSU3RCUwQSUwQUBpbmNsdWRlJTIwb1Rlc3RDb21wb25lbnQ7JTBBIiwibWFpbi5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNDO0VBQ0MsZUFBQTtFQUNBLGlCQUFBO0VBQUEsYUFBQTtFQUNBLHlCQUFBO0VBQUEsOEJBQUE7RUFDQSxrQkFBQTtFQUFBLHVCQUFBO0FDQUY7QURDRTtFQUNDLHFCQUFBO0VBQ0EsWUFBQTtBQ0NIOztBREVDO0VBQ0Msa0JBQUE7RUFBQSx1QkFBQTtFQUFBLHFCQUFBO0VBQ0EsZUFBQTtFQUFBLFdBQUE7RUFDQSw4QkFBQTtFQUFBLHNCQUFBO0VBQ0EsMEJBQUE7RUFBQSxrQkFBQTtBQ0NGOztBRENDO0VBQ0MsZUFBQTtFQUFBLFdBQUE7QUNFRiIsImZpbGUiOiJtYWluLmNzcyJ9 */`);
 					});
 			});
 		});
@@ -597,9 +596,9 @@ describe('obt build', function () {
 						return execa(obt, ['build']);
 					})
 					.then(() => {
-						return Promise.reject(new Error('obt build should error when trying to build sass which uses files in node_modules directory.'));
+						throw new Error('obt build should error when trying to build sass which uses files in node_modules directory.');
 					}, () => {
-						return Promise.resolve(); // obt build exited with a non-zero exit code, which is what we expected.
+						// obt build exited with a non-zero exit code, which is what we expected.
 					});
 			});
 		});

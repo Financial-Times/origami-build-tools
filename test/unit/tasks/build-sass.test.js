@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 'use strict';
 
-const denodeify = require('denodeify');
+const denodeify = require('util').promisify;
 const exec = denodeify(require('child_process').exec, function (err, stdout) {
 	return [err, stdout];
 });
