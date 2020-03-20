@@ -29,7 +29,6 @@
     "colors": "^1.3.3",
     "cssnano": "^4.1.10",
     "deglob": "^2.1.0",
-    "denodeify": "^1.2.1",
     "elegant-spinner": "^1.0.1",
     "eslint": "^4.9.0",
     "eslint-plugin-import": "^2.18.0",
