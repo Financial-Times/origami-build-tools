@@ -5,14 +5,14 @@ module.exports = () => {
 jobs:
   test:
     docker:
-      - image: 'circleci/node:10-browsers'
+      - image: 'circleci/node:12-browsers'
     steps:
       - checkout
       - run: npm install --only=dev
       - run: npx origami-ci branch
   publish_to_npm:
     docker:
-      - image: 'circleci/node:10'
+      - image: 'circleci/node:12'
     steps:
       - checkout
       - run: npm install --only=dev
