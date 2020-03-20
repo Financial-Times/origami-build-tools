@@ -57,7 +57,7 @@
     "memory-fs": "^0.4.1",
     "meow": "^3.7.0",
     "merge-stream": "^1.0.1",
-    "mocha": "^4.1.0",
+    "mocha": "^7.1.1",
     "mockery": "^2.1.0",
     "mustache": "^2.3.2",
     "node-sass": "^4.13.1",
