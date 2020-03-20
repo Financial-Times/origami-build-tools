@@ -15,7 +15,7 @@
     "@financial-times/sass": "^1.30.15",
     "aliases": "^0.1.0",
     "app-root-path": "^2.2.1",
-    "autoprefixer": "^7.1.5",
+    "autoprefixer": "^9.7.4",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.5",
     "babel-plugin-add-module-exports": "^0.2.1",
