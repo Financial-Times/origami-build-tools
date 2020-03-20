@@ -566,7 +566,7 @@ describe('obt build', function () {
 						proclaim.deepEqual(fs.readFileSync('build/main.css', 'utf-8'), `#test-compile-error {
   color: red;
 }
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGU6Ly8vVXNlcnMvamFrZS5jaGFtcGlvbi9Db2RlL29yaWdhbWktYnVpbGQtdG9vbHMvdGVzdC9pbnRlZ3JhdGlvbi9idWlsZC9maXh0dXJlcy9zYXNzLWJvd2VyLWRlcGVuZGVuY3kvYm93ZXJfY29tcG9uZW50cy9vLXRlc3QtY29tcG9uZW50L21haW4uc2NzcyIsIm1haW4uc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNDLFVBQUE7QUNBRCIsImZpbGUiOiJtYWluLmNzcyJ9 */`);
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGU6Ly8vaG9tZS9jaXJjbGVjaS9wcm9qZWN0L3Rlc3QvaW50ZWdyYXRpb24vYnVpbGQvZml4dHVyZXMvc2Fzcy1ib3dlci1kZXBlbmRlbmN5L2Jvd2VyX2NvbXBvbmVudHMvby10ZXN0LWNvbXBvbmVudC9tYWluLnNjc3MiLCJtYWluLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDQyxVQUFBO0FDQUQiLCJmaWxlIjoibWFpbi5jc3MifQ== */`);
 					});
 			});
 		});
