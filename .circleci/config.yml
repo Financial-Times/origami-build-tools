@@ -6,7 +6,7 @@ workflows:
           filters:
             tags:
               only: /^v.*/
-      - node-v10:
+      - node-v12:
           filters:
             tags:
               only: /^v.*/
@@ -30,10 +30,10 @@ jobs:
     <<: *node-base
     docker:
       - image: circleci/node:latest-browsers
-  node-v10:
+  node-v12:
     <<: *node-base
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:12-browsers
   # Publish the module to npm
   publish:
     <<: *node-base
