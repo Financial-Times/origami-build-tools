@@ -33,9 +33,9 @@ describe('obt demo', function () {
 					return execa(obt, ['demo']);
 				})
 				.then(() => {
-					return Promise.reject(new Error('obt demo should error when trying to create demos for a component which has no demos.'));
+					throw new Error('obt demo should error when trying to create demos for a component which has no demos.');
 				}, () => {
-					return Promise.resolve(); // obt demo exited with a non-zero exit code, which is what we expected.
+					// obt demo exited with a non-zero exit code, which is what we expected.
 				});
 		});
 	});
