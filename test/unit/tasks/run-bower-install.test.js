@@ -4,6 +4,7 @@
 const proclaim = require('proclaim');
 const mockery = require('mockery');
 const sinon = require('sinon');
+const path = require('path');
 
 describe('run-bower-install', function() {
 	let runBowerInstall;
@@ -41,11 +42,17 @@ describe('run-bower-install', function() {
 		return runBowerInstall()
 			.then(() => {
 				proclaim.calledOnce(commandLine.run);
-				proclaim.calledWithExactly(commandLine.run, 'bower', [
+				proclaim.calledWithExactly(
+					commandLine.run,
+					'bower',
+					[
 					'install',
 					'--config.registry.search=https://origami-bower-registry.ft.com',
-					'--config.registry.search=https://registry.bower.io'
-				], undefined);
+					'--config.registry.search=https://registry.bower.io'],
+					{
+						localDir: path.resolve(__dirname, '../../../node_modules/.bin')
+					}
+				);
 			});
 	});
 
