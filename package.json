@@ -77,13 +77,13 @@
     "sass-true": "^4.0.0",
     "serve": "^6.5.8",
     "sinon": "^9.0.1",
+    "snyk": "^1.301.0",
     "stream-combiner2": "1.1.1",
     "stream-from-promise": "^1.0.0",
     "through2": "^2.0.5",
-    "update-notifier": "^2.3.0",
+    "update-notifier": "^4.1.0",
     "webpack": "^3.8.1",
-    "webpack-merge": "^4.2.2",
-    "snyk": "^1.301.0"
+    "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
     "@financial-times/origami-service-makefile": "^7.0.1",
