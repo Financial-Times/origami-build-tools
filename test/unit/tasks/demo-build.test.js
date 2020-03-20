@@ -14,8 +14,6 @@ const pathSuffix = '-demo';
 const demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 let demo = require('../../../lib/tasks/demo-build');
 
-const sandbox = sinon.sandbox.create();
-
 describe('Demo task', function () {
 
 	beforeEach(function () {
@@ -31,7 +29,7 @@ describe('Demo task', function () {
 	afterEach(function () {
 		process.chdir(obtPath);
 		fs.removeSync(demoTestPath);
-		sandbox.restore(); // restore all fakes created through the sandbox
+		sinon.restore();
 		mockery.resetCache();
 		mockery.deregisterAll();
 		mockery.disable();
@@ -95,7 +93,7 @@ describe('Demo task', function () {
 		it('should build demo html', function () {
 			const request = require('request-promise-native');
 			const demoDataLabel = 'Footer';
-			sandbox.stub(request, 'get').callsFake(() => Promise.resolve({
+			sinon.stub(request, 'get').callsFake(() => Promise.resolve({
 				"label": demoDataLabel,
 				"items": []
 			}));
@@ -212,7 +210,7 @@ describe('Demo task', function () {
 		it('should fail if a remote url does not return valid json', function () {
 			// Stub for invalid json.
 			const request = require('request-promise-native');
-			sandbox.stub(request, 'get').callsFake(() => Promise.resolve(`{
+			sinon.stub(request, 'get').callsFake(() => Promise.resolve(`{
 				"label": none valid json,
 				"items": []}}}
 			}`));
@@ -264,7 +262,7 @@ describe('Demo task', function () {
 			const mockHttpError = new Error('Mock StatusCodeError');
 			mockHttpError.name = 'StatusCodeError';
 			mockHttpError.statusCode = '500';
-			sandbox.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
+			sinon.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
 			demo = require('../../../lib/tasks/demo-build');
 			// Create demo config.
 			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
@@ -292,7 +290,7 @@ describe('Demo task', function () {
 			const request = require('request-promise-native');
 			const mockHttpError = new Error('Mock Unknown Error');
 			mockHttpError.name = 'UnknownError';
-			sandbox.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
+			sinon.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
 			demo = require('../../../lib/tasks/demo-build');
 			// Create demo config.
 			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
