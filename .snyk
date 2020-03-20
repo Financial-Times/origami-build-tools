@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.3
+version: v1.14.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:braces:20180219':
@@ -116,4 +116,8 @@ ignore:
     - pa11y:
         reason: None given
         expires: '2019-02-03T15:08:10.922Z'
-patch: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:ms:20170412':
+    - karma > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
+        patched: '2020-03-20T13:54:14.814Z'
