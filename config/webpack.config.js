@@ -48,7 +48,6 @@ module.exports = {
 							],
 							plugins: [
 								[
-									require.resolve('babel-plugin-add-module-exports'),
 									// Polyfills the runtime needed for async/await and generators
 									// Useful for applications rather than components.
 									require.resolve('babel-plugin-transform-runtime'),
