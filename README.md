@@ -130,6 +130,11 @@ obt init o-my-new-component
 
 ### Migrating from 8.X.X to 9.X.X
 
+- NodeJS v10 is no longer supported. Use NodeJS v12 or above.
+
+
+### Migrating from 8.X.X to 9.X.X
+
 - NodeJS v8 is no longer supported. Use NodeJS v10 or above.
 - [Dart Sass](https://github.com/sass/dart-sass), the reference implementation of Sass, is used instead of [Node Sass](https://github.com/sass/node-sass). You may need to update your Sass to be compatible with Dart Sass if an error is thrown during build.
 
