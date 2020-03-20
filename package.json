@@ -60,7 +60,7 @@
     "merge-stream": "^1.0.1",
     "mocha": "^7.1.1",
     "mockery": "^2.1.0",
-    "mustache": "^2.3.2",
+    "mustache": "^4.0.1",
     "node-sass": "^4.13.1",
     "node.extend": "^2.0.2",
     "npmconf": "^2.1.2",
