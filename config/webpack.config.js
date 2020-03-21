@@ -43,22 +43,12 @@ module.exports = {
 							// TODO: Look into specifying our minimum versions in preset-env
 							// for enhanced experience instead of making everything become ES5
 							presets: [
-								require.resolve('babel-preset-es3'),
-								require.resolve('babel-preset-env')
+								require.resolve('@babel/preset-env')
 							],
 							plugins: [
-								[
-									// Polyfills the runtime needed for async/await and generators
-									// Useful for applications rather than components.
-									require.resolve('babel-plugin-transform-runtime'),
-									{
-										helpers: false,
-										polyfill: false,
-										regenerator: true,
-										// Resolve the Babel runtime relative to the config.
-										moduleName: path.dirname(require.resolve('babel-runtime/package')),
-									},
-								],
+								// Polyfills the runtime needed for async/await and generators
+								// Useful for applications rather than components.
+								require.resolve('@babel/plugin-transform-runtime')
 							],
 						}
 					}]

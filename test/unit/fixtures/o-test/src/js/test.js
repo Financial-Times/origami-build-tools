@@ -4,4 +4,4 @@ function Test() {
 	const name = 'test';  // eslint-disable-line
 }
 
-module.exports = Test;
+export default Test;

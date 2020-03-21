@@ -1,3 +1,4 @@
 'use strict';
 
-global.world = require('o-test-component');
+import t from 'o-test-component';
+global.world = t;

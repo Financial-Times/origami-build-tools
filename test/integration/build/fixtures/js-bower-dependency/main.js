@@ -1,3 +1,4 @@
 'use strict';
 
-global.world = require('lodash').camelCase('Foo Bar');
+import _ from 'lodash';
+global.world = _.camelCase('Foo Bar');

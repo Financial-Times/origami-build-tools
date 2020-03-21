@@ -1,1 +1,1 @@
-const dep = require('dep');  // eslint-disable-line
+import 'dep';  // eslint-disable-line
