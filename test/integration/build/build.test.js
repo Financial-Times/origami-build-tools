@@ -325,7 +325,7 @@ describe('obt build', function () {
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
-						proclaim.deepEqual(sandbox, { world: 'Hello world.' });
+						proclaim.deepEqual(sandbox, { word: 'Hello world.' });
 					});
 			});
 		});
