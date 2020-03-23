@@ -4,6 +4,6 @@
     "main.js"
   ],
   "dependencies": {
-    "lodash": "^4.17.4"
+    "o-test-component": "1.0.35"
   }
 }
