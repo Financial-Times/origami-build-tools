@@ -43,7 +43,10 @@ module.exports = {
 							// TODO: Look into specifying our minimum versions in preset-env
 							// for enhanced experience instead of making everything become ES5
 							presets: [
-								require.resolve('@babel/preset-env')
+								require.resolve('@babel/preset-env'),
+								{
+									targets: {ie: "11" }
+								}
 							],
 							plugins: [
 								// Polyfills the runtime needed for async/await and generators
