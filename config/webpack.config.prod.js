@@ -31,7 +31,8 @@ const prodConfig = {
 		// adding too much to bundle size and NamedModulesPlugin allows for
 		// easier debugging of development builds.
 		new webpack.HashedModuleIdsPlugin(),
-	]
+	],
+	mode: 'production'
 };
 
 module.exports = webpackMerge(require('./webpack.config'), prodConfig);

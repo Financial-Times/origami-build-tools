@@ -81,7 +81,7 @@
     "stream-from-promise": "^1.0.0",
     "through2": "^3.0.1",
     "update-notifier": "^4.1.0",
-    "webpack": "^3.8.1",
+    "webpack": "^4.42.0",
     "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
