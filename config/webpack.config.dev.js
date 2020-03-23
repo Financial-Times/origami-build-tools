@@ -8,7 +8,8 @@ const devConfig = {
 		new webpack.NormalModuleReplacementPlugin(/^sinon\/pkg\/sinon$/, require.resolve('sinon')),
 		new webpack.NormalModuleReplacementPlugin(/^proclaim$/,require.resolve('proclaim'))
 	],
-	devtool: 'inline-source-map'
+	devtool: 'inline-source-map',
+	mode: 'development'
 };
 
 module.exports = webpackMerge(require('./webpack.config'), devConfig);
