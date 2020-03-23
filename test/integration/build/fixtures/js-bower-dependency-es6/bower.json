@@ -4,6 +4,6 @@
     "main.js"
   ],
   "dependencies": {
-    "o-test-component": "1.0.25"
+    "o-test-component": "1.0.32"
   }
 }

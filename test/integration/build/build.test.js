@@ -286,7 +286,6 @@ describe('obt build', function () {
 		});
 
 		describe('component using bower dependency\'s js', function () {
-
 			beforeEach(function () {
 				// Change the current working directory to the folder which contains the project we are testing against.
 				// We are doing this to replicate how obt is used when executed inside a terminal.
@@ -326,7 +325,7 @@ describe('obt build', function () {
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
-						proclaim.deepEqual(sandbox, { world: 'fooBar' });
+						proclaim.deepEqual(sandbox, { word: 'Hello world.' });
 					});
 			});
 		});
@@ -372,7 +371,7 @@ describe('obt build', function () {
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
-						proclaim.deepEqual(sandbox, { world: 2 });
+						proclaim.isFunction(sandbox.world);
 					});
 			});
 		});

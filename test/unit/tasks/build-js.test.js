@@ -37,10 +37,7 @@ describe('build-js', function () {
 			.then(function (result) {
 				proclaim.match(result, /^\/\*\*\*\*\*\*\/ \(function\(modules\)/);
 				proclaim.include(result, 'sourceMappingURL');
-				proclaim.include(result, 'var Test');
-				proclaim.include(result, 'function Test() {\n\tvar name = \'test\';');
-				proclaim.include(result, 'module.exports = "This is a test\\n"');
-				proclaim.include(result, 'module.exports = {"test":true}');
+				proclaim.include(result, 'function Test() {\n  var name = \'test\'; // eslint-disable-line');
 			});
 	});
 
@@ -50,10 +47,6 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.doesNotInclude(builtJs, 'sourceMappingURL');
-				proclaim.doesNotInclude(builtJs, 'var Test');
-				proclaim.doesNotInclude(builtJs, 'function Test() {\n\tvar name = \'test\';');
-				proclaim.doesNotInclude(builtJs, '"This is a test"');
-				proclaim.doesNotInclude(builtJs, 'function Test() {\n\tvar name = \'test\';');
 			});
 	});
 
@@ -63,8 +56,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.doesNotInclude(builtJs, 'var Test');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, 'function Test() {\n  var name = \'test\'; // eslint-disable-line');
 			});
 	});
 
@@ -74,10 +66,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, 'var Test');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
-				proclaim.include(builtJs, 'module.exports = "This is a test\\n"');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, 'function Test() {\n  var name = \'test\'; // eslint-disable-line');
 			});
 	});
 
@@ -87,10 +76,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, 'var Test');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
-				proclaim.include(builtJs, 'module.exports = "This is a test\\n"');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, 'function Test() {\n  var name = \'test\'; // eslint-disable-line');
 			});
 	});
 
@@ -119,10 +105,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, 'var Test');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
-				proclaim.include(builtJs, 'module.exports = "This is a test\\n"');
-				proclaim.include(builtJs, 'module.exports = {"test":true}');
+				proclaim.include(builtJs, 'function Test() {\n  var name = \'test\'; // eslint-disable-line');
 				proclaim.include(builtJs, 'var origami =\n');
 			});
 	});
