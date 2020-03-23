@@ -285,6 +285,51 @@ describe('obt build', function () {
 			});
 		});
 
+		describe('component using bower dependency\'s js', function () {
+			beforeEach(function () {
+				// Change the current working directory to the folder which contains the project we are testing against.
+				// We are doing this to replicate how obt is used when executed inside a terminal.
+				process.chdir(path.join(__dirname, '/fixtures/js-bower-dependency'));
+			});
+
+			afterEach(function () {
+				return rimraf(path.join(process.cwd(), '/build'))
+					.then(() => rimraf(path.join(process.cwd(), '/bower_components')))
+					.then(() => process.chdir(process.cwd()));
+			});
+
+			it('should build js', function () {
+				let obt;
+				return obtBinPath()
+					.then(obtPath => {
+						obt = obtPath;
+						return execa(obt, ['install']);
+					})
+					.then(() => {
+						return execa(obt, ['build']);
+					})
+					.then(() => {
+						return fileExists('build/main.js');
+					})
+					.then(exists => {
+						proclaim.ok(exists);
+					})
+					.then(() => {
+						const code = fs.readFileSync('build/main.js', 'utf-8');
+
+						proclaim.isTrue(isEs5(code));
+
+						const sandbox = {};
+
+						const script = new vm.Script(code);
+
+						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
+						script.runInContext(context);
+						proclaim.deepEqual(sandbox, { world: 'Hello world.' });
+					});
+			});
+		});
+
 		describe('component using bower dependency\'s ES6 js', function () {
 
 			beforeEach(function () {

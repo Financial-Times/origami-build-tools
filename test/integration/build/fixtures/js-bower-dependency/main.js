@@ -1,4 +1,5 @@
 'use strict';
 
-import _ from 'lodash';
-global.world = _.camelCase('Foo Bar');
+import test from 'o-test-component/src/js/OTestComponent';
+
+global.word = test.helloWorld();
