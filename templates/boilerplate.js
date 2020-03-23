@@ -7,6 +7,7 @@ module.exports = {
 	demoPa11y: require('./component-boilerplate/demo-pa11y'),
 	demoSass: require('./component-boilerplate/demo-sass'),
 	eslint: require('./component-boilerplate/eslint'),
+	eslintIgnore: require('./component-boilerplate/eslint-ignore'),
 	gitIgnore: require('./component-boilerplate/git-ignore'),
 	mainJs: require('./component-boilerplate/main-js'),
 	mainScss: require('./component-boilerplate/main-scss'),
