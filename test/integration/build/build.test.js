@@ -250,7 +250,7 @@ describe('obt build', function () {
 					.then(() => process.chdir(process.cwd()));
 			});
 
-			it('should not compile the dependency js using babel', function () {
+			it('should compile the dependency js using babel', function () {
 				let obt;
 				return obtBinPath()
 					.then(obtPath => {
@@ -269,9 +269,7 @@ describe('obt build', function () {
 					.then(() => {
 						const code = fs.readFileSync('build/main.js', 'utf-8');
 
-						proclaim.isFalse(isEs5(code));
-						proclaim.isFalse(isEs6(code));
-						proclaim.isTrue(isEs7(code));
+						proclaim.isTrue(isEs5(code));
 
 						if (currentVersion.major >= 7) {
 							const sandbox = {};
