@@ -98,7 +98,7 @@ describe('Demo task', function () {
 					return {
 						"label": demoDataLabel,
 						"items": []
-					}
+					};
 				}
 			}));
 			const demoDataLabel = 'Footer';
