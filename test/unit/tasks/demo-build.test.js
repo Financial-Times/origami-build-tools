@@ -91,12 +91,17 @@ describe('Demo task', function () {
 		});
 
 		it('should build demo html', function () {
-			const request = require('request-promise-native');
-			const demoDataLabel = 'Footer';
-			sinon.stub(request, 'get').callsFake(() => Promise.resolve({
-				"label": demoDataLabel,
-				"items": []
+			mockery.registerMock('node-fetch', () => Promise.resolve({
+				ok: true,
+				status: 200,
+				json: () => {
+					return {
+						"label": demoDataLabel,
+						"items": []
+					}
+				}
 			}));
+			const demoDataLabel = 'Footer';
 			demo = require('../../../lib/tasks/demo-build');
 			addDemoToOrigamiConfig([{
 				"name": "test1",
@@ -209,11 +214,14 @@ describe('Demo task', function () {
 
 		it('should fail if a remote url does not return valid json', function () {
 			// Stub for invalid json.
-			const request = require('request-promise-native');
-			sinon.stub(request, 'get').callsFake(() => Promise.resolve(`{
-				"label": none valid json,
-				"items": []}}}
-			}`));
+			mockery.registerMock('node-fetch', () => Promise.resolve({
+				ok: true,
+				status: 200,
+				body: `{
+					"label": none valid json,
+					"items": []}}}
+				}`
+			}));
 			// Create demo config.
 			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
 			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
@@ -257,12 +265,12 @@ describe('Demo task', function () {
 		});
 
 		it('should show a helpful error message for http status code errors', function () {
-			// Stub for request/request-promise-native StatusCodeError.
-			const request = require('request-promise-native');
-			const mockHttpError = new Error('Mock StatusCodeError');
-			mockHttpError.name = 'StatusCodeError';
-			mockHttpError.statusCode = '500';
-			sinon.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
+			// Mock for node-fetch StatusCodeError.
+			const mockResponce = {
+				ok: false,
+				status: 500,
+			};
+			mockery.registerMock('node-fetch', () => Promise.resolve(mockResponce));
 			demo = require('../../../lib/tasks/demo-build');
 			// Create demo config.
 			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
@@ -273,24 +281,22 @@ describe('Demo task', function () {
 				"description": "Remote data url http error.",
 				"data": remoteDataUrl
 			});
-			// Run error HTTP status code test. Tests the request/request-promise-native
-			// error is caught and transformed, but not that the library throws the error.
+			// Run error HTTP status code test.
 			return demo({
 				production: true
 			}).then(function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
-				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} returned a ${mockHttpError.statusCode} status code.`);
+				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} returned a ${mockResponce.status} status code.`);
 				proclaim.equal(err.stack, '');
 			});
 		});
 
 		it('should show a stack trace if remote demo data retrieval fails for an unknown reason', function () {
-			// Stub for request/request-promise-native UnknownError.
-			const request = require('request-promise-native');
+			// Mock for node-fetch UnknownError.
 			const mockHttpError = new Error('Mock Unknown Error');
 			mockHttpError.name = 'UnknownError';
-			sinon.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
+			mockery.registerMock('node-fetch', () => Promise.reject(mockHttpError));
 			demo = require('../../../lib/tasks/demo-build');
 			// Create demo config.
 			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
