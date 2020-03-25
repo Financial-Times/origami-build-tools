@@ -47,29 +47,6 @@ module.exports = {
 							],
 						}
 					}]
-			},
-
-			// Components which are importing html/mustache/txt/text files into their JS:
-			// markets-chat, o-chat, web-chat
-			{
-				test: /\.html$/,
-				exclude: /node_modules/,
-				use: require.resolve('raw-loader')
-			},
-			{
-				test: /\.mustache$/,
-				exclude: /node_modules/,
-				use: require.resolve('raw-loader')
-			},
-			{
-				test: /\.txt$/,
-				exclude: /node_modules/,
-				use: require.resolve('raw-loader')
-			},
-			{
-				test: /\.text$/,
-				exclude: /node_modules/,
-				use: require.resolve('raw-loader')
 			}
 		]
 	},
