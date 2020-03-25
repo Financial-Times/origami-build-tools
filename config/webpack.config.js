@@ -11,15 +11,10 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			// Disable require.ensure as it's not a standard language feature.
-			{ parser: { requireEnsure: false } },
 			// Process JS with Babel.
 			{
 				test: /\.js$/,
-				exclude: /node_modules/,
 				use: [
-					// Disables AMD module loading and swaps requireText() for require()
-					'imports-loader?define=>false&requireText=>require',
 					{
 						loader: 'babel-loader',
 						options: {
