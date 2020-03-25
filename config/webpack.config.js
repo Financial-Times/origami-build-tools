@@ -33,7 +33,17 @@ module.exports = {
 							plugins: [
 								// Polyfills the runtime needed for async/await and generators
 								// Useful for applications rather than components.
-								require.resolve('@babel/plugin-transform-runtime')
+								[
+									require.resolve('@babel/plugin-transform-runtime'),
+									{
+									  "absoluteRuntime": false,
+									  "corejs": false,
+									  "helpers": false,
+									  "regenerator": true,
+									  "useESModules": true,
+									  "version": "7.9.2"
+									}
+								  ]
 							],
 						}
 					}]
