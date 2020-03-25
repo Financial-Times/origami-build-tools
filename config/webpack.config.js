@@ -2,11 +2,6 @@ const path = require('path');
 const appRoot = require('app-root-path');
 
 module.exports = {
-	// Cache the generated webpack modules and chunks to improve build speed.
-	// Caching is enabled by default while in watch mode.
-	// If an object is passed, webpack will use this object for caching.
-	// Keeping a reference to this object will allow one to share the same cache between compiler calls:
-	cache: false,
 	resolveLoader: {
 		modules: [
 			// Resolve loaders from the project directory. This is used for Origami Build Service as dependencies are
