@@ -16,37 +16,16 @@ module.exports = {
 			// Process JS with Babel.
 			{
 				test: /\.js$/,
+				exclude: /(node_modules|bower_components)/,
 				use: [
 					{
-						loader: 'babel-loader',
+						loader: 'swc-loader',
 						options: {
-							compact: false,
-
-							// TODO: Look into specifying our minimum versions in preset-env
-							// for enhanced experience instead of making everything become ES5
-							presets: [
-								[
-									require.resolve('@babel/preset-env'),
-									{
-										targets: {ie: "11" }
-									}
-								]
-							],
-							plugins: [
-								// Polyfills the runtime needed for async/await and generators
-								// Useful for applications rather than components.
-								[
-									require.resolve('@babel/plugin-transform-runtime'),
-									{
-									  "absoluteRuntime": false,
-									  "corejs": false,
-									  "helpers": false,
-									  "regenerator": true,
-									  "useESModules": true,
-									  "version": "7.9.2"
-									}
-								  ]
-							],
+							"env": {
+								"targets": {
+									"ie": "11"
+								}
+							}
 						}
 					}]
 			}

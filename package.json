@@ -12,14 +12,11 @@
     "npm": ">= 6.0.0"
   },
   "dependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-transform-runtime": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
     "@financial-times/sass": "^1.30.15",
+    "@swc/core": "^1.1.36",
     "aliases": "^1.0.0",
     "app-root-path": "^3.0.0",
     "autoprefixer": "^9.7.4",
-    "babel-loader": "^8.1.0",
     "bower": "^1.8.8",
     "bower-resolve-webpack-plugin": "^1.0.5",
     "boxen": "^4.2.0",
@@ -77,6 +74,7 @@
     "snyk": "^1.301.0",
     "stream-combiner2": "1.1.1",
     "stream-from-promise": "^1.0.0",
+    "swc-loader": "^0.1.8",
     "through2": "^3.0.1",
     "update-notifier": "^4.1.0",
     "webpack": "^4.42.0",
