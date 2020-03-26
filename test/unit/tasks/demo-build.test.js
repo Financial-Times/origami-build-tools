@@ -12,14 +12,11 @@ const oTestPath = 'test/unit/fixtures/o-test';
 const oNoManifestPath = path.resolve(obtPath, 'test/unit/fixtures/o-no-manifest');
 const pathSuffix = '-demo';
 const demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
-const axios = require('axios');
 const demo = require('../../../lib/tasks/demo-build');
 
 describe('Demo task', function () {
-	let axiosStub;
 
 	beforeEach(function () {
-		axiosStub = sinon.stub(axios, 'get');
 		fs.copySync(path.resolve(obtPath, oTestPath), demoTestPath);
 		process.chdir(demoTestPath);
 		mockery.enable({
@@ -94,14 +91,6 @@ describe('Demo task', function () {
 		});
 
 		it('should build demo html', function () {
-			const demoDataLabel = 'Footer';
-			axiosStub.callsFake(() => Promise.resolve({
-				data: {
-					"label": demoDataLabel,
-					"items": []
-				}
-			}));
-
 			addDemoToOrigamiConfig([{
 				"name": "test1",
 				"template": "demos/src/test1.mustache",
@@ -113,16 +102,9 @@ describe('Demo task', function () {
 				"path": "/demos/test2.html",
 				"hidden": true,
 				"description": "Second test"
-			}, {
-				"name": "remote-data",
-				"template": "demos/src/remote-data.mustache",
-				"path": "/demos/remote-data.html",
-				"description": "Third test",
-				"data": "http://origami.ft.com/#stubedRequest1"
-			}]);
+			});
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
-			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
 			return demo({
 				production: true
 			}).then(function () {
@@ -132,9 +114,6 @@ describe('Demo task', function () {
 				const test2 = fs.readFileSync('demos/test2.html', 'utf8');
 				proclaim.include(test2, '<div>test2</div>');
 				proclaim.match(test2, /\/v3\/polyfill\.min\.js\?features=.*promises/);
-				const testRemoteData = fs.readFileSync('demos/remote-data.html', 'utf8');
-				proclaim.include(testRemoteData, `<div>${demoDataLabel}</div>`);
-				proclaim.match(testRemoteData, /\/v3\/polyfill\.min\.js\?features=.*promises/);
 			});
 		});
 
@@ -211,108 +190,6 @@ describe('Demo task', function () {
 				});
 		});
 
-		it('should fail if a remote url does not return valid json', function () {
-			// Stub for invalid json.
-			axiosStub.callsFake(() => Promise.resolve({
-				data: `{
-					"label": none valid json,
-					"items": []}}}
-				}`
-			}));
-			// Create demo config.
-			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest2';
-			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
-			addDemoToOrigamiConfig({
-				"name": "remote-data",
-				"template": "demos/src/remote-data.mustache",
-				"path": "/demos/remote-data.html",
-				"description": "Invalid remote data test",
-				"data": remoteDataUrl
-			});
-			// Run invalid json test.
-			return demo({
-				production: true
-			}).then(function () {
-				throw new Error('promise resolved when it should have rejected');
-			}).catch(function (err) {
-				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} did not provide valid JSON.`);
-				proclaim.equal(err.stack, '');
-			});
-		});
-
-		it('should fail if a remote url is invalid', function () {
-			// Create invalid demo data config.
-			const remoteDataUrl = 'https://!@£$%^&*()';
-			addDemoToOrigamiConfig({
-				"name": "remote-data",
-				"template": "demos/src/remote-data.mustache",
-				"path": "/demos/remote-data.html",
-				"description": "Invalid url",
-				"data": remoteDataUrl
-			});
-			// Run remote url test.
-			return demo({
-				production: true
-			}).then(function () {
-				throw new Error('promise resolved when it should have rejected');
-			}).catch(function (err) {
-				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} does not appear to be valid.`);
-				proclaim.equal(err.stack, '');
-			});
-		});
-
-		it('should show a helpful error message for http status code errors', function () {
-			// Stub for axios error
-			const mockAxiosError = {
-				response: { status: 500 }
-			};
-			axiosStub.callsFake(() => Promise.reject(mockAxiosError));
-
-			// Create demo config.
-			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest3';
-			addDemoToOrigamiConfig({
-				"name": "remote-data",
-				"template": "demos/src/remote-data.mustache",
-				"path": "/demos/remote-data.html",
-				"description": "Remote data url http error.",
-				"data": remoteDataUrl
-			});
-			// Run error HTTP status code test.
-			return demo({
-				production: true
-			}).then(function () {
-				throw new Error('promise resolved when it should have rejected');
-			}).catch(function (err) {
-				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} returned a ${mockAxiosError.response.status} status code.`);
-				proclaim.equal(err.stack, '');
-			});
-		});
-
-		it('should show a stack trace if remote demo data retrieval fails for an unknown reason', function () {
-			// Stub for unknown error
-			const mockHttpError = new Error('Mock Unknown Error');
-			mockHttpError.name = 'UnknownError';
-			axiosStub.callsFake(() => Promise.reject(mockHttpError));
-
-			// Create demo config.
-			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest4';
-			addDemoToOrigamiConfig({
-				"name": "remote-data",
-				"template": "demos/src/remote-data.mustache",
-				"path": "/demos/remote-data.html",
-				"description": "Remote data url unknown error.",
-				"data": remoteDataUrl
-			});
-			// Test for a stack trace.
-			return demo({
-				production: true
-			}).then(function () {
-				throw new Error('promise resolved when it should have rejected');
-			}).catch(function (err) {
-				proclaim.notEqual(err.stack, '');
-			});
-		});
-
 		it('should throw an error if local demo data cannot be found', function () {
 			fs.writeFileSync('demos/src/local-data.mustache', '<div>{{{label}}}</div>', 'utf8');
 			const demoDataUri = 'demos/src/does-not-exist-data.mustache';
@@ -321,7 +198,7 @@ describe('Demo task', function () {
 				"name": "local-data",
 				"template": "demos/src/local-data.mustache",
 				"path": "/demos/local-data.html",
-				"description": "Remote data url unknown error.",
+				"description": "local data missing.",
 				"data": demoDataUri
 			});
 
