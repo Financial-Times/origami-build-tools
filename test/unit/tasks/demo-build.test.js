@@ -264,7 +264,7 @@ describe('Demo task', function () {
 		it('should show a helpful error message for http status code errors', function () {
 			// Stub for axios error
 			const mockAxiosError = {
-				status: 500
+				response: { status: 500 }
 			};
 			axiosStub.callsFake(() => Promise.reject(mockAxiosError));
 
@@ -283,7 +283,7 @@ describe('Demo task', function () {
 			}).then(function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
-				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} returned a ${mockAxiosError.status} status code.`);
+				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} returned a ${mockAxiosError.response.status} status code.`);
 				proclaim.equal(err.stack, '');
 			});
 		});
