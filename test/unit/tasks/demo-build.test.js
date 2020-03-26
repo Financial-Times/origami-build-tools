@@ -102,7 +102,7 @@ describe('Demo task', function () {
 				"path": "/demos/test2.html",
 				"hidden": true,
 				"description": "Second test"
-			});
+			}]);
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
 			return demo({
