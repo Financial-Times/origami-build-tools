@@ -12,11 +12,14 @@ const oTestPath = 'test/unit/fixtures/o-test';
 const oNoManifestPath = path.resolve(obtPath, 'test/unit/fixtures/o-no-manifest');
 const pathSuffix = '-demo';
 const demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
-let demo = require('../../../lib/tasks/demo-build');
+const axios = require('axios');
+const demo = require('../../../lib/tasks/demo-build');
 
 describe('Demo task', function () {
+	let axiosStub;
 
 	beforeEach(function () {
+		axiosStub = sinon.stub(axios, 'get');
 		fs.copySync(path.resolve(obtPath, oTestPath), demoTestPath);
 		process.chdir(demoTestPath);
 		mockery.enable({
@@ -91,13 +94,14 @@ describe('Demo task', function () {
 		});
 
 		it('should build demo html', function () {
-			const request = require('request-promise-native');
 			const demoDataLabel = 'Footer';
-			sinon.stub(request, 'get').callsFake(() => Promise.resolve({
-				"label": demoDataLabel,
-				"items": []
+			axiosStub.callsFake(() => Promise.resolve({
+				data: {
+					"label": demoDataLabel,
+					"items": []
+				}
 			}));
-			demo = require('../../../lib/tasks/demo-build');
+
 			addDemoToOrigamiConfig([{
 				"name": "test1",
 				"template": "demos/src/test1.mustache",
@@ -114,7 +118,7 @@ describe('Demo task', function () {
 				"template": "demos/src/remote-data.mustache",
 				"path": "/demos/remote-data.html",
 				"description": "Third test",
-				"data": "http://origami.ft.com/#stubedRequest"
+				"data": "http://origami.ft.com/#stubedRequest1"
 			}]);
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
@@ -209,13 +213,14 @@ describe('Demo task', function () {
 
 		it('should fail if a remote url does not return valid json', function () {
 			// Stub for invalid json.
-			const request = require('request-promise-native');
-			sinon.stub(request, 'get').callsFake(() => Promise.resolve(`{
-				"label": none valid json,
-				"items": []}}}
-			}`));
+			axiosStub.callsFake(() => Promise.resolve({
+				data: `{
+					"label": none valid json,
+					"items": []}}}
+				}`
+			}));
 			// Create demo config.
-			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
+			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest2';
 			fs.writeFileSync('demos/src/remote-data.mustache', '<div>{{{label}}}</div>', 'utf8');
 			addDemoToOrigamiConfig({
 				"name": "remote-data",
@@ -257,15 +262,14 @@ describe('Demo task', function () {
 		});
 
 		it('should show a helpful error message for http status code errors', function () {
-			// Stub for request/request-promise-native StatusCodeError.
-			const request = require('request-promise-native');
-			const mockHttpError = new Error('Mock StatusCodeError');
-			mockHttpError.name = 'StatusCodeError';
-			mockHttpError.statusCode = '500';
-			sinon.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
-			demo = require('../../../lib/tasks/demo-build');
+			// Stub for axios error
+			const mockAxiosError = {
+				response: { status: 500 }
+			};
+			axiosStub.callsFake(() => Promise.reject(mockAxiosError));
+
 			// Create demo config.
-			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
+			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest3';
 			addDemoToOrigamiConfig({
 				"name": "remote-data",
 				"template": "demos/src/remote-data.mustache",
@@ -273,27 +277,25 @@ describe('Demo task', function () {
 				"description": "Remote data url http error.",
 				"data": remoteDataUrl
 			});
-			// Run error HTTP status code test. Tests the request/request-promise-native
-			// error is caught and transformed, but not that the library throws the error.
+			// Run error HTTP status code test.
 			return demo({
 				production: true
 			}).then(function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
-				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} returned a ${mockHttpError.statusCode} status code.`);
+				proclaim.equal(err.message, `Could not load remote demo data. ${remoteDataUrl} returned a ${mockAxiosError.response.status} status code.`);
 				proclaim.equal(err.stack, '');
 			});
 		});
 
 		it('should show a stack trace if remote demo data retrieval fails for an unknown reason', function () {
-			// Stub for request/request-promise-native UnknownError.
-			const request = require('request-promise-native');
+			// Stub for unknown error
 			const mockHttpError = new Error('Mock Unknown Error');
 			mockHttpError.name = 'UnknownError';
-			sinon.stub(request, 'get').callsFake(() => Promise.reject(mockHttpError));
-			demo = require('../../../lib/tasks/demo-build');
+			axiosStub.callsFake(() => Promise.reject(mockHttpError));
+
 			// Create demo config.
-			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest';
+			const remoteDataUrl = 'http://origami.ft.com/#stubedRequest4';
 			addDemoToOrigamiConfig({
 				"name": "remote-data",
 				"template": "demos/src/remote-data.mustache",
