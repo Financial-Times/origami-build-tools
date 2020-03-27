@@ -35,9 +35,8 @@ describe('build-js', function () {
 	it('should work with default options', function () {
 		return build()
 			.then(function (result) {
-				proclaim.match(result, /^\/\*\*\*\*\*\*\/ \(function\(modules\)/);
+				proclaim.include(result, 'function Test()');
 				proclaim.include(result, 'sourceMappingURL');
-				proclaim.include(result, 'function Test() {\n  var name = \'test\'; // eslint-disable-line');
 			});
 	});
 
@@ -56,7 +55,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, 'function Test() {\n  var name = \'test\'; // eslint-disable-line');
+				proclaim.include(builtJs, 'function Test()');
 			});
 	});
 
@@ -66,7 +65,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, 'function Test() {\n  var name = \'test\'; // eslint-disable-line');
+				proclaim.include(builtJs, 'function Test()');
 			});
 	});
 
@@ -76,7 +75,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, 'function Test() {\n  var name = \'test\'; // eslint-disable-line');
+				proclaim.include(builtJs, 'function Test()');
 			});
 	});
 
@@ -105,7 +104,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, 'function Test() {\n  var name = \'test\'; // eslint-disable-line');
+				proclaim.include(builtJs, 'function Test()');
 				proclaim.include(builtJs, 'var origami =\n');
 			});
 	});
