@@ -83,9 +83,8 @@ describe('build-js', function () {
 		return build({
 			js: './src/js/syntax-error.js'
 		})
-			.then(function () {}, function (e) { // eslint-disable-line no-empty-function
-				proclaim.include(e.message, 'SyntaxError');
-				proclaim.include(e.message, 'Unexpected token');
+			.then(function () { }, function (e) { // eslint-disable-line no-empty-function
+				proclaim.include(e.message, 'Error: failed to parse module');
 			});
 	});
 
