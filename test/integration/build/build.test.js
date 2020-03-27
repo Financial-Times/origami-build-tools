@@ -359,7 +359,7 @@ describe('obt build', function () {
 					.then(() => {
 						const code = fs.readFileSync('build/main.js', 'utf-8');
 
-						proclaim.isTrue(isEs5(code));
+						proclaim.isTrue(isEs5(code), `Code is not ES5`);
 
 						const sandbox = {};
 

@@ -16,7 +16,6 @@ module.exports = {
 			// Process JS with Babel.
 			{
 				test: /\.js$/,
-				exclude: /(node_modules|bower_components)/,
 				use: [
 					{
 						loader: 'swc-loader',
