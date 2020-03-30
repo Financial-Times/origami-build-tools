@@ -2,13 +2,9 @@
 
 const process = require('process');
 const path = require('path');
-const webpackConfigDev = require('./webpack.config.dev');
-const webpackConfigBower = require('../config/webpack.config.bower');
-const webpackMerge = require('webpack-merge');
 const fileHelpers = require('../lib/helpers/files');
 
-// https://github.com/webpack/webpack/issues/3324#issuecomment-289720345
-delete webpackConfigDev.bail;
+const karmaOax = require('../lib/karma-oax');
 module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 	return Promise.all([fileHelpers.getModuleName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
 		const moduleName = values[0];
@@ -55,13 +51,8 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			frameworks: ['mocha', 'sinon'],
 
 			plugins: [
-				'karma-mocha',
-				'karma-sinon',
-				'karma-webpack',
-				'karma-browserstack-launcher',
-				'karma-chrome-launcher',
-				'karma-sourcemap-loader',
-				'karma-scss-preprocessor'
+				'karma-*',
+				karmaOax
 			],
 
 			// web server port
@@ -70,8 +61,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			// preprocess matching files before serving them to the browser
 			// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 			preprocessors: {
-				'test/*.js': ['webpack', 'sourcemap'],
-				'test/**/*.js': ['webpack', 'sourcemap'],
+				'test/**/*.js': ['oax'],
 				'main.scss': ['scss']
 			},
 			scssPreprocessor: {
@@ -84,14 +74,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 
 			// Continuous Integration mode
 			// if true, Karma captures browsers, runs the tests and exits
-			singleRun: true,
-
-			webpack: opts.ignoreBower ? webpackConfigDev : webpackMerge(webpackConfigDev, webpackConfigBower),
-
-			// Hide webpack output logging
-			webpackMiddleware: {
-				noInfo: true
-			}
+			singleRun: true
 		};
 	});
 };
