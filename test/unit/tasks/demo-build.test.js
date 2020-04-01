@@ -136,7 +136,7 @@ describe('Demo task', function () {
 				.then(function () {
 					proclaim.include(fs.readFileSync('demos/local/test1.html', 'utf8'), '<div>test1</div>');
 					proclaim.include(fs.readFileSync('demos/local/test2.html', 'utf8'), '<div>test2</div>');
-					proclaim.include(fs.readFileSync('demos/local/demo.js', 'utf8'), `var name = 'test'; // eslint-disable-line`);
+					proclaim.include(fs.readFileSync('demos/local/demo.js', 'utf8'), `var name='test';`);
 					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div {\n  color: blue;\n}\n');
 					fs.removeSync('demos/local');
 				});
