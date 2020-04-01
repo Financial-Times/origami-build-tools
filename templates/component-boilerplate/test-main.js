@@ -2,8 +2,7 @@
 
 module.exports = (name) => {
 	return `/* eslint-env mocha */
-import proclaim from 'proclaim';
-import sinon from 'sinon/pkg/sinon';
+/* global proclaim sinon */
 import * as fixtures from './helpers/fixtures';
 
 import ${name.titleCase} from './../main';
@@ -17,19 +16,28 @@ describe("${name.titleCase}", () => {
 		proclaim.equal(typeof ${name.titleCase}.init, 'function');
 	});
 
-	it("should autoinitialize", (done) => {
-		const initSpy = sinon.spy(${name.titleCase}, 'init');
-		document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));
-		setTimeout(function(){
-			proclaim.equal(initSpy.called, true);
-			initSpy.restore();
-			done();
-		}, 100);
-	});
+	describe('autoinitialize', () => {
+		let initSpy;
+		beforeEach(() => {
+			initSpy = sinon.spy(${name.titleCase}, 'init');
+		});
 
-	it("should not autoinitialize when the event is not dispached", () => {
-		const initSpy = sinon.spy(${name.titleCase}, 'init');
-		proclaim.equal(initSpy.called, false);
+		afterEach(() => {
+			initSpy.restore();
+		});
+
+		it("should autoinitialize via o.DOMContentLoaded event", (done) => {
+			document.dispatchEvent(new CustomEvent('o.DOMContentLoaded'));
+			setTimeout(function(){
+				proclaim.equal(initSpy.called, true);
+				initSpy.restore();
+				done();
+			}, 100);
+		});
+		
+		it("should not autoinitialize when the event is not dispached", () => {
+			proclaim.equal(initSpy.called, false);
+		});
 	});
 
 	describe("should create a new", () => {
