@@ -94,13 +94,13 @@ describe('obt build', function () {
 
 						proclaim.isTrue(isEs5(code));
 
-						const sandbox = {};
+						const sandbox = {self: {}};
 
 						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
-						proclaim.deepEqual(sandbox, { world: 2 });
+						proclaim.deepEqual(sandbox, { self: {world: 2 }});
 					});
 			});
 		});
@@ -134,13 +134,13 @@ describe('obt build', function () {
 
 						proclaim.isTrue(isEs5(code));
 
-						const sandbox = {};
+						const sandbox = {self: {}};
 
 						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
-						proclaim.deepEqual(sandbox, { world: 2 });
+						proclaim.deepEqual(sandbox, { self: {world: 2 }});
 					});
 			});
 		});
@@ -174,13 +174,13 @@ describe('obt build', function () {
 
 						proclaim.isTrue(isEs5(code));
 
-						const sandbox = {};
+						const sandbox = {self: {}};
 
 						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
-						proclaim.deepEqual(sandbox, { world: 100 });
+						proclaim.deepEqual(sandbox, { self: {world: 100} });
 					});
 			});
 		});
@@ -207,7 +207,7 @@ describe('obt build', function () {
 						return execa(obt, ['install']);
 					})
 					.then(() => {
-						return execa(obt, ['build']);
+						return execa(obt, ['build', '--ignore-bower']);
 					})
 					.then(() => {
 						return fileExists('build/main.js');
@@ -221,13 +221,13 @@ describe('obt build', function () {
 
 						proclaim.isTrue(isEs5(code));
 
-						const sandbox = {};
+						const sandbox = {self: {}};
 
 						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
-						proclaim.deepEqual(sandbox, { world: 'fooBar' });
+						proclaim.deepEqual(sandbox.self, { world: 'fooBar' });
 					});
 			});
 		});
@@ -238,25 +238,18 @@ describe('obt build', function () {
 				// Change the current working directory to the folder which contains the project we are testing against.
 				// We are doing this to replicate how obt is used when executed inside a terminal.
 				process.chdir(path.join(__dirname, '/fixtures/js-npm-dependency-es7'));
-				return rimraf(path.join(process.cwd(), '/build'))
-					.then(() => rimraf(path.join(process.cwd(), '/node_modules')));
+				return rimraf(path.join(process.cwd(), '/build'));
 			});
 
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
-					.then(() => rimraf(path.join(process.cwd(), '/node_modules')))
 					.then(() => process.chdir(process.cwd()));
 			});
 
-			it('should compile the dependency js using babel', function () {
-				let obt;
+			it('should compile the dependency js', function () {
 				return obtBinPath()
-					.then(obtPath => {
-						obt = obtPath;
-						return execa(obt, ['install']);
-					})
-					.then(() => {
-						return execa(obt, ['build']);
+					.then(obt => {
+						return execa(obt, ['build', '--ignore-bower']);
 					})
 					.then(() => {
 						return fileExists('build/main.js');
@@ -270,12 +263,12 @@ describe('obt build', function () {
 						proclaim.isTrue(isEs5(code));
 
 						if (currentVersion.major >= 7) {
-							const sandbox = {};
+							const sandbox = {self: {}};
 
 							const script = new vm.Script(code);
 							const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 							script.runInContext(context);
-							proclaim.deepEqual(sandbox, { world: 100 });
+							proclaim.deepEqual(sandbox.self, { world: 100 });
 						}
 					});
 			});
@@ -315,13 +308,13 @@ describe('obt build', function () {
 
 						proclaim.isTrue(isEs5(code));
 
-						const sandbox = {};
+						const sandbox = {self: {}};
 
 						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
-						proclaim.deepEqual(sandbox, { word: 'Hello world.' });
+						proclaim.deepEqual(sandbox.self, { word: 'Hello world.' });
 					});
 			});
 		});
@@ -361,13 +354,13 @@ describe('obt build', function () {
 
 						proclaim.isTrue(isEs5(code));
 
-						const sandbox = {};
+						const sandbox = {self: {}};
 
 						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
-						proclaim.isFunction(sandbox.world);
+						proclaim.isFunction(sandbox.self.world);
 					});
 			});
 		});
@@ -382,18 +375,12 @@ describe('obt build', function () {
 
 			afterEach(function () {
 				return rimraf(path.join(process.cwd(), '/build'))
-					.then(() => rimraf(path.join(process.cwd(), '/bower_components')))
 					.then(() => process.chdir(process.cwd()));
 			});
 
 			it('should build js', function () {
-				let obt;
 				return obtBinPath()
-					.then(obtPath => {
-						obt = obtPath;
-						return execa(obt, ['install']);
-					})
-					.then(() => {
+					.then(obt => {
 						return execa(obt, ['build']);
 					})
 					.then(() => {
@@ -407,13 +394,13 @@ describe('obt build', function () {
 
 						proclaim.isTrue(isEs5(code));
 
-						const sandbox = {};
+						const sandbox = {self: {}};
 
 						const script = new vm.Script(code);
 
 						const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
 						script.runInContext(context);
-						proclaim.deepEqual(sandbox, { world: 100 });
+						proclaim.deepEqual(sandbox.self, { world: 100 });
 					});
 			});
 		});
