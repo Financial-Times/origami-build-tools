@@ -1,1 +1,1 @@
-global.world = 1 + 1;
+self.world = 1 + 1;

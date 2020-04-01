@@ -1,7 +1,7 @@
 'use strict';
 
 const compute = ({
-	object = global,
+	object = self,
 	property = 'world'
 }, ...numbers) => {
 	let result = 0;

@@ -1,1 +1,2 @@
-global.world = 10 ** 2;
+const a = 10 ** 2
+self.world = a;
