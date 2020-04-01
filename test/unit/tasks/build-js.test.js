@@ -36,7 +36,7 @@ describe('build-js', function () {
 		return build()
 			.then(function (result) {
 				proclaim.include(result, 'sourceMappingURL');
-				proclaim.include(result, `var name = 'test'; // eslint-disable-line\n`);
+				proclaim.include(result, `var name='test';`);
 			});
 	});
 
@@ -55,7 +55,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, `var name = 'test'; // eslint-disable-line\n`);
+				proclaim.include(builtJs, `var name='test';`);
 			});
 	});
 
@@ -65,7 +65,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, `var name = 'test'; // eslint-disable-line\n`);
+				proclaim.include(builtJs, `var name='test';`);
 			});
 	});
 
@@ -75,7 +75,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, `var name = 'test'; // eslint-disable-line\n`);
+				proclaim.include(builtJs, `var name='test';`);
 			});
 	});
 
