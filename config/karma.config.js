@@ -48,7 +48,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 
 			// frameworks to use
 			// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-			frameworks: ['mocha', 'sinon'],
+			frameworks: ['mocha', 'sinon', 'proclaim'],
 
 			plugins: [
 				'karma-*',
