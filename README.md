@@ -42,7 +42,6 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--build-css=<file>         Compiled CSS file (default: main.css)
 		--build-folder=<dir>       Compiled assets directory (default: ./build/)
 		-v, --version              Print out version of origami-build-tools
-		--production               Compiled assets will be minified for production systems
 		--browserstack             Run tests using Browserstack instead of Chrome Stable
 		--standalone               Create a named export for the built JavaScript
 		--demo-filter=<demo-name>  Build a specific demo. E.G. --demo-filter=pa11y to build only the pa11y.html demo.
@@ -84,7 +83,6 @@ Set the main Sass file with the `--sass` option. _(default: ./src/main.scss)_
 Set the name of the built JS file with the `--build-js` option. _(default: main.js)_
 Set the name of the built CSS file with the `--build-css` option. _(default: main.css)_
 Set the name of the folder to store the built CSS and JS with the `--build-folder` option. _(default: ./build/)_
-Build the files for production environments with the `--production` option. _(default: off)_
 
 If building a library use the `--standalone` option to specify the name you want the library to be accessed with. _(default: off)_
 
@@ -94,9 +92,7 @@ Build demos found in the [demo config file](http://origami.ft.com/docs/component
 
 Build a specific demo with the `--demo-filter` option.
 
-* If `--production` is set, demos are built to pull assets through the Origami Build Service.
-
-Non-production demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add _demos/local/_ to your `.gitignore`.
+Demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add _demos/local/_ to your `.gitignore`.
 
 ### `verify` or `v`
 

@@ -45,18 +45,6 @@ describe('Build Sass', function () {
 			});
 	});
 
-	it('should work with production option', function () {
-		return build({
-			production: true
-		})
-			.then(function (result) {
-				const builtCss = fs.readFileSync('build/main.css', 'utf8');
-				// blue doesn't need to change to hex as it is same amount of characters as #00f
-				proclaim.equal(builtCss, 'div{color:#00f}', 'Sass build did not write css to file.');
-				proclaim.equal(result, 'div{color:#00f}', 'Sass build did not return css.');
-			});
-	});
-
 	it('should build from custom source', function () {
 		return build({
 			sass: './src/scss/test.scss'
