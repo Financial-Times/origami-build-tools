@@ -70,23 +70,6 @@ automatically re-build the module's demos and assets every time a file changes:
 
 Install npm and bower dependencies required to build modules.
 
-### `build` or `b`
-
-Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
-
-It comes with support for things like:
-
-* [Babel](https://github.com/babel/babel) so you can use ES2017 features in your modules and products
-* [autoprefixer](https://github.com/postcss/autoprefixer) so you don't have to worry about writing browser prefixes in your Sass
-
-Set the main JavaScript file with the `--js` option. _(default: ./src/main.js)_
-Set the main Sass file with the `--sass` option. _(default: ./src/main.scss)_
-Set the name of the built JS file with the `--build-js` option. _(default: main.js)_
-Set the name of the built CSS file with the `--build-css` option. _(default: main.css)_
-Set the name of the folder to store the built CSS and JS with the `--build-folder` option. _(default: ./build/)_
-Build the files for production environments with the `--production` option. _(default: off)_
-
-If building a library use the `--standalone` option to specify the name you want the library to be accessed with. _(default: off)_
 
 ### `demo` or `d`
 
