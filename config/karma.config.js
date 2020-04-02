@@ -37,7 +37,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			concurrency: 1, // default Infinity,
 
 			// list of files to exclude
-			exclude: [],
+			exclude: ['test/scss/test-runner.js'],
 
 			// list of files / patterns to load in the browser
 			files: [
