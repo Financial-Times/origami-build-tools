@@ -1,0 +1,45 @@
+rules:
+  block-closing-brace-newline-after: always
+  block-no-empty: true
+  block-opening-brace-space-before: always
+
+  color-hex-length: long
+  color-hex-case: lower
+  color-no-invalid-hex: true
+
+  declaration-bang-space-before: always
+  declaration-block-no-duplicate-properties: true
+  declaration-block-trailing-semicolon: always
+  declaration-colon-space-after: always
+  declaration-colon-space-before: never
+  declaration-no-important: 
+    - true
+    - severity: warning
+  declaration-property-value-blacklist:
+    border: 
+      - none
+
+  function-comma-space-after: always
+  function-parentheses-space-inside: never
+
+  indentation: tab
+  
+  length-zero-no-unit: true
+
+  max-nesting-depth: 3
+  media-query-list-comma-space-after: always
+  media-feature-colon-space-after: always
+
+  no-missing-end-of-source-newline: true
+  no-duplicate-selectors: true
+  number-leading-zero: always
+  number-no-trailing-zeros: true
+
+  selector-class-pattern: '^[a-z0-9_\-]+$'
+  selector-id-pattern: '^[a-z0-9_\-]+$'
+  selector-list-comma-newline-after: always
+  selector-list-comma-space-after: always
+  selector-no-qualifying-type: true
+  shorthand-property-no-redundant-values: true
+
+  value-list-comma-space-after: always  
