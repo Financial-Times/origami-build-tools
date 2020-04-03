@@ -51,12 +51,6 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--debug                    Keep the test runner open to enable debugging in any browser.
 		--verbose                  Output sass warnings with backtraces.
 
-### Developing products
-
-Build CSS and JavaScript bundles in the `build` directory:
-
-	origami-build-tools build
-
 ### Developing modules locally
 
 Build and browse the demos (typically: <http://localhost:8080/demos/local/>),
@@ -86,7 +80,6 @@ Set the name of the built CSS file with the `--build-css` option. _(default: mai
 Set the name of the folder to store the built CSS and JS with the `--build-folder` option. _(default: ./build/)_
 Build the files for production environments with the `--production` option. _(default: off)_
 
-If building a library use the `--standalone` option to specify the name you want the library to be accessed with. _(default: off)_
 
 ### `demo` or `d`
 
