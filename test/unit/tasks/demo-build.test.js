@@ -201,9 +201,7 @@ describe('Demo task', function () {
 			});
 
 			// Test for a "no local demo data" error.
-			return demo({
-				production: true
-			}).then(function () {
+			return demo().then(function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
 				proclaim.equal(err.message, `Demo data not found: ${demoTestPath}/${demoDataUri}`);
