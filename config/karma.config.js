@@ -50,6 +50,8 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
 			frameworks: ['mocha', 'sinon', 'proclaim'],
 
+			ignoreBower: opts.ignoreBower,
+
 			plugins: [
 				'karma-*',
 				karmaOax
