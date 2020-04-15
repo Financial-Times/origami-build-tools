@@ -14,7 +14,7 @@ const path = require('path');
 const process = require('process');
 
 const build = require('../../../lib/tasks/build-sass');
-const log = require('../../../lib/helpers/log')
+const log = require('../../../lib/helpers/log');
 
 const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/o-test';
