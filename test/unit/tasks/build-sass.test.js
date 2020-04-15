@@ -91,7 +91,6 @@ describe('Build Sass', function () {
 			});
 	});
 
-
 	it('should set the brand variable', function () {
 		return build({
 			buildCss: 'bundle.css',
@@ -101,6 +100,39 @@ describe('Build Sass', function () {
 				const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
 				proclaim.include(builtCss, 'div {\n  content: Brand is set to internal;\n  color: blue;\n}\n');
 				proclaim.include(result, 'div {\n  content: Brand is set to internal;\n  color: blue;\n}\n');
+			});
+	});
+
+	it('should parse errors to provide an absolute file path with line number', function () {
+		const invalidSass = `¯\_(ツ)_/¯!`;
+		fs.writeFileSync('src/scss/_variables.scss',
+			invalidSass,
+			'utf8'
+		);
+		return build({
+			buildCss: 'bundle.css'
+		})
+			.then(() => {
+				throw new Error('Expected build promise to reject.');
+			})
+			.catch((error) => {
+				proclaim.include(error.message, path.resolve(buildTestPath, 'src/scss/_variables.scss:1:9'));
+				proclaim.include(error.message, invalidSass);
+			});
+	});
+
+	it('should show Sass error message when unable to parse an absolute file path and line number', function () {
+		const invalidSass = '¯\_(ツ)_/¯! prefix invalid sass with no file or line number to parse';
+		return build({
+			buildCss: 'bundle.css',
+			sassPrefix: invalidSass
+		})
+			.then(() => {
+				throw new Error('Expected build promise to reject.');
+			})
+			.catch((error) => {
+				proclaim.include(error.message, 'root stylesheet');
+				proclaim.include(error.message, invalidSass);
 			});
 	});
 });
