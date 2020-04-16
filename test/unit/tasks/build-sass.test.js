@@ -110,7 +110,7 @@ describe('Build Sass', function () {
 		const warningMessage = `This is a warning!`;
 		const debugSass = `@debug "${debugMessage};";`;
 		const warningSass = `@warn "${warningMessage};";`;
-		const logSpy = sinon.spy(log, 'debug');
+		const logSpy = sinon.spy(log, 'secondary');
 		return build({
 			buildCss: 'bundle.css',
 			sassPrefix: debugSass + warningSass,
@@ -128,7 +128,7 @@ describe('Build Sass', function () {
 		const warningMessage = `This is a warning!`;
 		const debugSass = `@debug "${debugMessage};";`;
 		const warningSass = `@warn "${warningMessage};";`;
-		const logSpy = sinon.spy(log, 'debug');
+		const logSpy = sinon.spy(log, 'secondary');
 		return build({
 			buildCss: 'bundle.css',
 			sassPrefix: debugSass + warningSass,
