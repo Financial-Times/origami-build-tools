@@ -173,4 +173,15 @@ describe('Build Sass', function () {
 				proclaim.include(error.message, invalidSass);
 			});
 	});
+
+	it('should resolve imports relative to the sass entry point', function () {
+		return build({
+			sass: 'demos/src/demo-scss/demo.scss'
+		})
+			.then(function (result) {
+				const builtCss = fs.readFileSync('build/main.css', 'utf8');
+				proclaim.include(builtCss, 'div {\n  color: blue;\n}\n');
+				proclaim.include(result, 'div {\n  color: blue;\n}\n');
+			});
+	});
 });
