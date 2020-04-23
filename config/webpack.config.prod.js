@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const prodConfig = {
 	plugins: [
@@ -12,19 +13,17 @@ const prodConfig = {
 		}),
 		// Minify code, IE8 is core experience, by setting the screw_ie8 option
 		// we can use some newer minification techniques.
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				screw_ie8: true,
-				warnings: false,
-			},
-			mangle: {
-				screw_ie8: true,
-			},
-			output: {
-				comments: false,
-				screw_ie8: true,
-			},
-			sourceMap: true,
+		new UglifyJsPlugin({
+			uglifyOptions: {
+				ie8: false,
+				compress: {
+					warnings: false,
+				},
+				output: {
+					comments: false,
+				},
+				sourceMap: true,
+			}
 		}),
 		// Generate stable module ids instead of having Webpack assign integers.
 		// HashedModuleIdsPlugin (vendored from Webpack 2) does this without
