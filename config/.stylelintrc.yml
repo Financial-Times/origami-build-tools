@@ -25,8 +25,6 @@ rules:
 
   indentation: tab
 
-  length-zero-no-unit: true
-
   max-nesting-depth: 3
   media-query-list-comma-space-after: always
   media-feature-colon-space-after: always
