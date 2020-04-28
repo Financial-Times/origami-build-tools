@@ -63,16 +63,16 @@ describe('verify-sass', function() {
 		});
 
 		it('should throw error if there are linting violations', function() {
-			proclaim.throws(() => {
-				verify().task();
-			},
-			'Failed linting: \n\n' +
+			return verify().task().then(() => {
+				proclaim.ok(false);
+			}, error => {
+				proclaim.deepStrictEqual(error.message, 'Failed linting: \n\n' +
 				'./src/scss/verify.scss:1:9 Error - Hex values should use the long-form format - 6 characters (hex-length)\n' +
 				'./src/scss/verify.scss:4:10 Error - Trailing semicolons required (trailing-semicolon)\n' +
 				'./src/scss/verify.scss:4:16, Warning - !important not allowed (no-important)\n' +
 				'./src/scss/verify.scss:4:16 Error - Whitespace required before !important (space-before-bang)\n\n' +
-				'4 linting errors'
-			);
+				'4 linting errors');
+			});
 		});
 	});
 });

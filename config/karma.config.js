@@ -37,7 +37,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			concurrency: 1, // default Infinity,
 
 			// list of files to exclude
-			exclude: [],
+			exclude: ['test/scss/test-runner.js'],
 
 			// list of files / patterns to load in the browser
 			files: [
@@ -49,6 +49,8 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			// frameworks to use
 			// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
 			frameworks: ['mocha', 'sinon', 'proclaim'],
+
+			ignoreBower: opts.ignoreBower,
 
 			plugins: [
 				'karma-*',

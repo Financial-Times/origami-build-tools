@@ -34,7 +34,7 @@ describe("${name.titleCase}", () => {
 				done();
 			}, 100);
 		});
-		
+
 		it("should not autoinitialize when the event is not dispached", () => {
 			proclaim.equal(initSpy.called, false);
 		});
