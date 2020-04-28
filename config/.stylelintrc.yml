@@ -1,5 +1,6 @@
 rules:
-  block-closing-brace-newline-after: always
+  block-closing-brace-newline-after:
+    - ignore-at-rules: ['if', 'else']
   block-no-empty: true
   block-opening-brace-space-before: always
 
@@ -12,18 +13,18 @@ rules:
   declaration-block-trailing-semicolon: always
   declaration-colon-space-after: always
   declaration-colon-space-before: never
-  declaration-no-important: 
+  declaration-no-important:
     - true
     - severity: warning
   declaration-property-value-blacklist:
-    border: 
+    border:
       - none
 
   function-comma-space-after: always
   function-parentheses-space-inside: never
 
   indentation: tab
-  
+
   length-zero-no-unit: true
 
   max-nesting-depth: 3
@@ -42,4 +43,4 @@ rules:
   selector-no-qualifying-type: true
   shorthand-property-no-redundant-values: true
 
-  value-list-comma-space-after: always  
+  value-list-comma-space-after: always
