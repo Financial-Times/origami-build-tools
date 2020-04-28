@@ -1,7 +1,7 @@
 .bar {
-    content: 'bar';
+	content: 'bar';
 }
 
 .foo {
-  @extend .bar;
+	@extend .bar;
 }
