@@ -86,14 +86,14 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'class-name-format',
+					name: 'selector-class-pattern',
 					type: 'Error',
 					locations: [
-						'class-name-format/invalid.scss:1:2',
-						'class-name-format/invalid.scss:5:2',
-						'class-name-format/invalid.scss:9:2',
-						'class-name-format/invalid.scss:13:2',
-						'class-name-format/invalid.scss:17:2'
+						'class-name-format/invalid.scss:1:1',
+						'class-name-format/invalid.scss:5:1',
+						'class-name-format/invalid.scss:9:1',
+						'class-name-format/invalid.scss:13:1',
+						'class-name-format/invalid.scss:17:1'
 					]
 				},
 				{
