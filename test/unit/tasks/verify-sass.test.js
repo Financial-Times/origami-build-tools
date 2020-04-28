@@ -128,8 +128,8 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'final-newline',
-					type: 'Warning',
+					name: 'no-missing-end-of-source-newline',
+					type: 'Error',
 					locations: [
 						'final-newline/invalid.scss:4:44'
 					]
