@@ -124,6 +124,7 @@ obt init o-my-new-component
 	- Empty blocks will now error `.nothing-here {}`
 	- Duplicate `@import` statements will throw an error
 	- `@import` paths which include an extension or prefixed `_` will error instead of warn
+	- `@include` and `@extend` will error instead of warn if used after property declarations
 
 
 ### Migrating from 8.X.X to 9.X.X
