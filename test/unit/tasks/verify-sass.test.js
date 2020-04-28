@@ -30,7 +30,7 @@ describe('verify-sass', function () {
 	describe('skip', () => {
 		it('should return true if the file does not exist', () => {
 			// there is no scss to test in the js folder
-			process.chdir(path.resolve(obtPath, 'src/js');
+			process.chdir(path.resolve(obtPath, 'src/js'));
 			return verify().skip().then(skip => {
 				proclaim.ok(skip);
 			});
@@ -38,7 +38,7 @@ describe('verify-sass', function () {
 
 		it('should return a helpful message if the file does not exist', () => {
 			// there is no scss to test in the js folder
-			process.chdir(path.resolve(obtPath, 'src/js');
+			process.chdir(path.resolve(obtPath, 'src/js'));
 			return verify().skip().then(skip => {
 				proclaim.equal(skip, 'No Sass files found.');
 			});
@@ -54,7 +54,7 @@ describe('verify-sass', function () {
 	describe('task', () => {
 		it('should not error if there are no Sass files', () => {
 			// there is no scss to test in the js folder
-			process.chdir(path.resolve(obtPath, 'src/js');
+			process.chdir(path.resolve(obtPath, 'src/js'));
 			verify().task();
 		});
 
