@@ -120,17 +120,11 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'extends-before-declarations',
-					type: 'Warning',
+					name: 'order/order',
+					type: 'Error',
 					locations: [
-						'extends-before-declarations/invalid.scss:7:3'
-					]
-				},
-				{
-					name: 'extends-before-mixins',
-					type: 'Warning',
-					locations: [
-						'extends-before-mixins/invalid.scss:11:3'
+						'extends-before-declarations/invalid.scss:7:2',
+						'extends-before-mixins/invalid.scss:11:2'
 					]
 				},
 				{

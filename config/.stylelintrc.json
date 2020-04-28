@@ -1,10 +1,22 @@
 {
    "plugins": [
-      "stylelint-scss"
+      "stylelint-scss",
+      "stylelint-order"
    ],
    "rules": {
       "scss/at-import-no-partial-leading-underscore": true,
       "scss/at-import-partial-extension": "never",
+      "order/order": [
+         {
+            "type": "at-rule",
+            "name": "extend"
+         },
+         {
+            "type": "at-rule",
+            "name": "include"
+         },
+         "declarations"
+      ],
       "block-closing-brace-newline-after": [
          {
             "ignore-at-rules": [
