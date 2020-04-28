@@ -36,7 +36,6 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		-h, --help                 Print out this message
 		--watch                    Re-run every time a file changes
 		--run-server               Build demos locally and runs a server
-		--build-css=<file>         Compiled CSS file (default: main.css)
 		--build-folder=<dir>       Compiled assets directory (default: ./build/)
 		-v, --version              Print out version of origami-build-tools
 		--browserstack             Run tests using Browserstack instead of Chrome Stable
@@ -118,6 +117,7 @@ obt init o-my-new-component
 - Removed the `--js` flag.
 - Removed the `--sass` flag.
 - Removed the `--build-js` flag.
+- Removed the `--build-css` flag.
 
 ### Migrating from 8.X.X to 9.X.X
 
