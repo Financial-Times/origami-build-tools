@@ -68,11 +68,11 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'border-zero',
+					name: 'declaration-property-value-blacklist',
 					type: 'Error',
 					locations: [
-						'border-zero/invalid.scss:2:10',
-						'border-zero/invalid.scss:6:15'
+						'border-zero/invalid.scss:2:2',
+						'border-zero/invalid.scss:6:2'
 					]
 				},
 				{
