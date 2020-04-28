@@ -61,6 +61,13 @@ describe('verify-sass', function () {
 		it('should output errors and warnings only where there are linting violations', function () {
 			const expectedNotices = [
 				{
+					name: 'indentation',
+					type: 'Error',
+					locations: [
+						'indentation/invalid.scss:2:5',
+					]
+				},
+				{
 					name: 'border-zero',
 					type: 'Error',
 					locations: [

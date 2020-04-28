@@ -1,13 +1,3 @@
-.o-component-space-indent {
-    content: 'space indent';
-}
-
 .o-component-tab-indent {
 	content: 'tab indent';
 }
-
-// We do not lint for indentation style.
-// The spec says Component indent type (tabs or spaces) is
-// not standardised: developers must respect whatever indent
-// type is already in use when editing existing components.
-// https://origami.ft.com/spec/v1/sass/#syntax-convention
