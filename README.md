@@ -120,7 +120,7 @@ obt init o-my-new-component
 
 - NodeJS v10 is no longer supported. Use NodeJS v12 or above.
 - A default CommonJs export now maps to `module.exports.default`, the default [Babel](https://babeljs.io/) behaviour. If using `require` to include a default CommonJs export add a `.default` property to the `require` call. Alternatively update your project to use [ECMAScript Module syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
-- The `--suppress-errors` flag has been removed. OBT no longer throws an error if their are no demos to be built.
+- The `--suppress-errors` flag has been removed. OBT no longer throws an error if their are no demos to be built if passed the `--demo-filter` flag.
 
 ### Migrating from 8.X.X to 9.X.X
 
