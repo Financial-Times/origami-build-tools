@@ -22,8 +22,4 @@
 
 @if ($foo) { $bar: 'foo'; }
 
-@if ($foo) {
-	$bar: 'foo';
-} @else {
-	$bar: false;
-}
+@if ($foo) { $bar: 'foo'; } @else { $bar: false; }

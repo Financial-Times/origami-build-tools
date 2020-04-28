@@ -12,7 +12,7 @@ const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath);
 
-describe('verify-sass', function () {
+describe.only('verify-sass', function () {
 	beforeEach(function () {
 		process.chdir(verifyTestPath);
 	});
@@ -400,6 +400,7 @@ describe('verify-sass', function () {
 			return verify().task().then(() => {
 				throw new Error('No linting errors were thrown.');
 			}, error => {
+					console.log(error.message);
 				// Assert no SCSS in a valid.scss file throws a linting error.
 				proclaim.doesNotInclude(
 					error.message,
