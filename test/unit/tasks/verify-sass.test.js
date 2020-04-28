@@ -58,7 +58,7 @@ describe('verify-sass', function () {
 			verify().task();
 		});
 
-		it('should throw error where there are linting violations', function () {
+		it('should output errors and warnings only where there are linting violations', function () {
 			const expectedNotices = [
 				{
 					name: 'border-zero',
