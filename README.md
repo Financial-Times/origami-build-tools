@@ -38,7 +38,6 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--run-server               Build demos locally and runs a server
 		-v, --version              Print out version of origami-build-tools
 		--browserstack             Run tests using Browserstack instead of Chrome Stable
-		--standalone               Create a named export for the built JavaScript
 		--demo-filter=<demo-name>  Build a specific demo. E.G. --demo-filter=pa11y to build only the pa11y.html demo.
 		--brand=<brand-name>       Build SCSS for a given brand. E.G. --brand=internal to build the component for the internal brand.
 		--suppress-errors          Do not error if no demos are found when using the --demo-filter option.
@@ -118,6 +117,7 @@ obt init o-my-new-component
 - Removed the `--build-js` flag.
 - Removed the `--build-css` flag.
 - Removed the `--build-folder` flag.
+- Removed the `--standalone` flag.
 
 
 ### Migrating from 8.X.X to 9.X.X
