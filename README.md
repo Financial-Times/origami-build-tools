@@ -122,6 +122,7 @@ obt init o-my-new-component
 	- If your component uses Sass comments to temporarily disable linting (e.g. `// sass-lint:disable`) replace these with the [equivalent stylelint-disable comment for stylelint](https://stylelint.io/user-guide/ignore-code).
 	- Components by default must be indented with tabs, unless configured otherwise.
 	- Empty blocks will now error `.nothing-here {}`
+	- Duplicate `@import` statements will throw an error
 
 
 ### Migrating from 8.X.X to 9.X.X
