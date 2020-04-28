@@ -104,15 +104,6 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'clean-import-paths',
-					type: 'Warning',
-					locations: [
-						'clean-import-paths/invalid.scss:2:2',
-						'clean-import-paths/invalid.scss:4:2',
-						'clean-import-paths/invalid.scss:6:2',
-					]
-				},
-				{
 					name: 'extends-before-declarations',
 					type: 'Warning',
 					locations: [
