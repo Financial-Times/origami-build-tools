@@ -135,7 +135,7 @@ describe('Demo task', function () {
 					proclaim.include(fs.readFileSync('demos/local/test1.html', 'utf8'), '<div>test1</div>');
 					proclaim.include(fs.readFileSync('demos/local/test2.html', 'utf8'), '<div>test2</div>');
 					proclaim.include(fs.readFileSync('demos/local/demo.js', 'utf8'), `var name='test';`);
-					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div {\n  color: blue;\n}\n');
+					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div{color:#00f}');
 					fs.removeSync('demos/local');
 				});
 		});
@@ -183,7 +183,7 @@ describe('Demo task', function () {
 				brand: 'internal'
 			})
 				.then(function () {
-					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div {\n  content: Brand is set to internal;\n  color: blue;\n}\n');
+					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div{content:Brand is set to internal;color:#00f}');
 					fs.removeSync('demos/local');
 				});
 		});
