@@ -89,7 +89,8 @@
     "merge-deep": "^3.0.2",
     "node-version": "^2.0.0",
     "npm-prepublish": "^1.2.3",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "stylelint-order": "^4.0.0"
   },
   "repository": {
     "type": "git",
