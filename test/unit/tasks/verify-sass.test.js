@@ -396,6 +396,15 @@ describe.only('verify-sass', function () {
 						'variable-name-format/invalid.scss:3:1'
 					]
 				},
+				{
+					name: 'block-no-empty',
+					type: 'Error',
+					locations: [
+      					'no-empty-rulesets/valid.scss:2:6',
+      					'no-empty-rulesets/valid.scss:9:7',
+      					'no-empty-rulesets/valid.scss:12:8'
+					]
+				},
 			];
 			return verify().task().then(() => {
 				throw new Error('No linting errors were thrown.');
