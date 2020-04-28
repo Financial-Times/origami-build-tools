@@ -19,6 +19,14 @@ rules:
   declaration-property-value-blacklist:
     border:
       - none
+    border-top:
+      - none
+    border-right:
+      - none
+    border-bottom:
+      - none
+    border-left:
+      - none
 
   function-comma-space-after: always
   function-parentheses-space-inside: never
