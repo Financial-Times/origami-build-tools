@@ -58,7 +58,7 @@ describe('verify-sass', function() {
 			verify().task();
 		});
 
-		it('should throw error where there are linting violations', function() {
+		it.only('should throw error where there are linting violations', function() {
 			const expectedErrors = {
 				'border-zero': [
 					'border-zero/invalid.scss:2:10',
@@ -95,12 +95,58 @@ describe('verify-sass', function() {
 				'function-name-format': [
       				'function-name-format/invalid.scss:1:11',
       				'function-name-format/invalid.scss:5:11',
+				],
+				'hex-length': [
+					'hex-length/invalid.scss:1:13',
+					'hex-length/invalid.scss:4:36',
+					'hex-length/invalid.scss:4:42',
+					'hex-length/invalid.scss:8:10'
+				],
+				'hex-notation': [
+					'hex-notation/invalid.scss:2:13',
+					'hex-notation/invalid.scss:5:36',
+					'hex-notation/invalid.scss:5:45',
+					'hex-notation/invalid.scss:9:10'
+				],
+				'indentation': [], // tabs or spaces, we don't verify
+				'leading-zero': [
+					'leading-zero/invalid.scss:2:13'
+				],
+				'mixin-name-format': [
+					'mixin-name-format/invalid.scss:1:1',
+					'mixin-name-format/invalid.scss:5:1'
+				],
+				'mixins-before-declarations': [
+					'mixins-before-declarations/invalid.scss:9:5'
+				],
+				'nesting-depth': [
+					'nesting-depth/invalid.scss:5:17'
+				],
+				'no-color-keywords': [], // we allow colour keywords
+				'no-color-literals': [], // we allow css colour functions
+				'no-css-comments': [], // we allow css comments
+				'no-debug': [
+					'no-debug/invalid.scss:1:2'
+				],
+				'no-duplicate-properties': [
+					'no-duplicate-properties/invalid.scss:3:3',
+					'no-duplicate-properties/invalid.scss:8:3',
+				],
+				'no-empty-ruleset': [], // we allow empty rulesets
+				'no-ids': [
+					'no-ids/invalid.scss:1:1'
+				],
+				'no-important': [
+					'no-important/invalid.scss:2:43'
+				],
+				'no-invalid-hex': [
+					'no-invalid-hex/invalid.scss:1:16'
 				]
-
 			};
 			return verify().task().then(() => {
 				throw new Error('No linting errors were thrown.');
 			}, error => {
+					console.log(error.message);
 				// Assert no SCSS in a valid.scss file throws a linting error.
 				proclaim.doesNotInclude(
 					error.message,
