@@ -36,7 +36,6 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		-h, --help                 Print out this message
 		--watch                    Re-run every time a file changes
 		--run-server               Build demos locally and runs a server
-		--build-js=<file>          Compiled JavaScript file (default: main.js)
 		--build-css=<file>         Compiled CSS file (default: main.css)
 		--build-folder=<dir>       Compiled assets directory (default: ./build/)
 		-v, --version              Print out version of origami-build-tools
@@ -70,7 +69,6 @@ It comes with support for things like:
 * [Babel](https://github.com/babel/babel) so you can use ES2017 features in your modules and products
 * [autoprefixer](https://github.com/postcss/autoprefixer) so you don't have to worry about writing browser prefixes in your Sass
 
-Set the name of the built JS file with the `--build-js` option. _(default: main.js)_
 Set the name of the built CSS file with the `--build-css` option. _(default: main.css)_
 Set the name of the folder to store the built CSS and JS with the `--build-folder` option. _(default: ./build/)_
 
@@ -119,6 +117,7 @@ obt init o-my-new-component
 - A default CommonJs export now maps to `module.exports.default`, the default [Babel](https://babeljs.io/) behaviour. If using `require` to include a default CommonJs export add a `.default` property to the `require` call. Alternatively update your project to use [ECMAScript Module syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
 - Removed the `--js` flag.
 - Removed the `--sass` flag.
+- Removed the `--build-js` flag.
 
 ### Migrating from 8.X.X to 9.X.X
 
