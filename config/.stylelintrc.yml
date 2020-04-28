@@ -1,4 +1,8 @@
+plugins:
+  - stylelint-scss
 rules:
+  scss/at-import-no-partial-leading-underscore: true
+  scss/at-import-partial-extension: "never"
   block-closing-brace-newline-after:
     - ignore-at-rules: ['if', 'else']
   block-no-empty: true
