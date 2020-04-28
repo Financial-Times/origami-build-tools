@@ -40,15 +40,6 @@ describe('build-js', function () {
 			});
 	});
 
-	it('should work with production option', function () {
-		return build({
-			production: true
-		})
-			.then(function (builtJs) {
-				proclaim.doesNotInclude(builtJs, 'sourceMappingURL');
-			});
-	});
-
 	it('should build from custom source', function () {
 		return build({
 			js: './src/js/test.js'

@@ -105,13 +105,11 @@ describe('Demo task', function () {
 			}]);
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test2</div>', 'utf8');
-			return demo({
-				production: true
-			}).then(function () {
-				const test1 = fs.readFileSync('demos/test1.html', 'utf8');
+			return demo().then(function () {
+				const test1 = fs.readFileSync('demos/local/test1.html', 'utf8');
 				proclaim.include(test1, '<div>test1</div>');
 				proclaim.match(test1, /\/v3\/polyfill\.min\.js\?features=.*promises/);
-				const test2 = fs.readFileSync('demos/test2.html', 'utf8');
+				const test2 = fs.readFileSync('demos/local/test2.html', 'utf8');
 				proclaim.include(test2, '<div>test2</div>');
 				proclaim.match(test2, /\/v3\/polyfill\.min\.js\?features=.*promises/);
 			});
@@ -137,7 +135,7 @@ describe('Demo task', function () {
 					proclaim.include(fs.readFileSync('demos/local/test1.html', 'utf8'), '<div>test1</div>');
 					proclaim.include(fs.readFileSync('demos/local/test2.html', 'utf8'), '<div>test2</div>');
 					proclaim.include(fs.readFileSync('demos/local/demo.js', 'utf8'), `var name='test';`);
-					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div {\n  color: blue;\n}\n');
+					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div{color:#00f}');
 					fs.removeSync('demos/local');
 				});
 		});
@@ -185,7 +183,7 @@ describe('Demo task', function () {
 				brand: 'internal'
 			})
 				.then(function () {
-					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div {\n  content: Brand is set to internal;\n  color: blue;\n}\n');
+					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div{content:Brand is set to internal;color:#00f}');
 					fs.removeSync('demos/local');
 				});
 		});
@@ -203,9 +201,7 @@ describe('Demo task', function () {
 			});
 
 			// Test for a "no local demo data" error.
-			return demo({
-				production: true
-			}).then(function () {
+			return demo().then(function () {
 				throw new Error('promise resolved when it should have rejected');
 			}).catch(function (err) {
 				proclaim.equal(err.message, `Demo data not found: ${demoTestPath}/${demoDataUri}`);
@@ -229,12 +225,10 @@ describe('Demo task', function () {
 			]);
 			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>{{>partial1}}', 'utf8');
 			fs.writeFileSync('demos/src/test2.mustache', '<div>test1</div>{{>partials/partial2}}', 'utf8');
-			return demo({
-				production: true
-			})
+			return demo()
 				.then(function () {
-					const test1 = fs.readFileSync('demos/test1.html', 'utf8');
-					const test2 = fs.readFileSync('demos/test2.html', 'utf8');
+					const test1 = fs.readFileSync('demos/local/test1.html', 'utf8');
+					const test2 = fs.readFileSync('demos/local/test2.html', 'utf8');
 					proclaim.include(test1, '<div>partial1</div>');
 					proclaim.include(test2, '<div>partial2</div>');
 				});
