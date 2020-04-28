@@ -400,7 +400,7 @@ describe('verify-sass', function () {
 					`Did not expect any Sass in "*/**/valid.scss" to fail.`
 				);
 				// Assert expected lint errors are thrown from invalid.scss files.
-					for (const { name, type, locations } of expectedNotices) {
+				for (const { name, type, locations } of expectedNotices) {
 					locations.forEach(location => {
 						const expectedPattern = new RegExp(
 							`${location}[^\n]*${type}[^\n]*${name}`
