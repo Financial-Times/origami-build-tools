@@ -1,29 +1,29 @@
 @-webkit-keyframes anim {
-    0% { opacity: 0; }
+	0% { opacity: 0; }
 }
 
 .ms-block {
-    -ms-hyphenate-limit-lines: no-limit;
+	-ms-hyphenate-limit-lines: no-limit;
 }
 
 ::-moz-placeholder {
-    content: '';
+	content: '';
 }
 
 .foo {
-    -webkit-transition: none;
-    -webkit-tap-highlight-color: red;
+	-webkit-transition: none;
+	-webkit-tap-highlight-color: red;
 }
 
 .bar {
-    position: -moz-sticky;
+	position: -moz-sticky;
 }
 
 .more-disallowed-vendor-prefixes {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -webkit-font-smoothing: auto;
-    -moz-osx-font-smoothing: auto;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-webkit-font-smoothing: auto;
+	-moz-osx-font-smoothing: auto;
 }

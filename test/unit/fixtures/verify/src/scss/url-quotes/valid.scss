@@ -2,17 +2,17 @@
 $foo: 'foo.png';
 
 .foo {
-    background-image: url('foo.png');
+	background-image: url('foo.png');
 }
 
 .qux {
-    background-image: url('bar/' + $foo);
+	background-image: url('bar/' + $foo);
 }
 
 .bar {
-    background-image: url(foo.png);
+	background-image: url(foo.png);
 }
 
 .norf {
-    background-image: url(bar/ + $foo);
+	background-image: url(bar/ + $foo);
 }

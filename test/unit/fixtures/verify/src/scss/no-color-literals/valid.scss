@@ -1,56 +1,56 @@
 .literal {
-  color: mediumslateblue;
+	color: mediumslateblue;
 }
 
 .linear-gradient-func {
-  background: linear-gradient(top, #ffffff, white);
+	background: linear-gradient(top, #ffffff, white);
 }
 
 .box-shadow {
-  box-shadow: 1px 1px black, 1px 1px black;
+	box-shadow: 1px 1px black, 1px 1px black;
 }
 
 .background {
-  background: 1px solid white;
+	background: 1px solid white;
 }
 
 .hex {
-  color: #ffffff;
+	color: #ffffff;
 }
 
 // rgb function passed directly as function argument
 .adj {
-  color: adjust-color(rgb(255, 0, 0), $blue: 5);
+	color: adjust-color(rgb(255, 0, 0), $blue: 5);
 }
 
 // hsl function passed directly as function argument
 .scale {
-  color: scale-color(hsl(120, 70%, 80%), $lightness: 50%);
+	color: scale-color(hsl(120, 70%, 80%), $lightness: 50%);
 }
 
 // hsl function passed directly as function argument
 .change {
-  color: change-color(hsl(25, 100%, 80%), $lightness: 40%, $alpha: 0.8);
+	color: change-color(hsl(25, 100%, 80%), $lightness: 40%, $alpha: 0.8);
 }
 
 // color literal passed directly as function argument
 .function {
-  color: test(#ffffff);
+	color: test(#ffffff);
 }
 
 // color functions used directly as property values
 .rgb {
-  color: rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
 }
 
 .rgba {
-  color: rgba(255, 255, 255, 0.3);
+	color: rgba(255, 255, 255, 0.3);
 }
 
 .hsl {
-  color: hsl(40, 50%, 50%);
+	color: hsl(40, 50%, 50%);
 }
 
 .hsla {
-  color: hsla(40, 50%, 50%, 0.3);
+	color: hsla(40, 50%, 50%, 0.3);
 }

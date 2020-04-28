@@ -1,8 +1,8 @@
 %bar {
-    color: red;
+	color: red;
 }
 
 .foo {
-  @extend %bar;
-  content: 'baz';
+	@extend %bar;
+	content: 'baz';
 }
