@@ -76,13 +76,13 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'brace-style',
+					name: 'block-opening-brace-space-before',
 					type: 'Error',
 					locations: [
-						'brace-style/invalid.scss:2:1',
-						'brace-style/invalid.scss:8:1',
-						'brace-style/invalid.scss:13:1',
-						'brace-style/invalid.scss:18:1',
+						'brace-style/invalid.scss:1:5',
+						'brace-style/invalid.scss:7:5',
+						'brace-style/invalid.scss:12:16',
+						'brace-style/invalid.scss:17:13',
 					]
 				},
 				{
