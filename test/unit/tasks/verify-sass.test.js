@@ -97,6 +97,13 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
+					name: 'no-duplicate-at-import-rules',
+					type: 'Error',
+					locations: [
+						'no-duplicate-at-import-rules/invalid.scss:3:1'
+					]
+				},
+				{
 					name: 'clean-import-paths',
 					type: 'Warning',
 					locations: [
