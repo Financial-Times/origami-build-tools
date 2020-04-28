@@ -121,7 +121,7 @@ obt init o-my-new-component
 - v10 replaces the deprecated [scss-lint](https://github.com/sasstools/sass-lint) with [stylelint](https://github.com/stylelint/stylelint). Your component may fail the verify check and require updates, including:
 	- If your component uses Sass comments to temporarily disable linting (e.g. `// sass-lint:disable`) replace these with the [equivalent stylelint-disable comment for stylelint](https://stylelint.io/user-guide/ignore-code).
 	- Components by default must be indented with tabs, unless configured otherwise.
-	- By default, newlines are required after closing braces. This will now throw an error `@if ($foo) { $bar: 'foo'; } @else { $bar: false; }`.
+	- Empty blocks will now error `.nothing-here {}`
 
 
 ### Migrating from 8.X.X to 9.X.X
