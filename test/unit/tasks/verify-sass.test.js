@@ -104,12 +104,19 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'clean-import-paths',
-					type: 'Warning',
+					name: 'scss/at-import-no-partial-leading-underscore',
+					type: 'Error',
 					locations: [
-						'clean-import-paths/invalid.scss:2:2',
-						'clean-import-paths/invalid.scss:4:2',
-						'clean-import-paths/invalid.scss:6:2',
+						'clean-import-paths/invalid.scss:2:1',
+						'clean-import-paths/invalid.scss:6:1',
+					]
+				},
+				{
+					name: 'scss/at-import-partial-extension',
+					type: 'Error',
+					locations: [
+						'clean-import-paths/invalid.scss:4:22',
+						'clean-import-paths/invalid.scss:6:23',
 					]
 				},
 				{
