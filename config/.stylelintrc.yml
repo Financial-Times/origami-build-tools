@@ -36,7 +36,7 @@ rules:
   selector-class-pattern: '^[a-z0-9_\-]+$'
   selector-id-pattern: '^[a-z0-9_\-]+$'
   selector-list-comma-newline-after: always
-  selector-list-comma-space-after: always
+  selector-list-comma-space-after: never-single-line
   selector-no-qualifying-type: true
   shorthand-property-no-redundant-values: true
 
