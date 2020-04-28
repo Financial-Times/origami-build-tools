@@ -42,7 +42,6 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--brand=<brand-name>       Build SCSS for a given brand. E.G. --brand=internal to build the component for the internal brand.
 		--suppress-errors          Do not error if no demos are found when using the --demo-filter option.
 		--debug                    Keep the test runner open to enable debugging in any browser.
-		--verbose                  Output sass warnings with backtraces.
 
 ### Developing modules locally
 
@@ -118,6 +117,7 @@ obt init o-my-new-component
 - Removed the `--build-css` flag.
 - Removed the `--build-folder` flag.
 - Removed the `--standalone` flag.
+- Removed the `--verbose` flag.
 
 
 ### Migrating from 8.X.X to 9.X.X
