@@ -32,7 +32,6 @@ rules:
   media-feature-colon-space-after: always
 
   no-missing-end-of-source-newline: true
-  no-duplicate-selectors: true
   number-leading-zero: always
   number-no-trailing-zeros: true
 
