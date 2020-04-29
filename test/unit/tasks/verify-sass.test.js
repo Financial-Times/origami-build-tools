@@ -433,7 +433,10 @@ describe.only('verify-sass', function () {
 						// );
 					});
 				}
-					console.log({ 'remaining rules to migrate': s.size, next: s.values().next().value});
+				console.log({ 'remaining rules to migrate': s.size, next: s.values().next().value});
+				if (s.size) {
+					throw new Error('linting errors were not as expected');
+				}
 			});
 		});
 	});
