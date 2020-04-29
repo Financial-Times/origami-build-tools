@@ -135,11 +135,11 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'function-name-format',
+					name: 'scss/at-function-pattern',
 					type: 'Error',
 					locations: [
-						'function-name-format/invalid.scss:1:11',
-						'function-name-format/invalid.scss:5:11',
+						'function-name-format/invalid.scss:1:1',
+						'function-name-format/invalid.scss:5:1',
 					]
 				},
 				{
