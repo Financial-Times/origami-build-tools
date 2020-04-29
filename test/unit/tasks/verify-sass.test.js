@@ -67,6 +67,12 @@ describe('verify-sass', function () {
 					]
 				},
 				{
+					name: 'no-extra-semicolons',
+					locations: [
+						'no-extra-semicolons/invalid.scss:5:2',
+					]
+				},
+				{
 					name: 'declaration-property-value-blacklist',
 					locations: [
 						'border-zero/invalid.scss:2:2',

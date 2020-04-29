@@ -9,13 +9,13 @@ module.exports = (name) => {
 					.test-mixin {
 						@include ${name.camelCase}();
 					}
-				};
+				}
 
 				@include expect($selector: false) {
 					.test-mixin .${name.original} {
 						display: block;
 					}
-				};
+				}
 			};
 		}
 	}
