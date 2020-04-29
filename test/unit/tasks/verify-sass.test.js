@@ -179,10 +179,10 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'nesting-depth',
-					type: 'Warning',
+					name: 'max-nesting-depth',
+					type: 'Error',
 					locations: [
-						'nesting-depth/invalid.scss:5:17'
+						'nesting-depth/invalid.scss:5:5'
 					]
 				},
 				{
