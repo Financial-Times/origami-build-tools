@@ -12,7 +12,7 @@ const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath);
 
-describe.only('verify-sass', function () {
+describe('verify-sass', function () {
 	beforeEach(function () {
 		process.chdir(verifyTestPath);
 	});
@@ -370,7 +370,6 @@ describe.only('verify-sass', function () {
 			return verify().task().then(() => {
 				throw new Error('No linting errors were thrown.');
 			}, error => {
-					console.log(error.message);
 				// Assert no SCSS in a valid.scss file throws a linting error.
 				proclaim.doesNotInclude(
 					error.message,
@@ -378,27 +377,18 @@ describe.only('verify-sass', function () {
 					`Did not expect any Sass in "*/**/valid.scss" to fail.`
 				);
 				// Assert expected lint errors are thrown from invalid.scss files.
-				const s = new Set();
 				for (const { name, locations } of expectedNotices) {
 					locations.forEach(location => {
 						const expectedPattern = new RegExp(
 							`${location}[^\n]*Error[^\n]*${name}`
 						);
-						try {
-							proclaim.match(
-								error.message,
-								expectedPattern,
-								`Expected a "${name}" error from "${location}".`
-							);
-						} catch (error) {
-							console.log(`Expected a "${name}" error from "${location}".`);
-							s.add(name);
-						}
+
+						proclaim.match(
+							error.message,
+							expectedPattern,
+							`Expected a "${name}" error from "${location}".`
+						);
 					});
-				}
-				console.log({ 'remaining rules to migrate': s.size, next: s.values().next().value});
-				if (s.size) {
-					throw new Error('linting errors were not as expected');
 				}
 			});
 		});
