@@ -321,6 +321,12 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
+					name: 'declaration-colon-space-before',
+					locations: [
+						'space-before-colon/invalid.scss:3:10'
+					]
+				},
+				{
 					name: 'function-comma-space-after',
 					locations: [
 						'space-after-comma/invalid.scss:6:24'
@@ -330,12 +336,6 @@ describe.only('verify-sass', function () {
 					name: 'value-list-comma-space-after',
 					locations: [
 						'space-after-comma/invalid.scss:2:27'
-					]
-				},
-				{
-					name: 'space-before-colon',
-					locations: [
-						'space-before-colon/invalid.scss:3:12'
 					]
 				},
 				{
