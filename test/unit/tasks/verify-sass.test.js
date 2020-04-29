@@ -281,9 +281,10 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'placeholder-in-extend',
+					name: 'scss/at-extend-no-missing-placeholder',
 					locations: [
-						'placeholder-in-extend/invalid.scss:6:11'
+						'placeholder-in-extend/invalid.scss:6:2',
+						'placeholder-in-extend/invalid.scss:10:2'
 					]
 				},
 				{

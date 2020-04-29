@@ -5,3 +5,7 @@
 .foo {
 	@extend .bar;
 }
+
+.foo {
+	@extend .baz%qux;
+}
