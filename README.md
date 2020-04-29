@@ -123,6 +123,7 @@ obt init o-my-new-component
 	- Components by default must be indented with tabs, unless configured otherwise.
 	- Empty blocks will now error `.nothing-here {}`
 	- Duplicate `@import` statements will throw an error
+	- Extra semicolons will throw an error
 
 ### Migrating from 8.X.X to 9.X.X
 
