@@ -36,6 +36,7 @@
       "color-hex-case": "lower",
       "color-no-invalid-hex": true,
       "declaration-bang-space-before": "always",
+      "declaration-bang-space-after": "never",
       "declaration-block-no-duplicate-properties": true,
       "declaration-block-trailing-semicolon": "always",
       "declaration-colon-space-after": "always",

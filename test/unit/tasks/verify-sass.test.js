@@ -230,19 +230,19 @@ describe.only('verify-sass', function () {
 				{
 					// if the user disables no-important,
 					// verify there is no extra space `! important`
-					name: 'space-after-bang',
+					name: 'declaration-bang-space-after',
 					type: 'Error',
 					locations: [
-						'space-after-bang/invalid.scss:4:20'
+						'space-after-bang/invalid.scss:4:17'
 					]
 				},
 				{
 					// if the user disables no-important,
 					// verify there is a space before the bang `; !important`
-					name: 'space-before-bang',
+					name: 'declaration-bang-space-before',
 					type: 'Error',
 					locations: [
-						'space-before-bang/invalid.scss:4:19'
+						'space-before-bang/invalid.scss:4:16'
 					]
 				},
 				{
