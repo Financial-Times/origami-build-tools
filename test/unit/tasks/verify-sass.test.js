@@ -193,11 +193,11 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'no-duplicate-properties',
-					type: 'Warning',
+					name: 'declaration-block-no-duplicate-properties',
+					type: 'Error',
 					locations: [
-						'no-duplicate-properties/invalid.scss:3:3',
-						'no-duplicate-properties/invalid.scss:8:3',
+						'no-duplicate-properties/invalid.scss:3:2',
+						'no-duplicate-properties/invalid.scss:8:2',
 					]
 				},
 				{
