@@ -153,13 +153,13 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'hex-notation',
-					type: 'Warning',
+					name: 'color-hex-case',
+					type: 'Error',
 					locations: [
 						'hex-notation/invalid.scss:2:13',
-						'hex-notation/invalid.scss:5:36',
-						'hex-notation/invalid.scss:5:45',
-						'hex-notation/invalid.scss:9:10'
+						'hex-notation/invalid.scss:5:35',
+						'hex-notation/invalid.scss:5:44',
+						'hex-notation/invalid.scss:9:9'
 					]
 				},
 				{
