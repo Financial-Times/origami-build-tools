@@ -128,6 +128,7 @@ obt init o-my-new-component
 	- Nesting selectors beyond a depth of three will now error instead of warn
 	- Duplicate CSS property declarations error instead of warn
 	- Using ids in CSS errors instead of warn
+	- Using `!important` in CSS errors instead of warn
 
 
 ### Migrating from 8.X.X to 9.X.X

@@ -41,12 +41,7 @@
       "declaration-colon-space-after": "always",
       "declaration-colon-space-before": "never",
       "no-duplicate-at-import-rules": true,
-      "declaration-no-important": [
-         true,
-         {
-            "severity": "warning"
-         }
-      ],
+      "declaration-no-important": true,
       "declaration-property-value-blacklist": {
          "border": [
             "none"

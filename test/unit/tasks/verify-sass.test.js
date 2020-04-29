@@ -221,10 +221,10 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'no-important',
-					type: 'Warning',
+					name: 'declaration-no-important',
+					type: 'Error',
 					locations: [
-						'no-important/invalid.scss:2:43'
+						'no-important/invalid.scss:2:29'
 					]
 				},
 				{
