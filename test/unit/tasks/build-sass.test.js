@@ -168,8 +168,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/main.css', 'utf8');
-				proclaim.include(builtCss, 'div {\n  color: blue;\n}\n');
-				proclaim.include(result, 'div {\n  color: blue;\n}\n');
+				proclaim.include(builtCss, 'div{color:#00f}');
+				proclaim.include(result, 'div{color:#00f}');
 			});
 	});
 });
