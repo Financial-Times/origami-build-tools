@@ -238,10 +238,10 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'no-qualifying-elements',
+					name: 'selector-no-qualifying-type',
 					locations: [
-						'no-qualifying-elements/invalid.scss:2:4',
-						'no-qualifying-elements/invalid.scss:7:6'
+						'no-qualifying-elements/invalid.scss:2:1',
+						'no-qualifying-elements/invalid.scss:7:1'
 					]
 				},
 				{
