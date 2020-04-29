@@ -253,12 +253,12 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'no-misspelled-properties',
-					type: 'Warning',
+					name: 'property-no-unknown',
+					type: 'Error',
 					locations: [
-						'no-misspelled-properties/invalid.scss:8:3',
-						'no-misspelled-properties/invalid.scss:13:3',
-						'no-misspelled-properties/invalid.scss:13:3'
+						'no-misspelled-properties/invalid.scss:3:2',
+						'no-misspelled-properties/invalid.scss:8:2',
+						'no-misspelled-properties/invalid.scss:13:2'
 					]
 				},
 				{
