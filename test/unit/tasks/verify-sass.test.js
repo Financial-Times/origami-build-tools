@@ -201,8 +201,8 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'no-ids',
-					type: 'Warning',
+					name: 'selector-max-id',
+					type: 'Error',
 					locations: [
 						'no-ids/invalid.scss:1:1'
 					]

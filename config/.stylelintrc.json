@@ -20,6 +20,7 @@
          "declarations"
       ],
       "at-rule-blacklist": ["debug"],
+      "selector-max-id": 0,
       "block-closing-brace-newline-after": [
          {
             "ignore-at-rules": [
