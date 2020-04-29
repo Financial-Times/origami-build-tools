@@ -6,7 +6,7 @@ module.exports = (name) => {
 	.${name.original} {
 		display: block;
 	}
-};
+}
 
 /// Provide a component specific error message
 ///
@@ -14,6 +14,6 @@ module.exports = (name) => {
 /// @access Private
 @mixin _${name.camelCase}($message) {
 	@error '*** ${name.camelCase} SCSS error: #{$message} ***';
-};
+}
 `;
 };
