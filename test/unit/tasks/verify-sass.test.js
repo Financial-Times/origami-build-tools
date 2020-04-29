@@ -210,14 +210,14 @@ describe.only('verify-sass', function () {
 				{
 					// if a user ignores no-ids,
 					// verify the name format of the ids
-					name: 'id-name-format',
+					name: 'selector-id-pattern',
 					type: 'Error',
 					locations: [
-						'id-name-format/invalid.scss:4:2',
-						'id-name-format/invalid.scss:8:2',
-						'id-name-format/invalid.scss:12:2',
-						'id-name-format/invalid.scss:16:2',
-						'id-name-format/invalid.scss:20:2'
+						'id-name-format/invalid.scss:4:1',
+						'id-name-format/invalid.scss:8:1',
+						'id-name-format/invalid.scss:12:1',
+						'id-name-format/invalid.scss:16:1',
+						'id-name-format/invalid.scss:20:1'
 					]
 				},
 				{
