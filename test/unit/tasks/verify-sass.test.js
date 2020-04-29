@@ -318,11 +318,15 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'space-after-comma',
+					name: 'function-comma-space-after',
 					locations: [
-						'space-after-comma/invalid.scss:1:25',
-						'space-after-comma/invalid.scss:6:23',
-						'space-after-comma/invalid.scss:7:30'
+						'space-after-comma/invalid.scss:6:24'
+					]
+				},
+				{
+					name: 'value-list-comma-space-after',
+					locations: [
+						'space-after-comma/invalid.scss:2:27'
 					]
 				},
 				{
