@@ -16,7 +16,7 @@ module.exports = (name) => {
 						display: block;
 					}
 				}
-			};
+			}
 		}
 	}
 }
