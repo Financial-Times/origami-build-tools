@@ -290,7 +290,7 @@ describe.only('verify-sass', function () {
 				{
 					name: 'scss/percent-placeholder-pattern',
 					locations: [
-						'placeholder-name-format/invalid.scss:1:1',
+						'g/invalid.scss:1:1',
 						'placeholder-name-format/invalid.scss:5:1',
 						'placeholder-name-format/invalid.scss:9:1',
 						'placeholder-name-format/invalid.scss:13:1',
@@ -298,11 +298,11 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'shorthand-values',
+					name: 'shorthand-property-no-redundant-values',
 					locations: [
-						'shorthand-values/invalid.scss:2:13',
-						'shorthand-values/invalid.scss:6:13',
-						'shorthand-values/invalid.scss:10:13'
+						'shorthand-values/invalid.scss:2:2',
+						'shorthand-values/invalid.scss:6:2',
+						'shorthand-values/invalid.scss:10:2'
 					]
 				},
 				{
