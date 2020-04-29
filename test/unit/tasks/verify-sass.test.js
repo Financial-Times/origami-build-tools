@@ -290,7 +290,7 @@ describe.only('verify-sass', function () {
 				{
 					name: 'scss/percent-placeholder-pattern',
 					locations: [
-						'g/invalid.scss:1:1',
+						'placeholder-name-format/invalid.scss:1:1',
 						'placeholder-name-format/invalid.scss:5:1',
 						'placeholder-name-format/invalid.scss:9:1',
 						'placeholder-name-format/invalid.scss:13:1',
