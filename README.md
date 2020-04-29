@@ -129,6 +129,7 @@ obt init o-my-new-component
 	- Duplicate CSS property declarations error instead of warn
 	- Using ids in CSS errors instead of warn
 	- Using `!important` in CSS errors instead of warn
+	- Invalid hex codes error instead of warn
 
 
 ### Migrating from 8.X.X to 9.X.X
