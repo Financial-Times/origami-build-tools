@@ -124,7 +124,8 @@ describe.only('verify-sass', function () {
 					type: 'Error',
 					locations: [
 						'extends-before-declarations/invalid.scss:7:2',
-						'extends-before-mixins/invalid.scss:11:2'
+						'extends-before-mixins/invalid.scss:11:2',
+						'mixins-before-declarations/invalid.scss:9:2'
 					]
 				},
 				{
@@ -175,13 +176,6 @@ describe.only('verify-sass', function () {
 					locations: [
 						'mixin-name-format/invalid.scss:1:1',
 						'mixin-name-format/invalid.scss:5:1'
-					]
-				},
-				{
-					name: 'mixins-before-declarations',
-					type: 'Warning',
-					locations: [
-						'mixins-before-declarations/invalid.scss:9:5'
 					]
 				},
 				{
