@@ -62,14 +62,12 @@ describe.only('verify-sass', function () {
 			const expectedNotices = [
 				{
 					name: 'indentation',
-					type: 'Error',
 					locations: [
 						'indentation/invalid.scss:2:5',
 					]
 				},
 				{
 					name: 'declaration-property-value-blacklist',
-					type: 'Error',
 					locations: [
 						'border-zero/invalid.scss:2:2',
 						'border-zero/invalid.scss:6:2'
@@ -77,7 +75,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'block-opening-brace-space-before',
-					type: 'Error',
 					locations: [
 						'brace-style/invalid.scss:1:5',
 						'brace-style/invalid.scss:7:5',
@@ -87,7 +84,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'selector-class-pattern',
-					type: 'Error',
 					locations: [
 						'class-name-format/invalid.scss:1:1',
 						'class-name-format/invalid.scss:5:1',
@@ -98,14 +94,12 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'no-duplicate-at-import-rules',
-					type: 'Error',
 					locations: [
 						'no-duplicate-at-import-rules/invalid.scss:3:1'
 					]
 				},
 				{
 					name: 'scss/at-import-no-partial-leading-underscore',
-					type: 'Error',
 					locations: [
 						'clean-import-paths/invalid.scss:2:1',
 						'clean-import-paths/invalid.scss:6:1',
@@ -113,7 +107,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'scss/at-import-partial-extension',
-					type: 'Error',
 					locations: [
 						'clean-import-paths/invalid.scss:4:22',
 						'clean-import-paths/invalid.scss:6:23',
@@ -121,7 +114,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'order/order',
-					type: 'Error',
 					locations: [
 						'extends-before-declarations/invalid.scss:7:2',
 						'extends-before-mixins/invalid.scss:11:2',
@@ -130,14 +122,12 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'no-missing-end-of-source-newline',
-					type: 'Error',
 					locations: [
 						'final-newline/invalid.scss:4:44'
 					]
 				},
 				{
 					name: 'scss/at-function-pattern',
-					type: 'Error',
 					locations: [
 						'function-name-format/invalid.scss:1:1',
 						'function-name-format/invalid.scss:5:1',
@@ -145,7 +135,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'color-hex-length',
-					type: 'Error',
 					locations: [
 						'hex-length/invalid.scss:1:13',
 						'hex-length/invalid.scss:4:35',
@@ -155,7 +144,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'color-hex-case',
-					type: 'Error',
 					locations: [
 						'hex-notation/invalid.scss:2:13',
 						'hex-notation/invalid.scss:5:35',
@@ -165,14 +153,12 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'leading-zero',
-					type: 'Error',
 					locations: [
 						'leading-zero/invalid.scss:2:13'
 					]
 				},
 				{
 					name: 'scss/at-mixin-pattern',
-					type: 'Error',
 					locations: [
 						'mixin-name-format/invalid.scss:1:1',
 						'mixin-name-format/invalid.scss:5:1'
@@ -180,21 +166,18 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'max-nesting-depth',
-					type: 'Error',
 					locations: [
 						'nesting-depth/invalid.scss:5:5'
 					]
 				},
 				{
 					name: 'at-rule-blacklist',
-					type: 'Error',
 					locations: [
 						'no-debug/invalid.scss:1:1'
 					]
 				},
 				{
 					name: 'declaration-block-no-duplicate-properties',
-					type: 'Error',
 					locations: [
 						'no-duplicate-properties/invalid.scss:3:2',
 						'no-duplicate-properties/invalid.scss:8:2',
@@ -202,7 +185,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'selector-max-id',
-					type: 'Error',
 					locations: [
 						'no-ids/invalid.scss:1:1'
 					]
@@ -211,7 +193,6 @@ describe.only('verify-sass', function () {
 					// if a user ignores no-ids,
 					// verify the name format of the ids
 					name: 'selector-id-pattern',
-					type: 'Error',
 					locations: [
 						'id-name-format/invalid.scss:4:1',
 						'id-name-format/invalid.scss:8:1',
@@ -222,7 +203,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'declaration-no-important',
-					type: 'Error',
 					locations: [
 						'no-important/invalid.scss:2:29'
 					]
@@ -231,7 +211,6 @@ describe.only('verify-sass', function () {
 					// if the user disables no-important,
 					// verify there is no extra space `! important`
 					name: 'declaration-bang-space-after',
-					type: 'Error',
 					locations: [
 						'space-after-bang/invalid.scss:4:17'
 					]
@@ -240,21 +219,18 @@ describe.only('verify-sass', function () {
 					// if the user disables no-important,
 					// verify there is a space before the bang `; !important`
 					name: 'declaration-bang-space-before',
-					type: 'Error',
 					locations: [
 						'space-before-bang/invalid.scss:4:16'
 					]
 				},
 				{
 					name: 'color-no-invalid-hex',
-					type: 'Error',
 					locations: [
 						'no-invalid-hex/invalid.scss:1:16'
 					]
 				},
 				{
 					name: 'property-no-unknown',
-					type: 'Error',
 					locations: [
 						'no-misspelled-properties/invalid.scss:3:2',
 						'no-misspelled-properties/invalid.scss:8:2',
@@ -263,7 +239,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'no-qualifying-elements',
-					type: 'Error',
 					locations: [
 						'no-qualifying-elements/invalid.scss:2:4',
 						'no-qualifying-elements/invalid.scss:7:6'
@@ -271,7 +246,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'no-qualifying-elements',
-					type: 'Error',
 					locations: [
 						'no-qualifying-elements/invalid.scss:2:4',
 						'no-qualifying-elements/invalid.scss:7:6'
@@ -279,7 +253,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'no-trailing-zero',
-					type: 'Error',
 					locations: [
 						'no-trailing-zero/invalid.scss:2:13',
 						'no-trailing-zero/invalid.scss:6:13',
@@ -288,7 +261,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'no-vendor-prefixes',
-					type: 'Warning',
 					locations: [
 						'no-vendor-prefixes/invalid.scss:1:2',
 						'no-vendor-prefixes/invalid.scss:6:5',
@@ -306,14 +278,12 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'placeholder-in-extend',
-					type: 'Error',
 					locations: [
 						'placeholder-in-extend/invalid.scss:6:11'
 					]
 				},
 				{
 					name: 'placeholder-name-format',
-					type: 'Error',
 					locations: [
 						'placeholder-name-format/invalid.scss:1:1',
 						'placeholder-name-format/invalid.scss:5:1',
@@ -324,7 +294,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'shorthand-values',
-					type: 'Error',
 					locations: [
 						'shorthand-values/invalid.scss:2:13',
 						'shorthand-values/invalid.scss:6:13',
@@ -333,21 +302,18 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'single-line-per-selector',
-					type: 'Error',
 					locations: [
 						'single-line-per-selector/invalid.scss:1:7'
 					]
 				},
 				{
 					name: 'space-after-colon',
-					type: 'Error',
 					locations: [
 						'space-after-colon/invalid.scss:2:12'
 					]
 				},
 				{
 					name: 'space-after-comma',
-					type: 'Error',
 					locations: [
 						'space-after-comma/invalid.scss:1:25',
 						'space-after-comma/invalid.scss:6:23',
@@ -356,7 +322,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'space-before-brace',
-					type: 'Error',
 					locations: [
 						'space-before-brace/invalid.scss:1:4',
 						'space-before-brace/invalid.scss:2:16',
@@ -365,14 +330,12 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'space-before-colon',
-					type: 'Error',
 					locations: [
 						'space-before-colon/invalid.scss:3:12'
 					]
 				},
 				{
 					name: 'space-between-parens',
-					type: 'Error',
 					locations: [
 						'space-between-parens/invalid.scss:1:15',
 						'space-between-parens/invalid.scss:1:20',
@@ -385,14 +348,12 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'trailing-semicolon',
-					type: 'Error',
 					locations: [
 						'trailing-semicolon/invalid.scss:4:19'
 					]
 				},
 				{
 					name: 'variable-name-format',
-					type: 'Error',
 					locations: [
 						'variable-name-format/invalid.scss:1:1',
 						'variable-name-format/invalid.scss:3:1'
@@ -400,7 +361,6 @@ describe.only('verify-sass', function () {
 				},
 				{
 					name: 'block-no-empty',
-					type: 'Error',
 					locations: [
       					'no-empty-rulesets/valid.scss:2:6',
       					'no-empty-rulesets/valid.scss:9:7',
@@ -420,16 +380,16 @@ describe.only('verify-sass', function () {
 				);
 				// Assert expected lint errors are thrown from invalid.scss files.
 				const s = new Set();
-				for (const { name, type, locations } of expectedNotices) {
+				for (const { name, locations } of expectedNotices) {
 					locations.forEach(location => {
 						const expectedPattern = new RegExp(
-							`${location}[^\n]*${type}[^\n]*${name}`
+							`${location}[^\n]*Error[^\n]*${name}`
 						);
 						try {
 							proclaim.match(
 								error.message,
 								expectedPattern,
-								`Expected a "${name}" "${type}" from "${location}".`
+								`Expected a "${name}" error from "${location}".`
 							);
 						} catch (error) {
 							s.add(name);
