@@ -245,13 +245,6 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'no-qualifying-elements',
-					locations: [
-						'no-qualifying-elements/invalid.scss:2:4',
-						'no-qualifying-elements/invalid.scss:7:6'
-					]
-				},
-				{
 					name: 'no-trailing-zero',
 					locations: [
 						'no-trailing-zero/invalid.scss:2:13',
