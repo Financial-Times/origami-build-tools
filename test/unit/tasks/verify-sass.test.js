@@ -352,7 +352,7 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'variable-name-format',
+					name: 'scss/dollar-variable-pattern',
 					locations: [
 						'variable-name-format/invalid.scss:1:1',
 						'variable-name-format/invalid.scss:3:1'
