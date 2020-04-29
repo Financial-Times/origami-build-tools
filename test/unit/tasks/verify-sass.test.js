@@ -339,15 +339,10 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'space-between-parens',
+					name: 'function-parentheses-space-inside',
 					locations: [
-						'space-between-parens/invalid.scss:1:15',
-						'space-between-parens/invalid.scss:1:20',
-						'space-between-parens/invalid.scss:5:16',
-						'space-between-parens/invalid.scss:10:18',
-						'space-between-parens/invalid.scss:10:26',
-						'space-between-parens/invalid.scss:11:18',
-						'space-between-parens/invalid.scss:12:17'
+						'space-between-parens/invalid.scss:11:15',
+						'space-between-parens/invalid.scss:12:14'
 					]
 				},
 				{

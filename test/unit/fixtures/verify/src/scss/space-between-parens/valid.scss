@@ -11,3 +11,14 @@
 	content: foo('bar');
 	width: calc(100% - 10px);
 }
+
+// We do not lint against Sass parameter spaces.
+// Previously origami-build-tools did lint for this, but
+// no stylelint rule appears to exist at time of writing
+@function fooWithParamSpace( $bar ) {
+	@return $bar;
+}
+
+@mixin barWithParamSpace($baz ) {
+	content: $baz;
+}
