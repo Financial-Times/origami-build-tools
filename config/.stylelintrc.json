@@ -31,6 +31,9 @@
          }
       ],
       "block-no-empty": true,
+      "property-no-unknown": [true, {
+         "checkPrefixed": true
+      }],
       "block-opening-brace-space-before": "always",
       "color-hex-length": "long",
       "color-hex-case": "lower",
