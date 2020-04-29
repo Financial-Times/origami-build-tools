@@ -245,11 +245,11 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'no-trailing-zero',
+					name: 'number-no-trailing-zeros',
 					locations: [
 						'no-trailing-zero/invalid.scss:2:13',
-						'no-trailing-zero/invalid.scss:6:13',
-						'no-trailing-zero/invalid.scss:10:13'
+						'no-trailing-zero/invalid.scss:6:14',
+						'no-trailing-zero/invalid.scss:10:12'
 					]
 				},
 				{
