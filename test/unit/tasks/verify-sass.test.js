@@ -253,20 +253,31 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'no-vendor-prefixes',
+					name: 'property-no-vendor-prefix',
 					locations: [
-						'no-vendor-prefixes/invalid.scss:1:2',
-						'no-vendor-prefixes/invalid.scss:6:5',
-						'no-vendor-prefixes/invalid.scss:9:3',
-						'no-vendor-prefixes/invalid.scss:14:5',
-						'no-vendor-prefixes/invalid.scss:15:5',
-						'no-vendor-prefixes/invalid.scss:19:15',
-						'no-vendor-prefixes/invalid.scss:23:5',
-						'no-vendor-prefixes/invalid.scss:24:5',
-						'no-vendor-prefixes/invalid.scss:25:5',
-						'no-vendor-prefixes/invalid.scss:26:5',
-						'no-vendor-prefixes/invalid.scss:27:5',
-						'no-vendor-prefixes/invalid.scss:28:5'
+						'no-vendor-prefixes/invalid.scss:10:2',
+						'no-vendor-prefixes/invalid.scss:18:2',
+						'no-vendor-prefixes/invalid.scss:19:2',
+						'no-vendor-prefixes/invalid.scss:20:2',
+						'no-vendor-prefixes/invalid.scss:21:2'
+					]
+				},
+				{
+					name: 'selector-no-vendor-prefix',
+					locations: [
+						'no-vendor-prefixes/invalid.scss:5:3',
+					]
+				},
+				{
+					name: 'at-rule-no-vendor-prefix',
+					locations: [
+						'no-vendor-prefixes/invalid.scss:1:1'
+					]
+				},
+				{
+					name: 'value-no-vendor-prefix',
+					locations: [
+						'no-vendor-prefixes/invalid.scss:14:11'
 					]
 				},
 				{
@@ -385,6 +396,7 @@ describe.only('verify-sass', function () {
 								`Expected a "${name}" error from "${location}".`
 							);
 						} catch (error) {
+							console.log(`Expected a "${name}" error from "${location}".`);
 							s.add(name);
 						}
 					});

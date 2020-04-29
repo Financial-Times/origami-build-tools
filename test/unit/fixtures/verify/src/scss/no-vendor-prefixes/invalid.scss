@@ -2,21 +2,16 @@
 	0% { opacity: 0; }
 }
 
-.ms-block {
-	-ms-hyphenate-limit-lines: no-limit;
-}
-
 ::-moz-placeholder {
 	content: '';
 }
 
 .foo {
 	-webkit-transition: none;
-	-webkit-tap-highlight-color: red;
 }
 
-.bar {
-	position: -moz-sticky;
+.a {
+	display: -webkit-flex;
 }
 
 .more-disallowed-vendor-prefixes {
@@ -24,6 +19,4 @@
 	-moz-user-select: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	-webkit-font-smoothing: auto;
-	-moz-osx-font-smoothing: auto;
 }
