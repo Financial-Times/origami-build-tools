@@ -40,7 +40,6 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		--browserstack             Run tests using Browserstack instead of Chrome Stable
 		--demo-filter=<demo-name>  Build a specific demo. E.G. --demo-filter=pa11y to build only the pa11y.html demo.
 		--brand=<brand-name>       Build SCSS for a given brand. E.G. --brand=internal to build the component for the internal brand.
-		--suppress-errors          Do not error if no demos are found when using the --demo-filter option.
 		--debug                    Keep the test runner open to enable debugging in any browser.
 
 ### Developing modules locally
@@ -118,7 +117,7 @@ obt init o-my-new-component
 - Removed the `--build-folder` flag.
 - Removed the `--standalone` flag.
 - Removed the `--verbose` flag.
-
+- The `--suppress-errors` flag has been removed. OBT no longer throws an error if their are no demos to be built if passed the `--demo-filter` flag.
 
 ### Migrating from 8.X.X to 9.X.X
 
