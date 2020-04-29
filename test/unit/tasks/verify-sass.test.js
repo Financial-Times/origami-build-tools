@@ -143,13 +143,13 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'hex-length',
+					name: 'color-hex-length',
 					type: 'Error',
 					locations: [
 						'hex-length/invalid.scss:1:13',
-						'hex-length/invalid.scss:4:36',
-						'hex-length/invalid.scss:4:42',
-						'hex-length/invalid.scss:8:10'
+						'hex-length/invalid.scss:4:35',
+						'hex-length/invalid.scss:4:41',
+						'hex-length/invalid.scss:8:9'
 					]
 				},
 				{
