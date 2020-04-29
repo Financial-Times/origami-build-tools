@@ -80,6 +80,9 @@ describe.only('verify-sass', function () {
 						'brace-style/invalid.scss:7:5',
 						'brace-style/invalid.scss:12:16',
 						'brace-style/invalid.scss:17:13',
+						'space-before-brace/invalid.scss:1:4',
+						'space-before-brace/invalid.scss:2:13',
+						'space-before-brace/invalid.scss:7:10'
 					]
 				},
 				{
@@ -327,14 +330,6 @@ describe.only('verify-sass', function () {
 					name: 'value-list-comma-space-after',
 					locations: [
 						'space-after-comma/invalid.scss:2:27'
-					]
-				},
-				{
-					name: 'space-before-brace',
-					locations: [
-						'space-before-brace/invalid.scss:1:4',
-						'space-before-brace/invalid.scss:2:16',
-						'space-before-brace/invalid.scss:7:10'
 					]
 				},
 				{
