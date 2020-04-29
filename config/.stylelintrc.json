@@ -75,7 +75,9 @@
       "function-comma-space-after": "always",
       "function-parentheses-space-inside": "never",
       "indentation": "tab",
-      "max-nesting-depth": 3,
+      "max-nesting-depth": [3, {
+         "ignore": ["blockless-at-rules"]
+      }],
       "media-query-list-comma-space-after": "always",
       "media-feature-colon-space-after": "always",
       "no-missing-end-of-source-newline": true,
