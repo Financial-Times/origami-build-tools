@@ -346,9 +346,9 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'trailing-semicolon',
+					name: 'declaration-block-trailing-semicolon',
 					locations: [
-						'trailing-semicolon/invalid.scss:4:19'
+						'trailing-semicolon/invalid.scss:4:18'
 					]
 				},
 				{
