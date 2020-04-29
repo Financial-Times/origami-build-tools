@@ -361,9 +361,9 @@ describe.only('verify-sass', function () {
 				{
 					name: 'block-no-empty',
 					locations: [
-      					'no-empty-rulesets/valid.scss:2:6',
-      					'no-empty-rulesets/valid.scss:9:7',
-      					'no-empty-rulesets/valid.scss:12:8'
+      					'no-empty-rulesets/invalid.scss:2:6',
+      					'no-empty-rulesets/invalid.scss:9:7',
+      					'no-empty-rulesets/invalid.scss:12:8'
 					]
 				},
 			];
