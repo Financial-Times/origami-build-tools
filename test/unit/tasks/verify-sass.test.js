@@ -170,7 +170,7 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'mixin-name-format',
+					name: 'scss/at-mixin-pattern',
 					type: 'Error',
 					locations: [
 						'mixin-name-format/invalid.scss:1:1',
