@@ -288,7 +288,7 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'placeholder-name-format',
+					name: 'scss/percent-placeholder-pattern',
 					locations: [
 						'placeholder-name-format/invalid.scss:1:1',
 						'placeholder-name-format/invalid.scss:5:1',
