@@ -246,8 +246,8 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'no-invalid-hex',
-					type: 'Warning',
+					name: 'color-no-invalid-hex',
+					type: 'Error',
 					locations: [
 						'no-invalid-hex/invalid.scss:1:16'
 					]
@@ -425,12 +425,15 @@ describe.only('verify-sass', function () {
 						const expectedPattern = new RegExp(
 							`${location}[^\n]*${type}[^\n]*${name}`
 						);
-						s.add(name);
-						// proclaim.match(
-						// 	error.message,
-						// 	expectedPattern,
-						// 	`Expected a "${name}" "${type}" from "${location}".`
-						// );
+						try {
+							proclaim.match(
+								error.message,
+								expectedPattern,
+								`Expected a "${name}" "${type}" from "${location}".`
+							);
+						} catch (error) {
+							s.add(name);
+						}
 					});
 				}
 				console.log({ 'remaining rules to migrate': s.size, next: s.values().next().value});
