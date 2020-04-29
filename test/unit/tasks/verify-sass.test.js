@@ -312,9 +312,9 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'space-after-colon',
+					name: 'declaration-colon-space-after',
 					locations: [
-						'space-after-colon/invalid.scss:2:12'
+						'space-after-colon/invalid.scss:2:10'
 					]
 				},
 				{
