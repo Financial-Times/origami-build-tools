@@ -19,6 +19,7 @@
          },
          "declarations"
       ],
+      "at-rule-blacklist": ["debug"],
       "block-closing-brace-newline-after": [
          {
             "ignore-at-rules": [

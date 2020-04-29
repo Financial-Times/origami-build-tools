@@ -186,10 +186,10 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'no-debug',
+					name: 'at-rule-blacklist',
 					type: 'Error',
 					locations: [
-						'no-debug/invalid.scss:1:2'
+						'no-debug/invalid.scss:1:1'
 					]
 				},
 				{
