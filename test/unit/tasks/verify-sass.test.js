@@ -306,9 +306,9 @@ describe.only('verify-sass', function () {
 					]
 				},
 				{
-					name: 'single-line-per-selector',
+					name: 'selector-list-comma-newline-after',
 					locations: [
-						'single-line-per-selector/invalid.scss:1:7'
+						'single-line-per-selector/invalid.scss:1:5'
 					]
 				},
 				{
