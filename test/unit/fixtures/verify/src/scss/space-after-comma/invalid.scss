@@ -1,8 +1,7 @@
-@mixin baz($argument-one,$argument-two) {
-	content: '#{$argument-one} #{$argument-two}';
+.no-value-list-space {
+	box-shadow: 1px 1px black,1px 1px black;
 }
 
-.foo {
-	@include baz('foo','bar');
-	box-shadow: 1px 1px black,1px 1px black;
+.no-argument-space {
+	transform: translate(1,1);
 }
