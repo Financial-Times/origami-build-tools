@@ -56,7 +56,6 @@ describe("obt boilerplate", function () {
 						.exec('cd bob')
 						.exec(obt + " install")
 						.exec(obt + " demo")
-						.exec(obt + " build")
 						.exec(obt + " verify")
 						.exec(obt + " test")
 						.end(done);

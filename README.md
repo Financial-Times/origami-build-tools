@@ -26,7 +26,6 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 
 	Commands
 		develop, dev  Build demos locally every time a file changes and run a server to view them.
-		build, b      Build CSS and JS in current directory
 		demo, d       Build demos into the demos directory
 		init          Initialise a new component with a boilerplate folder structure
 		install, i    Install npm and bower dependencies required to build modules
@@ -61,10 +60,6 @@ Build demos locally every time a file changes and run a server to view them.
 ### `init`
 
 Creates boilerplate for a new Origami component.
-
-### `build` or `b`
-
-Build CSS and JavaScript bundles from `main.js` and `main.css`.
 
 ### `demo` or `d`
 
@@ -116,6 +111,8 @@ All logs are now output from Sass compilation by default. The `verbose` flag has
 In addition, the following flags have been removed:
 - `--standalone`. It is no longer possible to specify a named export for the built JavaScript
 - `--suppress-errors`. OBT no longer throws an error if their are no demos to be built if passed the `--demo-filter` flag.
+
+The `obt build` command has been removed.
 
 Other changes include:
 - NodeJS v10 is no longer supported. Use NodeJS v12 or above.
