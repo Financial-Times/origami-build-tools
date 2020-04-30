@@ -50,17 +50,4 @@ describe('Boilerplate task', function() {
 	it('should export a function', function() {
 		proclaim.isFunction(init);
 	});
-
-	describe('when called', () => {
-		it('should create Listr object with build tasks', function() {
-			init();
-
-			Listr.firstCall.args[0][0].task();
-
-			proclaim.calledOnce(Listr);
-			proclaim.calledWithNew(Listr);
-			proclaim.isArray(Listr.firstCall.args[0]);
-			proclaim.calledOnce(buildBoilerplate);
-		});
-	});
 });

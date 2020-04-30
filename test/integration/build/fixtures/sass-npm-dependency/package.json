@@ -1,5 +1,0 @@
-{
-  "dependencies": {
-    "o-test-component": "file:./scss-node-modules/o-test-component"
-  }
-}
