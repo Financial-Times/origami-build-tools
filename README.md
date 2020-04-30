@@ -17,7 +17,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 
 2. Install the build tools globally:
 
-		npm install -g origami-build-tools
+	`npm install -g origami-build-tools`
 
 ## Usage
 
@@ -25,29 +25,28 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		$ obt <command> [<options>]
 
 	Commands
-		build, b    Build CSS and JS in current directory
-		demo, d     Build demos into the demos directory
-		init        Initialise a new component with a boilerplate folder structure
-		install, i  Install npm and bower dependencies required to build modules
-		test, t     Run Origami specification tests and component specific tests
-		verify, v   Check folder and code structure follows Origami specification
+		develop, dev  Build demos locally every time a file changes and run a server to view them.
+		build, b      Build CSS and JS in current directory
+		demo, d       Build demos into the demos directory
+		init          Initialise a new component with a boilerplate folder structure
+		install, i    Install npm and bower dependencies required to build modules
+		test, t       Run Origami specification tests and component specific tests
+		verify, v     Check folder and code structure follows Origami specification
 
 	Options
 		-h, --help                 Print out this message
-		--watch                    Re-run every time a file changes
-		--run-server               Build demos locally and runs a server
 		-v, --version              Print out version of origami-build-tools
 		--browserstack             Run tests using Browserstack instead of Chrome Stable
 		--demo-filter=<demo-name>  Build a specific demo. E.G. --demo-filter=pa11y to build only the pa11y.html demo.
 		--brand=<brand-name>       Build SCSS for a given brand. E.G. --brand=internal to build the component for the internal brand.
 		--debug                    Keep the test runner open to enable debugging in any browser.
 
-### Developing modules locally
+### Developing components locally
 
 Build and browse the demos (typically: <http://localhost:8080/demos/local/>),
-automatically re-build the module's demos and assets every time a file changes:
+automatically re-build the component's demos and assets every time a file changes:
 
-	origami-build-tools demo --runServer --watch
+	`obt dev`
 
 ## Commands
 
@@ -55,22 +54,21 @@ automatically re-build the module's demos and assets every time a file changes:
 
 Install npm and bower dependencies required to build modules.
 
+### `develop` or `dev`
+
+Build demos locally every time a file changes and run a server to view them.
+
+### `init`
+
+Creates boilerplate for a new Origami component.
+
 ### `build` or `b`
 
-Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
-
-It comes with support for things like:
-
-* [Babel](https://github.com/babel/babel) so you can use ES2017 features in your modules and products
-* [autoprefixer](https://github.com/postcss/autoprefixer) so you don't have to worry about writing browser prefixes in your Sass
-
-Set the name of the built CSS file with the `--build-css` option. _(default: main.css)_
-Set the name of the folder to store the built CSS and JS with the `--build-folder` option. _(default: ./build/)_
-
+Build CSS and JavaScript bundles from `main.js` and `main.css`.
 
 ### `demo` or `d`
 
-Build demos found in the [demo config file](http://origami.ft.com/docs/component-spec/modules/#demo-config).
+Build demos found in the [origami.json manifest](https://origami.ft.com/spec/v1/manifest/#demos).
 
 Build a specific demo with the `--demo-filter` option.
 
@@ -78,11 +76,11 @@ Demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `dem
 
 ### `verify` or `v`
 
-Lints JavaScript, Sass and configuration files against [Origami coding standards](http://origami.ft.com/docs/syntax/).
+Lints JavaScript, Sass and configuration files against [Origami specification](https://origami.ft.com/spec/v1/components/).
 
 ### `test` or `t`
 
-Run Origami specification tests and component specific tests.
+Runs JavaScript and Sass tests.
 
 * If `--debug` is set, the test runner will not exit automatically to allow debugging of the tests.
 
@@ -90,18 +88,6 @@ Checks Sass supports [silent and non-silent compilation modes](http://origami.ft
 If `pa11y.html` demo exists, confirms it is accessible using [Pa11y](http://pa11y.org/).
 If `package.json` contains a `test` script, confirms it exits with a 0 exit code.
 Runs tests using [Karma](https://karma-runner.github.io) defaulting to Chrome Stable, can be configured to use BrowserStack by using the `--browserstack` flag. You will need the environment variables `BROWSER_STACK_USERNAME` and `BROWSER_STACK_ACCESS_KEY` set. This will run the tests on the minimum version for enhanced experience based on the [FT Browser Support Policy[(https://docs.google.com/document/d/1mByh6sT8zI4XRyPKqWVsC2jUfXHZvhshS5SlHErWjXU).
-
-
-### `init`
-
-Initialises a new component with a full boilerplate folder structure.
-
-This command takes an argument in the form of a component name, which will populate all of the relevant files within that tree. Defaults to `o-component-boilerplate`.
-
-e.g.
-```
-obt init o-my-new-component
-```
 
 ## Migration guide
 
