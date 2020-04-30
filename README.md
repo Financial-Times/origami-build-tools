@@ -17,7 +17,7 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 
 2. Install the build tools globally:
 
-		npm install -g origami-build-tools
+	`npm install -g origami-build-tools`
 
 ## Usage
 
@@ -25,28 +25,27 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		$ obt <command> [<options>]
 
 	Commands
-		demo, d     Build demos into the demos directory
-		init        Initialise a new component with a boilerplate folder structure
-		install, i  Install npm and bower dependencies required to build modules
-		test, t     Run Origami specification tests and component specific tests
-		verify, v   Check folder and code structure follows Origami specification
+		develop, dev  Build demos locally every time a file changes and run a server to view them.
+		demo, d       Build demos into the demos directory
+		init          Initialise a new component with a boilerplate folder structure
+		install, i    Install npm and bower dependencies required to build modules
+		test, t       Run Origami specification tests and component specific tests
+		verify, v     Check folder and code structure follows Origami specification
 
 	Options
 		-h, --help                 Print out this message
-		--watch                    Re-run every time a file changes
-		--run-server               Build demos locally and runs a server
 		-v, --version              Print out version of origami-build-tools
 		--browserstack             Run tests using Browserstack instead of Chrome Stable
 		--demo-filter=<demo-name>  Build a specific demo. E.G. --demo-filter=pa11y to build only the pa11y.html demo.
 		--brand=<brand-name>       Build SCSS for a given brand. E.G. --brand=internal to build the component for the internal brand.
 		--debug                    Keep the test runner open to enable debugging in any browser.
 
-### Developing modules locally
+### Developing components locally
 
 Build and browse the demos (typically: <http://localhost:8080/demos/local/>),
-automatically re-build the module's demos and assets every time a file changes:
+automatically re-build the component's demos and assets every time a file changes:
 
-	origami-build-tools demo --runServer --watch
+	`obt dev`
 
 ## Commands
 
@@ -54,10 +53,17 @@ automatically re-build the module's demos and assets every time a file changes:
 
 Install npm and bower dependencies required to build modules.
 
+### `develop` or `dev`
+
+Build demos locally every time a file changes and run a server to view them.
+
+### `init`
+
+Creates boilerplate for a new Origami component.
 
 ### `demo` or `d`
 
-Build demos found in the [demo config file](http://origami.ft.com/docs/component-spec/modules/#demo-config).
+Build demos found in the [origami.json manifest](https://origami.ft.com/spec/v1/manifest/#demos).
 
 Build a specific demo with the `--demo-filter` option.
 
@@ -65,11 +71,11 @@ Demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `dem
 
 ### `verify` or `v`
 
-Lints JavaScript, Sass and configuration files against [Origami coding standards](http://origami.ft.com/docs/syntax/).
+Lints JavaScript, Sass and configuration files against [Origami specification](https://origami.ft.com/spec/v1/components/).
 
 ### `test` or `t`
 
-Run Origami specification tests and component specific tests.
+Runs JavaScript and Sass tests.
 
 * If `--debug` is set, the test runner will not exit automatically to allow debugging of the tests.
 
@@ -78,34 +84,40 @@ If `pa11y.html` demo exists, confirms it is accessible using [Pa11y](http://pa11
 If `package.json` contains a `test` script, confirms it exits with a 0 exit code.
 Runs tests using [Karma](https://karma-runner.github.io) defaulting to Chrome Stable, can be configured to use BrowserStack by using the `--browserstack` flag. You will need the environment variables `BROWSER_STACK_USERNAME` and `BROWSER_STACK_ACCESS_KEY` set. This will run the tests on the minimum version for enhanced experience based on the [FT Browser Support Policy[(https://docs.google.com/document/d/1mByh6sT8zI4XRyPKqWVsC2jUfXHZvhshS5SlHErWjXU).
 
-
-### `init`
-
-Initialises a new component with a full boilerplate folder structure.
-
-This command takes an argument in the form of a component name, which will populate all of the relevant files within that tree. Defaults to `o-component-boilerplate`.
-
-e.g.
-```
-obt init o-my-new-component
-```
-
 ## Migration guide
 
 
 ### Migrating from 9.X.X to 10.X.X
 
-- NodeJS v10 is no longer supported. Use NodeJS v12 or above.
-- A default CommonJs export now maps to `module.exports.default`, the default [Babel](https://babeljs.io/) behaviour. If using `require` to include a default CommonJs export add a `.default` property to the `require` call. Alternatively update your project to use [ECMAScript Module syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+The following `demo` command flags have been removed and replaced with the `develop` (`dev`) command:
+- Removed the `--watch` flag.
+- Removed the `--run-server` flag.
+
+```diff
+-obt demo --watch --run-server
++obt dev
+```
+
+JavaScript and Sass is compiled to the [recommended directory structure](https://origami.ft.com/spec/v1/components/#files-and-folder-structure). The flags to customise this have been removed from origami-build-tools:
 - Removed the `--js` flag.
 - Removed the `--sass` flag.
 - Removed the `--build-js` flag.
 - Removed the `--build-css` flag.
 - Removed the `--build-folder` flag.
-- Removed the `--standalone` flag.
+
+All logs are now output from Sass compilation by default. The `verbose` flag has been removed:
 - Removed the `--verbose` flag.
-- The `--suppress-errors` flag has been removed. OBT no longer throws an error if their are no demos to be built if passed the `--demo-filter` flag.
-- v10 replaces the deprecated [scss-lint](https://github.com/sasstools/sass-lint) with [stylelint](https://github.com/stylelint/stylelint). Your component may fail the verify check and require Sass updates, including:
+
+In addition, the following flags have been removed:
+- `--standalone`. It is no longer possible to specify a named export for the built JavaScript
+- `--suppress-errors`. OBT no longer throws an error if their are no demos to be built if passed the `--demo-filter` flag.
+
+The `obt build` command has been removed.
+
+Other changes include:
+- NodeJS v10 is no longer supported. Use NodeJS v12 or above.
+- A default CommonJs export now maps to `module.exports.default`, the default [Babel](https://babeljs.io/) behaviour. If using `require` to include a default CommonJs export add a `.default` property to the `require` call. Alternatively update your project to use [ECMAScript Module syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+- The deprecated [scss-lint](https://github.com/sasstools/sass-lint) package has been replaced with [stylelint](https://github.com/stylelint/stylelint). Your component may fail the verify check and require Sass updates, including:
 	- If your component uses Sass comments to temporarily disable linting (e.g. `// sass-lint:disable`) replace these with the [equivalent stylelint-disable comment for stylelint](https://stylelint.io/user-guide/ignore-code).
 	- Components by default must be indented with tabs, unless configured otherwise.
 	- Empty blocks will now error `.nothing-here {}`
