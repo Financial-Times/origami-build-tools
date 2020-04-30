@@ -94,17 +94,33 @@ Runs tests using [Karma](https://karma-runner.github.io) defaulting to Chrome St
 
 ### Migrating from 9.X.X to 10.X.X
 
-- NodeJS v10 is no longer supported. Use NodeJS v12 or above.
-- A default CommonJs export now maps to `module.exports.default`, the default [Babel](https://babeljs.io/) behaviour. If using `require` to include a default CommonJs export add a `.default` property to the `require` call. Alternatively update your project to use [ECMAScript Module syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+The following `demo` command flags have been removed and replaced with the `develop` (`dev`) command:
+- Removed the `--watch` flag.
+- Removed the `--run-server` flag.
+
+```diff
+-obt demo --watch --run-server
++obt dev
+```
+
+JavaScript and Sass is compiled to the [recommended directory structure](https://origami.ft.com/spec/v1/components/#files-and-folder-structure). The flags to customise this have been removed from origami-build-tools:
 - Removed the `--js` flag.
 - Removed the `--sass` flag.
 - Removed the `--build-js` flag.
 - Removed the `--build-css` flag.
 - Removed the `--build-folder` flag.
-- Removed the `--standalone` flag.
+
+All logs are now output from Sass compilation by default. The `verbose` flag has been removed:
 - Removed the `--verbose` flag.
-- The `--suppress-errors` flag has been removed. OBT no longer throws an error if their are no demos to be built if passed the `--demo-filter` flag.
-- v10 replaces the deprecated [scss-lint](https://github.com/sasstools/sass-lint) with [stylelint](https://github.com/stylelint/stylelint). Your component may fail the verify check and require Sass updates, including:
+
+In addition, the following flags have been removed:
+- `--standalone`. It is no longer possible to specify a named export for the built JavaScript
+- `--suppress-errors`. OBT no longer throws an error if their are no demos to be built if passed the `--demo-filter` flag.
+
+Other changes include:
+- NodeJS v10 is no longer supported. Use NodeJS v12 or above.
+- A default CommonJs export now maps to `module.exports.default`, the default [Babel](https://babeljs.io/) behaviour. If using `require` to include a default CommonJs export add a `.default` property to the `require` call. Alternatively update your project to use [ECMAScript Module syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+- The deprecated [scss-lint](https://github.com/sasstools/sass-lint) package has been replaced with [stylelint](https://github.com/stylelint/stylelint). Your component may fail the verify check and require Sass updates, including:
 	- If your component uses Sass comments to temporarily disable linting (e.g. `// sass-lint:disable`) replace these with the [equivalent stylelint-disable comment for stylelint](https://stylelint.io/user-guide/ignore-code).
 	- Components by default must be indented with tabs, unless configured otherwise.
 	- Empty blocks will now error `.nothing-here {}`
