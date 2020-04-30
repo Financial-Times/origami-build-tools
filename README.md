@@ -25,7 +25,6 @@ If you have any issues with OBT, please check out [troubleshooting guide](https:
 		$ obt <command> [<options>]
 
 	Commands
-		build, b    Build CSS and JS in current directory
 		demo, d     Build demos into the demos directory
 		init        Initialise a new component with a boilerplate folder structure
 		install, i  Install npm and bower dependencies required to build modules
@@ -54,18 +53,6 @@ automatically re-build the module's demos and assets every time a file changes:
 ### `install` or `i`
 
 Install npm and bower dependencies required to build modules.
-
-### `build` or `b`
-
-Build CSS and JavaScript bundles (typically, from `main.js` and `main.css`).
-
-It comes with support for things like:
-
-* [Babel](https://github.com/babel/babel) so you can use ES2017 features in your modules and products
-* [autoprefixer](https://github.com/postcss/autoprefixer) so you don't have to worry about writing browser prefixes in your Sass
-
-Set the name of the built CSS file with the `--build-css` option. _(default: main.css)_
-Set the name of the folder to store the built CSS and JS with the `--build-folder` option. _(default: ./build/)_
 
 
 ### `demo` or `d`
