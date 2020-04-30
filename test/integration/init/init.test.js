@@ -1,99 +1,66 @@
 /* eslint-env mocha */
-'use strict';
+"use strict";
 
-const execa = require('execa');
-const path = require('path');
-const process = require('process');
-const proclaim = require('proclaim');
-const obtBinPath = require('../helpers/obtpath');
-const fileExists = require('../helpers/fileExists');
-const rimraf = require('../helpers/delete');
+const process = require("process");
+const obtBinPath = require("../helpers/obtpath");
+const rimraf = require("../helpers/delete");
+const nixt = require("nixt");
+const uniqueTempDir = require('unique-temp-dir');
 
-describe('obt boilerplate', function () {
-
+describe("obt boilerplate", function () {
 	this.timeout(10 * 1000);
 
-	describe('builds boilerplate tree structure', function () {
-		const defaultName = 'o-component-boilerplate';
-		const plainDefaultName = 'component-boilerplate';
-
-		describe('with component name', function () {
-			const componentName = 'o-my-test';
-			const plainComponentName = 'my-test';
+	describe("initialising a new component", function () {
+		describe("obt install && demo && build && verify && test", () => {
+			let testDirectory;
+			beforeEach(function () {
+				testDirectory = uniqueTempDir({create:true});
+				process.chdir(testDirectory);
+			});
 
 			afterEach(function () {
-				return rimraf(path.join(process.cwd(), componentName))
-					.then(() => process.chdir(process.cwd()));
+				process.chdir(process.cwd());
+				return rimraf(testDirectory);
 			});
 
-			it('should build boilerplate folder', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['init', componentName]);
-					})
-					.then(() => {
-						return fileExists(`${componentName}/src/js/${plainComponentName}.js`);
-					})
-					.then(exists => {
-						proclaim.ok(exists);
-					});
-			});
-
-			it('should error if component folder exists', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['init', componentName]);
-					})
-					.then(obt => {
-						return execa(obt, ['init', componentName]);
-					})
-					.then(() => {
-						throw new Error('obt init should error instead of overwriting an existing file');
-					}, () => {
-						// obt init exited with a non-zero exit code, which is what we expected.
-					});
-			});
-		});
-
-		describe('without component name', function () {
-			afterEach(function () {
-				return rimraf(path.join(process.cwd(), defaultName))
-					.then(() => process.chdir(process.cwd()));
-			});
-
-			it('should build init folder', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['init']);
-					})
-					.then(() => {
-						return fileExists(`${defaultName}/src/js/${plainDefaultName}.js`);
-					})
-					.then(exists => {
-						proclaim.ok(exists);
-					});
-			});
-		});
-
-		describe('obt install && demo && build && verify && test', () => {
-			afterEach(function () {
-				process.chdir('../');
-				return rimraf(path.join(process.cwd(), defaultName))
-					.then(() => process.chdir(process.cwd()));
-			});
-
-			it('should not error', function () {
-				this.timeout (100 * 1000);
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['init'])
-							.then(() => process.chdir(defaultName))
-							.then(() => execa(obt, ['install']))
-							.then(() => execa(obt, ['demo']))
-							.then(() => execa(obt, ['build']))
-							.then(() => execa(obt, ['verify']))
-							.then(() => execa(obt, ['test']));
-					});
+			it("should not error", function (done) {
+				this.timeout(100 * 1000);
+				obtBinPath().then((obt) => {
+					return nixt({ colors: false })
+						.run(obt + ' init')
+						.on(/name/i)
+						.respond("bob\n")
+						.on(/current directory/i)
+						.respond("033[B\n")
+						.on(/description/i)
+						.respond("bla bla\n")
+						.on(/keywords/i)
+						.respond("\n")
+						.on(/category/)
+						.respond("\n")
+						.on(/brands/)
+						.respond("\n")
+						.on(/JavaScript/)
+						.respond("\n")
+						.on(/Sass/)
+						.respond("\n")
+						.on(/status/)
+						.respond("\n")
+						.on(/team email/)
+						.respond("\n")
+						.on(/slack channel/)
+						.respond("\n")
+						.on(/right/)
+						.respond("\n")
+						.exec("./bob/")
+						.exec('cd bob')
+						.exec(obt + " install")
+						.exec(obt + " demo")
+						.exec(obt + " build")
+						.exec(obt + " verify")
+						.exec(obt + " test")
+						.end(done);
+				}).catch(done);
 			});
 		});
 	});

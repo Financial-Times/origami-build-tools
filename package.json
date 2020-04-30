@@ -86,9 +86,11 @@
     "eslint-plugin-promise": "^4.2.1",
     "is-es5-syntax": "^1.0.1",
     "merge-deep": "^3.0.2",
+    "nixt": "^0.5.1",
     "node-version": "^2.0.0",
     "npm-prepublish": "^1.2.3",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "unique-temp-dir": "^1.0.0"
   },
   "repository": {
     "type": "git",
