@@ -118,6 +118,12 @@ obt init o-my-new-component
 - Removed the `--standalone` flag.
 - Removed the `--verbose` flag.
 - The `--suppress-errors` flag has been removed. OBT no longer throws an error if their are no demos to be built if passed the `--demo-filter` flag.
+- v10 replaces the deprecated [scss-lint](https://github.com/sasstools/sass-lint) with [stylelint](https://github.com/stylelint/stylelint). Your component may fail the verify check and require Sass updates, including:
+	- If your component uses Sass comments to temporarily disable linting (e.g. `// sass-lint:disable`) replace these with the [equivalent stylelint-disable comment for stylelint](https://stylelint.io/user-guide/ignore-code).
+	- Components by default must be indented with tabs, unless configured otherwise.
+	- Empty blocks will now error `.nothing-here {}`
+	- Duplicate `@import` statements will throw an error
+	- Extra semicolons will throw an error
 
 ### Migrating from 8.X.X to 9.X.X
 

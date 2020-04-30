@@ -61,139 +61,139 @@ describe('verify-sass', function () {
 		it('should output errors and warnings only where there are linting violations', function () {
 			const expectedNotices = [
 				{
-					name: 'border-zero',
-					type: 'Error',
+					name: 'indentation',
 					locations: [
-						'border-zero/invalid.scss:2:10',
-						'border-zero/invalid.scss:6:15'
+						'indentation/invalid.scss:2:5',
 					]
 				},
 				{
-					name: 'brace-style',
-					type: 'Error',
+					name: 'no-extra-semicolons',
 					locations: [
-						'brace-style/invalid.scss:2:1',
-						'brace-style/invalid.scss:8:1',
-						'brace-style/invalid.scss:13:1',
-						'brace-style/invalid.scss:18:1',
+						'no-extra-semicolons/invalid.scss:5:2',
 					]
 				},
 				{
-					name: 'class-name-format',
-					type: 'Error',
+					name: 'declaration-property-value-blacklist',
 					locations: [
-						'class-name-format/invalid.scss:1:2',
-						'class-name-format/invalid.scss:5:2',
-						'class-name-format/invalid.scss:9:2',
-						'class-name-format/invalid.scss:13:2',
-						'class-name-format/invalid.scss:17:2'
+						'border-zero/invalid.scss:2:2',
+						'border-zero/invalid.scss:6:2'
 					]
 				},
 				{
-					name: 'clean-import-paths',
-					type: 'Warning',
+					name: 'block-opening-brace-space-before',
 					locations: [
-						'clean-import-paths/invalid.scss:2:2',
-						'clean-import-paths/invalid.scss:4:2',
-						'clean-import-paths/invalid.scss:6:2',
+						'brace-style/invalid.scss:1:5',
+						'brace-style/invalid.scss:7:5',
+						'brace-style/invalid.scss:12:16',
+						'brace-style/invalid.scss:17:13',
+						'space-before-brace/invalid.scss:1:4',
+						'space-before-brace/invalid.scss:2:13',
+						'space-before-brace/invalid.scss:7:10'
 					]
 				},
 				{
-					name: 'extends-before-declarations',
-					type: 'Warning',
+					name: 'selector-class-pattern',
 					locations: [
-						'extends-before-declarations/invalid.scss:7:3'
+						'class-name-format/invalid.scss:1:1',
+						'class-name-format/invalid.scss:5:1',
+						'class-name-format/invalid.scss:9:1',
+						'class-name-format/invalid.scss:13:1',
+						'class-name-format/invalid.scss:17:1'
 					]
 				},
 				{
-					name: 'extends-before-mixins',
-					type: 'Warning',
+					name: 'no-duplicate-at-import-rules',
 					locations: [
-						'extends-before-mixins/invalid.scss:11:3'
+						'no-duplicate-at-import-rules/invalid.scss:3:1'
 					]
 				},
 				{
-					name: 'final-newline',
-					type: 'Warning',
+					name: 'scss/at-import-no-partial-leading-underscore',
+					locations: [
+						'clean-import-paths/invalid.scss:2:1',
+						'clean-import-paths/invalid.scss:6:1',
+					]
+				},
+				{
+					name: 'scss/at-import-partial-extension',
+					locations: [
+						'clean-import-paths/invalid.scss:4:22',
+						'clean-import-paths/invalid.scss:6:23',
+					]
+				},
+				{
+					name: 'order/order',
+					locations: [
+						'extends-before-declarations/invalid.scss:7:2',
+						'extends-before-mixins/invalid.scss:11:2',
+						'mixins-before-declarations/invalid.scss:9:2'
+					]
+				},
+				{
+					name: 'no-missing-end-of-source-newline',
 					locations: [
 						'final-newline/invalid.scss:4:44'
 					]
 				},
 				{
-					name: 'function-name-format',
-					type: 'Error',
+					name: 'scss/at-function-pattern',
 					locations: [
-						'function-name-format/invalid.scss:1:11',
-						'function-name-format/invalid.scss:5:11',
+						'function-name-format/invalid.scss:1:1',
+						'function-name-format/invalid.scss:5:1',
 					]
 				},
 				{
-					name: 'hex-length',
-					type: 'Error',
+					name: 'color-hex-length',
 					locations: [
 						'hex-length/invalid.scss:1:13',
-						'hex-length/invalid.scss:4:36',
-						'hex-length/invalid.scss:4:42',
-						'hex-length/invalid.scss:8:10'
+						'hex-length/invalid.scss:4:35',
+						'hex-length/invalid.scss:4:41',
+						'hex-length/invalid.scss:8:9'
 					]
 				},
 				{
-					name: 'hex-notation',
-					type: 'Warning',
+					name: 'color-hex-case',
 					locations: [
 						'hex-notation/invalid.scss:2:13',
-						'hex-notation/invalid.scss:5:36',
-						'hex-notation/invalid.scss:5:45',
-						'hex-notation/invalid.scss:9:10'
+						'hex-notation/invalid.scss:5:35',
+						'hex-notation/invalid.scss:5:44',
+						'hex-notation/invalid.scss:9:9'
 					]
 				},
 				{
 					name: 'leading-zero',
-					type: 'Error',
 					locations: [
 						'leading-zero/invalid.scss:2:13'
 					]
 				},
 				{
-					name: 'mixin-name-format',
-					type: 'Error',
+					name: 'scss/at-mixin-pattern',
 					locations: [
 						'mixin-name-format/invalid.scss:1:1',
 						'mixin-name-format/invalid.scss:5:1'
 					]
 				},
 				{
-					name: 'mixins-before-declarations',
-					type: 'Warning',
+					name: 'max-nesting-depth',
 					locations: [
-						'mixins-before-declarations/invalid.scss:9:5'
+						'nesting-depth/invalid.scss:5:5'
 					]
 				},
 				{
-					name: 'nesting-depth',
-					type: 'Warning',
+					name: 'at-rule-blacklist',
 					locations: [
-						'nesting-depth/invalid.scss:5:17'
+						'no-debug/invalid.scss:1:1'
 					]
 				},
 				{
-					name: 'no-debug',
-					type: 'Error',
+					name: 'declaration-block-no-duplicate-properties',
 					locations: [
-						'no-debug/invalid.scss:1:2'
+						'no-duplicate-properties/invalid.scss:3:2',
+						'no-duplicate-properties/invalid.scss:8:2',
 					]
 				},
 				{
-					name: 'no-duplicate-properties',
-					type: 'Warning',
-					locations: [
-						'no-duplicate-properties/invalid.scss:3:3',
-						'no-duplicate-properties/invalid.scss:8:3',
-					]
-				},
-				{
-					name: 'no-ids',
-					type: 'Warning',
+					name: 'selector-max-id',
 					locations: [
 						'no-ids/invalid.scss:1:1'
 					]
@@ -201,110 +201,103 @@ describe('verify-sass', function () {
 				{
 					// if a user ignores no-ids,
 					// verify the name format of the ids
-					name: 'id-name-format',
-					type: 'Error',
+					name: 'selector-id-pattern',
 					locations: [
-						'id-name-format/invalid.scss:4:2',
-						'id-name-format/invalid.scss:8:2',
-						'id-name-format/invalid.scss:12:2',
-						'id-name-format/invalid.scss:16:2',
-						'id-name-format/invalid.scss:20:2'
+						'id-name-format/invalid.scss:4:1',
+						'id-name-format/invalid.scss:8:1',
+						'id-name-format/invalid.scss:12:1',
+						'id-name-format/invalid.scss:16:1',
+						'id-name-format/invalid.scss:20:1'
 					]
 				},
 				{
-					name: 'no-important',
-					type: 'Warning',
+					name: 'declaration-no-important',
 					locations: [
-						'no-important/invalid.scss:2:43'
+						'no-important/invalid.scss:2:29'
 					]
 				},
 				{
 					// if the user disables no-important,
 					// verify there is no extra space `! important`
-					name: 'space-after-bang',
-					type: 'Error',
+					name: 'declaration-bang-space-after',
 					locations: [
-						'space-after-bang/invalid.scss:4:20'
+						'space-after-bang/invalid.scss:4:17'
 					]
 				},
 				{
 					// if the user disables no-important,
 					// verify there is a space before the bang `; !important`
-					name: 'space-before-bang',
-					type: 'Error',
+					name: 'declaration-bang-space-before',
 					locations: [
-						'space-before-bang/invalid.scss:4:19'
+						'space-before-bang/invalid.scss:4:16'
 					]
 				},
 				{
-					name: 'no-invalid-hex',
-					type: 'Warning',
+					name: 'color-no-invalid-hex',
 					locations: [
 						'no-invalid-hex/invalid.scss:1:16'
 					]
 				},
 				{
-					name: 'no-misspelled-properties',
-					type: 'Warning',
+					name: 'property-no-unknown',
 					locations: [
-						'no-misspelled-properties/invalid.scss:8:3',
-						'no-misspelled-properties/invalid.scss:13:3',
-						'no-misspelled-properties/invalid.scss:13:3'
+						'no-misspelled-properties/invalid.scss:3:2',
+						'no-misspelled-properties/invalid.scss:8:2',
+						'no-misspelled-properties/invalid.scss:13:2'
 					]
 				},
 				{
-					name: 'no-qualifying-elements',
-					type: 'Error',
+					name: 'selector-no-qualifying-type',
 					locations: [
-						'no-qualifying-elements/invalid.scss:2:4',
-						'no-qualifying-elements/invalid.scss:7:6'
+						'no-qualifying-elements/invalid.scss:2:1',
+						'no-qualifying-elements/invalid.scss:7:1'
 					]
 				},
 				{
-					name: 'no-qualifying-elements',
-					type: 'Error',
-					locations: [
-						'no-qualifying-elements/invalid.scss:2:4',
-						'no-qualifying-elements/invalid.scss:7:6'
-					]
-				},
-				{
-					name: 'no-trailing-zero',
-					type: 'Error',
+					name: 'number-no-trailing-zeros',
 					locations: [
 						'no-trailing-zero/invalid.scss:2:13',
-						'no-trailing-zero/invalid.scss:6:13',
-						'no-trailing-zero/invalid.scss:10:13'
+						'no-trailing-zero/invalid.scss:6:14',
+						'no-trailing-zero/invalid.scss:10:12'
 					]
 				},
 				{
-					name: 'no-vendor-prefixes',
-					type: 'Warning',
+					name: 'property-no-vendor-prefix',
 					locations: [
-						'no-vendor-prefixes/invalid.scss:1:2',
-						'no-vendor-prefixes/invalid.scss:6:5',
-						'no-vendor-prefixes/invalid.scss:9:3',
-						'no-vendor-prefixes/invalid.scss:14:5',
-						'no-vendor-prefixes/invalid.scss:15:5',
-						'no-vendor-prefixes/invalid.scss:19:15',
-						'no-vendor-prefixes/invalid.scss:23:5',
-						'no-vendor-prefixes/invalid.scss:24:5',
-						'no-vendor-prefixes/invalid.scss:25:5',
-						'no-vendor-prefixes/invalid.scss:26:5',
-						'no-vendor-prefixes/invalid.scss:27:5',
-						'no-vendor-prefixes/invalid.scss:28:5'
+						'no-vendor-prefixes/invalid.scss:10:2',
+						'no-vendor-prefixes/invalid.scss:18:2',
+						'no-vendor-prefixes/invalid.scss:19:2',
+						'no-vendor-prefixes/invalid.scss:20:2',
+						'no-vendor-prefixes/invalid.scss:21:2'
 					]
 				},
 				{
-					name: 'placeholder-in-extend',
-					type: 'Error',
+					name: 'selector-no-vendor-prefix',
 					locations: [
-						'placeholder-in-extend/invalid.scss:6:11'
+						'no-vendor-prefixes/invalid.scss:5:3',
 					]
 				},
 				{
-					name: 'placeholder-name-format',
-					type: 'Error',
+					name: 'at-rule-no-vendor-prefix',
+					locations: [
+						'no-vendor-prefixes/invalid.scss:1:1'
+					]
+				},
+				{
+					name: 'value-no-vendor-prefix',
+					locations: [
+						'no-vendor-prefixes/invalid.scss:14:11'
+					]
+				},
+				{
+					name: 'scss/at-extend-no-missing-placeholder',
+					locations: [
+						'placeholder-in-extend/invalid.scss:6:2',
+						'placeholder-in-extend/invalid.scss:10:2'
+					]
+				},
+				{
+					name: 'scss/percent-placeholder-pattern',
 					locations: [
 						'placeholder-name-format/invalid.scss:1:1',
 						'placeholder-name-format/invalid.scss:5:1',
@@ -314,79 +307,69 @@ describe('verify-sass', function () {
 					]
 				},
 				{
-					name: 'shorthand-values',
-					type: 'Error',
+					name: 'shorthand-property-no-redundant-values',
 					locations: [
-						'shorthand-values/invalid.scss:2:13',
-						'shorthand-values/invalid.scss:6:13',
-						'shorthand-values/invalid.scss:10:13'
+						'shorthand-values/invalid.scss:2:2',
+						'shorthand-values/invalid.scss:6:2',
+						'shorthand-values/invalid.scss:10:2'
 					]
 				},
 				{
-					name: 'single-line-per-selector',
-					type: 'Error',
+					name: 'selector-list-comma-newline-after',
 					locations: [
-						'single-line-per-selector/invalid.scss:1:7'
+						'single-line-per-selector/invalid.scss:1:5'
 					]
 				},
 				{
-					name: 'space-after-colon',
-					type: 'Error',
+					name: 'declaration-colon-space-after',
 					locations: [
-						'space-after-colon/invalid.scss:2:12'
+						'space-after-colon/invalid.scss:2:10'
 					]
 				},
 				{
-					name: 'space-after-comma',
-					type: 'Error',
+					name: 'declaration-colon-space-before',
 					locations: [
-						'space-after-comma/invalid.scss:1:25',
-						'space-after-comma/invalid.scss:6:23',
-						'space-after-comma/invalid.scss:7:30'
+						'space-before-colon/invalid.scss:3:10'
 					]
 				},
 				{
-					name: 'space-before-brace',
-					type: 'Error',
+					name: 'function-comma-space-after',
 					locations: [
-						'space-before-brace/invalid.scss:1:4',
-						'space-before-brace/invalid.scss:2:16',
-						'space-before-brace/invalid.scss:7:10'
+						'space-after-comma/invalid.scss:6:24'
 					]
 				},
 				{
-					name: 'space-before-colon',
-					type: 'Error',
+					name: 'value-list-comma-space-after',
 					locations: [
-						'space-before-colon/invalid.scss:3:12'
+						'space-after-comma/invalid.scss:2:27'
 					]
 				},
 				{
-					name: 'space-between-parens',
-					type: 'Error',
+					name: 'function-parentheses-space-inside',
 					locations: [
-						'space-between-parens/invalid.scss:1:15',
-						'space-between-parens/invalid.scss:1:20',
-						'space-between-parens/invalid.scss:5:16',
-						'space-between-parens/invalid.scss:10:18',
-						'space-between-parens/invalid.scss:10:26',
-						'space-between-parens/invalid.scss:11:18',
-						'space-between-parens/invalid.scss:12:17'
+						'space-between-parens/invalid.scss:11:15',
+						'space-between-parens/invalid.scss:12:14'
 					]
 				},
 				{
-					name: 'trailing-semicolon',
-					type: 'Error',
+					name: 'declaration-block-trailing-semicolon',
 					locations: [
-						'trailing-semicolon/invalid.scss:4:19'
+						'trailing-semicolon/invalid.scss:4:18'
 					]
 				},
 				{
-					name: 'variable-name-format',
-					type: 'Error',
+					name: 'scss/dollar-variable-pattern',
 					locations: [
 						'variable-name-format/invalid.scss:1:1',
 						'variable-name-format/invalid.scss:3:1'
+					]
+				},
+				{
+					name: 'block-no-empty',
+					locations: [
+      					'no-empty-rulesets/invalid.scss:2:6',
+      					'no-empty-rulesets/invalid.scss:9:7',
+      					'no-empty-rulesets/invalid.scss:12:8'
 					]
 				},
 			];
@@ -400,15 +383,16 @@ describe('verify-sass', function () {
 					`Did not expect any Sass in "*/**/valid.scss" to fail.`
 				);
 				// Assert expected lint errors are thrown from invalid.scss files.
-				for (const { name, type, locations } of expectedNotices) {
+				for (const { name, locations } of expectedNotices) {
 					locations.forEach(location => {
 						const expectedPattern = new RegExp(
-							`${location}[^\n]*${type}[^\n]*${name}`
+							`${location}[^\n]*Error[^\n]*${name}`
 						);
+
 						proclaim.match(
 							error.message,
 							expectedPattern,
-							`Expected a "${name}" "${type}" from "${location}".`
+							`Expected a "${name}" error from "${location}".`
 						);
 					});
 				}

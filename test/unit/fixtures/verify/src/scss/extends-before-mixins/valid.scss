@@ -1,12 +1,12 @@
 @mixin baz {
-    content: 'baz';
+	content: 'baz';
 }
 
 %bar {
-    content: 'bar';
+	content: 'bar';
 }
 
 .foo {
-  @extend %bar;
-  @include baz;
+	@extend %bar;
+	@include baz;
 }

@@ -1,13 +1,13 @@
 @function foo( $bar ) {
-    @return $bar;
+	@return $bar;
 }
 
 @mixin bar($baz ) {
-    content: $baz;
+	content: $baz;
 }
 
 .foo {
-    @include bar( 'Hello' );
-    content: foo( 'bar');
-    width: calc( 100% - 10px);
+	@include bar( 'Hello' );
+	content: foo( 'bar');
+	width: calc( 100% - 10px);
 }
