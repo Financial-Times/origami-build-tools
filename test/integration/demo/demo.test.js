@@ -49,7 +49,7 @@ describe('obt demo', function () {
 		before(function () {
 			// copy fixture (example component with multiple demos)
 			// to a temporary test directory
-			fs.copySync(fixturesDirectory, testDirectory)
+			fs.copySync(fixturesDirectory, testDirectory);
 			process.chdir(testDirectory);
 			// update the demo configuration in origami.json so multiple demos
 			// have the same name
@@ -98,7 +98,7 @@ describe('obt demo', function () {
 		before(function () {
 			// copy fixture (example component with multiple demos)
 			// to a temporary test directory
-			fs.copySync(fixturesDirectory, testDirectory)
+			fs.copySync(fixturesDirectory, testDirectory);
 			process.chdir(testDirectory);
 			return obtBinPath()
 				.then(obt => {
@@ -111,7 +111,9 @@ describe('obt demo', function () {
 					try {
 						builtDemoHtml1 = fs.readFileSync(expectedBuiltDemoPath1, 'utf8');
 						builtDemoHtml2 = fs.readFileSync(expectedBuiltDemoPath2, 'utf8');
-					} catch {}
+					} catch(e) {
+						// assume no files found
+					}
 				});
 		});
 
@@ -200,7 +202,9 @@ describe('obt demo', function () {
 			try {
 				builtDemoCss1 = fs.readFileSync(expectedBuiltCssPath1, 'utf8');
 				builtDemoCss2 = fs.readFileSync(expectedBuiltCssPath2, 'utf8');
-			} catch { }
+			} catch(e) {
+				// assume files not found
+			}
 			// Confirm the css is as expected.
 			proclaim.include(
 				builtDemoCss1,
@@ -227,7 +231,9 @@ describe('obt demo', function () {
 			try {
 				builtDemoJs1 = fs.readFileSync(expectedBuiltJsPath1, 'utf8');
 				builtDemoJs2 = fs.readFileSync(expectedBuiltJsPath2, 'utf8');
-			} catch { }
+			} catch(e) {
+				// assume files not found
+			}
 			// Confirm the js is as expected.
 			proclaim.include(
 				builtDemoJs1,
