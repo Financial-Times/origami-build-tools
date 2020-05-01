@@ -1,0 +1,13 @@
+{
+  "name": "o-multiple-demos",
+  "description": "a fixture to test the demo command of origami-build-tools",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "build"
+  ],
+  "main": [
+    "main.scss",
+    "main.js"
+  ]
+}
