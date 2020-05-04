@@ -121,3 +121,162 @@ patch:
   'npm:ms:20170412':
     - karma > socket.io > socket.io-adapter > socket.io-parser > debug > ms:
         patched: '2020-03-20T13:54:14.814Z'
+  SNYK-JS-LODASH-567746:
+    - '@swc/cli > lodash':
+        patched: '2020-05-04T13:24:23.777Z'
+    - eslint > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - karma > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - karma-scss-preprocessor > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - node-sass > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint-scss > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - eslint > inquirer > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - eslint > table > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > table > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - portfinder > async > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - mocha > yargs-unparser > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - node-sass > sass-graph > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > graphlib > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > @snyk/ruby-semver > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > inquirer > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > snyk-config > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > snyk-mvn-plugin > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > postcss-reporter > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - karma > log4js > streamroller > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - node-sass > gaze > globule > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > snyk-mvn-plugin > @snyk/java-call-graph-builder > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > snyk-php-plugin > @snyk/composer-lockfile-parser > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - karma > log4js > streamroller > async > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > snyk-mvn-plugin > @snyk/java-call-graph-builder > graphlib > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/ruby-semver > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/generator > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/traverse > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/generator > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/template > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/traverse > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helpers > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helpers > @babel/traverse > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/traverse > @babel/generator > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-module-imports > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/template > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helpers > @babel/template > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/traverse > @babel/helper-function-name > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helpers > @babel/traverse > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-simple-access > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helpers > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helpers > @babel/traverse > @babel/generator > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/helper-member-expression-to-functions > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/helper-optimise-call-expression > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-simple-access > @babel/template > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/generator > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
+    - stylelint > @stylelint/postcss-css-in-js > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-05-04T13:24:23.777Z'
