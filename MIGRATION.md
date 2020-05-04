@@ -1,4 +1,6 @@
-### Migrating from v9 to v10
+# Migration Guides
+
+## Migrating from v9 to v10
 
 The following `demo` command flags have been removed and replaced with the `develop` (`dev`) command:
 - Removed the `--watch` flag.
@@ -35,29 +37,41 @@ Other changes include:
 	- Duplicate `@import` statements will throw an error
 	- Extra semicolons will throw an error
 
-### Migrating from v8 to v9
+# Migration Guides
+
+## Migrating from v8 to v9
 
 - NodeJS v8 is no longer supported. Use NodeJS v10 or above.
 - [Dart Sass](https://github.com/sass/dart-sass), the reference implementation of Sass, is used instead of [Node Sass](https://github.com/sass/node-sass). You may need to update your Sass to be compatible with Dart Sass if an error is thrown during build.
 
-### Migrating from v7 to v8
+# Migration Guides
+
+## Migrating from v7 to v8
 
 
 OBT no longer supports NodeJS v6 because it uses async functions. To use this version of OBT, you will need NodeJS v8 or above.
 
-### Migrating from v6 to v7
+# Migration Guides
+
+## Migrating from v6 to v7
 
 
 The ability to use OBT via it's programmatic API has been removed, if you were using OBT via `gulp`, you will need to migrate to the command line version of OBT.
 OBT has removed the ability to configure the way it installs/builds/verifies code, this is to ensure that systems built with OBT follows the Origami specification and conventions.
 
 
-### Migrating from v5 to v6
+# Migration Guides
 
-#### OBT build
+## Migrating from v5 to v6
+
+# Migration Guides
+
+### OBT build
 The 6.0.0 release removes the ability for OBT to include the Babel/Core-JS polyfills in the built Javascript. If you are relying on this feature, we recommend that you use the [Polyfill service](https://polyfill.io) instead.
 
-#### OBT verify
+# Migration Guides
+
+### OBT verify
 The 6.0.0 release swapped out [`scss-lint`](https://www.npmjs.com/package/gulp-scss-lint) for [`sass-lint`](https://www.npmjs.com/package/gulp-sass-lint).
 
 If you are supplying your own custom scss-lint configuration you need to convert it to an equivalent sass-lint configuration, [here is a tool which can do this for you](https://sasstools.github.io/make-sass-lint-config/). The programatic API and CLI flag has also changed from `scssLintPath` to `sassLintPath`.
