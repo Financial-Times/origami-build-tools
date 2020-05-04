@@ -65,6 +65,7 @@
     "snyk": "^1.317.0",
     "stylelint": "^13.2.1",
     "stylelint-scss": "^3.17.1",
+    "stylelint-order": "^4.0.0",
     "update-notifier": "^4.1.0"
   },
   "devDependencies": {
@@ -80,8 +81,7 @@
     "node-version": "^2.0.0",
     "npm-prepublish": "^1.2.3",
     "rimraf": "^3.0.2",
-    "unique-temp-dir": "^1.0.0",
-    "stylelint-order": "^4.0.0"
+    "unique-temp-dir": "^1.0.0"
   },
   "repository": {
     "type": "git",
