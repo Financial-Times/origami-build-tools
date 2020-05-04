@@ -5,6 +5,7 @@ Build tools for developing Origami components.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Commands](#commands)
+- [API Reference](#api-reference)
 - [Migration Guides](#migration-guides)
 - [Licence](#licence)
 
@@ -52,7 +53,7 @@ Further, JavaScript tests may be run in BrowserStack automatically with the `--b
 
 Origami Build Tools provides boilerplate for creating up a new Origami component. Run `obt init` and follow the prompts.
 
-### API Reference
+## API Reference
 
 	Usage
 		$ obt <command> [<options>]
@@ -73,21 +74,21 @@ Origami Build Tools provides boilerplate for creating up a new Origami component
 		--brand=<brand-name>       Build SCSS for a given brand. E.G. --brand=internal to build the component for the internal brand.
 		--debug                    Keep the test runner open to enable debugging in any browser.
 
-### Commands
+## Commands
 
-#### `install` or `i`
+### `install` or `i`
 
 Install npm and bower dependencies required to build components.
 
-#### `develop` or `dev`
+### `develop` or `dev`
 
 Build demos locally every time a file changes and run a server to view them.
 
-#### `init`
+### `init`
 
 Creates boilerplate for a new Origami component.
 
-#### `demo` or `d`
+### `demo` or `d`
 
 Build demos found in the [origami.json manifest](https://origami.ft.com/spec/v1/manifest/#demos).
 
@@ -95,11 +96,11 @@ Build a specific demo with the `--demo-filter` option.
 
 Demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add _demos/local/_ to your `.gitignore`.
 
-#### `verify` or `v`
+### `verify` or `v`
 
 Lints JavaScript, Sass and configuration files against [Origami specification](https://origami.ft.com/spec/v1/components/).
 
-#### `test` or `t`
+### `test` or `t`
 
 Runs JavaScript and Sass tests.
 
