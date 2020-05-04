@@ -93,7 +93,7 @@ describe('Build Sass', function () {
 			});
 	});
 
-	it('outputs warnings and debug messages when verbose mode is enabled', function () {
+	it('outputs warnings and debug messages', function () {
 		const debugMessage = `This is a debug message!`;
 		const warningMessage = `This is a warning!`;
 		const debugSass = `@debug "${debugMessage};";`;
@@ -101,30 +101,11 @@ describe('Build Sass', function () {
 		const logSpy = sinon.spy(log, 'secondary');
 		return build({
 			buildCss: 'bundle.css',
-			sassPrefix: debugSass + warningSass,
-			verbose: true
+			sassPrefix: debugSass + warningSass
 		})
 			.then(() => {
 				proclaim.isTrue(logSpy.calledWithMatch(debugMessage), 'Did not log Sass debug messages.');
 				proclaim.isTrue(logSpy.calledWithMatch(warningMessage), 'Did not log Sass warnings.');
-				logSpy.restore();
-			});
-	});
-
-	it('does not output warnings or debug messages when verbose mode is not enabled', function () {
-		const debugMessage = `This is a debug message!`;
-		const warningMessage = `This is a warning!`;
-		const debugSass = `@debug "${debugMessage};";`;
-		const warningSass = `@warn "${warningMessage};";`;
-		const logSpy = sinon.spy(log, 'secondary');
-		return build({
-			buildCss: 'bundle.css',
-			sassPrefix: debugSass + warningSass,
-			verbose: false
-		})
-			.then(() => {
-				proclaim.isFalse(logSpy.calledWithMatch(debugMessage), 'Logged Sass debug messages unexpectedly.');
-				proclaim.isFalse(logSpy.calledWithMatch(warningMessage), 'Logged Sass warnings unexpectedly.');
 				logSpy.restore();
 			});
 	});
