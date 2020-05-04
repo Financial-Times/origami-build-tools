@@ -1,5 +1,3 @@
-
-
 ### Migrating from v9 to v10
 
 The following `demo` command flags have been removed and replaced with the `develop` (`dev`) command:
