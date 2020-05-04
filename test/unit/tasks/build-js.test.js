@@ -35,25 +35,8 @@ describe('build-js', function () {
 	it('should work with default options', function () {
 		return build()
 			.then(function (result) {
-				proclaim.match(result, /^\/\*\*\*\*\*\*\/ \(function\(modules\)/);
 				proclaim.include(result, 'sourceMappingURL');
-				proclaim.include(result, 'var Test');
-				proclaim.include(result, 'function Test() {\n\tvar name = \'test\';');
-				proclaim.include(result, 'module.exports = "This is a test\\n"');
-				proclaim.include(result, 'module.exports = {"test":true}');
-			});
-	});
-
-	it('should work with production option', function () {
-		return build({
-			production: true
-		})
-			.then(function (builtJs) {
-				proclaim.doesNotInclude(builtJs, 'sourceMappingURL');
-				proclaim.doesNotInclude(builtJs, 'var Test');
-				proclaim.doesNotInclude(builtJs, 'function Test() {\n\tvar name = \'test\';');
-				proclaim.doesNotInclude(builtJs, '"This is a test"');
-				proclaim.doesNotInclude(builtJs, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.include(result, `var name='test';`);
 			});
 	});
 
@@ -63,8 +46,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.doesNotInclude(builtJs, 'var Test');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, `var name='test';`);
 			});
 	});
 
@@ -74,10 +56,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, 'var Test');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
-				proclaim.include(builtJs, 'module.exports = "This is a test\\n"');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, `var name='test';`);
 			});
 	});
 
@@ -87,10 +66,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, 'var Test');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
-				proclaim.include(builtJs, 'module.exports = "This is a test\\n"');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
+				proclaim.include(builtJs, `var name='test';`);
 			});
 	});
 
@@ -98,9 +74,10 @@ describe('build-js', function () {
 		return build({
 			js: './src/js/syntax-error.js'
 		})
-			.then(function () {}, function (e) { // eslint-disable-line no-empty-function
-				proclaim.include(e.message, 'SyntaxError');
-				proclaim.include(e.message, 'Unexpected token');
+			.then(() => {
+				proclaim.ok(false);
+			}, function (e) {
+				proclaim.isInstanceOf(e, Error);
 			});
 	});
 
@@ -108,22 +85,10 @@ describe('build-js', function () {
 		return build({
 			js: './src/js/missing-dep.js'
 		})
-			.then(function () {}, function (e) { // eslint-disable-line no-empty-function
-				proclaim.include(e.message, 'Module not found: Error: Can\'t resolve \'dep\'');
-			});
-	});
-
-	it('should support a standalone option which creates a global variable', function () {
-		return build({
-			standalone: 'origami'
-		})
-			.then(function (builtJs) {
-				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, 'var Test');
-				proclaim.include(builtJs, 'function Test() {\n\tvar name = \'test\';');
-				proclaim.include(builtJs, 'module.exports = "This is a test\\n"');
-				proclaim.include(builtJs, 'module.exports = {"test":true}');
-				proclaim.include(builtJs, 'var origami =\n');
+			.then(() => {
+				proclaim.ok(false);
+			}, function (e) {
+				proclaim.isInstanceOf(e, Error);
 			});
 	});
 });

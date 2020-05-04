@@ -1,6 +1,6 @@
 'use strict';
 
-const denodeify = require('denodeify');
+const denodeify = require('util').promisify;
 const fs = require('fs-extra');
 const path = require('path');
 

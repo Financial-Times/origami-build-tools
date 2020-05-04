@@ -1,0 +1,4 @@
+.foo {
+	margin: 15px;
+	margin-bottom: 0; // this is not counted as a duplicate property
+}

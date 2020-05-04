@@ -1,6 +1,6 @@
 'use strict';
 
-const denodeify = require('denodeify');
+const denodeify = require('util').promisify;
 
 /**
  * A promisfied version of the `rm -rf` unix command.

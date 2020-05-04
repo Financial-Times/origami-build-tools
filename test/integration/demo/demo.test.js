@@ -5,15 +5,16 @@ const execa = require('execa');
 const path = require('path');
 const process = require('process');
 const obtBinPath = require('../helpers/obtpath');
-/*
 const proclaim = require('proclaim');
 const fileExists = require('../helpers/fileExists');
-const rimraf = require('../helpers/delete');
-*/
+const uniqueTempDir = require('unique-temp-dir');
+const fs = require('fs-extra');
+const rimraf = require("../helpers/delete");
 
 describe('obt demo', function () {
 
 	this.timeout(60 * 1000);
+
 	describe('component with no demos', function () {
 
 		beforeEach(function () {
@@ -33,373 +34,222 @@ describe('obt demo', function () {
 					return execa(obt, ['demo']);
 				})
 				.then(() => {
-					return Promise.reject(new Error('obt demo should error when trying to create demos for a component which has no demos.'));
+					throw new Error('obt demo should error when trying to create demos for a component which has no demos.');
 				}, () => {
-					return Promise.resolve(); // obt demo exited with a non-zero exit code, which is what we expected.
+					// obt demo exited with a non-zero exit code, which is what we expected.
 				});
 		});
 	});
 
-	/*
-	describe('component with multiple demos', function () {
 
-		beforeEach(function () {
-			// Change the current working directory to the folder which contains the project we are testing against.
-			// We are doing this to replicate how obt is used when executed inside a terminal.
-			process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
+	describe('component with multiple demos with the same name', function () {
+		const testDirectory = uniqueTempDir({ create: true });
+		const fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
+
+		before(function () {
+			// copy fixture (example component with multiple demos)
+			// to a temporary test directory
+			fs.copySync(fixturesDirectory, testDirectory);
+			process.chdir(testDirectory);
+			// update the demo configuration in origami.json so multiple demos
+			// have the same name
+			const testManifestPath = path.resolve(testDirectory, 'origami.json');
+			const testManifestContent = fs.readFileSync(testManifestPath);
+			const testManifest = JSON.parse(testManifestContent);
+			testManifest.demos.push(Object.assign({}, testManifest.demos[0]));
+			fs.writeFileSync(testManifestPath, JSON.stringify(testManifest));
 		});
 
-		afterEach(function () {
-			// Change the current working directory back to the directory where you started running these tests from.
+		after(function () {
+			// remove temporary test directory
 			process.chdir(process.cwd());
+			return rimraf(testDirectory);
 		});
 
-		it('should not error', function () {
-			return obtBinPath()
+		it('should error', function (done) {
+			// Run obt demo
+			obtBinPath()
 				.then(obt => {
 					return execa(obt, ['demo']);
+				}).then(() => {
+					done(new Error('No error was thrown.'));
+				}).catch(e => {
+					try {
+						proclaim.include(
+							e.message,
+							'Demos with the same name were found'
+						);
+					} catch(e) {
+						done(e);
+					}
+					done();
+				});
+		});
+	});
+
+	describe('component with multiple valid demos', function () {
+		const testDirectory = uniqueTempDir({ create: true });
+		const fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
+		const expectedBuiltDemoPath1 = path.resolve(testDirectory, 'demos/local/demo-1.html');
+		const expectedBuiltDemoPath2 = path.resolve(testDirectory, 'demos/local/demo-2.html');
+		let builtDemoHtml1 = '';
+		let builtDemoHtml2 = '';
+
+		before(function () {
+			// copy fixture (example component with multiple demos)
+			// to a temporary test directory
+			fs.copySync(fixturesDirectory, testDirectory);
+			process.chdir(testDirectory);
+			return obtBinPath()
+				.then(obt => {
+					// Run obt demo
+					return execa(obt, ['demo']);
+				}).then(() => {
+					// Get the built demo html content we expect
+					// If the file is not found move on, later test
+					// assertions will cover that
+					try {
+						builtDemoHtml1 = fs.readFileSync(expectedBuiltDemoPath1, 'utf8');
+						builtDemoHtml2 = fs.readFileSync(expectedBuiltDemoPath2, 'utf8');
+					} catch(e) {
+						// assume no files found
+					}
 				});
 		});
 
-		describe('demos with data stored in demo configuration', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
+		after(function () {
+			// remove temporary test directory
+			process.chdir(process.cwd());
+			return rimraf(testDirectory);
 		});
 
-		describe('demo with data stored in it\'s own specific demo configuration', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
+		it('should have created a html file for each demo', function () {
+			proclaim.ok(
+				fileExists(expectedBuiltDemoPath1),
+				'Could not find the built demo html file for demo-1.'
+			);
+			proclaim.ok(
+				fileExists(expectedBuiltDemoPath2),
+				'Could not find the built demo html file for demo-2.'
+			);
 		});
 
-		describe('demo with it\'s own dependencies', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
+		it('should have rendered demo html in the body of the demo template', function () {
+			proclaim.include(builtDemoHtml1, 'demo 1');
+			proclaim.include(builtDemoHtml2, 'demo 2');
 		});
 
-	});
-
-	describe('component with one demo', function () {
-
-		describe('component with no required browser features', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-required-browser-features'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
+		it('should have included demo css in the demo html', function () {
+			proclaim.include(builtDemoHtml1, '<link rel="stylesheet" href="demo.css" />');
+			proclaim.include(builtDemoHtml2, '<link rel="stylesheet" href="demo-2.css" />');
 		});
 
-		describe('component with required browser features', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
+		it('should have included demo javascript in the demo html', function () {
+			proclaim.include(builtDemoHtml1, '<script src="demo.js"></script>');
+			proclaim.include(builtDemoHtml2, '<script src="demo-2.js"></script>');
 		});
 
-		describe('component with optional browser features', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
+		it('should have included required polyfills registered in origami.json', function () {
+			const expectedPolyfill = 'Array.from';
+			const regex = new RegExp(`<script [^>]+polyfill.io[^>]+${expectedPolyfill}`);
+			proclaim.match(
+				builtDemoHtml1,
+				regex,
+				`Demo 1 did not find the expected ${expectedPolyfill} polyfill.`
+			);
+			proclaim.match(
+				builtDemoHtml2,
+				regex,
+				`Demo 2 did not find the expected ${expectedPolyfill} polyfill.`
+			);
 		});
 
-		describe('demo using component\'s sass mixins', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
+		it('should not include the `default` polyfill in demo html if not specified', function () {
+			const unexpectedPolyfill = 'default';
+			const regex = new RegExp(`<script [^>]+polyfill.io[^>]+${unexpectedPolyfill}`);
+			proclaim.notMatch(
+				builtDemoHtml1,
+				regex,
+				`Demo 1 had the ${unexpectedPolyfill} polyfill unexpectedly.`
+			);
+			proclaim.notMatch(
+				builtDemoHtml2,
+				regex,
+				`Demo 2 had the ${unexpectedPolyfill} polyfill unexpectedly.`
+			);
 		});
 
-		describe('demo using component\'s javascript API', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
+		it('should add demo document classes', function () {
+			proclaim.match(builtDemoHtml1, /<html[^>]+class="[^"]+demo-1/, 'Did not find a `demo-1` class on the html element.');
+			proclaim.match(builtDemoHtml2, /<html[^>]+class="[^"]+demo-2/, 'Did not find a `demo-2` class on the html element.');
 		});
 
-		describe('demo using extra dependency component\'s javascript and sass', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
+		it('should include a request to the Origami Build Service in demo markup for demo dependencies', function () {
+			// demo dependency css
+			proclaim.include(builtDemoHtml1, '<link rel="stylesheet" href="https://origami-build.ft.com/v2/bundles/css?modules=o-fonts@^4.0.0" />');
+			proclaim.include(builtDemoHtml2, '<link rel="stylesheet" href="https://origami-build.ft.com/v2/bundles/css?modules=o-fonts@^4.0.0" />');
+			// demo dependency js
+			proclaim.include(builtDemoHtml1, '<script src="https://origami-build.ft.com/v2/bundles/js?modules=o-fonts@^4.0.0"></script>');
+			proclaim.include(builtDemoHtml2, '<script src="https://origami-build.ft.com/v2/bundles/js?modules=o-fonts@^4.0.0"></script>');
 		});
 
-		describe('demo which has a bower conflict in it\'s dependencies', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
+		it('should build demo css', function () {
+			const expectedBuiltCssPath1 = path.resolve(testDirectory, 'demos/local/demo.css');
+			const expectedBuiltCssPath2 = path.resolve(testDirectory, 'demos/local/demo-2.css');
+			let builtDemoCss1 = '';
+			let builtDemoCss2 = '';
+			// Get built css.
+			try {
+				builtDemoCss1 = fs.readFileSync(expectedBuiltCssPath1, 'utf8');
+				builtDemoCss2 = fs.readFileSync(expectedBuiltCssPath2, 'utf8');
+			} catch(e) {
+				// assume files not found
+			}
+			// Confirm the css is as expected.
+			proclaim.include(
+				builtDemoCss1,
+				'.o-multiple-demos', 'Expected demo 1 css to include the class ".o-multiple-demos".'
+			);
+			proclaim.notInclude(
+				builtDemoCss1,
+				'.demo-two', 'Did not expected demo 1 css to include the demo 2 specific class ".demo-two".'
+			);
+			proclaim.include(
+				builtDemoCss2,
+				'.demo-two', 'Expected demo 2 css to include the demo specific class ".demo-2".'
+			);
 		});
 
-		describe('demos which have the same name', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
-		});
-
-		describe('building using custom demo configuration file', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
-		});
-
-		describe('demo with invalid sass', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
-		});
-
-		describe('demo with invalid javascript', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
-		});
-
-		describe('demo with invalid mustache template', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
-		});
-
-		describe('demo with data stored in demo configuration', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/no-js-or-sass'));
-			});
-
-			afterEach(function () {
-				// Change the current working directory back to the directory where you started running these tests from.
-				process.chdir(process.cwd());
-			});
-
-			it('should not error', function () {
-				return obtBinPath()
-					.then(obt => {
-						return execa(obt, ['demo']);
-					});
-			});
+		it('should build demo javascript', function () {
+			const expectedBuiltJsPath1 = path.resolve(testDirectory, 'demos/local/demo.js');
+			const expectedBuiltJsPath2 = path.resolve(testDirectory, 'demos/local/demo-2.js');
+			const expectedJsInDemo1 = 'oMultipleDemos.init()';
+			const expectedJsInDemo2 = 'console.log(demoTwo)';
+			let builtDemoJs1 = '';
+			let builtDemoJs2 = '';
+			// Get built js.
+			try {
+				builtDemoJs1 = fs.readFileSync(expectedBuiltJsPath1, 'utf8');
+				builtDemoJs2 = fs.readFileSync(expectedBuiltJsPath2, 'utf8');
+			} catch(e) {
+				// assume files not found
+			}
+			// Confirm the js is as expected.
+			proclaim.include(
+				builtDemoJs1,
+				expectedJsInDemo1,
+				`Expected demo 1 js to include the javascript "${expectedJsInDemo1}".`
+			);
+			proclaim.notInclude(
+				builtDemoJs1,
+				expectedJsInDemo2,
+				'Did not expected demo 1 javascript to include the demo 2 specific javascript.'
+			);
+			proclaim.include(
+				builtDemoJs2,
+				expectedJsInDemo2,
+				'Expected demo 2 javascript to include demo specific javascript.'
+			);
 		});
 	});
-	*/
 });

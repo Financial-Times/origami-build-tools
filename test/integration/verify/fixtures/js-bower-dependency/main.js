@@ -1,1 +1,1 @@
-global.world = require('o-test-component/syntaxerr');
+self.world = require('o-test-component/syntaxerr');

@@ -1,3 +1,5 @@
+"use strict";
+
 const { getBaseKarmaConfig } = require('./karma.config');
 const constants = require('karma').constants;
 
