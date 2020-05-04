@@ -37,7 +37,7 @@
     "karma": "^4.4.1",
     "karma-browserstack-launcher": "^1.5.2",
     "karma-chrome-launcher": "^3.1.0",
-    "karma-mocha": "^1.3.0",
+    "karma-mocha": "^2.0.0",
     "karma-proclaim": "git+https://github.com/Financial-Times/karma-proclaim.git",
     "karma-scss-preprocessor": "^4.0.0",
     "karma-sinon": "^1.0.5",
@@ -62,7 +62,7 @@
     "sass-true": "^5.0.0",
     "serve-handler": "^6.1.2",
     "sinon": "^9.0.2",
-    "snyk": "^1.315.0",
+    "snyk": "^1.317.0",
     "stylelint": "^13.2.1",
     "stylelint-scss": "^3.17.1",
     "update-notifier": "^4.1.0"
