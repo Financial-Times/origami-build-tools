@@ -4,6 +4,7 @@
 const execa = require('execa');
 const path = require('path');
 const process = require('process');
+const proclaim = require('proclaim');
 const obtBinPath = require('../helpers/obtpath');
 const rimraf = require('../helpers/delete');
 
@@ -242,6 +243,37 @@ describe('obt verify', function () {
 				return obtBinPath()
 					.then(obt => {
 						return execa(obt, ['verify']);
+					});
+			});
+		});
+
+		describe('component with custom sass style configuration', function () {
+
+			beforeEach(function () {
+				// Change the current working directory to the folder which contains the project we are testing against.
+				// We are doing this to replicate how obt is used when executed inside a terminal.
+				process.chdir(path.join(__dirname, '/fixtures/sass-custom-config'));
+			});
+
+			afterEach(function () {
+				// Change the current working directory back to the directory where you started running these tests from.
+				process.chdir(process.cwd());
+			});
+
+			it('should error for customised rules', function () {
+				return obtBinPath()
+					.then(obt => {
+						return execa(obt, ['verify']);
+					})
+					.then(() => {
+						throw new Error('obt verify should error.');
+					})
+					.catch(e => {
+						proclaim.include(
+							e.message,
+							'indentation of 4 spaces',
+							'Expected the linter to check for indentation with spaces, instead of our default tabs rule.'
+						);
 					});
 			});
 		});
