@@ -17,6 +17,6 @@
 }
 
 .foo {
-	@include oGridRespondTo();
 	content: 'baz';
+	@include oGridRespondTo();
 }
