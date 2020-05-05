@@ -64,7 +64,7 @@
     "sinon": "^9.0.2",
     "snyk": "^1.317.0",
     "stylelint": "^13.2.1",
-    "stylelint-config-origami-component": "^1.0.0",
+    "stylelint-config-origami-component": "^1.0.1",
     "update-notifier": "^4.1.0"
   },
   "devDependencies": {
