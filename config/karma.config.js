@@ -4,7 +4,7 @@ const process = require('process');
 const path = require('path');
 const fileHelpers = require('../lib/helpers/files');
 
-const karmaOax = require('../lib/karma-oax');
+const karmaScrumple = require('../lib/karma-scrumple');
 module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 	return Promise.all([fileHelpers.getModuleName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
 		const moduleName = values[0];
@@ -54,7 +54,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 
 			plugins: [
 				'karma-*',
-				karmaOax
+				karmaScrumple
 			],
 
 			// web server port
@@ -63,7 +63,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			// preprocess matching files before serving them to the browser
 			// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 			preprocessors: {
-				'test/**/*.js': ['oax'],
+				'test/**/*.js': ['scrumple'],
 				'main.scss': ['scss']
 			},
 			scssPreprocessor: {
