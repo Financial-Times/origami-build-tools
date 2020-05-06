@@ -10,7 +10,7 @@ module.exports.getChromeKarmaConfig = function (opts = { ignoreBower: false }) {
 			karmaBaseConfig,
 			{
 				browsers: ['ChromeHeadless'],
-				logLevel: constants.LOG_DISABLE
+				logLevel: constants.LOG_ERROR
 			}
 		);
 
