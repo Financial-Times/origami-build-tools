@@ -54,7 +54,7 @@
     "proclaim": "^3.6.0",
     "root-check": "^1.0.0",
     "sass-true": "^5.0.0",
-    "scrumple": "^1.1.0",
+    "scrumple": "^1.2.1",
     "serve-handler": "^6.1.2",
     "sinon": "^9.0.2",
     "snyk": "^1.319.0",
