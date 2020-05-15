@@ -153,4 +153,27 @@ describe('Build Sass', function () {
 				proclaim.include(result, 'div {\n  color: blue;\n}');
 			});
 	});
+
+	it('should output source maps by default', function () {
+		return build({
+			sass: 'demos/src/demo-scss/demo.scss'
+		})
+			.then(function (result) {
+				const builtCss = fs.readFileSync('build/main.css', 'utf8');
+				proclaim.include(builtCss, '/*# sourceMappingURL=');
+				proclaim.include(result, '/*# sourceMappingURL=');
+			});
+	});
+
+	it('should not not output a source map when the sourcemaps option is false', function () {
+		return build({
+			sass: 'demos/src/demo-scss/demo.scss',
+			sourcemaps: false
+		})
+			.then(function (result) {
+				const builtCss = fs.readFileSync('build/main.css', 'utf8');
+				proclaim.doesNotInclude(builtCss, '/*# sourceMappingURL=');
+				proclaim.doesNotInclude(result, '/*# sourceMappingURL=');
+			});
+	});
 });
