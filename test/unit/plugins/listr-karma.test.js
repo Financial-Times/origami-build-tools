@@ -2,6 +2,7 @@
 
 'use strict';
 
+const mockery = require('mockery');
 const colors = require('colors/safe');
 const proclaim = require('proclaim');
 
@@ -15,10 +16,24 @@ describe('SpecReporter', function () {
 	let SpecReporter;
 	let errors;
 
-	beforeEach(() => {
+	beforeEach(function() {
+		mockery.enable({
+			useCleanCache: true,
+			warnOnReplace: false,
+			warnOnUnregistered: false
+		});
+		mockery.registerMock('is-ci', false);
+		mockery.registerAllowable('../../../lib/plugins/listr-karma.js');
+
 		const listrKarmaReporter = require('../../../lib/plugins/listr-karma.js')();
 		SpecReporter = listrKarmaReporter.reporter['reporter:listr'];
 		errors = listrKarmaReporter.errors;
+	});
+
+	afterEach(() => {
+		mockery.resetCache();
+		mockery.deregisterAll();
+		mockery.disable();
 	});
 
 	describe('functionality', function () {
