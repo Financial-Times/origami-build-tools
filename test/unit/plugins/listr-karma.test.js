@@ -82,7 +82,7 @@ describe('SpecReporter', function () {
 						failedSpec = {
 							suite: ['suite name'],
 							description: 'description of test',
-							log: ['log message']
+							log: ['log', 'message']
 						};
 						newSpecReporter = new SpecReporter[1](baseReporterDecorator, formatError);
 						newSpecReporter.currentSuite.push(failedSpec.suite);
