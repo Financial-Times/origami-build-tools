@@ -63,7 +63,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			// preprocess matching files before serving them to the browser
 			// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 			preprocessors: {
-				'test/**/*.js': ['scrumple'],
+				'test/**/*.js': ['scrumple', 'sourcemap'],
 				'main.scss': ['scss']
 			},
 			scssPreprocessor: {
