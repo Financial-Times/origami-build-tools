@@ -106,8 +106,8 @@ describe('SpecReporter', function () {
 						proclaim.deepEqual(errors, [
 							colors.white('Test Browser failed specs:'),
 							colors.white('suite name > description of test'),
-							colors.red('log message\t'),
-							'',
+							colors.red('log\t'),
+							colors.red('message\t'),
 							'1 tests failed across 1 browsers.'
 						]);
 					});
@@ -124,8 +124,8 @@ describe('SpecReporter', function () {
 						proclaim.deepEqual(errors, [
 							colors.white('Test Browser failed specs:'),
 							colors.white('suite name > description of test'),
-							colors.red('log message\t'),
-							'',
+							colors.red('log\t'),
+							colors.red('message\t'),
 							'1 tests failed across 1 browsers.'
 						]);
 					});
