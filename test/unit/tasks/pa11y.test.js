@@ -55,7 +55,7 @@ describe('Test task', function() {
 
 		describe('task', () => {
 			it('should run pa11y correctly', function () {
-				this.timeout(10000);
+				this.timeout(30000);
 				return pa11y().task()
 					.catch(function (results) {
 						proclaim.isInstanceOf(results, Error);
