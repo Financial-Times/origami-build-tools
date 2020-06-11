@@ -12,7 +12,7 @@ const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath);
 
-describe('verify-javascript', function() {
+describe.only('verify-javascript', function() {
 	beforeEach(function () {
 		process.chdir(verifyTestPath);
 	});
@@ -23,6 +23,7 @@ describe('verify-javascript', function() {
 
 	describe('default title', () => {
 		it('should be "Linting Javascript"', () => {
+			process.chdir('./src/js/error');
 			proclaim.equal(verifyJavascript().title, 'Linting Javascript');
 		});
 	});
@@ -45,6 +46,7 @@ describe('verify-javascript', function() {
 		});
 
 		it('should return a falsey value if the file does exist', () => {
+			process.chdir('./src/js/error');
 			return verifyJavascript().skip().then(skip => {
 				proclaim.notOk(skip);
 			});
@@ -60,6 +62,16 @@ describe('verify-javascript', function() {
 
 		it('should throw error if there are linting violations', async function() {
 			try {
+				process.chdir('./src/js/warning');
+				await verifyJavascript().task();
+			} catch (e) {
+				proclaim.ok(e, `Unexpected error: ${e.message}`);
+			}
+		});
+
+		it('should not throw error if there are linting warnings', async function() {
+			try {
+				process.chdir('./src/scss');
 				await verifyJavascript().task();
 			} catch (e) {
 				proclaim.deepEqual(e.message, 'Failed linting: \n\n' +
