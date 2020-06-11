@@ -15,7 +15,7 @@ module.exports = {
 		"no-console": "off",
 		"no-await-in-loop": "off",
 
-		"filenames/match-regex": [2, "^[a-z0-9-]+(\.test|(\.config(\.browserstack|\.bower|\.dev|\.chrome|\.prod)?))?$", true],
+		"filenames/match-regex": [2, "^[a-z0-9-]+(\.test|(\.config(\.browserstack|\.bower|\.dev|\.chrome|\.prod)?))?$|\.eslintrc\.js", true],
 
 		"import/no-dynamic-require": "error",
 		"import/no-unresolved": "error",
@@ -54,8 +54,7 @@ module.exports = {
 		"promise/param-names": "error",
 		"promise/catch-or-return": "error"
 	},
-	globals:
-	{
+	globals: {
 		require: true,
 		module: true,
 		exports: true
