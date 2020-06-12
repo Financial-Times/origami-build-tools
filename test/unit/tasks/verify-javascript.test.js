@@ -78,7 +78,7 @@ describe('verify-javascript', function() {
 		});
 	});
 
-	describe.only('task', () => {
+	describe('task', () => {
 		it('should not error if there are no Javascript files', async () => {
 			// there is no js in the scss folder to verify
 			process.chdir('./src/scss');
