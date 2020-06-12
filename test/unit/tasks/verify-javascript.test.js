@@ -110,7 +110,7 @@ describe('verify-javascript', function() {
 				proclaim.calledTwice(console.log);
 				proclaim.calledWithExactly(
 					console.log,
-					`::error file=/Users/jake.champion/Code/repo-data-cli/repos/origami-build-tools/test/unit/fixtures/verify/src/js/error/invalid.js,line=1,col=6,code=undefined,severity=error::Parsing error: Unexpected token test`
+					`::error file=/invalid.js,line=1,col=6,code=undefined,severity=error::Parsing error: Unexpected token test`
 				);
 			}
 		});
