@@ -1,23 +1,48 @@
 /* eslint-env mocha */
 'use strict';
 
+const mockery = require('mockery');
 const proclaim = require('proclaim');
+const sinon = require('sinon');
+sinon.assert.expose(proclaim, {
+	includeFail: false,
+	prefix: ''
+});
 
 const path = require('path');
 const process = require('process');
-
-const verifyJavascript = require('../../../lib/tasks/verify-javascript');
 
 const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath);
 
 describe('verify-javascript', function() {
-	beforeEach(function () {
+	let verifyJavascript;
+	const originalConsole = global.console;
+	let console;
+	beforeEach(function() {
+		mockery.enable({
+			useCleanCache: true,
+			warnOnReplace: false,
+			warnOnUnregistered: false
+		});
+		console = {
+			log: sinon.stub(),
+			warn: sinon.stub(),
+			error: sinon.stub()
+		};
+		mockery.registerMock('is-ci', true);
+		process.env.CI = true;
+		global.console = console;
 		process.chdir(verifyTestPath);
+		verifyJavascript = require('../../../lib/tasks/verify-javascript');
 	});
 
 	afterEach(function () {
+		global.console = originalConsole;
+		mockery.resetCache();
+		mockery.deregisterAll();
+		mockery.disable();
 		process.chdir(obtPath);
 	});
 
@@ -53,32 +78,46 @@ describe('verify-javascript', function() {
 		});
 	});
 
-	describe('task', () => {
+	describe.only('task', () => {
 		it('should not error if there are no Javascript files', async () => {
 			// there is no js in the scss folder to verify
 			process.chdir('./src/scss');
 			await verifyJavascript().task();
 		});
 
+		it('should not write to the output a github annotation if there are no JavaScript files', async () => {
+			// there is no js in the scss folder to verify
+			process.chdir('./src/scss');
+			await verifyJavascript().task();
+			proclaim.notCalled(console.log);
+		});
+
 		it('should throw error if there are linting violations', async function() {
 			try {
-				process.chdir('./src/js/warning');
+				process.chdir('./src/js/error');
 				await verifyJavascript().task();
 			} catch (e) {
 				proclaim.ok(e, `Unexpected error: ${e.message}`);
 			}
 		});
 
-		it('should not throw error if there are linting warnings', async function() {
+		it('should write to the output a github annotation for each linting violation', async function() {
 			try {
-				process.chdir('./src/scss');
+				process.chdir('./src/js/error');
 				await verifyJavascript().task();
 			} catch (e) {
-				proclaim.deepEqual(e.message, 'Failed linting: \n\n' +
-				'./src/js/invalid.js:1:6 Error - Parsing error: Unexpected token test\n' +
-				'./src/js/unused-constant.js:1:7 Error - \'test\' is assigned a value but never used. (no-unused-vars)\n\n' +
-				'2 linting errors');
+				proclaim.ok(e, `Unexpected error: ${e.message}`);
+				proclaim.calledTwice(console.log);
+				proclaim.calledWithExactly(
+					console.log,
+					`::error file=/Users/jake.champion/Code/repo-data-cli/repos/origami-build-tools/test/unit/fixtures/verify/src/js/error/invalid.js,line=1,col=6,code=undefined,severity=error::Parsing error: Unexpected token test`
+				);
 			}
+		});
+
+		it('should not throw error if there are linting warnings', async function() {
+			process.chdir('./src/js/warning');
+			await verifyJavascript().task();
 		});
 	});
 });

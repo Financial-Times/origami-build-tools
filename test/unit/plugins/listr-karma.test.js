@@ -30,6 +30,7 @@ describe('SpecReporter', function () {
 	describe('functionality', function () {
 		context('running in a CI environment', function() {
 			let console;
+			let originalConsole = global.console;
 			beforeEach(function() {
 				mockery.enable({
 					useCleanCache: true,
@@ -49,6 +50,7 @@ describe('SpecReporter', function () {
 			});
 
 			afterEach(() => {
+				global.console = originalConsole;
 				console.log.reset();
 			});
 
@@ -107,7 +109,13 @@ describe('SpecReporter', function () {
 
 		context('running in a non-CI environment', function() {
 
+			let console;
+			let originalConsole = global.console;
 			beforeEach(function() {
+				console = {
+					log: sinon.stub()
+				};
+				global.console = console;
 				mockery.enable({
 					useCleanCache: true,
 					warnOnReplace: false,
@@ -119,6 +127,11 @@ describe('SpecReporter', function () {
 				const listrKarmaReporter = require('../../../lib/plugins/listr-karma.js')();
 				SpecReporter = listrKarmaReporter.reporter['reporter:listr'];
 				errors = listrKarmaReporter.errors;
+			});
+
+			afterEach(() => {
+				global.console = originalConsole;
+				console.log.reset();
 			});
 
 			describe('onRunComplete', function () {
