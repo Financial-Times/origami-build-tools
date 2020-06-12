@@ -1,23 +1,48 @@
 'use strict';
 /* eslint-env mocha */
 
+const mockery = require('mockery');
 const proclaim = require('proclaim');
+const sinon = require('sinon');
+sinon.assert.expose(proclaim, {
+	includeFail: false,
+	prefix: ''
+});
 const process = require('process');
 
 const path = require('path');
-
-const verify = require('../../../lib/tasks/verify-sass');
 
 const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath);
 
 describe('verify-sass', function () {
-	beforeEach(function () {
+	let verify;
+	const originalConsole = global.console;
+	let console;
+	beforeEach(function() {
+		mockery.enable({
+			useCleanCache: true,
+			warnOnReplace: false,
+			warnOnUnregistered: false
+		});
+		console = {
+			log: sinon.stub(),
+			warn: sinon.stub(),
+			error: sinon.stub()
+		};
+		mockery.registerMock('is-ci', true);
+		process.env.CI = true;
+		global.console = console;
+		verify = require('../../../lib/tasks/verify-sass');
 		process.chdir(verifyTestPath);
 	});
 
 	afterEach(function () {
+		global.console = originalConsole;
+		mockery.resetCache();
+		mockery.deregisterAll();
+		mockery.disable();
 		process.chdir(obtPath);
 	});
 
@@ -52,10 +77,11 @@ describe('verify-sass', function () {
 	});
 
 	describe('task', () => {
-		it('should not error if there are no Sass files', () => {
+		it('should not error if there are no Sass files', async () => {
 			// there is no scss to test in the js folder
 			process.chdir(path.resolve(verifyTestPath, 'src/js'));
-			verify().task();
+			await verify().task();
+			proclaim.notCalled(console.log);
 		});
 
 		it('should output errors and warnings only where there are linting violations', function () {
@@ -367,9 +393,9 @@ describe('verify-sass', function () {
 				{
 					name: 'block-no-empty',
 					locations: [
-      					'no-empty-rulesets/invalid.scss:2:6',
-      					'no-empty-rulesets/invalid.scss:9:7',
-      					'no-empty-rulesets/invalid.scss:12:8'
+						'no-empty-rulesets/invalid.scss:2:6',
+						'no-empty-rulesets/invalid.scss:9:7',
+						'no-empty-rulesets/invalid.scss:12:8'
 					]
 				},
 			];
@@ -396,6 +422,11 @@ describe('verify-sass', function () {
 						);
 					});
 				}
+				proclaim.callCount(console.log, 101);
+				proclaim.calledWithExactly(
+					console.log,
+					`::error file=/src/scss/border-zero/invalid.scss,line=2,col=2,code=declaration-property-value-blacklist,severity=error::Unexpected value "none" for property "border" (declaration-property-value-blacklist)`
+				);
 			});
 		});
 	});
