@@ -83,7 +83,7 @@ describe('SpecReporter', function () {
 							failedSpec = {
 								suite: ['suite name'],
 								description: 'description of test',
-								log: ['2+2 doest not equal carrot', 'test/add.test.js:1:12']
+								log: ['2+2 does not equal carrot', 'test/add.test.js:1:12 <- test/add.test.js:1245:4325']
 							};
 							newSpecReporter = new SpecReporter[1](baseReporterDecorator, formatError);
 							newSpecReporter.currentSuite.push(failedSpec.suite);
@@ -99,7 +99,7 @@ describe('SpecReporter', function () {
 							proclaim.calledOnce(console.log);
 							proclaim.calledWithExactly(
 								console.log,
-								`::error file=test/add.test.js,line=1,col=12::suite name > description of test%0ATest Browser errored with: 2+2 doest not equal carrot`
+								`::error file=test/add.test.js,line=1,col=12::suite name > description of test%0ATest Browser errored with: 2+2 does not equal carrot`
 							);
 						});
 					});
