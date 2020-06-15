@@ -19,7 +19,7 @@
     "autoprefixer": "^9.7.6",
     "bower": "^1.8.8",
     "boxen": "^4.2.0",
-    "chalk": "^3.0.0",
+    "chalk": "^4.1.0",
     "chokidar": "^3.4.0",
     "colors": "^1.4.0",
     "deglob": "^4.0.1",
