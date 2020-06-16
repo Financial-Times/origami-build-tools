@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="o-hoverable-on {{oDemoDocumentClasses}}">
+<html lang="en" class="core {{oDemoDocumentClasses}}">
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -15,19 +15,49 @@
 		.enhanced .o--if-no-js {
 			display: none !important;
 		}
-
 	</style>
 	<script>
-		(function (d) {
-			d.className = d.className + ' demo-js';
-		})(document.documentElement);
-
+		// Core and enhanced mode.
+		// https://origami.ft.com/docs/components/compatibility/#core--enhanced-experiences
+		var script = document.createElement('script');
+		var supportsDeferredScripts = "defer" in script && "async" in script;
+		window.cutsTheMustard = (typeof document.documentElement.dataset === 'object' && ('visibilityState' in document) && supportsDeferredScripts);
+		if (window.cutsTheMustard) {
+			document.documentElement.classList.replace('core', 'enhanced');
+		}
+		// Load demo JavaScript if the cuts the mustard test passes
+		// https://origami.ft.com/docs/components/compatibility/#core--enhanced-experiences
+		(function() {
+			function loadScript(src) {
+				var script = document.createElement('script');
+				if (window.cutsTheMustard) {
+					script.async = script.defer = true;
+					script.src = src;
+					var s = document.getElementsByTagName('script')[0];
+					s.parentNode.insertBefore(script, s);
+				}
+			}
+			{{#oDemoDependenciesScriptPath}}
+				// Add demo dependencies script tag
+				loadScript('{{{.}}}');
+			{{/oDemoDependenciesScriptPath}}
+			{{#oDemoComponentScriptPath}}
+				// Add demo script tag
+				loadScript('{{{.}}}');
+			{{/oDemoComponentScriptPath}}
+		}());
 	</script>
-	{{> oDemoStyle}}
+
+	{{#oDemoDependenciesStylePath}}
+		<link rel="stylesheet" href="{{.}}">
+	{{/oDemoDependenciesStylePath}}
+
+	{{#oDemoComponentStylePath}}
+		<link rel="stylesheet" href="{{.}}">
+	{{/oDemoComponentStylePath}}
 </head>
 <body>
 	{{> oDemoTpl}}
-	{{> oDemoScript}}
 	<script src="https://registry.origami.ft.com/embedapi?autoload=resize"></script>
 </body>
 </html>
