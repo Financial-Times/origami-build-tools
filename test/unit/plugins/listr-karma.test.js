@@ -99,7 +99,7 @@ describe('SpecReporter', function () {
 							proclaim.calledOnce(console.log);
 							proclaim.calledWithExactly(
 								console.log,
-								`::error file=test/add.test.js,line=1,col=12::suite name > description of test%0ATest Browser errored with: 2+2 does not equal carrot`
+								`::error file=test/add.test.js,line=1,col=12::suite name > description of test%0ATest Browser errored with: %0A2+2 does not equal carrot`
 							);
 						});
 					});
