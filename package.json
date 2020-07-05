@@ -41,7 +41,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "listr": "^0.12.0",
     "listr-multiline-renderer": "^1.1.0",
-    "meow": "^6.1.0",
+    "meow": "^7.0.1",
     "merge-deep": "^3.0.2",
     "mocha": "^8.0.1",
     "mockery": "^2.1.0",
