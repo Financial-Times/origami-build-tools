@@ -39,7 +39,7 @@
     "karma-scss-preprocessor": "^4.0.0",
     "karma-sinon": "^1.0.5",
     "karma-sourcemap-loader": "^0.3.7",
-    "listr": "^0.12.0",
+    "listr": "^0.14.3",
     "listr-multiline-renderer": "^1.1.0",
     "meow": "^7.0.1",
     "merge-deep": "^3.0.2",
