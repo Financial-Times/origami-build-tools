@@ -50,6 +50,8 @@ describe("obt boilerplate", function () {
 						.respond("\n")
 						.on(/slack channel/)
 						.respond("\n")
+						.on(/Github team/)
+						.respond("\n")
 						.on(/right/)
 						.respond("\n")
 						.exec("./bob/")
