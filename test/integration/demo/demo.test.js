@@ -145,8 +145,8 @@ describe('obt demo', function () {
 		});
 
 		it('should have included demo javascript in the demo html', function () {
-			proclaim.include(builtDemoHtml1, '<script src="demo.js"></script>');
-			proclaim.include(builtDemoHtml2, '<script src="demo-2.js"></script>');
+			proclaim.include(builtDemoHtml1, 'demo.js');
+			proclaim.include(builtDemoHtml2, 'demo-2.js');
 		});
 
 		it('should have included required polyfills registered in origami.json', function () {
@@ -180,17 +180,17 @@ describe('obt demo', function () {
 		});
 
 		it('should add demo document classes', function () {
-			proclaim.match(builtDemoHtml1, /<html[^>]+class="[^"]+demo-1/, 'Did not find a `demo-1` class on the html element.');
-			proclaim.match(builtDemoHtml2, /<html[^>]+class="[^"]+demo-2/, 'Did not find a `demo-2` class on the html element.');
+			proclaim.match(builtDemoHtml1, /<html[^>]+class="(?:[^"]+)?demo-1/, 'Did not find a `demo-1` class on the html element.');
+			proclaim.match(builtDemoHtml2, /<html[^>]+class="(?:[^"]+)?demo-2/, 'Did not find a `demo-2` class on the html element.');
 		});
 
 		it('should include a request to the Origami Build Service in demo markup for demo dependencies', function () {
 			// demo dependency css
-			proclaim.include(builtDemoHtml1, '<link rel="stylesheet" href="https://origami-build.ft.com/v2/bundles/css?modules=o-fonts@^4.0.0" />');
-			proclaim.include(builtDemoHtml2, '<link rel="stylesheet" href="https://origami-build.ft.com/v2/bundles/css?modules=o-fonts@^4.0.0" />');
+			proclaim.include(builtDemoHtml1, '<link rel="stylesheet" href="https:///www.ft.com/__origami/service/build/v2/bundles/css?modules=o-fonts@^4.0.0" />');
+			proclaim.include(builtDemoHtml2, '<link rel="stylesheet" href="https:///www.ft.com/__origami/service/build/v2/bundles/css?modules=o-fonts@^4.0.0" />');
 			// demo dependency js
-			proclaim.include(builtDemoHtml1, '<script src="https://origami-build.ft.com/v2/bundles/js?modules=o-fonts@^4.0.0"></script>');
-			proclaim.include(builtDemoHtml2, '<script src="https://origami-build.ft.com/v2/bundles/js?modules=o-fonts@^4.0.0"></script>');
+			proclaim.include(builtDemoHtml1, 'https:///www.ft.com/__origami/service/build/v2/bundles/js?modules=o-fonts@^4.0.0');
+			proclaim.include(builtDemoHtml2, 'https:///www.ft.com/__origami/service/build/v2/bundles/js?modules=o-fonts@^4.0.0');
 		});
 
 		it('should build demo css', function () {
