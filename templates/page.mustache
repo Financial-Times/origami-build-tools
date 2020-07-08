@@ -17,9 +17,13 @@
 		// classes are global and for projects only.
 		// https://origami.ft.com/docs/components/compatibility
 		(function() {
+			var script = document.createElement('script');
+			var supportsDeferredScripts = "defer" in script && "async" in script;
+			var cutsTheMustard = (typeof document.documentElement.dataset === 'object' && ('visibilityState' in document) && supportsDeferredScripts);
+
 			function loadScript(src) {
 				var script = document.createElement('script');
-				if (window.cutsTheMustard) {
+				if (cutsTheMustard) {
 					script.async = script.defer = true;
 					script.src = src;
 					var s = document.getElementsByTagName('script')[0];
