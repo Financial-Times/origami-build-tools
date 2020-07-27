@@ -52,6 +52,9 @@
     "portfinder": "^1.0.26",
     "postcss": "^7.0.27",
     "proclaim": "^3.6.0",
+    "remark": "^12.0.1",
+    "remark-lint": "^7.0.1",
+    "remark-preset-lint-origami-component": "^1.1.1",
     "root-check": "^1.0.0",
     "sass-true": "^6.0.0",
     "scrumple": "^1.2.1",
@@ -60,7 +63,9 @@
     "snyk": "^1.319.0",
     "stylelint": "^13.2.1",
     "stylelint-config-origami-component": "^1.0.3",
-    "update-notifier": "^4.1.0"
+    "update-notifier": "^4.1.0",
+    "vfile": "^4.1.1",
+    "vfile-reporter": "^6.0.1"
   },
   "devDependencies": {
     "@financial-times/origami-service-makefile": "^7.0.3",
