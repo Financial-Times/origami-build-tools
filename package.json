@@ -55,7 +55,7 @@
 		"proclaim": "^3.6.0",
 		"remark": "^12.0.1",
 		"remark-lint": "^7.0.1",
-		"remark-preset-lint-origami-component": "^1.1.1",
+		"remark-preset-lint-origami-component": "^1.1.3",
 		"root-check": "^1.0.0",
 		"sass-true": "^6.0.0",
 		"scrumple": "^1.2.1",
