@@ -22,7 +22,7 @@ describe('Test task', function() {
 		const testTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
 		let console;
-		let originalConsole = global.console;
+		const originalConsole = global.console;
 		let demo;
 		let pa11y;
 		beforeEach(function() {

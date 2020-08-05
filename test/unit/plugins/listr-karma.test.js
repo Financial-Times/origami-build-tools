@@ -30,7 +30,7 @@ describe('SpecReporter', function () {
 	describe('functionality', function () {
 		context('running in a CI environment', function() {
 			let console;
-			let originalConsole = global.console;
+			const originalConsole = global.console;
 			beforeEach(function() {
 				mockery.enable({
 					useCleanCache: true,
@@ -110,7 +110,7 @@ describe('SpecReporter', function () {
 		context('running in a non-CI environment', function() {
 
 			let console;
-			let originalConsole = global.console;
+			const originalConsole = global.console;
 			beforeEach(function() {
 				console = {
 					log: sinon.stub()
