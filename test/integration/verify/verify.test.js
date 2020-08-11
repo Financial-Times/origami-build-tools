@@ -54,15 +54,12 @@ describe('obt verify', function () {
 			});
 
 
-			it('should error', function () {
+			it('should warn', function () {
 				return obtBinPath()
 					.then(obt => {
 						return execa(obt, ['verify']);
 					})
-					.then(() => {
-						throw new Error('obt verify should error.');
-					}, output => {
-						// obt verify exited with a non-zero exit code, which is what we expected.
+					.then(output => {
 						proclaim.include(output.stdout, 'expected "test-component", got "not-the-component-name"');
 					});
 			});
