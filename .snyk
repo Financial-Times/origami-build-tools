@@ -116,6 +116,74 @@ ignore:
     - pa11y:
         reason: None given
         expires: '2019-02-03T15:08:10.922Z'
+  SNYK-JS-FLAT-596927:
+    - mocha > yargs-unparser > flat:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-535497:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-535498:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-535502:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-540956:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-540958:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-540964:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-540974:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-540978:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-540980:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-540990:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-540992:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-540994:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-540996:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-540998:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-541000:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
+  SNYK-JS-NODESASS-541002:
+    - node-sass:
+        reason: not vulnerable
+        expires: '2020-09-04T11:44:19.165Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:ms:20170412':

@@ -12,6 +12,81 @@ describe('obt verify', function () {
 
 	this.timeout(60 * 1000);
 
+	describe('readme', function () {
+		describe('component with no readme', function () {
+
+			beforeEach(function () {
+				// Change the current working directory to the folder which contains the project we are testing against.
+				// We are doing this to replicate how obt is used when executed inside a terminal.
+				process.chdir(path.join(__dirname, '/fixtures/no-readme'));
+			});
+
+			afterEach(function () {
+				// Change the current working directory back to the directory where you started running these tests from.
+				process.chdir(process.cwd());
+			});
+
+			it('should error', function () {
+				return obtBinPath()
+					.then(obt => {
+						return execa(obt, ['verify']);
+					})
+					.then(() => {
+						throw new Error('obt verify should error.');
+					}, output => {
+						// obt verify exited with a non-zero exit code, which is what we expected.
+						proclaim.include(output.stdout, 'Components require a README.md with documentation.');
+					});
+			});
+		});
+
+		describe('component with an invalid readme', function () {
+
+			beforeEach(function () {
+				// Change the current working directory to the folder which contains the project we are testing against.
+				// We are doing this to replicate how obt is used when executed inside a terminal.
+				process.chdir(path.join(__dirname, '/fixtures/readme-invalid'));
+			});
+
+			afterEach(function () {
+				// Change the current working directory back to the directory where you started running these tests from.
+				process.chdir(process.cwd());
+			});
+
+
+			it('should warn', function () {
+				return obtBinPath()
+					.then(obt => {
+						return execa(obt, ['verify']);
+					})
+					.then(output => {
+						proclaim.include(output.stdout, 'expected "test-component", got "not-the-component-name"');
+					});
+			});
+		});
+
+		describe('component with custom .remarkrc.js configuration', function () {
+
+			beforeEach(function () {
+				// Change the current working directory to the folder which contains the project we are testing against.
+				// We are doing this to replicate how obt is used when executed inside a terminal.
+				process.chdir(path.join(__dirname, '/fixtures/readme-custom-remarkrc'));
+			});
+
+			afterEach(function () {
+				// Change the current working directory back to the directory where you started running these tests from.
+				process.chdir(process.cwd());
+			});
+
+			it('should not error given conformance with custom rules', function () {
+				return obtBinPath()
+					.then(obt => {
+						return execa(obt, ['verify']);
+					});
+			});
+		});
+	});
+
 	describe('js', function () {
 		describe('component with no js', function () {
 

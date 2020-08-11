@@ -1,0 +1,14 @@
+@include test-module('oTestComponentHelloWorld') {
+	@include test('Can be included') {
+		@include assert {
+			@include output($selector: false) {
+				@include oTestComponentHelloWorld();
+			}
+			@include expect($selector: false) {
+				body:after {
+					content: 'Hello world!';
+				}
+			}
+		}
+	}
+}
