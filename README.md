@@ -1,4 +1,4 @@
-# origami-build-tools [![Build Status](https://circleci.com/gh/Financial-Times/origami-build-tools/tree/master.svg?style=svg)](https://circleci.com/gh/Financial-Times/origami-build-tools/tree/master)
+# origami-build-tools
 
 Build tools for developing Origami components.
 
