@@ -1,4 +1,4 @@
-import oMultipleDemos from './src/js/o-multiple-demos';
+import oMultipleDemos from './src/js/o-multiple-demos.js';
 const constructAll = function () {
 	oMultipleDemos.init();
 	document.removeEventListener('o.DOMContentLoaded', constructAll);
