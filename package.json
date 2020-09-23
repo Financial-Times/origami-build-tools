@@ -12,6 +12,9 @@
 		"npm": ">= 6.0.0"
 	},
 	"dependencies": {
+		"@babel/core": "^7.11.6",
+		"@babel/polyfill": "^7.11.5",
+		"@babel/preset-env": "^7.11.5",
 		"@financial-times/sass": "^1.31.0",
 		"@swc/cli": "^0.1.24",
 		"@swc/core": "^1.1.39",
@@ -33,6 +36,7 @@
 		"globby": "^11.0.0",
 		"is-ci": "^2.0.0",
 		"karma": "^5.1.0",
+		"karma-babel-preprocessor": "^8.0.1",
 		"karma-browserstack-launcher": "^1.5.2",
 		"karma-chrome-launcher": "^3.1.0",
 		"karma-mocha": "^2.0.0",

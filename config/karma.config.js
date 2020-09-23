@@ -41,6 +41,7 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 
 			// list of files / patterns to load in the browser
 			files: [
+				require.resolve('@babel/polyfill/dist/polyfill.js'),
 				'test/*.js',
 				'test/**/*.js',
 				'main.scss'
@@ -63,8 +64,17 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			// preprocess matching files before serving them to the browser
 			// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 			preprocessors: {
-				'test/**/*.js': ['scrumple', 'sourcemap'],
+				'test/**/*.js': ['scrumple', 'babel', 'sourcemap'],
 				'main.scss': ['scss']
+			},
+			babelPreprocessor: {
+				options: {
+					presets: [require.resolve('@babel/preset-env')],
+					sourceMap: 'inline'
+				},
+				sourceFileName: function (file) {
+					return file.originalPath;
+				}
 			},
 			scssPreprocessor: {
 				options: {
