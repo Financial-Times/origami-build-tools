@@ -44,7 +44,7 @@
 		"listr-multiline-renderer": "^1.1.0",
 		"meow": "^7.0.1",
 		"merge-deep": "^3.0.2",
-		"mocha": "^8.0.1",
+		"mocha": "^8.2.0",
 		"mockery": "^2.1.0",
 		"mustache": "^4.0.1",
 		"node-sass": "^4.14.0",
