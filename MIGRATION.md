@@ -10,7 +10,7 @@ Installing bower dependencies has been removed.
 
 Bundling/Compiling code which uses bower dependencies is no longer supported.
 
-
+node-sass has been removed, obt will no longer test the component sass can compile with node-sass.
 
 `obt test` no longer runs `npm test`, this is to allow `obt test` to be a command within the components `npm test` script.
 
