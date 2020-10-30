@@ -11,7 +11,6 @@ sinon.assert.expose(proclaim, {
 
 describe('Install task', function() {
 	let Listr;
-	let bowerInstall;
 	let npmInstall;
 	let install;
 	let listrInstance;
@@ -22,8 +21,6 @@ describe('Install task', function() {
 		};
 		Listr = sinon.stub();
 		Listr.returns(listrInstance);
-		bowerInstall = sinon.stub();
-		bowerInstall.returns(bowerInstall);
 		npmInstall = sinon.stub();
 		npmInstall.returns(npmInstall);
 
@@ -35,7 +32,6 @@ describe('Install task', function() {
 
 		mockery.registerMock('listr', Listr);
 
-		mockery.registerMock('./install-bower', bowerInstall);
 		mockery.registerMock('./install-npm', npmInstall);
 
 		mockery.registerAllowable('../../../lib/tasks/install');
@@ -63,7 +59,6 @@ describe('Install task', function() {
 			proclaim.calledWithNew(Listr);
 			proclaim.isArray(Listr.firstCall.args[0]);
 			proclaim.include(Listr.firstCall.args[0], npmInstall);
-			proclaim.include(Listr.firstCall.args[0], bowerInstall);
 		});
 	});
 });

@@ -1,4 +1,5 @@
 {
+    "name": "test-component",
     "dependencies": {
         "o-test-component": "Financial-Times/o-test-component#v1.0.33"
     }

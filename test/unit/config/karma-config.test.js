@@ -40,19 +40,8 @@ describe('base karma config', () => {
 		});
 	});
 
-	it('includes only bower scss paths by default', () => {
+	it('includes only npm scss paths', () => {
 		return getBaseKarmaConfig().then(actualConfig => {
-			const actual = actualConfig.scssPreprocessor.options.includePaths;
-			const expected = [
-				process.cwd(),
-				path.resolve(process.cwd(), `bower_components`)
-			];
-			proclaim.deepEqual(actual, expected);
-		});
-	});
-
-	it('includes only npm scss paths when "ignoreBower" is true', () => {
-		return getBaseKarmaConfig({ ignoreBower: true }).then(actualConfig => {
 			const actual = actualConfig.scssPreprocessor.options.includePaths;
 			const expected = [
 				process.cwd(),

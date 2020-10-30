@@ -18,7 +18,7 @@ describe('build-js', function () {
 	beforeEach(function () {
 		fs.copySync(path.resolve(obtPath, oTestPath), buildTestPath);
 		process.chdir(buildTestPath);
-		fs.writeFileSync('bower.json', JSON.stringify({
+		fs.writeFileSync('package.json', JSON.stringify({
 			name: 'o-test',
 			main: 'main.js'
 		}), 'utf8');

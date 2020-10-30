@@ -1,5 +1,4 @@
 {
 	"name": "test-component",
-	"main": ["main.scss"],
 	"dependencies": {}
 }
