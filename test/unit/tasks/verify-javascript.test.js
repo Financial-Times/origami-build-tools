@@ -16,10 +16,11 @@ const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath);
 
-describe('verify-javascript', function() {
+describe.only('verify-javascript', function() {
 	let verifyJavascript;
 	const originalConsole = global.console;
 	let console;
+	this.timeout(10 * 1000);
 	beforeEach(function() {
 		mockery.enable({
 			useCleanCache: true,
