@@ -1,7 +1,0 @@
-{
-  "name": "non-existent-dependency",
-  "private": true,
-  "dependencies": {
-		"nothere": "404-package-doesnt-exist"
-	}
-}

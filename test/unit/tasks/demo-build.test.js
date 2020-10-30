@@ -38,19 +38,19 @@ describe('Demo task', function () {
 	describe('Build demos', function () {
 		it('should fail if there is not a config file', function () {
 			process.chdir(oNoManifestPath);
-			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
+			fs.writeFileSync('package.json', '{"name":"o-test"}', 'utf8');
 			return demo()
 				.then(() => {
 					throw new Error('promise resolved when it should have rejected');
 				}, function (err) {
 					proclaim.equal(err.message, `Couldn\'t find demos config path, checked: ${path.join(process.cwd(),'origami.json')}`);
-					fs.unlinkSync(path.resolve(oNoManifestPath, 'bower.json'));
+					fs.unlinkSync(path.resolve(oNoManifestPath, 'package.json'));
 					process.chdir(demoTestPath);
 				});
 		});
 
 		it('should error with a custom config file', function () {
-			fs.writeFileSync('bower.json', '{"name":"o-test"}', 'utf8');
+			fs.writeFileSync('package.json', '{"name":"o-test"}', 'utf8');
 			fs.copySync('demos/src/config.json', 'demos/src/mysupercoolconfig.json');
 			return demo({
 				demoConfig: 'demos/src/mysupercoolconfig.json'

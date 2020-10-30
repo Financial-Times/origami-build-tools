@@ -26,9 +26,8 @@ describe('Build Sass', function () {
 	beforeEach(function () {
 		fs.copySync(path.resolve(obtPath, oTestPath), buildTestPath);
 		process.chdir(buildTestPath);
-		fs.writeFileSync('bower.json', JSON.stringify({
-			name: 'o-test',
-			main: 'main.scss'
+		fs.writeFileSync('package.json', JSON.stringify({
+			name: 'o-test'
 		}), 'utf8');
 	});
 

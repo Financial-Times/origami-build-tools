@@ -1,5 +1,16 @@
 # Migration Guides
 
+## Migrating from v10 to v11
+
+obt no longer supports bower, it now only supports npm.
+
+The `--ignore-bower` flag has been removed.
+
+Installing bower dependencies has been removed.
+
+Bundling/Compiling code which uses bower dependencies is no longer supported.
+
+
 ## Migrating from v9 to v10
 The following `demo` command flags have been removed and replaced with the `develop` (`dev`) command:
 - Removed the `--watch` flag.

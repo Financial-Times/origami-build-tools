@@ -328,32 +328,6 @@ describe('obt verify', function () {
 			});
 		});
 
-		describe('component with bower dependency', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/js-bower-dependency'));
-			});
-
-			afterEach(function () {
-				return rimraf(path.join(process.cwd(), '/build'))
-					.then(() => rimraf(path.join(process.cwd(), '/bower_components')))
-					.then(() => process.chdir(process.cwd()));
-			});
-
-			it('should not error because of bad js in a bower dependency', function () {
-				let obt;
-				return obtBinPath()
-					.then(obtPath => {
-						obt = obtPath;
-						return execa(obt, ['install']);
-					})
-					.then(() => {
-						return execa(obt, ['verify']);
-					});
-			});
-		});
 	});
 
 	describe('sass', function () {
@@ -452,33 +426,6 @@ describe('obt verify', function () {
 							'indentation of 4 spaces',
 							'Expected the linter to check for indentation with spaces, instead of our default tabs rule.'
 						);
-					});
-			});
-		});
-
-		describe('component with bower dependency', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/sass-bower-dependency'));
-			});
-
-			afterEach(function () {
-				return rimraf(path.join(process.cwd(), '/build'))
-					.then(() => rimraf(path.join(process.cwd(), '/bower_components')))
-					.then(() => process.chdir(process.cwd()));
-			});
-
-			it('should not error because of bad sass in a bower dependency', function () {
-				let obt;
-				return obtBinPath()
-					.then(obtPath => {
-						obt = obtPath;
-						return execa(obt, ['install']);
-					})
-					.then(() => {
-						return execa(obt, ['verify']);
 					});
 			});
 		});

@@ -1,8 +1,0 @@
-{
-	"name": "no-dependencies",
-	"main": [
-		"main.js",
-		"main.scss"
-	],
-	"dependencies": {}
-}
