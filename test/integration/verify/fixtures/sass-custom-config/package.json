@@ -1,0 +1,16 @@
+{
+  "name": "sass-custom-config",
+  "version": "1.0.0",
+  "description": "test component",
+  "main": ".remarkrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "remark-preset-lint-origami-component": "^1.2.0",
+    "stylelint-config-origami-component": "^1.0.4"
+  }
+}

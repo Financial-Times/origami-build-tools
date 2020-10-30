@@ -20,6 +20,8 @@ describe('verify-sass', function () {
 	let verify;
 	const originalConsole = global.console;
 	let console;
+	this.timeout(10 * 1000);
+
 	beforeEach(function() {
 		mockery.enable({
 			useCleanCache: true,
