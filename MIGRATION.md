@@ -4,6 +4,8 @@
 
 `obt test` no longer runs `npm test`, this is to allow `obt test` to be a command within the components `npm test` script.
 
+node-sass support has been removed, obt will no longer test the component sass can compile with node-sass.
+
 ## Migrating from v9 to v10
 The following `demo` command flags have been removed and replaced with the `develop` (`dev`) command:
 - Removed the `--watch` flag.
