@@ -5,41 +5,23 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<title>{{oDemoTitle}}</title>
 	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-	<script src="{{{oDemoPolyfillUrl}}}"></script>
 	<style>
 		body {
 			margin: 0;
 		}
 	</style>
-	<script>
-		// Load demo JavaScript if the cuts the mustard test passes.
-		// core / enhanced mode classes are not implemented in demos as these
-		// classes are global and for projects only.
-		// https://origami.ft.com/docs/components/compatibility
-		(function() {
-			var script = document.createElement('script');
-			var supportsDeferredScripts = "defer" in script && "async" in script;
-			var cutsTheMustard = (typeof document.documentElement.dataset === 'object' && ('visibilityState' in document) && supportsDeferredScripts);
 
-			function loadScript(src) {
-				var script = document.createElement('script');
-				if (cutsTheMustard) {
-					script.async = script.defer = true;
-					script.src = src;
-					var s = document.getElementsByTagName('script')[0];
-					s.parentNode.insertBefore(script, s);
-				}
-			}
-			{{#oDemoDependenciesScriptPath}}
-				// Add demo dependencies script tag
-				loadScript('{{{.}}}');
-			{{/oDemoDependenciesScriptPath}}
-			{{#oDemoComponentScriptPath}}
-				// Add demo script tag
-				loadScript('{{{.}}}');
-			{{/oDemoComponentScriptPath}}
-		}());
-	</script>
+	{{#oDemoPolyfillUrl}}
+		<script src="{{{oDemoPolyfillUrl}}}"></script>
+	{{/oDemoPolyfillUrl}}
+
+	{{#oDemoComponentScriptPath}}
+		<script src="{{ oDemoComponentScriptPath }}" defer></script>
+	{{/oDemoComponentScriptPath}}
+
+	{{#oDemoDependenciesScriptPath}}
+		<script src="{{ oDemoDependenciesScriptPath }}" defer></script>
+	{{/oDemoDependenciesScriptPath}}
 
 	{{#oDemoDependenciesStylePath}}
 		<link rel="stylesheet" href="{{{.}}}" />
