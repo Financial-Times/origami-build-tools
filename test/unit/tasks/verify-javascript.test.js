@@ -16,7 +16,7 @@ const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath);
 
-describe.only('verify-javascript', function() {
+describe('verify-javascript', function() {
 	let verifyJavascript;
 	const originalConsole = global.console;
 	let console;
