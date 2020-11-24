@@ -63,7 +63,7 @@
 		"scrumple": "^1.2.1",
 		"serve-handler": "^6.1.2",
 		"sinon": "^9.0.2",
-		"snyk": "^1.319.0",
+		"snyk": "^1.425.4",
 		"stylelint": "13.2.1",
 		"stylelint-config-origami-component": "^1.0.3",
 		"update-notifier": "^4.1.0",
