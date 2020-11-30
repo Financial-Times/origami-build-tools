@@ -64,12 +64,12 @@ describe('Test task', function() {
 
 		describe('skip', () => {
 			it('should return a truthy value if the file does not exist', function() {
-				fs.removeSync(path.join(process.cwd(), '/demos/local/pa11y.html'));
+				fs.removeSync(path.join(process.cwd(), '/demos/src/pa11y.mustache'));
 				return pa11y().skip().then(result => proclaim.isTrue(Boolean(result)));
 			});
 
 			it('should return a helpful message if the file does not exist', function() {
-				fs.removeSync(path.join(process.cwd(), '/demos/local/pa11y.html'));
+				fs.removeSync(path.join(process.cwd(), '/demos/src/pa11y.mustache'));
 				return pa11y().skip().then(result => proclaim.equal(result, `No Pa11y demo found. To run Pa11y against this project, create a file at ${path.join(process.cwd(), '/demos/local/pa11y.html')}`));
 			});
 
