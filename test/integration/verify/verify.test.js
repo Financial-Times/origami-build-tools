@@ -37,7 +37,6 @@ describe('obt verify', function () {
 						return execa(obt, ['verify']);
 					})
 					.then((s) => {
-						console.log(s)
 						throw new Error('obt verify should error.');
 					}, output => {
 						// obt verify exited with a non-zero exit code, which is what we expected.
@@ -211,7 +210,6 @@ describe('obt verify', function () {
 						return execa(obt, ['verify']);
 					})
 					.then((s) => {
-						console.log({s})
 						throw new Error('obt verify should error.');
 					}, () => {
 						// obt verify exited with a non-zero exit code, which is what we expected.
@@ -399,7 +397,6 @@ describe('obt verify', function () {
 						return execa(obt, ['verify']);
 					})
 					.then((s) => {
-						console.log({s})
 						throw new Error('obt verify should error when trying to verify a component which has invalid sass.');
 					}, () => {
 						// obt verify exited with a non-zero exit code, which is what we expected.
