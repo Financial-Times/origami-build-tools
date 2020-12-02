@@ -37,7 +37,7 @@ To preview the components demos run the `dev` command. The `dev` command will au
 
 After making your changes run the linter and check for errors:
 
-`obt verify`
+`obt lint`
 
 Also run the components tests:
 
@@ -59,12 +59,12 @@ Origami Build Tools provides boilerplate for creating up a new Origami component
 		$ obt <command> [<options>]
 
 	Commands
-		install, i    Install npm and bower dependencies required to build the component
-		develop, dev  Build demos locally every time a file changes and run a server to view them
-		demo, d       Build demos into the demos directory
-		init          Initialise a new component with a boilerplate folder structure
-		test, t       Run Origami specification tests and component specific tests
-		verify, v     Check folder and code structure follows Origami specification
+		install, i             Install npm and bower dependencies required to build the component
+		develop, dev           Build demos locally every time a file changes and run a server to view them
+		demo, d                Build demos into the demos directory
+		init                   Initialise a new component with a boilerplate folder structure
+		test, t                Run Origami specification tests and component specific tests
+		verify, v, lint, l     Check folder and code structure follows Origami specification
 
 	Options
 		-h, --help                 Print out this message
@@ -96,7 +96,7 @@ Build a specific demo with the `--demo-filter` option.
 
 Demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add _demos/local/_ to your `.gitignore`.
 
-### `verify` or `v`
+### `verify` or `v` or `lint` or `l`
 
 Lints JavaScript, Sass and configuration files against [Origami specification](https://origami.ft.com/spec/v1/components/).
 
