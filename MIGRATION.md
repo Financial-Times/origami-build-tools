@@ -4,6 +4,8 @@
 
 `obt test` no longer runs `npm test`, this is to allow `obt test` to be a command within the components `npm test` script.
 
+`obt verify` linting enforces fewer configuration options. Ignore patterns must now be configured for each component by creating `.eslintignore` and `.stylelintignore` files, with content that includes `demos/local/**` and any other file patterns which do not need to be linted. `node_modules` is ignored by default.
+
 node-sass support has been removed, obt will no longer test the component sass can compile with node-sass.
 
 ## Migrating from v9 to v10
