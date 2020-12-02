@@ -439,8 +439,13 @@ describe('obt verify', function () {
 			});
 
 			it('should error for customised rules', function () {
+				let obt;
 				return obtBinPath()
-					.then(obt => {
+					.then(obtPath => {
+						obt = obtPath;
+						return execa(obt, ['install']);
+					})
+					.then(() => {
 						return execa(obt, ['verify']);
 					})
 					.then(() => {
