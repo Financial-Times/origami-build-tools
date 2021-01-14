@@ -1,5 +1,7 @@
 {
 	"name": "test-component",
-	"main": ["main.js"],
+	"main": [
+		"main.js"
+	],
 	"dependencies": {}
 }

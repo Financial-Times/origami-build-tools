@@ -13,7 +13,7 @@
     "o-test-component": "1.0.26"
   },
   "devDependencies": {
-    "remark-preset-lint-origami-component": "^1.2.0",
+    "remark-preset-lint-origami-component": "2.0.0-beta.1",
     "stylelint-config-origami-component": "^1.0.4",
     "stylelint": "^13.7.0"
   }
