@@ -9,6 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "dependencies": {},
   "devDependencies": {
     "remark-preset-lint-origami-component": "2.0.0-beta.1",
