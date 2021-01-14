@@ -16,6 +16,8 @@ Bundling/Compiling code which uses bower dependencies is no longer supported.
 
 node-sass support has been removed, obt will no longer test the component sass can compile with node-sass.
 
+Component lint configuration must be renamed to use the CommonJS extension `.eslintrc.cjs` and `.stylelintrc.cjs`
+
 ## Migrating from v9 to v10
 The following `demo` command flags have been removed and replaced with the `develop` (`dev`) command:
 - Removed the `--watch` flag.
