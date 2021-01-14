@@ -84,22 +84,62 @@ describe('Files helper', function () {
 				});
 		});
 
-		it('should get the path of main.js', function () {
-			return files.getMainJsPath()
-				.then(jsPath => {
-					proclaim.equal(jsPath, null);
-					return files.getPackageJson()
-						.then(pkgJson => {
+		describe('when the package.json manifest file contains both main and browser properties', function () {
+			it('should get the JavaScript path from the browser property', function () {
+				return files.getMainJsPath()
+					.then(jsPath => {
+						proclaim.equal(jsPath, null);
+						return files.getPackageJson()
+							.then(pkgJson => {
 
-							pkgJson.main = 'main.js';
-							fs.writeFileSync('package.json', JSON.stringify(pkgJson), 'utf8');
-							return files.getMainJsPath()
-								.then(jsPath => {
+								pkgJson.browser = 'browser.js';
+								pkgJson.main = 'main.js';
+								fs.writeFileSync('package.json', JSON.stringify(pkgJson), 'utf8');
+								return files.getMainJsPath()
+									.then(jsPath => {
+										proclaim.equal(jsPath, process.cwd() + '/browser.js');
+									});
+							});
+					});
+			});
+		});
 
-									proclaim.equal(jsPath, process.cwd() + '/main.js');
-								});
-						});
-				});
+		describe('when the package.json manifest file contains a browser property but no main property', function () {
+			it('should get the JavaScript path from the browser property', function () {
+				return files.getMainJsPath()
+					.then(jsPath => {
+						proclaim.equal(jsPath, null);
+						return files.getPackageJson()
+							.then(pkgJson => {
+
+								pkgJson.browser = 'browser.js';
+								fs.writeFileSync('package.json', JSON.stringify(pkgJson), 'utf8');
+								return files.getMainJsPath()
+									.then(jsPath => {
+										proclaim.equal(jsPath, process.cwd() + '/browser.js');
+									});
+							});
+					});
+			});
+		});
+
+		describe('when the package.json manifest file contains a main property but no browser property', function () {
+			it('should get the JavaScript path from the main property', function () {
+				return files.getMainJsPath()
+					.then(jsPath => {
+						proclaim.equal(jsPath, null);
+						return files.getPackageJson()
+							.then(pkgJson => {
+
+								pkgJson.main = 'main.js';
+								fs.writeFileSync('package.json', JSON.stringify(pkgJson), 'utf8');
+								return files.getMainJsPath()
+									.then(jsPath => {
+										proclaim.equal(jsPath, process.cwd() + '/main.js');
+									});
+							});
+					});
+			});
 		});
 	});
 
