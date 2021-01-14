@@ -1,6 +1,6 @@
 {
 	"description": "Origami component development tools.",
-	"origamiType": null,
+	"origamiType": "cli",
 	"origamiVersion": 1,
 	"keywords": [],
 	"support": "https://github.com/Financial-Times/origami-build-tools/issues",
