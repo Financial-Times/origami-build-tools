@@ -109,7 +109,7 @@ describe('obt verify', function () {
 			});
 		});
 
-		describe('component with custom .remarkrc.js configuration', function () {
+		describe('component with custom .remarkrc.cjs configuration', function () {
 
 			beforeEach(function () {
 				// Change the current working directory to the folder which contains the project we are testing against.
