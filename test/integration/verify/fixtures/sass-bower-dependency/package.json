@@ -3,6 +3,7 @@
   "main": [
     "main.scss"
   ],
+  "type": "module",
   "dependencies": {
     "o-test-component": "1.0.7"
   }
