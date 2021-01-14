@@ -211,7 +211,7 @@ describe('obt verify', function () {
 			});
 		});
 
-		describe('component with custom .eslintrc.js configuration', function () {
+		describe('component with custom .eslintrc.cjs configuration', function () {
 
 			beforeEach(function () {
 				// Change the current working directory to the folder which contains the project we are testing against.
