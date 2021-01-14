@@ -1,5 +1,16 @@
 {
-	"name": "test-component",
-	"main": "main.js",
-	"dependencies": {}
+  "name": "js-invalid",
+  "version": "1.0.0",
+  "description": "test component",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint-config-origami-component": "^1.1.1"
+  }
 }

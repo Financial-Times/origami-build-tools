@@ -1,5 +1,18 @@
 {
-	"name": "test-component",
-	"main": [],
-	"dependencies": {}
+  "name": "no-js-or-sass",
+  "version": "1.0.0",
+  "description": "test component",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "remark-preset-lint-origami-component": "^1.2.0",
+    "stylelint-config-origami-component": "^1.0.4",
+    "stylelint": "^13.7.0"
+  }
 }

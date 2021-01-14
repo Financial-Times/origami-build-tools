@@ -20,6 +20,7 @@ describe('verify-javascript', function() {
 	let verifyJavascript;
 	const originalConsole = global.console;
 	let console;
+	this.timeout(10 * 1000);
 	beforeEach(function() {
 		mockery.enable({
 			useCleanCache: true,
