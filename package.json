@@ -17,7 +17,6 @@
 		"@swc/core": "^1.1.39",
 		"aliases": "^1.0.0",
 		"autoprefixer": "^9.7.6",
-		"bower": "^1.8.8",
 		"boxen": "^4.2.0",
 		"chalk": "^4.1.0",
 		"chokidar": "^3.4.0",

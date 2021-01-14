@@ -35,13 +35,13 @@ describe('Files helper', function () {
 				proclaim.equal(name, '');
 			})
 			.then(() => {
-				fs.writeFileSync('bower.json', JSON.stringify({
+				fs.writeFileSync('package.json', JSON.stringify({
 					name: 'o-test'
 				}), 'utf8');
 				return files.getModuleName()
 					.then(name => {
 						proclaim.equal(name, 'o-test');
-						fs.unlinkSync(path.resolve(filesTestPath, 'bower.json'));
+						fs.unlinkSync(path.resolve(filesTestPath, 'package.json'));
 					});
 			});
 	});
@@ -55,98 +55,91 @@ describe('Files helper', function () {
 	});
 
 	it('should check if the module supports silent mode', function () {
-		fs.writeFileSync('bower.json', JSON.stringify({
+		fs.writeFileSync('package.json', JSON.stringify({
 			name: 'o-test'
 		}), 'utf8');
 		return files.getSassFilesList()
 			.then(files.sassSupportsSilent)
 			.then(function (supportsSilent) {
 				proclaim.equal(supportsSilent, true);
-				fs.unlinkSync(path.resolve(filesTestPath, 'bower.json'));
+				fs.unlinkSync(path.resolve(filesTestPath, 'package.json'));
 			});
 	});
 
 	describe('Main files', function () {
 		beforeEach(function () {
-			fs.writeFileSync('bower.json', JSON.stringify({
+			fs.writeFileSync('package.json', JSON.stringify({
 				name: 'o-test'
 			}), 'utf8');
 		});
 
 		afterEach(function () {
-			fs.unlinkSync(path.resolve(filesTestPath, 'bower.json'));
+			fs.unlinkSync(path.resolve(filesTestPath, 'package.json'));
 		});
 
 		it('should get the path of main.scss', function () {
 			return files.getMainSassPath()
 				.then(sassPath => {
-					proclaim.equal(sassPath, null);
-					return files.getBowerJson()
-						.then(bowerJson => {
-							bowerJson.main = bowerJson.main || [];
-							bowerJson.main.push('main.scss');
-							fs.writeFileSync('bower.json', JSON.stringify(bowerJson), 'utf8');
-							return files.getMainSassPath()
-								.then(sassPath => {
-									proclaim.equal(sassPath, process.cwd() + '/main.scss');
-								});
-						});
+					proclaim.equal(sassPath, process.cwd() + '/main.scss');
 				});
 		});
 
-		it('should get the path of main.js', function () {
-			return files.getMainJsPath()
-				.then(jsPath => {
-					proclaim.equal(jsPath, null);
-					return files.getBowerJson()
-						.then(bowerJson => {
+		describe('when the package.json manifest file contains both main and browser properties', function () {
+			it('should get the JavaScript path from the browser property', function () {
+				return files.getMainJsPath()
+					.then(jsPath => {
+						proclaim.equal(jsPath, null);
+						return files.getPackageJson()
+							.then(pkgJson => {
 
-							bowerJson.main = bowerJson.main || [];
-							bowerJson.main.push('main.js');
-							fs.writeFileSync('bower.json', JSON.stringify(bowerJson), 'utf8');
-							return files.getMainJsPath()
-								.then(jsPath => {
-
-									proclaim.equal(jsPath, process.cwd() + '/main.js');
-								});
-						});
-				});
-		});
-	});
-
-	describe('Bower.json', function () {
-		beforeEach(function () {
-			if (fs.existsSync(path.resolve(filesTestPath, 'bower.json'))) {
-				fs.unlinkSync(path.resolve(filesTestPath, 'bower.json'));
-			}
+								pkgJson.browser = 'browser.js';
+								pkgJson.main = 'main.js';
+								fs.writeFileSync('package.json', JSON.stringify(pkgJson), 'utf8');
+								return files.getMainJsPath()
+									.then(jsPath => {
+										proclaim.equal(jsPath, process.cwd() + '/browser.js');
+									});
+							});
+					});
+			});
 		});
 
-		afterEach(function () {
-			fs.unlinkSync(path.resolve(filesTestPath, 'bower.json'));
+		describe('when the package.json manifest file contains a browser property but no main property', function () {
+			it('should get the JavaScript path from the browser property', function () {
+				return files.getMainJsPath()
+					.then(jsPath => {
+						proclaim.equal(jsPath, null);
+						return files.getPackageJson()
+							.then(pkgJson => {
+
+								pkgJson.browser = 'browser.js';
+								fs.writeFileSync('package.json', JSON.stringify(pkgJson), 'utf8');
+								return files.getMainJsPath()
+									.then(jsPath => {
+										proclaim.equal(jsPath, process.cwd() + '/browser.js');
+									});
+							});
+					});
+			});
 		});
 
-		it('should get bower.json', function () {
-			return files.getBowerJson()
-				.then(bowerJson => {
-					proclaim.equal(typeof bowerJson, 'undefined');
-					fs.writeFileSync('bower.json', JSON.stringify({}), 'utf8');
-					return files.getBowerJson()
-						.then(bowerJson => {
-							proclaim.notEqual(typeof bowerJson, 'undefined');
-						});
-				});
-		});
+		describe('when the package.json manifest file contains a main property but no browser property', function () {
+			it('should get the JavaScript path from the main property', function () {
+				return files.getMainJsPath()
+					.then(jsPath => {
+						proclaim.equal(jsPath, null);
+						return files.getPackageJson()
+							.then(pkgJson => {
 
-		it('should check if bower.json is present', function () {
-			return files.bowerJsonExists()
-				.then(exists => {
-					proclaim.equal(exists, false);
-					fs.writeFileSync('bower.json', JSON.stringify({}), 'utf8');
-					return files.bowerJsonExists()
-						.then(exists => {
-							proclaim.equal(exists, true);
-						});
-				});
+								pkgJson.main = 'main.js';
+								fs.writeFileSync('package.json', JSON.stringify(pkgJson), 'utf8');
+								return files.getMainJsPath()
+									.then(jsPath => {
+										proclaim.equal(jsPath, process.cwd() + '/main.js');
+									});
+							});
+					});
+			});
 		});
 	});
 

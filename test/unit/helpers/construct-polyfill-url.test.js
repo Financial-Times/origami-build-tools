@@ -107,8 +107,8 @@ describe('construct-polyfill-url', function() {
 
 			it('does not duplicate features in the polyfill url', () => {
 				fs.readFile.withArgs(path.join(__dirname, '../../../', '/origami.json'), 'utf-8').resolves('{"browserFeatures": {"required": ["Array.prototype.every"]}}');
-				fs.readFile.withArgs(path.join(__dirname, '../../../', '/bower_components/example/origami.json'), 'utf-8').resolves('{"browserFeatures": {"required": ["Array.prototype.every","Array.prototype.some"]}}');
-				globby.resolves(['/origami.json', '/bower_components/example/origami.json']);
+				fs.readFile.withArgs(path.join(__dirname, '../../../', '/node_modules/example/origami.json'), 'utf-8').resolves('{"browserFeatures": {"required": ["Array.prototype.every","Array.prototype.some"]}}');
+				globby.resolves(['/origami.json', '/node_modules/example/origami.json']);
 
 				return constructPolyfillUrl()
 					.then(polyfillUrl => {

@@ -71,7 +71,7 @@ describe('obt verify', function () {
 
 			it('should warn', function () {
 				return execa(obt, ['verify']).then(output => {
-					proclaim.include(output.stdout, 'expected "test-component", got "not-the-component-name"');
+					proclaim.include(output.stdout, 'expected "invalid-readme", got "not-the-component-name"');
 				});
 			});
 		});
@@ -315,7 +315,6 @@ describe('obt verify', function () {
 		});
 
 		describe('component with bower dependency', function () {
-
 			beforeEach(function () {
 				// Change the current working directory to the folder which contains the project we are testing against.
 				// We are doing this to replicate how obt is used when executed inside a terminal.
@@ -423,25 +422,6 @@ describe('obt verify', function () {
 							'Expected the linter to check for indentation with spaces, instead of our default tabs rule.'
 						);
 					});
-			});
-		});
-
-		describe('component with bower dependency', function () {
-
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/sass-bower-dependency'));
-				// Install dependencies.
-				return obtBinPath()
-					.then(obtPath => {
-						obt = obtPath;
-						return execa(obt, ['install']);
-					});
-			});
-
-			it('should not error because of bad sass in a bower dependency', function () {
-				return execa(obt, ['verify']);
 			});
 		});
 

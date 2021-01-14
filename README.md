@@ -59,7 +59,7 @@ Origami Build Tools provides boilerplate for creating up a new Origami component
 		$ obt <command> [<options>]
 
 	Commands
-		install, i             Install npm and bower dependencies required to build the component
+		install, i             Install npm dependencies required to build the component
 		develop, dev           Build demos locally every time a file changes and run a server to view them
 		demo, d                Build demos into the demos directory
 		init                   Initialise a new component with a boilerplate folder structure
@@ -78,7 +78,7 @@ Origami Build Tools provides boilerplate for creating up a new Origami component
 
 ### `install` or `i`
 
-Install npm and bower dependencies required to build components.
+Install npm required to build components.
 
 ### `develop` or `dev`
 

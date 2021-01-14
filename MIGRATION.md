@@ -2,6 +2,14 @@
 
 ## Migrating from v10 to v11
 
+obt no longer supports bower, it now only supports npm.
+
+The `--ignore-bower` flag has been removed.
+
+Installing bower dependencies has been removed.
+
+Bundling/Compiling code which uses bower dependencies is no longer supported.
+
 `obt test` no longer runs `npm test`, this is to allow `obt test` to be a command within the components `npm test` script.
 
 `obt verify` linting enforces fewer configuration options. Ignore patterns must now be configured for each component by creating `.eslintignore` and `.stylelintignore` files, with content that includes `demos/local/**` and any other file patterns which do not need to be linted. `node_modules` is ignored by default.
