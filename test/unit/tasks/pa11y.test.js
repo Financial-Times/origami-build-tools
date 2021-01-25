@@ -32,7 +32,9 @@ describe('Test task', function() {
 				warnOnUnregistered: false
 			});
 			console = {
-				log: sinon.stub()
+				log: sinon.stub(),
+				warn: sinon.stub(),
+				error: sinon.stub()
 			};
 			mockery.registerMock('is-ci', true);
 			process.env.CI = true;
