@@ -46,6 +46,23 @@ describe('Files helper', function () {
 			});
 	});
 
+	it('should not return package namespace in module name', function () {
+		return files.getModuleName()
+			.then(name => {
+				proclaim.equal(name, '');
+			})
+			.then(() => {
+				fs.writeFileSync('package.json', JSON.stringify({
+					name: '@financial-times/o-test'
+				}), 'utf8');
+				return files.getModuleName()
+					.then(name => {
+						proclaim.equal(name, 'o-test');
+						fs.unlinkSync(path.resolve(filesTestPath, 'package.json'));
+					});
+			});
+	});
+
 	it('should return a list of Sass files', function () {
 		return files.getSassFilesList().then(function (sassFiles) {
 			const testResults = [path.join(process.cwd() + '/main.scss'), path.join(process.cwd() + '/src/scss/_variables.scss')];
