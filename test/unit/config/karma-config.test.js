@@ -13,10 +13,10 @@ describe('base karma config', () => {
 	const mockScss = 'boby:after{content:"hello"}';
 
 	beforeEach(() => {
-		const getModuleNameMock = sinon.stub(fileHelpers, 'getModuleName');
+		const getComponentNameMock = sinon.stub(fileHelpers, 'getComponentName');
 		const readIfExistsMock = sinon.stub(fileHelpers, 'readIfExists');
 
-		getModuleNameMock.returns(new Promise((resolve) => {
+		getComponentNameMock.returns(new Promise((resolve) => {
 			resolve(mockName);
 		}));
 
@@ -26,7 +26,7 @@ describe('base karma config', () => {
 	});
 
 	afterEach(() => {
-		fileHelpers.getModuleName.restore();
+		fileHelpers.getComponentName.restore();
 		fileHelpers.readIfExists.restore();
 	});
 

@@ -30,7 +30,7 @@ describe('Files helper', function () {
 	});
 
 	it('should return module name', function () {
-		return files.getModuleName()
+		return files.getComponentName()
 			.then(name => {
 				proclaim.equal(name, '');
 			})
@@ -38,7 +38,7 @@ describe('Files helper', function () {
 				fs.writeFileSync('package.json', JSON.stringify({
 					name: 'o-test'
 				}), 'utf8');
-				return files.getModuleName()
+				return files.getComponentName()
 					.then(name => {
 						proclaim.equal(name, 'o-test');
 						fs.unlinkSync(path.resolve(filesTestPath, 'package.json'));
@@ -47,7 +47,7 @@ describe('Files helper', function () {
 	});
 
 	it('should not return package namespace in module name', function () {
-		return files.getModuleName()
+		return files.getComponentName()
 			.then(name => {
 				proclaim.equal(name, '');
 			})
@@ -55,7 +55,7 @@ describe('Files helper', function () {
 				fs.writeFileSync('package.json', JSON.stringify({
 					name: '@financial-times/o-test'
 				}), 'utf8');
-				return files.getModuleName()
+				return files.getComponentName()
 					.then(name => {
 						proclaim.equal(name, 'o-test');
 						fs.unlinkSync(path.resolve(filesTestPath, 'package.json'));

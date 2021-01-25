@@ -8,7 +8,7 @@ const karmaScrumple = require('../lib/karma-scrumple');
 const karmaSwc = require('../lib/karma-swc');
 
 module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
-	return Promise.all([fileHelpers.getModuleName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
+	return Promise.all([fileHelpers.getComponentName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
 		const moduleName = values[0];
 		const brands = values[1];
 		const mainScssContent = values[2];
