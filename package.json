@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@babel/core": "^7.12.10",
+		"@financial-times/karma-proclaim": "^1.1.2",
 		"@financial-times/sass": "^1.31.0",
 		"aliases": "^1.0.0",
 		"autoprefixer": "^9.7.6",
@@ -35,7 +36,6 @@
 		"karma-browserstack-launcher": "^1.5.2",
 		"karma-chrome-launcher": "^3.1.0",
 		"karma-mocha": "^2.0.0",
-		"karma-proclaim": "git+https://github.com/Financial-Times/karma-proclaim.git",
 		"karma-scss-preprocessor": "^4.0.0",
 		"karma-sinon": "^1.0.5",
 		"karma-sourcemap-loader": "^0.3.7",
