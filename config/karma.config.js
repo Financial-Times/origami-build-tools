@@ -4,9 +4,6 @@ const process = require('process');
 const path = require('path');
 const fileHelpers = require('../lib/helpers/files');
 
-const karmaScrumple = require('../lib/karma-scrumple');
-const karmaSwc = require('../lib/karma-swc');
-
 module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 	return Promise.all([fileHelpers.getComponentName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
 		const moduleName = values[0];
@@ -54,9 +51,7 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 			frameworks: ['mocha', 'sinon', 'proclaim'],
 
 			plugins: [
-				'karma-*',
-				karmaScrumple,
-				karmaSwc
+				'karma-*'
 			],
 
 			// web server port
@@ -65,7 +60,7 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 			// preprocess matching files before serving them to the browser
 			// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 			preprocessors: {
-				'test/**/*.js': ['swc', 'scrumple', 'sourcemap'],
+				'test/**/*.js': ['esbuild', 'sourcemap'],
 				'main.scss': ['scss']
 			},
 			scssPreprocessor: {
