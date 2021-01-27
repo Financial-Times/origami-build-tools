@@ -51,7 +51,8 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 			frameworks: ['mocha', 'sinon', 'proclaim'],
 
 			plugins: [
-				'karma-*'
+				'karma-*',
+				'@financial-times/karma-proclaim'
 			],
 
 			// web server port
