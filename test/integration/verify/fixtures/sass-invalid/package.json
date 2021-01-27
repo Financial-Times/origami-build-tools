@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "stylelint-config-origami-component": "^1.0.4",
-    "stylelint": "^13.7.0"
+    "stylelint": "^13.7.0",
+    "stylelint-config-origami-component": "^1.0.4"
   }
 }
