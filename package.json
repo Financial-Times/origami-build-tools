@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@babel/core": "^7.12.10",
+		"@babel/preset-env": "^7.12.11",
 		"@financial-times/karma-proclaim": "^1.1.2",
 		"@financial-times/sass": "^1.31.0",
 		"aliases": "^1.0.0",

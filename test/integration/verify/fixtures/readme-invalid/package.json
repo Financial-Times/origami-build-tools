@@ -14,7 +14,7 @@
   "devDependencies": {
     "eslint-config-origami-component": "^1.1.1",
     "remark-preset-lint-origami-component": "2.0.0-beta.1",
-    "stylelint-config-origami-component": "^1.0.4",
-    "stylelint": "^13.7.0"
+    "stylelint": "^13.7.0",
+    "stylelint-config-origami-component": "^1.0.4"
   }
 }

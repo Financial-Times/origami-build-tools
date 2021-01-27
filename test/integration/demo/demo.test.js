@@ -223,7 +223,7 @@ describe('obt demo', function () {
 		it('should build demo javascript', function () {
 			const expectedBuiltJsPath1 = path.resolve(testDirectory, 'demos/local/demo.js');
 			const expectedBuiltJsPath2 = path.resolve(testDirectory, 'demos/local/demo-2.js');
-			const expectedJsInDemo1 = 'oMultipleDemos.init()';
+			const expectedJsInDemo1 = 'oMultipleDemos';
 			const expectedJsInDemo2 = 'console.log(demoTwo)';
 			let builtDemoJs1 = '';
 			let builtDemoJs2 = '';
