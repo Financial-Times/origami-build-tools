@@ -60,8 +60,31 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 
 			// preprocess matching files before serving them to the browser
 			// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+			babelPreprocessor: {
+				options: {
+					presets: [
+						[
+							require.resolve('@babel/preset-env'),
+							{
+								// https://docs.google.com/document/d/1z6kecy_o9qHYIznTmqQ-IJqre72jhfd0nVa4JMsS7Q4/
+								"targets": {
+									"safari": "11",
+									"ios": "9",
+									"ie": "11",
+									"samsung": "9"
+								}
+							}
+						]
+					],
+					configFile: false,
+					envName: 'development',
+					inputSourceMap: true,
+					sourceMaps: 'inline',
+					sourceType: 'script'
+				},
+			},
 			preprocessors: {
-				'test/**/*.js': ['esbuild', 'sourcemap'],
+				'test/**/*.js': ['esbuild', 'babel', 'sourcemap'],
 				'main.scss': ['scss']
 			},
 			scssPreprocessor: {
