@@ -248,4 +248,33 @@ describe('Files helper', function () {
 
 	});
 
+	describe('getComponentDemos', function () {
+		it('should return the component\'s `demos` configuration from origami.json', async function () {
+			const demos = await files.getComponentDemos();
+			proclaim.isArray(demos, 'Expected an array of demos.');
+			proclaim.ok(demos.some(d => d.name === 'pa11y'), 'Expected to find a test demo with name "pa11y"');
+		});
+
+		it('should return an empty array given no origami.json manifest', async function () {
+			fs.unlinkSync(path.resolve(filesTestPath, 'origami.json'));
+			const demos = await files.getComponentDemos();
+			proclaim.isArray(demos);
+			proclaim.lengthEquals(demos, 0, 'Expected an empty array.');
+		});
+	});
+
+	describe('getComponentDefaultDemoConfig', function () {
+		it('should return the component\'s `demosDefaults` configuration from origami.json', async function () {
+			const demosDefaults = await files.getComponentDefaultDemoConfig();
+			proclaim.isObject(demosDefaults, 'Expected an object of default demo configuration.');
+			proclaim.ok(demosDefaults.sass, 'Expected to confirm demo default configuration by finding "sass" configuration, but found none.');
+		});
+
+		it('should return an empty object given no origami.json manifest', async function () {
+			fs.unlinkSync(path.resolve(filesTestPath, 'origami.json'));
+			const demosDefaults = await files.getComponentDefaultDemoConfig();
+			proclaim.isObject(demosDefaults, {}, 'Expected an object given missing default demo configuration.');
+			proclaim.lengthEquals(Object.keys(demosDefaults), 0, 'Expected an empty object given missing default demo configuration.');
+		});
+	});
 });
