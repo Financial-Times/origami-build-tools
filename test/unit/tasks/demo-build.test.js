@@ -36,46 +36,26 @@ describe('Demo task', function () {
 	});
 
 	describe('Build demos', function () {
-		it('should fail if there is not a config file', function () {
+		it('should error if no demos are found', function () {
 			process.chdir(oNoManifestPath);
 			fs.writeFileSync('package.json', '{"name":"o-test"}', 'utf8');
 			return demo()
 				.then(() => {
 					throw new Error('promise resolved when it should have rejected');
 				}, function (err) {
-					proclaim.equal(err.message, `Couldn\'t find demos config path, checked: ${path.join(process.cwd(),'origami.json')}`);
+					proclaim.equal(
+						err.message,
+						'No demos exist in origami.json file. Reference ' +
+						'https://origami.ft.com/spec to help configure demos ' +
+						'for the component.'
+					);
 					fs.unlinkSync(path.resolve(oNoManifestPath, 'package.json'));
 					process.chdir(demoTestPath);
 				});
 		});
 
-		it('should error with a custom config file', function () {
-			fs.writeFileSync('package.json', '{"name":"o-test"}', 'utf8');
-			fs.copySync('demos/src/config.json', 'demos/src/mysupercoolconfig.json');
-			return demo({
-				demoConfig: 'demos/src/mysupercoolconfig.json'
-			})
-				.then(() => {
-					throw new Error('promise resolved when it should have rejected');
-				}, function errorHandler(err) {
-					// It will throw a template not found error which is fixed in "should build html" test
-					proclaim.notEqual(err.message, 'Couldn\'t find demos config path, checked: demos/src/mysupercoolconfigs.json');
-				});
-		});
-
 		it('should not fail using origami.json', function () {
 			return demo();
-		});
-
-		it('should fail if it\'s using the old config format', function () {
-			return demo({
-				demoConfig: 'demos/src/oldconfig.json'
-			})
-				.then(() => {
-					throw new Error('promise resolved when it should have rejected');
-				}, function () {
-					proclaim.ok(true);
-				});
 		});
 
 		it('should fail if there are demos with the same name', function () {

@@ -44,7 +44,6 @@ describe('Test task', function() {
 			demo = require('../../../lib/tasks/demo-build');
 			pa11y = require('../../../lib/tasks/pa11y');
 			return demo({
-				demoConfig: 'origami.json',
 				demoFilter: ['pa11y']
 			});
 		});
@@ -65,14 +64,21 @@ describe('Test task', function() {
 		});
 
 		describe('skip', () => {
-			it('should return a truthy value if the file does not exist', function() {
-				fs.removeSync(path.join(process.cwd(), '/demos/src/pa11y.mustache'));
+			it('should return a truthy value if origami.json has no demo with name "pa11y"', function() {
+				const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
+				origamiJSON.demos = [];
+				fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
 				return pa11y().skip().then(result => proclaim.isTrue(Boolean(result)));
 			});
 
-			it('should return a helpful message if the file does not exist', function() {
-				fs.removeSync(path.join(process.cwd(), '/demos/src/pa11y.mustache'));
-				return pa11y().skip().then(result => proclaim.equal(result, `No Pa11y demo found. To run Pa11y against this project, create a file at ${path.join(process.cwd(), '/demos/local/pa11y.html')}`));
+			it('should return a helpful message if origami.json has no demo with name "pa11y"', function() {
+				const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
+				origamiJSON.demos = [];
+				fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
+				return pa11y().skip().then(result => proclaim.equal(
+					result,
+					'No Pa11y demo found. Create a demo with name "pa11y" to run Pa11y against this project.'
+				));
 			});
 
 			it('should return a falsey value if the file does exist', function() {
