@@ -43,7 +43,7 @@
 		"listr": "^0.14.3",
 		"listr-multiline-renderer": "^1.1.0",
 		"meow": "^7.0.1",
-		"merge-deep": "^3.0.2",
+		"merge-deep": "^3.0.3",
 		"mocha": "^8.2.0",
 		"mockery": "^2.1.0",
 		"mustache": "^4.0.1",
