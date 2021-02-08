@@ -186,11 +186,11 @@ describe('obt demo', function () {
 
 		it('should include a request to the Origami Build Service in demo markup for demo dependencies', function () {
 			// demo dependency css
-			proclaim.include(builtDemoHtml1, '<link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v2/bundles/css?modules=o-fonts@^4.0.0" />');
-			proclaim.include(builtDemoHtml2, '<link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v2/bundles/css?modules=o-fonts@^4.0.0" />');
+			proclaim.include(builtDemoHtml1, '<link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v3/bundles/css?system_code=origami&modules=o-fonts@^4.0.0&brand=master" />');
+			proclaim.include(builtDemoHtml2, '<link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v3/bundles/css?system_code=origami&modules=o-fonts@^4.0.0&brand=master" />');
 			// demo dependency js
-			proclaim.include(builtDemoHtml1, 'https://www.ft.com/__origami/service/build/v2/bundles/js?modules=o-fonts@^4.0.0');
-			proclaim.include(builtDemoHtml2, 'https://www.ft.com/__origami/service/build/v2/bundles/js?modules=o-fonts@^4.0.0');
+			proclaim.include(builtDemoHtml1, '<script src="https://www.ft.com/__origami/service/build/v3/bundles/js?system_code=origami&modules=o-fonts@^4.0.0" defer></script>');
+			proclaim.include(builtDemoHtml2, '<script src="https://www.ft.com/__origami/service/build/v3/bundles/js?system_code=origami&modules=o-fonts@^4.0.0" defer></script>');
 		});
 
 		it('should build demo css', function () {
@@ -250,6 +250,63 @@ describe('obt demo', function () {
 				expectedJsInDemo2,
 				'Expected demo 2 javascript to include demo specific javascript.'
 			);
+		});
+	});
+
+	describe('component demo built as single file', function () {
+		const testDirectory = uniqueTempDir({ create: true });
+		const fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
+		const expectedBuiltDemoPath2 = path.resolve(testDirectory, 'demos/local/demo-2.html');
+		let builtDemoHtml2 = '';
+
+		before(async function () {
+			// copy fixture (example component with multiple demos)
+			// to a temporary test directory
+			fs.copySync(fixturesDirectory, testDirectory);
+			process.chdir(testDirectory);
+			const obt = await obtBinPath();
+			// Run obt demo
+			await execa(obt, ['demo', '--single-file-demo', '--demo-filter=demo-2']);
+			// Get the built demo html content we expect
+			// If the file is not found move on, later test
+			// assertions will cover that
+			try {
+				builtDemoHtml2 = fs.readFileSync(expectedBuiltDemoPath2, 'utf8');
+			} catch(e) {
+				// assume no files found
+			}
+		});
+
+		after(function () {
+			// remove temporary test directory
+			process.chdir(process.cwd());
+			return rimraf(testDirectory);
+		});
+
+		it('should have created a html file for each demo', function () {
+			proclaim.ok(
+				fileExists(expectedBuiltDemoPath2),
+				'Could not find the built demo html file for demo-2.'
+			);
+		});
+
+		it('should have rendered demo html in the body of the demo template', function () {
+			proclaim.include(builtDemoHtml2, 'demo 2');
+		});
+
+		it('should have included demo css in the demo html', function () {
+			proclaim.include(builtDemoHtml2, '<style>.demo-two{content:"demo 2 here"}');
+		});
+
+		it('should have included demo javascript in the demo html', function () {
+			proclaim.include(builtDemoHtml2, '(function () {\n  // demos/src/demo-2.js\n  var demoTwo = "demo 2 here";\n  console.log(demoTwo);\n})();');
+		});
+
+		it('should include a request to the Origami Build Service in demo markup for demo dependencies', function () {
+			// demo dependency css
+			proclaim.include(builtDemoHtml2, '<link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v3/bundles/css?system_code=origami&modules=o-fonts@^4.0.0&brand=master" />');
+			// demo dependency js
+			proclaim.include(builtDemoHtml2, '<script src="https://www.ft.com/__origami/service/build/v3/bundles/js?system_code=origami&modules=o-fonts@^4.0.0" defer></script>');
 		});
 	});
 });

@@ -87,8 +87,8 @@ describe('Build Sass', function () {
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/bundle.css', 'utf8');
-				proclaim.include(builtCss, 'div {\n  content: Brand is set to internal;\n  color: blue;\n}');
-				proclaim.include(result, 'div {\n  content: Brand is set to internal;\n  color: blue;\n}');
+				proclaim.include(builtCss, 'div {\n  content: "Brand is set to internal";\n  color: blue;\n}');
+				proclaim.include(result, 'div {\n  content: "Brand is set to internal";\n  color: blue;\n}');
 			});
 	});
 

@@ -14,6 +14,15 @@ const pathSuffix = '-demo';
 const demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 const demo = require('../../../lib/tasks/demo-build');
 
+function addDemoToOrigamiConfig (demosConfig) {
+	if (!Array.isArray(demosConfig)) {
+		demosConfig = [demosConfig];
+	}
+	const origamiConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
+	demosConfig.forEach((demoConfig) => origamiConfig.demos.push(demoConfig));
+	fs.writeFileSync('origami.json', JSON.stringify(origamiConfig));
+}
+
 describe('Demo task', function () {
 
 	beforeEach(function () {
@@ -115,7 +124,7 @@ describe('Demo task', function () {
 					proclaim.include(fs.readFileSync('demos/local/test1.html', 'utf8'), '<div>test1</div>');
 					proclaim.include(fs.readFileSync('demos/local/test2.html', 'utf8'), '<div>test2</div>');
 					proclaim.include(fs.readFileSync('demos/local/demo.js', 'utf8'), `var name = "test";`);
-					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div {\n  color: blue;\n}');
+					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div{color:blue}');
 					fs.removeSync('demos/local');
 				});
 		});
@@ -163,7 +172,7 @@ describe('Demo task', function () {
 				brand: 'internal'
 			})
 				.then(function () {
-					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div {\n  content: Brand is set to internal;\n  color: blue;\n}');
+					proclaim.include(fs.readFileSync('demos/local/demo.css', 'utf8'), 'div{content:"Brand is set to internal";color:blue}');
 					fs.removeSync('demos/local');
 				});
 		});
@@ -213,14 +222,25 @@ describe('Demo task', function () {
 					proclaim.include(test2, '<div>partial2</div>');
 				});
 		});
+	});
 
-		function addDemoToOrigamiConfig (demosConfig) {
-			if (!Array.isArray(demosConfig)) {
-				demosConfig = [demosConfig];
-			}
-			const origamiConfig = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
-			demosConfig.forEach((demoConfig) => origamiConfig.demos.push(demoConfig));
-			fs.writeFileSync('origami.json', JSON.stringify(origamiConfig));
-		}
+	context('when --single-file-demo is set', function(){
+		it('should inline demo css and js into html file ', function () {
+			addDemoToOrigamiConfig([{
+				"name": "test1",
+				"template": "demos/src/test1.mustache",
+				"path": "/demos/test1.html",
+				"description": "First test"
+			}]);
+			fs.writeFileSync('demos/src/test1.mustache', '<div>test1</div>', 'utf8');
+			return demo({singleFileDemo:true})
+				.then(function () {
+					const demo1html = fs.readFileSync('demos/local/test1.html', 'utf8');
+					proclaim.include(demo1html, '<div>test1</div>');
+					proclaim.include(demo1html, `var name = "test";`);
+					proclaim.include(demo1html, 'div{color:blue}');
+					fs.removeSync('demos/local');
+				});
+		});
 	});
 });

@@ -72,6 +72,7 @@ Origami Build Tools provides boilerplate for creating up a new Origami component
 		--browserstack             Run tests using Browserstack instead of Chrome Stable
 		--demo-filter=<demo-name>  Build a specific demo. E.G. --demo-filter=pa11y to build only the pa11y.html demo.
 		--brand=<brand-name>       Build SCSS for a given brand. E.G. --brand=internal to build the component for the internal brand.
+		--single-file-demo         Build the demo html as a single file which has the demo css and js inlined.
 		--debug                    Keep the test runner open to enable debugging in any browser.
 
 ## Commands

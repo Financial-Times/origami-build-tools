@@ -15,10 +15,6 @@
 		<script src="{{{oDemoPolyfillUrl}}}"></script>
 	{{/oDemoPolyfillUrl}}
 
-	{{#oDemoComponentScriptPath}}
-		<script src="{{{ oDemoComponentScriptPath }}}" defer></script>
-	{{/oDemoComponentScriptPath}}
-
 	{{#oDemoDependenciesScriptPath}}
 		<script src="{{{ oDemoDependenciesScriptPath }}}" defer></script>
 	{{/oDemoDependenciesScriptPath}}
@@ -30,9 +26,19 @@
 	{{#oDemoComponentStylePath}}
 		<link rel="stylesheet" href="{{{.}}}" />
 	{{/oDemoComponentStylePath}}
+
+	{{#oDemoComponentStyle}}
+		<style>{{{.}}}</style>
+	{{/oDemoComponentStyle}}
 </head>
 <body>
 	{{> oDemoTpl}}
 	<script src="https://registry.origami.ft.com/embedapi?autoload=resize"></script>
+	{{#oDemoComponentScriptPath}}
+		<script src="{{{ oDemoComponentScriptPath }}}" defer></script>
+	{{/oDemoComponentScriptPath}}
+	{{#oDemoComponentScript}}
+		<script>{{{ oDemoComponentScript }}}</script>
+	{{/oDemoComponentScript}}
 </body>
 </html>

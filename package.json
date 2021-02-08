@@ -94,5 +94,8 @@
 		"test:unit": "make test-unit",
 		"test:integration": "make test-integration"
 	},
-	"snyk": true
+	"snyk": true,
+	"volta": {
+		"node": "14.15.4"
+	}
 }
