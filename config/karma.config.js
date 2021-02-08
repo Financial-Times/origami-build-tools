@@ -3,6 +3,7 @@
 const process = require('process');
 const path = require('path');
 const fileHelpers = require('../lib/helpers/files');
+const karmaSass = require('../lib/plugins/dart-sass-karma');
 
 module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 	return Promise.all([fileHelpers.getComponentName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
@@ -52,6 +53,7 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 
 			plugins: [
 				'karma-*',
+				karmaSass,
 				'@financial-times/karma-proclaim'
 			],
 
