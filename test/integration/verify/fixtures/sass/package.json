@@ -1,5 +1,4 @@
 {
 	"name": "test-component",
-	"type": "module",
-	"dependencies": {}
+	"type": "module"
 }
