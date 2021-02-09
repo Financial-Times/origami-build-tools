@@ -313,24 +313,6 @@ describe('obt verify', function () {
 					});
 			});
 		});
-
-		describe('component with bower dependency', function () {
-			beforeEach(function () {
-				// Change the current working directory to the folder which contains the project we are testing against.
-				// We are doing this to replicate how obt is used when executed inside a terminal.
-				process.chdir(path.join(__dirname, '/fixtures/js-bower-dependency'));
-				// Install dependencies.
-				return obtBinPath()
-					.then(obtPath => {
-						obt = obtPath;
-						return execa(obt, ['install']);
-					});
-			});
-
-			it('should not error because of bad js in a bower dependency', function () {
-				return execa(obt, ['verify']);
-			});
-		});
 	});
 
 	describe('sass', function () {
