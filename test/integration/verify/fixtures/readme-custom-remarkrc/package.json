@@ -1,6 +1,5 @@
 {
 	"name": "test-component",
 	"main": [],
-	"type": "module",
-	"dependencies": {}
+	"type": "module"
 }
