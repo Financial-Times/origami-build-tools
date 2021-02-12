@@ -277,4 +277,30 @@ describe('Files helper', function () {
 			proclaim.lengthEquals(Object.keys(demosDefaults), 0, 'Expected an empty object given missing default demo configuration.');
 		});
 	});
+
+	describe('getModuleBrands', function() {
+		context('if no brands are defined', function() {
+			it('should return an array containing only `master`, `internal`, `whitelabel`', async function(){
+				const brands = await files.getModuleBrands();
+				proclaim.deepStrictEqual(brands, ['master', 'internal', 'whitelabel']);
+			});
+		});
+
+		context('if brands is defined as an array with no items', function(){
+			it('should return an array containing only `master`, `internal`, `whitelabel`', async function(){
+				const brands = await files.getModuleBrands();
+				proclaim.deepStrictEqual(brands, ['master', 'internal', 'whitelabel']);
+			});
+		});
+
+		context('if brands is defined as an array with items', function(){
+			it('should return an arary with the same items as those defined', async function() {
+				const origamiManifest = JSON.parse(fs.readFileSync('origami.json', 'utf8'));
+				origamiManifest.brands = ['master'];
+				fs.writeFileSync('origami.json', JSON.stringify(origamiManifest), 'utf8');
+				const brands = await files.getModuleBrands();
+				proclaim.deepStrictEqual(brands, ['master']);
+			});
+		});
+	});
 });
