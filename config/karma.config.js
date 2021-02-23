@@ -58,7 +58,8 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			plugins: [
 				'karma-*',
 				karmaScrumple,
-				karmaSwc
+				karmaSwc,
+				'@financial-times/karma-proclaim'
 			],
 
 			// web server port
