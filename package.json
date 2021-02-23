@@ -14,7 +14,7 @@
 	"dependencies": {
 		"@financial-times/sass": "^1.31.0",
 		"@swc/cli": "^0.1.24",
-		"@swc/core": "^1.1.39",
+		"@swc/core": "1.2.47",
 		"aliases": "^1.0.0",
 		"autoprefixer": "^9.7.6",
 		"bower": "^1.8.8",
