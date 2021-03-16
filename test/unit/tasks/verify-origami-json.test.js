@@ -289,13 +289,14 @@ describe('verify-origami-json', function () {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
+						'The origamiVersion property must be a string.\n' +
 						'The origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.\n\n' +
 						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
 					);
 					proclaim.calledOnce(console.log);
 					proclaim.calledWithExactly(
 						console.log,
-						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
+						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiVersion property must be a string.%0AThe origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
 					);
 				});
 		});
@@ -311,13 +312,14 @@ describe('verify-origami-json', function () {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
+						'The origamiVersion property must be a string.\n' +
 						'The origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.\n\n' +
 						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
 					);
 					proclaim.calledOnce(console.log);
 					proclaim.calledWithExactly(
 						console.log,
-						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
+						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiVersion property must be a string.%0AThe origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
 					);
 				});
 		});
