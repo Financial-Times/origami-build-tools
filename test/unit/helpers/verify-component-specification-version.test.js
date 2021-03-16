@@ -21,9 +21,17 @@ describe('verify-component-specification-version', function () {
 		verifyComponentSpecificationVersion = require('../../../lib/helpers/verify-component-specification-version');
 	});
 
-	it('returns undefined for a component which follows version "2" of the spec', async function () {
+	it('returns undefined for a component which follows version "2.0" of the spec', async function () {
 		origamiManifest = {
-			origamiVersion: 2
+			origamiVersion: "2.0"
+		};
+		const result = await verifyComponentSpecificationVersion();
+		proclaim.isUndefined(result);
+	});
+
+	it('returns undefined for a component which follows version "2.1" of the spec', async function () {
+		origamiManifest = {
+			origamiVersion: "2.0"
 		};
 		const result = await verifyComponentSpecificationVersion();
 		proclaim.isUndefined(result);
@@ -31,15 +39,15 @@ describe('verify-component-specification-version', function () {
 
 	it('returns undefined for a component which follows some future version of the spec', async function () {
 		origamiManifest = {
-			origamiVersion: 9999
+			origamiVersion: "13.7"
 		};
 		const result = await verifyComponentSpecificationVersion();
 		proclaim.isUndefined(result);
 	});
 
-	it('throws an error for a component which follows version "2" of the spec but is misconfigured with a string instead of a number', async function () {
+	it('throws an error for a component which follows version "2" of the spec but is misconfigured with a number instead of a string', async function () {
 		origamiManifest = {
-			origamiVersion: "2"
+			origamiVersion: 2.0
 		};
 		try {
 			await verifyComponentSpecificationVersion();

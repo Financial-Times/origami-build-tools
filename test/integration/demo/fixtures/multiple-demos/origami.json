@@ -3,7 +3,7 @@
 	"keywords": [],
 	"origamiType": "module",
 	"origamiCategory": "components",
-	"origamiVersion": 2,
+	"origamiVersion": "2.0",
 	"brands": ["master"],
 	"support": "https://github.com/Financial-Times/o-multiple-demos/issues",
 	"supportContact": {
