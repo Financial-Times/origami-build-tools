@@ -1,7 +1,7 @@
 {
     "description": "Test module",
     "origamiType": "module",
-    "origamiVersion": 2,
+    "origamiVersion": "2.0",
     "support": "origami.support@ft.com",
     "supportStatus": "active",
     "demosDefaults": {
