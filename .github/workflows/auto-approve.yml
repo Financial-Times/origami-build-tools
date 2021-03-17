@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - id: auto-approve-dependabot
-      uses: hmarr/auto-approve-action@v2.0.0
+      uses: hmarr/auto-approve-action@v2.1.0
       if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
       with:
         github-token: "${{ secrets.ORIGAMI_FOX_ACCESS_TOKEN }}"
