@@ -101,9 +101,6 @@
 	},
 	"license": "MIT",
 	"scripts": {
-		"snyk-protect": "snyk protect",
-		"prepare": "npm run snyk-protect",
 		"test": "make test"
-	},
-	"snyk": true
+	}
 }
