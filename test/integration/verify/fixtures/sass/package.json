@@ -1,4 +1,6 @@
 {
 	"name": "test-component",
+	"description": "for a fixture",
+	"keywords": [],
 	"type": "module"
 }
