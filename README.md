@@ -43,7 +43,7 @@ Also run the components tests:
 
 `obt test`
 
-To debug JavaScript test errors with immediate feedback and breakpoints, pass the `debug` flag. This will open the tests in a browser window with logs in the browser console:
+To debug JavaScript test errors with immediate feedback and breakpoints, pass the `debug` flag. This will open the tests in a browser window with logs in the browser console. It will also watch and rebuild tests when you make changes:
 
 `obt test --debug`
 

@@ -42,9 +42,26 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 			// list of files / patterns to load in the browser
 			files: [
 				require.resolve('regenerator-runtime'),
-				'test/*.js',
 				'test/**/*.js',
-				'main.scss'
+				'main.scss',
+				{
+					pattern: 'main.js',
+					watched: true,
+					included: false,
+					served: false
+				},
+				{
+					pattern: 'src/**/*.js',
+					watched: true,
+					included: false,
+					served: false
+				},
+				{
+					pattern: 'src/**/*.scss',
+					watched: true,
+					included: false,
+					served: false
+				},
 			],
 
 			// frameworks to use
@@ -103,3 +120,4 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 		};
 	});
 };
+
