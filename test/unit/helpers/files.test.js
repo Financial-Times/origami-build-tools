@@ -32,24 +32,14 @@ describe('Files helper', function () {
 	it('should return module name', function () {
 		return files.getComponentName()
 			.then(name => {
-				proclaim.equal(name, '');
-			})
-			.then(() => {
-				fs.writeFileSync('package.json', JSON.stringify({
-					name: 'o-test'
-				}), 'utf8');
-				return files.getComponentName()
-					.then(name => {
-						proclaim.equal(name, 'o-test');
-						fs.unlinkSync(path.resolve(filesTestPath, 'package.json'));
-					});
+				proclaim.equal(name, 'o-test');
 			});
 	});
 
 	it('should not return package namespace in module name', function () {
 		return files.getComponentName()
 			.then(name => {
-				proclaim.equal(name, '');
+				proclaim.equal(name, 'o-test');
 			})
 			.then(() => {
 				fs.writeFileSync('package.json', JSON.stringify({
