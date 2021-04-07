@@ -83,7 +83,6 @@ describe('verify-package-json', function () {
 		it('should run package.json check successfully', function () {
 			return verifyPackageJson().task().
 				then(function (verifiedpackageJson) {
-					console.log({verifiedpackageJson})
 					proclaim.equal(verifiedpackageJson.length, 0);
 				});
 		});
