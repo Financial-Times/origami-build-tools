@@ -98,29 +98,29 @@ describe('verify-package-json', function () {
 			fs.writeFileSync('package.json', JSON.stringify({}), 'utf8');
 
 			let errored;
-				try {
-					await verifyPackageJson().task();
-					errored = false;
-				} catch (error) {
-					errored = true;
-					proclaim.equal(
-						error.message,
-						'Failed linting:\n\n' +
+			try {
+				await verifyPackageJson().task();
+				errored = false;
+			} catch (error) {
+				errored = true;
+				proclaim.equal(
+					error.message,
+					'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
-					);
-					proclaim.calledOnce(console.log);
+				);
+				proclaim.calledOnce(console.log);
 
-					proclaim.deepStrictEqual(
-						console.log.lastCall.args,
-						[`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`]
-					);
-				}
+				proclaim.deepStrictEqual(
+					console.log.lastCall.args,
+					[`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`]
+				);
+			}
 
-				if (!errored) {
-					proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
-				}
+			if (!errored) {
+				proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+			}
 		});
 
 		it('should write to the output a github annotation if empty package.json', async function() {
