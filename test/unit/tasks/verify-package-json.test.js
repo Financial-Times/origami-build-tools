@@ -83,6 +83,7 @@ describe('verify-package-json', function () {
 		it('should run package.json check successfully', function () {
 			return verifyPackageJson().task().
 				then(function (verifiedpackageJson) {
+					console.log({verifiedpackageJson})
 					proclaim.equal(verifiedpackageJson.length, 0);
 				});
 		});
@@ -94,158 +95,236 @@ describe('verify-package-json', function () {
 			proclaim.notCalled(console.log);
 		});
 
-		it('should fail with an empty package.json', function () {
+		it('should fail with an empty package.json', async function () {
 			fs.writeFileSync('package.json', JSON.stringify({}), 'utf8');
 
-			return verifyPackageJson().task()
-				.catch(function (verifiedpackageJson) {
+			let errored;
+				try {
+					await verifyPackageJson().task();
+					errored = false;
+				} catch (error) {
+					errored = true;
 					proclaim.equal(
-						verifiedpackageJson.message,
+						error.message,
 						'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 					);
-				});
+					proclaim.calledOnce(console.log);
+
+					proclaim.deepStrictEqual(
+						console.log.lastCall.args,
+						[`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`]
+					);
+				}
+
+				if (!errored) {
+					proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+				}
 		});
 
 		it('should write to the output a github annotation if empty package.json', async function() {
+			fs.writeFileSync('package.json', JSON.stringify({}), 'utf8');
+
+			let errored;
 			try {
-				fs.writeFileSync('package.json', JSON.stringify({}), 'utf8');
 				await verifyPackageJson().task();
-			} catch (e) {
-				proclaim.ok(e, `Unexpected error: ${e.message}`);
-				proclaim.calledOnce(console.log);
-				proclaim.calledWithExactly(
-					console.log,
-					`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
+				errored = false;
+			} catch (error) {
+				errored = true;
+				proclaim.equal(
+					error.message,
+					'Failed linting:\n\n' +
+						'A description property is required. It must be a string which describes the component.\n' +
+						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
+						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
+				proclaim.calledOnce(console.log);
+				proclaim.deepStrictEqual(
+					console.log.lastCall.args,
+					[`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`]
+				);
+			}
+
+			if (!errored) {
+				proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
 			}
 		});
 
-		it('should fail if missing description property', function () {
+		it('should fail if missing description property', async function () {
 			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
 			delete packageJSON.description;
 			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
-			return verifyPackageJson().task()
-				.catch(function (verifiedpackageJson) {
-					proclaim.equal(
-						verifiedpackageJson.message,
-						'Failed linting:\n\n' +
+			let errored;
+			try {
+				await verifyPackageJson().task();
+				errored = false;
+			} catch (error) {
+				errored = true;
+				proclaim.equal(
+					error.message,
+					'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
-					);
-					proclaim.calledOnce(console.log);
-					proclaim.calledWithExactly(
-						console.log,
-						`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
-					);
-				});
+				);
+				proclaim.calledOnce(console.log);
+				proclaim.calledWithExactly(
+					console.log,
+					`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
+				);
+			}
+
+			if (!errored) {
+				proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+			}
 		});
 
-		it('should fail if description property is an empty string', function () {
+		it('should fail if description property is an empty string', async function () {
 			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
 			packageJSON.description = '';
 			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
-			return verifyPackageJson().task()
-				.catch(function (verifiedpackageJson) {
-					proclaim.equal(
-						verifiedpackageJson.message,
-						'Failed linting:\n\n' +
+			let errored;
+			try {
+				await verifyPackageJson().task();
+				errored = false;
+			} catch (error) {
+				errored = true;
+				proclaim.equal(
+					error.message,
+					'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
-					);
-					proclaim.calledOnce(console.log);
-					proclaim.calledWithExactly(
-						console.log,
-						`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
-					);
-				});
+				);
+				proclaim.calledOnce(console.log);
+				proclaim.calledWithExactly(
+					console.log,
+					`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
+				);
+			}
+
+			if (!errored) {
+				proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+			}
 		});
 
-		it('should fail if description property is a string containing only spaces', function () {
+		it('should fail if description property is a string containing only spaces', async function () {
 			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
 			packageJSON.description = '      ';
 			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
-			return verifyPackageJson().task()
-				.catch(function (verifiedpackageJson) {
-					proclaim.equal(
-						verifiedpackageJson.message,
-						'Failed linting:\n\n' +
+			let errored;
+			try {
+				await verifyPackageJson().task();
+				errored = false;
+			} catch (error) {
+				errored = true;
+				proclaim.equal(
+					error.message,
+					'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
-					);
-					proclaim.calledOnce(console.log);
-					proclaim.calledWithExactly(
-						console.log,
-						`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
-					);
-				});
+				);
+				proclaim.calledOnce(console.log);
+				proclaim.calledWithExactly(
+					console.log,
+					`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
+				);
+			}
+
+			if (!errored) {
+				proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+			}
 		});
 
-		it('should fail if missing keywords property', function () {
+		it('should fail if missing keywords property', async function () {
 			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
 			delete packageJSON.keywords;
 			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
-			return verifyPackageJson().task()
-				.catch(function (verifiedpackageJson) {
-					proclaim.equal(
-						verifiedpackageJson.message,
-						'Failed linting:\n\n' +
+			let errored;
+			try {
+				await verifyPackageJson().task();
+				errored = false;
+			} catch (error) {
+				errored = true;
+				proclaim.equal(
+					error.message,
+					'Failed linting:\n\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
-					);
-					proclaim.calledOnce(console.log);
-					proclaim.calledWithExactly(
-						console.log,
-						`::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
-					);
-				});
+				);
+				proclaim.calledOnce(console.log);
+				proclaim.calledWithExactly(
+					console.log,
+					`::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
+				);
+			}
+
+			if (!errored) {
+				proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+			}
 		});
 
-		it('should fail if keywords property contains an empty string', function () {
+		it('should fail if keywords property contains an empty string', async function () {
 			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
 			packageJSON.keywords = [''];
 			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
-			return verifyPackageJson().task()
-				.catch(function (verifiedpackageJson) {
-					proclaim.equal(
-						verifiedpackageJson.message,
-						'Failed linting:\n\n' +
+			let errored;
+			try {
+				await verifyPackageJson().task();
+				errored = false;
+			} catch (error) {
+				errored = true;
+				proclaim.equal(
+					error.message,
+					'Failed linting:\n\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
-					);
-					proclaim.calledOnce(console.log);
-					proclaim.calledWithExactly(
-						console.log,
-						`::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
-					);
-				});
+				);
+				proclaim.calledOnce(console.log);
+				proclaim.calledWithExactly(
+					console.log,
+					`::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
+				);
+			}
+
+			if (!errored) {
+				proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+			}
 		});
 
-		it('should fail if keywords property contains a string containing only spaces', function () {
+		it('should fail if keywords property contains a string containing only spaces', async function () {
 			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
 			packageJSON.keywords = ['      '];
 			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
-			return verifyPackageJson().task()
-				.catch(function (verifiedpackageJson) {
-					proclaim.equal(
-						verifiedpackageJson.message,
-						'Failed linting:\n\n' +
+			let errored;
+			try {
+				await verifyPackageJson().task();
+				errored = false;
+			} catch (error) {
+				errored = true;
+				proclaim.equal(
+					error.message,
+					'Failed linting:\n\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
-					);
-					proclaim.calledOnce(console.log);
-					proclaim.calledWithExactly(
-						console.log,
-						`::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
-					);
+				);
+				proclaim.calledOnce(console.log);
+				proclaim.calledWithExactly(
+					console.log,
+					`::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`
+				);
+			}
+
+			if (!errored) {
+				proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+			}
+		});
 				});
 		});
 
