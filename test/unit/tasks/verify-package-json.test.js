@@ -107,14 +107,15 @@ describe('verify-package-json', function () {
 					error.message,
 					'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n' +
-						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
+						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n' +
+						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
 				proclaim.calledOnce(console.log);
 
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					[`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -136,13 +137,14 @@ describe('verify-package-json', function () {
 					error.message,
 					'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n' +
-						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
+						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n' +
+						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
 				proclaim.calledOnce(console.log);
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					[`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -194,8 +196,8 @@ describe('verify-package-json', function () {
 				proclaim.equal(
 					error.message,
 					'Failed linting:\n\n' +
-						'A description property is required. It must be a string which describes the component.\n\n' +
-						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+					'A description property is required. It must be a string which describes the component.\n\n' +
+					'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
 				proclaim.calledOnce(console.log);
 				proclaim.deepStrictEqual(
@@ -223,13 +225,13 @@ describe('verify-package-json', function () {
 				proclaim.equal(
 					error.message,
 					'Failed linting:\n\n' +
-						'A description property is required. It must be a string which describes the component.\n\n' +
-						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+					'A description property is required. It must be a string which describes the component.\n\n' +
+					'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
 				proclaim.calledOnce(console.log);
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					[`::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -252,13 +254,13 @@ describe('verify-package-json', function () {
 				proclaim.equal(
 					error.message,
 					'Failed linting:\n\n' +
-						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
-						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+					'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
+					'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
 				proclaim.calledOnce(console.log);
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					[`::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -281,13 +283,13 @@ describe('verify-package-json', function () {
 				proclaim.equal(
 					error.message,
 					'Failed linting:\n\n' +
-						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
-						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+					'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
+					'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
 				proclaim.calledOnce(console.log);
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					[`::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -310,13 +312,13 @@ describe('verify-package-json', function () {
 				proclaim.equal(
 					error.message,
 					'Failed linting:\n\n' +
-						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
-						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+					'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
+					'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
 				proclaim.calledOnce(console.log);
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					[`::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management`]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -324,6 +326,137 @@ describe('verify-package-json', function () {
 				proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
 			}
 		});
+
+		context('the name property', function(){
+
+			it('should fail if property is missing', async function () {
+				const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+				delete packageJSON.name;
+				fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+				let errored;
+				try {
+					await verifyPackageJson().task();
+					errored = false;
+				} catch (error) {
+					errored = true;
+					proclaim.equal(
+						error.message,
+						'Failed linting:\n\n' +
+						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n\n' +
+						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+					);
+					proclaim.calledOnce(console.log);
+					proclaim.deepStrictEqual(
+						console.log.lastCall.args,
+						["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+					);
+				}
+
+				if (!errored) {
+					proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+				}
+			});
+
+			it('should fail if property contains an empty string', async function () {
+				const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+				packageJSON.name = '';
+				fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+				let errored;
+				try {
+					await verifyPackageJson().task();
+					errored = false;
+				} catch (error) {
+					errored = true;
+					proclaim.equal(
+						error.message,
+						'Failed linting:\n\n' +
+						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n\n' +
+						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+					);
+					proclaim.calledOnce(console.log);
+					proclaim.deepStrictEqual(
+						console.log.lastCall.args,
+						["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+					);
+				}
+
+				if (!errored) {
+					proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+				}
+			});
+
+			it('should fail if property does not conform to the npmjs specification', async function () {
+				const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+				packageJSON.name = '@financial-times/Hello_W@rld!';
+				fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+				let errored;
+				try {
+					await verifyPackageJson().task();
+					errored = false;
+				} catch (error) {
+					errored = true;
+					proclaim.equal(
+						error.message,
+						'Failed linting:\n\n' +
+						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n\n' +
+						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+					);
+					proclaim.calledOnce(console.log);
+					proclaim.deepStrictEqual(
+						console.log.lastCall.args,
+						["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+					);
+				}
+
+				if (!errored) {
+					proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+				}
+			});
+
+			it('should fail if it is not within the `@financial-times` namespace', async function () {
+				const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+				packageJSON.name = 'o-test-component';
+				fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+				let errored;
+				try {
+					await verifyPackageJson().task();
+					errored = false;
+				} catch (error) {
+					errored = true;
+					proclaim.equal(
+						error.message,
+						'Failed linting:\n\n' +
+						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n\n' +
+						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+					);
+					proclaim.calledOnce(console.log);
+					proclaim.deepStrictEqual(
+						console.log.lastCall.args,
+						["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+					);
+				}
+
+				if (!errored) {
+					proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+				}
+			});
+
+			it('should pass if it is within the `@financial-times` namespace and conforms to the npmjs specification', async function () {
+				const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+				packageJSON.name = '@financial-times/o-test-component';
+				fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+				await verifyPackageJson().task();
+				proclaim.notCalled(console.log);
+			});
+
+		});
+
+
 
 	});
 });

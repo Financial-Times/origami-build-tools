@@ -66,6 +66,7 @@
 		"strip-ansi": "^6.0.0",
 		"stylelint": "^13.8.0",
 		"update-notifier": "^4.1.0",
+		"validate-npm-package-name": "^3.0.0",
 		"vfile": "^4.1.1",
 		"vfile-reporter": "^6.0.1"
 	},
