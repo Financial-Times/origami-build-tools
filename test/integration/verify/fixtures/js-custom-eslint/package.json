@@ -1,5 +1,5 @@
 {
-  "name": "js-custom-eslint",
+  "name": "@financial-times/js-custom-eslint",
   "version": "1.0.0",
   "description": "for a fixture",
   "main": "main.js",

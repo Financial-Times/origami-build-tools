@@ -71,7 +71,7 @@ describe('obt verify', function () {
 
 			it('should warn', function () {
 				return execa(obt, ['verify']).then(output => {
-					proclaim.include(output.stdout, 'expected "invalid-readme", got "not-the-component-name"');
+					proclaim.include(output.stdout, 'expected "@financial-times/invalid-readme", got "not-the-component-name"');
 				});
 			});
 		});

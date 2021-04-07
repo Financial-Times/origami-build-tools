@@ -1,4 +1,5 @@
 {
+	"name": "@financial-times/with-npm-dependencies",
 	"type": "module",
 	"dependencies": {
 		"lodash": "*"
