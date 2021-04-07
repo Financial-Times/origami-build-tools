@@ -82,8 +82,8 @@ describe('verify-package-json', function () {
 	describe('task', function () {
 		it('should run package.json check successfully', function () {
 			return verifyPackageJson().task().
-				then(function (verifiedOrigamiJson) {
-					proclaim.equal(verifiedOrigamiJson.length, 0);
+				then(function (verifiedpackageJson) {
+					proclaim.equal(verifiedpackageJson.length, 0);
 				});
 		});
 
@@ -98,9 +98,9 @@ describe('verify-package-json', function () {
 			fs.writeFileSync('package.json', JSON.stringify({}), 'utf8');
 
 			return verifyPackageJson().task()
-				.catch(function (verifiedOrigamiJson) {
+				.catch(function (verifiedpackageJson) {
 					proclaim.equal(
-						verifiedOrigamiJson.message,
+						verifiedpackageJson.message,
 						'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
@@ -124,14 +124,14 @@ describe('verify-package-json', function () {
 		});
 
 		it('should fail if missing description property', function () {
-			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
-			delete origamiJSON.description;
-			fs.writeFileSync('package.json', JSON.stringify(origamiJSON), 'utf8');
+			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+			delete packageJSON.description;
+			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
 			return verifyPackageJson().task()
-				.catch(function (verifiedOrigamiJson) {
+				.catch(function (verifiedpackageJson) {
 					proclaim.equal(
-						verifiedOrigamiJson.message,
+						verifiedpackageJson.message,
 						'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
@@ -145,14 +145,14 @@ describe('verify-package-json', function () {
 		});
 
 		it('should fail if description property is an empty string', function () {
-			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
-			origamiJSON.description = '';
-			fs.writeFileSync('package.json', JSON.stringify(origamiJSON), 'utf8');
+			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+			packageJSON.description = '';
+			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
 			return verifyPackageJson().task()
-				.catch(function (verifiedOrigamiJson) {
+				.catch(function (verifiedpackageJson) {
 					proclaim.equal(
-						verifiedOrigamiJson.message,
+						verifiedpackageJson.message,
 						'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
@@ -166,14 +166,14 @@ describe('verify-package-json', function () {
 		});
 
 		it('should fail if description property is a string containing only spaces', function () {
-			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
-			origamiJSON.description = '      ';
-			fs.writeFileSync('package.json', JSON.stringify(origamiJSON), 'utf8');
+			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+			packageJSON.description = '      ';
+			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
 			return verifyPackageJson().task()
-				.catch(function (verifiedOrigamiJson) {
+				.catch(function (verifiedpackageJson) {
 					proclaim.equal(
-						verifiedOrigamiJson.message,
+						verifiedpackageJson.message,
 						'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
@@ -187,14 +187,14 @@ describe('verify-package-json', function () {
 		});
 
 		it('should fail if missing keywords property', function () {
-			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
-			delete origamiJSON.keywords;
-			fs.writeFileSync('package.json', JSON.stringify(origamiJSON), 'utf8');
+			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+			delete packageJSON.keywords;
+			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
 			return verifyPackageJson().task()
-				.catch(function (verifiedOrigamiJson) {
+				.catch(function (verifiedpackageJson) {
 					proclaim.equal(
-						verifiedOrigamiJson.message,
+						verifiedpackageJson.message,
 						'Failed linting:\n\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
@@ -208,14 +208,14 @@ describe('verify-package-json', function () {
 		});
 
 		it('should fail if keywords property contains an empty string', function () {
-			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
-			origamiJSON.keywords = [''];
-			fs.writeFileSync('package.json', JSON.stringify(origamiJSON), 'utf8');
+			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+			packageJSON.keywords = [''];
+			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
 			return verifyPackageJson().task()
-				.catch(function (verifiedOrigamiJson) {
+				.catch(function (verifiedpackageJson) {
 					proclaim.equal(
-						verifiedOrigamiJson.message,
+						verifiedpackageJson.message,
 						'Failed linting:\n\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
@@ -229,14 +229,14 @@ describe('verify-package-json', function () {
 		});
 
 		it('should fail if keywords property contains a string containing only spaces', function () {
-			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
-			origamiJSON.keywords = ['      '];
-			fs.writeFileSync('package.json', JSON.stringify(origamiJSON), 'utf8');
+			const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+			packageJSON.keywords = ['      '];
+			fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
 			return verifyPackageJson().task()
-				.catch(function (verifiedOrigamiJson) {
+				.catch(function (verifiedpackageJson) {
 					proclaim.equal(
-						verifiedOrigamiJson.message,
+						verifiedpackageJson.message,
 						'Failed linting:\n\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
