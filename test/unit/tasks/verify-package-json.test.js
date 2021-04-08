@@ -11,6 +11,8 @@ sinon.assert.expose(proclaim, {
 const process = require('process');
 const fs = require('fs-extra');
 const path = require('path');
+const denodeify = require('util').promisify;
+const rimraf = denodeify(require('rimraf'));
 
 const obtPath = process.cwd();
 const oTestPath = 'test/unit/fixtures/o-test';
@@ -108,14 +110,15 @@ describe('verify-package-json', function () {
 					'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n' +
-						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n\n' +
+						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n' +
+						'Because the file `main.js` exists, the `browser` property is required. It must have the value `"main.js"`.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
 				proclaim.calledOnce(console.log);
 
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -138,13 +141,14 @@ describe('verify-package-json', function () {
 					'Failed linting:\n\n' +
 						'A description property is required. It must be a string which describes the component.\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n' +
-						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n\n' +
+						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n' +
+						'Because the file `main.js` exists, the `browser` property is required. It must have the value `"main.js"`.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
 				proclaim.calledOnce(console.log);
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -456,7 +460,118 @@ describe('verify-package-json', function () {
 
 		});
 
+		context('the browser property', function(){
+			context('when main.js file exists', function() {
+				it('should fail if property does not exist ', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					delete packageJSON.browser;
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
+					let errored;
+					try {
+						await verifyPackageJson().task();
+						errored = false;
+					} catch (error) {
+						errored = true;
+						proclaim.equal(
+							error.message,
+							'Failed linting:\n\n' +
+							'Because the file `main.js` exists, the `browser` property is required. It must have the value `"main.js"`.\n\n' +
+							'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+						);
+						proclaim.calledOnce(console.log);
+						proclaim.deepStrictEqual(
+							console.log.lastCall.args,
+							["::error file=package.json,line=1,col=1::Failed linting:%0A%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+						);
+					}
+
+					if (!errored) {
+						proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+					}
+				});
+
+				it('should fail if property does not contain the value `"main.js"', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.browser = "";
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					let errored;
+					try {
+						await verifyPackageJson().task();
+						errored = false;
+					} catch (error) {
+						errored = true;
+						proclaim.equal(
+							error.message,
+							'Failed linting:\n\n' +
+							'Because the file `main.js` exists, the `browser` property is required. It must have the value `"main.js"`.\n\n' +
+							'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+						);
+						proclaim.calledOnce(console.log);
+						proclaim.deepStrictEqual(
+							console.log.lastCall.args,
+							["::error file=package.json,line=1,col=1::Failed linting:%0A%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+						);
+					}
+
+					if (!errored) {
+						proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+					}
+				});
+				it('should pass if property is set to `"main.js"', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.browser = 'main.js';
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					await verifyPackageJson().task();
+					proclaim.notCalled(console.log);
+				});
+			});
+
+			context('when main.js file does not exist', function() {
+				it('should pass if property does not exist ', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					delete packageJSON.browser;
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+					await rimraf(path.join(process.cwd(), 'main.js'));
+
+					await verifyPackageJson().task();
+					proclaim.notCalled(console.log);
+				});
+
+				it('should fail if property exists', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.browser = "";
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+					await rimraf(path.join(process.cwd(), 'main.js'));
+
+					let errored;
+					try {
+						await verifyPackageJson().task();
+						errored = false;
+					} catch (error) {
+						errored = true;
+						proclaim.equal(
+							error.message,
+							'Failed linting:\n\n' +
+							'Because the file `main.js` does not exist, the `browser` property must not be set.\n\n' +
+							'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+						);
+						proclaim.calledOnce(console.log);
+						proclaim.deepStrictEqual(
+							console.log.lastCall.args,
+							["::error file=package.json,line=1,col=1::Failed linting:%0A%0ABecause the file `main.js` does not exist, the `browser` property must not be set.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+						);
+					}
+
+					if (!errored) {
+						proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+					}
+				});
+			});
+
+		});
 
 	});
 });
