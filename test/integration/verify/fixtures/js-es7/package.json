@@ -2,8 +2,6 @@
 	"name": "@financial-times/test-component",
 	"description": "for a fixture",
 	"keywords": [],
-	"main": [
-		"main.js"
-	],
+	"browser": "main.js",
 	"type": "module"
 }
