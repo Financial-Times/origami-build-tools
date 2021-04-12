@@ -88,7 +88,7 @@
 		"eslint-plugin-mocha": "^8.0.0",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-objects": "^1.1.1",
-		"eslint-plugin-promise": "^4.2.1",
+		"eslint-plugin-promise": "^5.1.0",
 		"nixt": "^0.5.1",
 		"node-version": "^2.0.0",
 		"npm-prepublish": "^1.2.3",
