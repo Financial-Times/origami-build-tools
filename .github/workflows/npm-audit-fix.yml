@@ -1,13 +1,13 @@
 name: npm audit fix
 
 on:
- schedule:
-   - cron: 0 0 * * * # Runs at 00:00 UTC every day
+  schedule:
+    - cron: 0 0 * * * # Runs at 00:00 UTC every day
 
 # on:
-#  push:
-#   branches:
-#    - $default-branch
+#   push:
+#     branches:
+#       - master
 
 jobs:
   run:
@@ -18,5 +18,5 @@ jobs:
         with:
           github_token: ${{ secrets.ORIGAMI_GITHUB_TOKEN }}
           # branch: "npm-audit-fix"
-          # default_branch: $default-branch
+          # default_branch: master
           # commit_title: "chore(deps): npm audit fix"
