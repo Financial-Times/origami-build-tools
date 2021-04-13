@@ -19,7 +19,7 @@ const oTestPath = 'test/unit/fixtures/o-test';
 const pathSuffix = '-verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
-describe('verify-package-json', function () {
+describe.only('verify-package-json', function () {
 	let verifyPackageJson;
 	const originalConsole = global.console;
 	let console;
@@ -420,44 +420,73 @@ describe('verify-package-json', function () {
 				}
 			});
 
-			it('should fail if it is not within the `@financial-times` namespace', async function () {
-				const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
-				packageJSON.name = 'o-test-component';
-				fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+			context('the codebase being tested is an origami component', function() {
 
-				let errored;
-				try {
-					await verifyPackageJson().task();
-					errored = false;
-				} catch (error) {
-					errored = true;
-					proclaim.equal(
-						error.message,
-						'Failed linting:\n\n' +
+				it('should fail if it is not within the `@financial-times` namespace', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.name = 'o-test-component';
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					let errored;
+					try {
+						await verifyPackageJson().task();
+						errored = false;
+					} catch (error) {
+						errored = true;
+						proclaim.equal(
+							error.message,
+							'Failed linting:\n\n' +
 						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
-					);
-					proclaim.calledOnce(console.log);
-					proclaim.deepStrictEqual(
-						console.log.lastCall.args,
-						["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
-					);
-				}
+						);
+						proclaim.calledOnce(console.log);
+						proclaim.deepStrictEqual(
+							console.log.lastCall.args,
+							["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+						);
+					}
 
-				if (!errored) {
-					proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
-				}
+					if (!errored) {
+						proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+					}
+				});
+
+				it('should pass if it is within the `@financial-times` namespace and conforms to the npmjs specification', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.name = '@financial-times/o-test-component';
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					await verifyPackageJson().task();
+					proclaim.notCalled(console.log);
+				});
+
 			});
+			context('the codebase being tested is not an origami component', function() {
+				beforeEach(function() {
+					const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
+					origamiJSON.origamiType = 'library';
+					fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
+				});
 
-			it('should pass if it is within the `@financial-times` namespace and conforms to the npmjs specification', async function () {
-				const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
-				packageJSON.name = '@financial-times/o-test-component';
-				fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+				it('should pass if it is not within the `@financial-times` namespace', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.name = 'o-test-component';
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
 
-				await verifyPackageJson().task();
-				proclaim.notCalled(console.log);
+					await verifyPackageJson().task();
+					proclaim.notCalled(console.log);
+				});
+
+				it('should pass if it is within the `@financial-times` namespace and conforms to the npmjs specification', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.name = '@financial-times/o-test-component';
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					await verifyPackageJson().task();
+					proclaim.notCalled(console.log);
+				});
+
 			});
-
 		});
 
 		context('the browser property', function(){
