@@ -19,7 +19,7 @@ const oTestPath = 'test/unit/fixtures/o-test';
 const pathSuffix = '-verify';
 const verifyTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 
-describe.only('verify-package-json', function () {
+describe('verify-package-json', function () {
 	let verifyPackageJson;
 	const originalConsole = global.console;
 	let console;
