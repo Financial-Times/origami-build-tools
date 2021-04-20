@@ -108,6 +108,7 @@ describe('verify-package-json', function () {
 				proclaim.equal(
 					error.message,
 					'Failed linting:\n\n' +
+						'The `type` property is required. It must be the string "module".\n' +
 						'A description property is required. It must be a string which describes the component.\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n' +
 						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n' +
@@ -118,7 +119,7 @@ describe('verify-package-json', function () {
 
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe `type` property is required. It must be the string \"module\".%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -139,6 +140,7 @@ describe('verify-package-json', function () {
 				proclaim.equal(
 					error.message,
 					'Failed linting:\n\n' +
+						'The `type` property is required. It must be the string "module".\n' +
 						'A description property is required. It must be a string which describes the component.\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n' +
 						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n' +
@@ -148,7 +150,7 @@ describe('verify-package-json', function () {
 				proclaim.calledOnce(console.log);
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe `type` property is required. It must be the string \"module\".%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -562,6 +564,80 @@ describe('verify-package-json', function () {
 						proclaim.deepStrictEqual(
 							console.log.lastCall.args,
 							["::error file=package.json,line=1,col=1::Failed linting:%0A%0ABecause the file `main.js` does not exist, the `browser` property must not be set.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+						);
+					}
+
+					if (!errored) {
+						proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+					}
+				});
+			});
+
+		});
+
+		context('the type property', function(){
+			context('when type exists', function() {
+				it('should fail if property is not set to `"module"`', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.type = "carrot";
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					let errored;
+					try {
+						await verifyPackageJson().task();
+						errored = false;
+					} catch (error) {
+						errored = true;
+						proclaim.equal(
+							error.message,
+							'Failed linting:\n\n' +
+							'The `type` property is required. It must be the string "module".\n\n' +
+							'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+						);
+						proclaim.calledOnce(console.log);
+						proclaim.deepStrictEqual(
+							console.log.lastCall.args,
+							["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe `type` property is required. It must be the string \"module\".%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+						);
+					}
+
+					if (!errored) {
+						proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+					}
+				});
+
+				it('should pass if property is set to `"module"', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.type = 'module';
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					await verifyPackageJson().task();
+					proclaim.notCalled(console.log);
+				});
+			});
+
+			context('when type does not exist', function() {
+				it('should fail', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					delete packageJSON.type;
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					let errored;
+					try {
+						await verifyPackageJson().task();
+						errored = false;
+					} catch (error) {
+						errored = true;
+						proclaim.equal(
+							error.message,
+							'Failed linting:\n\n' +
+							'The `type` property is required. It must be the string "module".\n\n' +
+							'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+						);
+						proclaim.calledOnce(console.log);
+						proclaim.deepStrictEqual(
+							console.log.lastCall.args,
+							["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe `type` property is required. It must be the string \"module\".%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 						);
 					}
 

@@ -1,5 +1,6 @@
 {
   "name": "@financial-times/o-test",
+  "type": "module",
   "version": "1.0.0",
   "description": "for a fixture",
 	"keywords": [],
