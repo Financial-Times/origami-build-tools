@@ -13,10 +13,13 @@ const oNoManifestPath = path.resolve(obtPath, 'test/unit/fixtures/o-no-manifest'
 const pathSuffix = '-demo';
 const demoTestPath = path.resolve(obtPath, oTestPath + pathSuffix);
 const demo = require('../../../lib/tasks/demo-build');
+const denodeify = require('util').promisify;
+const rimraf = denodeify(require('rimraf'));
 
 describe('Demo task', function () {
 
-	beforeEach(function () {
+	beforeEach(async function () {
+		await rimraf(demoTestPath);
 		fs.copySync(path.resolve(obtPath, oTestPath), demoTestPath);
 		process.chdir(demoTestPath);
 		mockery.enable({
@@ -26,9 +29,9 @@ describe('Demo task', function () {
 		});
 	});
 
-	afterEach(function () {
+	afterEach(async function () {
 		process.chdir(obtPath);
-		fs.removeSync(demoTestPath);
+		await rimraf(demoTestPath);
 		sinon.restore();
 		mockery.resetCache();
 		mockery.deregisterAll();
