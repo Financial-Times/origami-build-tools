@@ -59,28 +59,6 @@ describe('verify-package-json', function () {
 		});
 	});
 
-	describe('skip', () => {
-		it('should return true if the file does not exist', () => {
-			fs.removeSync(path.join(process.cwd(), '/package.json'));
-			proclaim.ok(verifyPackageJson().skip());
-		});
-
-		it('should return a helpful message if the file does not exist', function() {
-			fs.removeSync(path.join(process.cwd(), '/package.json'));
-			return verifyPackageJson().skip()
-				.then(skipped => {
-					proclaim.equal(skipped, `No package.json file found. To make this an origami component, create a file at ${path.join(process.cwd(), '/package.json')} following the format defined at: https://origami.ft.com/spec/v2/components/#package-management`);
-				});
-		});
-
-		it('should return a falsey value if the file does exist', function () {
-			return verifyPackageJson().skip()
-				.then(skipped => {
-					proclaim.notOk(skipped);
-				});
-		});
-	});
-
 	describe('task', function () {
 		it('should run package.json check successfully', function () {
 			return verifyPackageJson().task().
@@ -90,10 +68,36 @@ describe('verify-package-json', function () {
 		});
 
 		it('should not write to the output a github annotation if package.json has no issues', async () => {
-			// there is no js in the scss folder to verify
-			process.chdir('./src/scss');
 			await verifyPackageJson().task();
 			proclaim.notCalled(console.log);
+		});
+
+		it('should fail if no package.json file exists', async function () {
+			fs.unlinkSync('package.json', JSON.stringify({}), 'utf8');
+
+			let errored;
+			try {
+				await verifyPackageJson().task();
+				errored = false;
+			} catch (error) {
+				errored = true;
+				proclaim.equal(
+					error.message,
+					'Failed linting:\n\n' +
+						'No package.json file found. To make this an origami component, create a package.json file following the format defined at: https://origami.ft.com/spec/v2/components/#package-management\n\n' +
+						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+				);
+				proclaim.calledOnce(console.log);
+
+				proclaim.deepStrictEqual(
+					console.log.lastCall.args,
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0ANo package.json file found. To make this an origami component, create a package.json file following the format defined at: https://origami.ft.com/spec/v2/components/#package-management%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+				);
+			}
+
+			if (!errored) {
+				proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+			}
 		});
 
 		it('should fail with an empty package.json', async function () {
