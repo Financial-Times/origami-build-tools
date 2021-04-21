@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "type": "module",
+  "engines": {
+    "npm": "^7"
+  },
   "devDependencies": {
     "eslint-config-origami-component": "^1.1.1",
     "remark-preset-lint-origami-component": "2.0.0-beta.1",

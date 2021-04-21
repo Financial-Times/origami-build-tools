@@ -3,5 +3,8 @@
 	"description": "for a fixture",
 	"keywords": [],
 	"browser": "main.js",
+	"engines": {
+		"npm": "^7"
+	},
 	"type": "module"
 }

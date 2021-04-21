@@ -4,6 +4,9 @@
   "keywords": [],
   "browser": "main.js",
   "type": "module",
+  "engines": {
+    "npm": "^7"
+  },
   "dependencies": {
     "o-test-component": "1.0.26"
   }
