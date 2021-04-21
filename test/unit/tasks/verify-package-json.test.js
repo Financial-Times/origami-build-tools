@@ -116,6 +116,7 @@ describe('verify-package-json', function () {
 						'A description property is required. It must be a string which describes the component.\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n' +
 						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n' +
+						'The engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.\n' +
 						'Because the file `main.js` exists, the `browser` property is required. It must have the value `"main.js"`.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
@@ -123,7 +124,7 @@ describe('verify-package-json', function () {
 
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe `type` property is required. It must be the string \"module\".%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe `type` property is required. It must be the string \"module\".%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0AThe engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -148,13 +149,14 @@ describe('verify-package-json', function () {
 						'A description property is required. It must be a string which describes the component.\n' +
 						'The keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.\n' +
 						'The name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.\n' +
+						'The engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.\n' +
 						'Because the file `main.js` exists, the `browser` property is required. It must have the value `"main.js"`.\n\n' +
 						'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
 				);
 				proclaim.calledOnce(console.log);
 				proclaim.deepStrictEqual(
 					console.log.lastCall.args,
-					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe `type` property is required. It must be the string \"module\".%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+					["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe `type` property is required. It must be the string \"module\".%0AA description property is required. It must be a string which describes the component.%0AThe keywords property is required. It must be an array. It must contain only strings which relate to the component. It can also be an empty array.%0AThe name property is required. It must be within the `@financial-times` namespace and conform to the npmjs specification at https://docs.npmjs.com/cli/v7/configuring-npm/package-json#name.%0AThe engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.%0ABecause the file `main.js` exists, the `browser` property is required. It must have the value `\"main.js\"`.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 				);
 			}
 
@@ -642,6 +644,137 @@ describe('verify-package-json', function () {
 						proclaim.deepStrictEqual(
 							console.log.lastCall.args,
 							["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe `type` property is required. It must be the string \"module\".%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+						);
+					}
+
+					if (!errored) {
+						proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+					}
+				});
+			});
+
+		});
+
+		context('the engines property', function(){
+			context('when engines exists', function() {
+				it('should fail if missing the npm property', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.engines = "carrot";
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					let errored;
+					try {
+						await verifyPackageJson().task();
+						errored = false;
+					} catch (error) {
+						errored = true;
+						proclaim.equal(
+							error.message,
+							'Failed linting:\n\n' +
+							'The engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.\n\n' +
+							'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+						);
+						proclaim.calledOnce(console.log);
+						proclaim.deepStrictEqual(
+							console.log.lastCall.args,
+							["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+						);
+					}
+
+					if (!errored) {
+						proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+					}
+				});
+				it('should fail if npm property is set to SemVer ranges which allows npm versions below 7', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.engines = {npm: '>=6'};
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					let errored;
+					try {
+						await verifyPackageJson().task();
+						errored = false;
+					} catch (error) {
+						errored = true;
+						proclaim.equal(
+							error.message,
+							'Failed linting:\n\n' +
+							'The engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.\n\n' +
+							'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+						);
+						proclaim.calledOnce(console.log);
+						proclaim.deepStrictEqual(
+							console.log.lastCall.args,
+							["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+						);
+					}
+
+					if (!errored) {
+						proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+					}
+				});
+
+				it('should fail if npm property is not a valid SemVer range', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.engines = {npm: 'penguin'};
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					let errored;
+					try {
+						await verifyPackageJson().task();
+						errored = false;
+					} catch (error) {
+						errored = true;
+						proclaim.equal(
+							error.message,
+							'Failed linting:\n\n' +
+							'The engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.\n\n' +
+							'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+						);
+						proclaim.calledOnce(console.log);
+						proclaim.deepStrictEqual(
+							console.log.lastCall.args,
+							["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
+						);
+					}
+
+					if (!errored) {
+						proclaim.fail('verifyPackageJson().task() did not return a rejected promise', 'verifyPackageJson().task() should have returned a rejected promise');
+					}
+				});
+
+				it('should pass if npm property is set to SemVer ranges which disallows npm versions below 7', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.engines = {'npm': '>=7'};
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					await verifyPackageJson().task();
+					proclaim.notCalled(console.log);
+				});
+			});
+
+			context('when engines does not exist', function() {
+				it('should fail', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					delete packageJSON.engines;
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					let errored;
+					try {
+						await verifyPackageJson().task();
+						errored = false;
+					} catch (error) {
+						errored = true;
+						proclaim.equal(
+							error.message,
+							'Failed linting:\n\n' +
+							'The engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.\n\n' +
+							'The package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management'
+						);
+						proclaim.calledOnce(console.log);
+						proclaim.deepStrictEqual(
+							console.log.lastCall.args,
+							["::error file=package.json,line=1,col=1::Failed linting:%0A%0AThe engines property is required. It must have the npm property set to a SemVer range which disallows versions lower than 7.0.0.%0A%0AThe package.json file does not conform to the specification at https://origami.ft.com/spec/v2/components/#package-management"]
 						);
 					}
 
