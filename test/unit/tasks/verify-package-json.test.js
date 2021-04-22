@@ -535,6 +535,15 @@ describe('verify-package-json', function () {
 					await verifyPackageJson().task();
 					proclaim.notCalled(console.log);
 				});
+
+				it('should pass if property is set to `"./main.js"', async function () {
+					const packageJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
+					packageJSON.browser = './main.js';
+					fs.writeFileSync('package.json', JSON.stringify(packageJSON), 'utf8');
+
+					await verifyPackageJson().task();
+					proclaim.notCalled(console.log);
+				});
 			});
 
 			context('when main.js file does not exist', function() {
