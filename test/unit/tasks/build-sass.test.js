@@ -48,7 +48,7 @@ describe('Build Sass', function () {
 
 	it('should build from custom source', function () {
 		return build({
-			sass: './src/scss/test.scss'
+			sass: path.join(process.cwd(), './src/scss/test.scss')
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/main.css', 'utf8');
