@@ -42,7 +42,7 @@ describe('build-js', function () {
 
 	it('should build from custom source', function () {
 		return build({
-			js: './src/js/test.js'
+			js: path.join(process.cwd(), './src/js/test.js')
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
