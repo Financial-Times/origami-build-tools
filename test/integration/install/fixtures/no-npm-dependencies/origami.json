@@ -1,7 +1,7 @@
 {
     "description": "fixture, no-dependencies",
     "keywords": [],
-    "origamiType": "module",
+    "origamiType": "component",
     "origamiCategory": "components",
     "origamiVersion": "2.0",
     "brands": [],

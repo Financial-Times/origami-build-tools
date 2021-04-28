@@ -1,7 +1,7 @@
 {
     "description": "fixture, non-existent-npm-dependency",
     "keywords": [],
-    "origamiType": "module",
+    "origamiType": "component",
     "origamiCategory": "components",
     "origamiVersion": "2.0",
     "brands": [],
