@@ -20,7 +20,7 @@
         "js": "demos/src/demo.js",
         "sass": "demos/src/demo.scss",
         "dependencies": [
-            "o-fonts@^4.0.0"
+            "@financial-times/o-fonts@5.0.0-1"
         ]
     },
     "demos": [
