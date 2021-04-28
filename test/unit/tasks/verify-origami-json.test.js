@@ -102,9 +102,9 @@ describe('verify-origami-json', function () {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
-						'The origamiType property needs to be set to either "component", "module", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null\n' +
+						'The origamiType property needs to be set to either "component", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null\n' +
 						'The origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.\n' +
-						'The support property must be an email or url to an issue tracker for this module\n' +
+						'The support property must be an email or url to an issue tracker for this project\n' +
 						'The supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"\n\n' +
 						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
 					);
@@ -120,7 +120,7 @@ describe('verify-origami-json', function () {
 				proclaim.calledOnce(console.log);
 				proclaim.calledWithExactly(
 					console.log,
-					`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiType property needs to be set to either "component", "module", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null%0AThe origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.%0AThe support property must be an email or url to an issue tracker for this module%0AThe supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
+					`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiType property needs to be set to either "component", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null%0AThe origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.%0AThe support property must be an email or url to an issue tracker for this project%0AThe supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
 				);
 			}
 		});
@@ -180,7 +180,7 @@ describe('verify-origami-json', function () {
 					proclaim.calledOnce(console.log);
 					proclaim.calledWithExactly(
 						console.log,
-						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiType property needs to be set to either "component", "module", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null%0A'The origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.'%0AThe support property must be an email or url to an issue tracker for this module%0AThe supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
+						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiType property needs to be set to either "component", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null%0A'The origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.'%0AThe support property must be an email or url to an issue tracker for this project%0AThe supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
 					);
 				});
 		});
@@ -195,18 +195,18 @@ describe('verify-origami-json', function () {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
-						'The origamiType property needs to be set to either "component", "module", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null\n\n' +
+						'The origamiType property needs to be set to either "component", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null\n\n' +
 						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
 					);
 					proclaim.calledOnce(console.log);
 					proclaim.calledWithExactly(
 						console.log,
-						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiType property needs to be set to either "component", "module", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
+						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiType property needs to be set to either "component", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
 					);
 				});
 		});
 
-		it('should fail if origamiType property is not "module" or "service" or "imageset"', function () {
+		it('should fail if origamiType property is no or "service" or "imageset"', function () {
 			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.origamiType = '';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
@@ -216,13 +216,13 @@ describe('verify-origami-json', function () {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
-						'The origamiType property needs to be set to either "component", "module", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null\n\n' +
+						'The origamiType property needs to be set to either "component", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null\n\n' +
 						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
 					);
 					proclaim.calledOnce(console.log);
 					proclaim.calledWithExactly(
 						console.log,
-						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiType property needs to be set to either "component", "module", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
+						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiType property needs to be set to either "component", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
 					);
 				});
 		});
@@ -236,7 +236,7 @@ describe('verify-origami-json', function () {
 			proclaim.notCalled(console.log);
 		});
 
-		it('should pass if origamiType property is "module"', async function () {
+		it('should pass if origamiType property i', async function () {
 			const origamiJSON = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'origami.json'), 'utf-8'));
 			origamiJSON.origamiType = 'module';
 			fs.writeFileSync('origami.json', JSON.stringify(origamiJSON), 'utf8');
@@ -349,13 +349,13 @@ describe('verify-origami-json', function () {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
-						'The support property must be an email or url to an issue tracker for this module\n\n' +
+						'The support property must be an email or url to an issue tracker for this project\n\n' +
 						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
 					);
 					proclaim.calledOnce(console.log);
 					proclaim.calledWithExactly(
 						console.log,
-						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe support property must be an email or url to an issue tracker for this module%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
+						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe support property must be an email or url to an issue tracker for this project%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
 					);
 				});
 		});
@@ -370,7 +370,7 @@ describe('verify-origami-json', function () {
 					proclaim.equal(
 						verifiedOrigamiJson.message,
 						'Failed linting:\n\n' +
-						'The support property must be an email or url to an issue tracker for this module\n\n' +
+						'The support property must be an email or url to an issue tracker for this project\n\n' +
 						'The origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/'
 					);
 					proclaim.equal(
@@ -382,7 +382,7 @@ describe('verify-origami-json', function () {
 					proclaim.calledOnce(console.log);
 					proclaim.calledWithExactly(
 						console.log,
-						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiType property needs to be set to either "component", "module", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null%0AThe origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.%0AThe support property must be an email or url to an issue tracker for this module%0AThe supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
+						`::error file=origami.json,line=1,col=1::Failed linting:%0A%0AThe origamiType property needs to be set to either "component", "imageset", "service", "cli", "library", "website", "config", "example", "meta", or null%0AThe origamiVersion property needs to be set to "2.0" or higher, this version of Origami Build tools only supports v2 of the Origami component specification.%0AThe support property must be an email or url to an issue tracker for this project%0AThe supportStatus property must be set to either "active", "maintained", "deprecated", "dead" or "experimental"%0A%0AThe origami.json file does not conform to the specification at http://origami.ft.com/docs/syntax/origamijson/`
 					);
 				});
 		});
