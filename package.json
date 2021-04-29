@@ -23,7 +23,7 @@
 		"chalk": "^4.1.1",
 		"chokidar": "^3.5.1",
 		"colors": "^1.4.0",
-		"create-origami-component": "^1.0.0-beta.2",
+		"create-origami-component": "^1.0.0-beta.3",
 		"deglob": "^4.0.1",
 		"esbuild": "^0.11.13",
 		"eslint": "^7.24.0",
