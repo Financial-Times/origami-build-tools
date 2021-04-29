@@ -2,7 +2,6 @@
 	"description": "a fixture to test the demo command of origami-build-tools",
 	"keywords": [],
 	"origamiType": "component",
-	"origamiCategory": "components",
 	"origamiVersion": "2.0",
 	"brands": ["master"],
 	"support": "https://github.com/Financial-Times/o-multiple-demos/issues",

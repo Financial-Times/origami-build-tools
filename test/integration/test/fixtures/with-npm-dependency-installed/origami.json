@@ -2,7 +2,6 @@
     "description": "fixture, with-npm-dependency-installed",
     "keywords": [],
     "origamiType": "component",
-    "origamiCategory": "components",
     "origamiVersion": "2.0",
     "brands": [],
     "support": "https://github.com/Financial-Times/o-example/issues",
