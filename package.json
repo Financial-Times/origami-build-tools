@@ -99,5 +99,9 @@
 		"test:unit": "make test-unit",
 		"test:integration": "make test-integration"
 	},
-	"snyk": true
+	"snyk": true,
+	"volta": {
+		"node": "12.22.1",
+		"npm": "7.11.2"
+	}
 }
