@@ -55,7 +55,9 @@ describe('run-npm-install', function() {
 		return runNpmInstall()
 			.then(() => {
 				proclaim.calledOnce(commandLine.run);
-				proclaim.calledWithExactly(commandLine.run, 'npm', ['install'], {});
+				proclaim.calledWithExactly(commandLine.run, 'npm', ['install'], {
+  					localDir: sinon.match.string
+				});
 			});
 	});
 
@@ -64,7 +66,9 @@ describe('run-npm-install', function() {
 		return runNpmInstall()
 			.then(() => {
 				proclaim.calledOnce(commandLine.run);
-				sinon.assert.calledWithExactly(commandLine.run, 'npm', ['install'], {});
+				sinon.assert.calledWithExactly(commandLine.run, 'npm', ['install'], {
+  					localDir: sinon.match.string
+				});
 			});
 	});
 
