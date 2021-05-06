@@ -13,7 +13,7 @@ const mkdtemp = promisify(fs.mkdtemp);
 const os = require('os');
 const proclaim = require('proclaim');
 
-describe.only('obt test', function () {
+describe('obt test', function () {
 
 	this.timeout(30 * 1000);
 	let obt;
