@@ -4,12 +4,14 @@ const process = require('process');
 const path = require('path');
 const fileHelpers = require('../lib/helpers/files');
 const karmaSass = require('../lib/plugins/dart-sass-karma');
+const { camelCase } = require('lodash');
 
 module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 	return Promise.all([fileHelpers.getComponentName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
 		const moduleName = values[0];
 		const brands = values[1];
 		const mainScssContent = values[2];
+		const primaryMixinName = camelCase(moduleName);
 		return {
 			// enable / disable watching file and executing tests whenever any file changes
 			autoWatch: false,
@@ -109,7 +111,7 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 			scssPreprocessor: {
 				options: {
 					file: '',
-					data: `$system-code: "origami-build-tools";${brands.length ? `$o-brand: ${brands[0]};` : ''}$${moduleName}-is-silent: false; ${mainScssContent}`,
+					data: `$system-code: "origami-build-tools";${brands.length ? `$o-brand: ${brands[0]};` : ''}${mainScssContent}@if mixin-exists('${primaryMixinName}') {@include ${primaryMixinName}();};`,
 					includePaths: fileHelpers.getSassIncludePaths(process.cwd(), opts)
 				}
 			},

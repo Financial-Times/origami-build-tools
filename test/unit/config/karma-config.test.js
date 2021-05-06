@@ -10,7 +10,12 @@ const process = require('process');
 
 describe('base karma config', () => {
 	const mockName = 'o-karma-test';
-	const mockScss = 'boby:after{content:"hello"}';
+	const mockPrimaryMixinName = 'oKarmaTest';
+	const mockScss = `@mixin ${mockPrimaryMixinName} {
+		body {
+			background-color: hotpink;
+		}
+	};`;
 
 	beforeEach(() => {
 		const getComponentNameMock = sinon.stub(fileHelpers, 'getComponentName');
@@ -30,12 +35,12 @@ describe('base karma config', () => {
 		fileHelpers.readIfExists.restore();
 	});
 
-	it('includes component scss with a silent mode variable set to false', () => {
+	it('includes component scss with a primary mixin include', () => {
 		return getBaseKarmaConfig().then(actualConfig => {
 			const actualScssConfig = actualConfig.scssPreprocessor.options.data;
 			proclaim.equal(
 				actualScssConfig,
-				`$system-code: "origami-build-tools";$o-brand: master;$${mockName}-is-silent: false; ${mockScss}`
+				`$system-code: "origami-build-tools";$o-brand: master;$${mockName}-is-silent: false; ${mockScss}@include ${mockPrimaryMixinName}();`
 			);
 		});
 	});

@@ -61,18 +61,6 @@ describe('Files helper', function () {
 		});
 	});
 
-	it('should check if the module supports silent mode', function () {
-		fs.writeFileSync('package.json', JSON.stringify({
-			name: 'o-test'
-		}), 'utf8');
-		return files.getSassFilesList()
-			.then(files.sassSupportsSilent)
-			.then(function (supportsSilent) {
-				proclaim.equal(supportsSilent, true);
-				fs.unlinkSync(path.resolve(filesTestPath, 'package.json'));
-			});
-	});
-
 	describe('Main files', function () {
 		beforeEach(function () {
 			fs.writeFileSync('package.json', JSON.stringify({
