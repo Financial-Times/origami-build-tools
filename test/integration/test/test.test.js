@@ -7,36 +7,90 @@ const path = require('path');
 const process = require('process');
 const rimraf = require('../helpers/delete');
 const obtBinPath = require('../helpers/obtpath');
+const fs = require('fs');
+const { promisify } = require('util');
+const mkdtemp = promisify(fs.mkdtemp);
+const os = require('os');
+const proclaim = require('proclaim');
 
-describe('obt test', function () {
+describe.only('obt test', function () {
 
-	this.timeout(10 * 1000);
-	const npmPath = path.join(__dirname, '/fixtures/with-npm-dependency-installed');
+	this.timeout(30 * 1000);
+	let obt;
+	let testDirectory;
 
-	before(function () {
-		return obtBinPath()
-			.then((obt) => {
-				// Install npm fixtures.
-				process.chdir(npmPath);
-				return execa(obt, ['install']);
-			});
+	beforeEach(async function () {
+		obt = await obtBinPath();
+		testDirectory = await mkdtemp(path.join(os.tmpdir(), 'obt-test-'));
+		process.chdir(testDirectory);
 	});
 
-	after(function () {
-		// Clear installs and correct path.
-		return rimraf(path.join(npmPath, '/node_modules'))
-			.then(() => process.chdir(process.cwd()));
+	afterEach(async function () {
+		process.chdir(process.cwd());
+		await rimraf(testDirectory);
 	});
 
-	it('passes Sass compilation tests for a component installed via npm', function () {
-		process.chdir(npmPath);
+	describe('given a valid component', function () {
 
-		return obtBinPath()
-			.then(obt => {
-				return execa(obt, ['test']);
-			})
-			.catch((e) => {
-				throw new Error(`Test command failed: ${e.stdout}`);
-			});
+		beforeEach(async function () {
+			const name = 'o-test-component';
+			const tag = 'v2.2.9';
+			await execa('git', ['clone', '--depth', 1, '--branch', tag, `git@github.com:Financial-Times/${name}.git`, './']);
+			await execa(obt, ['install']);
+		});
+
+		it('passes', async function () {
+			try {
+				await execa(obt, ['test']);
+			} catch (error) {
+				throw new Error(`Test command failed: ${error.stdout}`);
+			}
+		});
+	});
+
+	describe('given a component with no primary Sass mixin', function () {
+
+		beforeEach(async function () {
+			const name = 'o-test-component';
+			const tag = 'v2.2.17';
+			await execa('git', ['clone', '--depth', 1, '--branch', tag, `git@github.com:Financial-Times/${name}.git`, './']);
+			await execa(obt, ['install']);
+		});
+
+		it('fails', async function () {
+			try {
+				await execa(obt, ['test']);
+				throw new Error('The test command did not throw an error as expected.');
+			} catch (error) {
+				proclaim.include(
+					error.stdout,
+					'primary mixin',
+					'Failed but with an unexpected error message: ' + error.stdout
+				);
+			}
+		});
+	});
+
+	describe('given a component which outputs CSS by default on @import', function () {
+
+		beforeEach(async function () {
+			const name = 'o-test-component';
+			const tag = 'v2.2.18';
+			await execa('git', ['clone', '--depth', 1, '--branch', tag, `git@github.com:Financial-Times/${name}.git`, './']);
+			await execa(obt, ['install']);
+		});
+
+		it('fails', async function () {
+			try {
+				await execa(obt, ['test']);
+				throw new Error('The test command did not throw an error as expected.');
+			} catch (error) {
+				proclaim.include(
+					error.stdout,
+					'CSS was output by default',
+					'Failed but with an unexpected error message: ' + error.stdout
+				);
+			}
+		});
 	});
 });
