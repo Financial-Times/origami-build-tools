@@ -106,7 +106,7 @@ Runs JavaScript and Sass tests.
 
 * If `--debug` is set, the test runner will not exit automatically to allow debugging of the tests.
 
-Checks Sass supports [includes a primary mixin](https://origami.ft.com/spec/v2/components/sass/#primary-mixin).
+Checks Sass [includes a primary mixin](https://origami.ft.com/spec/v2/components/sass/#primary-mixin).
 If `pa11y.html` demo exists, confirms it is accessible using [Pa11y](http://pa11y.org/).
 Runs tests using [Karma](https://karma-runner.github.io) defaulting to Chrome Stable, can be configured to use BrowserStack by using the `--browserstack` flag. You will need the environment variables `BROWSER_STACK_USERNAME` and `BROWSER_STACK_ACCESS_KEY` set. This will run the tests on the minimum version for enhanced experience based on the [FT Browser Support Policy[(https://docs.google.com/document/d/1mByh6sT8zI4XRyPKqWVsC2jUfXHZvhshS5SlHErWjXU).
 
