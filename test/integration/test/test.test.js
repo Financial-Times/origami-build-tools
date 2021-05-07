@@ -35,7 +35,7 @@ describe('obt test', function () {
 		beforeEach(async function () {
 			const name = 'o-test-component';
 			const tag = 'v2.2.9';
-			await execa('git', ['clone', '--depth', 1, '--branch', tag, `git@github.com:Financial-Times/${name}.git`, './']);
+			await execa('git', ['clone', '--depth', 1, '--branch', tag, `https://github.com/Financial-Times/${name}.git`, './']);
 			await execa(obt, ['install']);
 		});
 
@@ -53,7 +53,7 @@ describe('obt test', function () {
 		beforeEach(async function () {
 			const name = 'o-test-component';
 			const tag = 'v2.2.17';
-			await execa('git', ['clone', '--depth', 1, '--branch', tag, `git@github.com:Financial-Times/${name}.git`, './']);
+			await execa('git', ['clone', '--depth', 1, '--branch', tag, `https://github.com/Financial-Times/${name}.git`, './']);
 			await execa(obt, ['install']);
 		});
 
@@ -76,7 +76,7 @@ describe('obt test', function () {
 		beforeEach(async function () {
 			const name = 'o-test-component';
 			const tag = 'v2.2.18';
-			await execa('git', ['clone', '--depth', 1, '--branch', tag, `git@github.com:Financial-Times/${name}.git`, './']);
+			await execa('git', ['clone', '--depth', 1, '--branch', tag, `https://github.com/Financial-Times/${name}.git`, './']);
 			await execa(obt, ['install']);
 		});
 
