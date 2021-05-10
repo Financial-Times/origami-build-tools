@@ -36,11 +36,13 @@ describe('obt test', function () {
 			const tag = 'v2.2.9';
 			await execa('git', ['clone', '--depth', 1, '--branch', tag, `https://github.com/Financial-Times/${name}.git`, './']);
 			await execa(obt, ['install']);
+			await execa('pwd', {stdout: 'inherit'});
+			await execa('ls', ['test'], {stdout: 'inherit'});
 		});
 
 		it('passes', async function () {
 			try {
-				await execa(obt, ['test']);
+				await execa(obt, ['test'], { stdout: 'inherit' });
 			} catch (error) {
 				throw new Error(`Test command failed: ${error.stdout}`);
 			}
