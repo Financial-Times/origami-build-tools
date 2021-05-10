@@ -107,6 +107,7 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 				'main.scss': ['scss']
 			},
 			esbuild: {
+				logLevel: 'debug',
 				define: {
 					DEBUG: true
 				}
