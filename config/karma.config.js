@@ -106,12 +106,6 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 				'test/**/*.js': ['esbuild', 'babel', 'sourcemap'],
 				'main.scss': ['scss']
 			},
-			esbuild: {
-				logLevel: 'debug',
-				define: {
-					DEBUG: true
-				}
-			},
 			scssPreprocessor: {
 				options: {
 					file: '',
