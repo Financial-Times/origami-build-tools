@@ -7,36 +7,43 @@ const path = require('path');
 const process = require('process');
 const rimraf = require('../helpers/delete');
 const obtBinPath = require('../helpers/obtpath');
+const fs = require('fs');
+const { promisify } = require('util');
+const mkdtemp = promisify(fs.mkdtemp);
+const os = require('os');
 
 describe('obt test', function () {
 
-	this.timeout(10 * 1000);
-	const npmPath = path.join(__dirname, '/fixtures/with-npm-dependency-installed');
+	this.timeout(30 * 1000);
+	let obt;
+	let testDirectory;
 
-	before(function () {
-		return obtBinPath()
-			.then((obt) => {
-				// Install npm fixtures.
-				process.chdir(npmPath);
-				return execa(obt, ['install']);
-			});
+	beforeEach(async function () {
+		obt = await obtBinPath();
+		testDirectory = await mkdtemp(path.join(os.tmpdir(), 'obt-test-'));
+		process.chdir(testDirectory);
 	});
 
-	after(function () {
-		// Clear installs and correct path.
-		return rimraf(path.join(npmPath, '/node_modules'))
-			.then(() => process.chdir(process.cwd()));
+	afterEach(async function () {
+		process.chdir(process.cwd());
+		await rimraf(testDirectory);
 	});
 
-	it('passes Sass compilation tests for a component installed via npm', function () {
-		process.chdir(npmPath);
+	describe('given a valid component', function () {
 
-		return obtBinPath()
-			.then(obt => {
-				return execa(obt, ['test']);
-			})
-			.catch((e) => {
-				throw new Error(`Test command failed: ${e.stdout}`);
-			});
+		beforeEach(async function () {
+			const name = 'o-test-component';
+			const tag = 'v2.2.9';
+			await execa('git', ['clone', '--depth', 1, '--branch', tag, `https://github.com/Financial-Times/${name}.git`, './']);
+			await execa(obt, ['install']);
+		});
+
+		it('passes', async function () {
+			try {
+				await execa(obt, ['test']);
+			} catch (error) {
+				throw new Error(`Test command failed: ${error.stdout}`);
+			}
+		});
 	});
 });
