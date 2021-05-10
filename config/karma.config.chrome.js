@@ -10,7 +10,7 @@ module.exports.getChromeKarmaConfig = function (opts = { sassIncludePaths: [] })
 			karmaBaseConfig,
 			{
 				browsers: ['ChromeHeadless'],
-				logLevel: constants.LOG_DEBUG
+				logLevel: constants.LOG_ERROR
 			}
 		);
 
