@@ -4,13 +4,13 @@
 
 const execa = require('execa');
 const path = require('path');
+const os = require('os');
 const process = require('process');
 const rimraf = require('../helpers/delete');
 const obtBinPath = require('../helpers/obtpath');
 const fs = require('fs');
 const { promisify } = require('util');
 const mkdtemp = promisify(fs.mkdtemp);
-const os = require('os');
 const proclaim = require('proclaim');
 
 describe('obt test', function () {
@@ -21,7 +21,7 @@ describe('obt test', function () {
 
 	beforeEach(async function () {
 		obt = await obtBinPath();
-		testDirectory = await mkdtemp(path.join(os.tmpdir(), 'obt-test-'));
+		testDirectory = await mkdtemp(path.join(os.homedir(), 'obt-test-'));
 		process.chdir(testDirectory);
 	});
 
@@ -43,7 +43,7 @@ describe('obt test', function () {
 			try {
 				await execa(obt, ['test']);
 			} catch (error) {
-				throw new Error(`Test command failed: ${error.stdout}`);
+				throw new Error(`Test command failed: ${error}`);
 			}
 		});
 	});
