@@ -4,13 +4,13 @@
 
 const execa = require('execa');
 const path = require('path');
+const os = require('os');
 const process = require('process');
 const rimraf = require('../helpers/delete');
 const obtBinPath = require('../helpers/obtpath');
 const fs = require('fs');
 const { promisify } = require('util');
 const mkdtemp = promisify(fs.mkdtemp);
-const os = require('os');
 
 describe('obt test', function () {
 
@@ -20,7 +20,7 @@ describe('obt test', function () {
 
 	beforeEach(async function () {
 		obt = await obtBinPath();
-		testDirectory = await mkdtemp(path.join(os.tmpdir(), 'obt-test-'));
+		testDirectory = await mkdtemp(path.join(os.homedir(), 'obt-test-'));
 		process.chdir(testDirectory);
 	});
 
@@ -32,19 +32,15 @@ describe('obt test', function () {
 	describe('given a valid component', function () {
 
 		beforeEach(async function () {
-			const name = 'o-test-component';
-			const tag = 'v2.2.9';
-			await execa('git', ['clone', '--depth', 1, '--branch', tag, `https://github.com/Financial-Times/${name}.git`, './']);
-			await execa(obt, ['install']);
-			await execa('pwd', {stdout: 'inherit'});
-			await execa('ls', ['test'], {stdout: 'inherit'});
+			await execa('git', ['clone', '--depth', '1', '--branch', 'v2.2.9', 'https://github.com/Financial-Times/o-test-component.git', './'], {stdout: 'inherit'});
+			await execa(obt, ['install'], {stdout: 'inherit'});
 		});
 
 		it('passes', async function () {
 			try {
 				await execa(obt, ['test'], { stdout: 'inherit' });
 			} catch (error) {
-				throw new Error(`Test command failed: ${error.stdout}`);
+				throw new Error(`Test command failed: ${error}`);
 			}
 		});
 	});
