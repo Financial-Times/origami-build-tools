@@ -9,9 +9,8 @@ const obtBinPath = require('../helpers/obtpath');
 const rimraf = require('../helpers/delete');
 const fs = require('fs');
 const { promisify } = require('util');
-const mkdtemp = promisify(fs.mkdtemp);
 const writeFile = promisify(fs.writeFile);
-const os = require('os');
+const tmpdir = require('../helpers/tmpdir');
 
 describe('obt verify', function () {
 	let obt;
@@ -92,7 +91,7 @@ describe('obt verify', function () {
 
 
 			it('should error', async function () {
-				const folder = await mkdtemp(path.join(os.tmpdir(), 'foo-'));
+				const folder = await tmpdir('obt-verify-task-');
 				const filePath = path.join(folder, 'testFilesystemCaseSensitivity.txt');
 				await writeFile(path.join(folder, 'testFilesystemCaseSensitivity.txt'), "hello", "utf8");
 				const caseSensitiveFileSystem = fs.existsSync(filePath.toUpperCase());

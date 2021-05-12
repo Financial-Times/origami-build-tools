@@ -5,7 +5,7 @@ const process = require("process");
 const obtBinPath = require("../helpers/obtpath");
 const rimraf = require("../helpers/delete");
 const nixt = require("nixt");
-const uniqueTempDir = require('unique-temp-dir');
+const tmpdir = require('../helpers/tmpdir');
 
 describe("obt boilerplate", function () {
 	this.timeout(10 * 1000);
@@ -13,8 +13,8 @@ describe("obt boilerplate", function () {
 	describe("initialising a new component", function () {
 		describe("obt install && demo && build && verify && test", () => {
 			let testDirectory;
-			beforeEach(function () {
-				testDirectory = uniqueTempDir({create:true});
+			beforeEach(async function () {
+				testDirectory = await tmpdir('obt-init-task-');
 				process.chdir(testDirectory);
 			});
 
