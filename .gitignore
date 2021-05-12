@@ -3,5 +3,5 @@ node_modules
 npm-debug.log*
 .DS_Store
 .editorconfig
-test/integration/demo/fixtures/no-demos/o-component-boilerplate/
+test/integration/tmp/
 ws-*
