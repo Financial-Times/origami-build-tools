@@ -7,7 +7,7 @@ const rimraf = require("../helpers/delete");
 const nixt = require("nixt");
 const tmpdir = require('../helpers/tmpdir');
 
-describe("obt boilerplate", function () {
+describe("obt init", function () {
 	this.timeout(10 * 1000);
 
 	describe("initialising a new component", function () {
