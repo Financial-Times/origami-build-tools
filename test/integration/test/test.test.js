@@ -3,14 +3,10 @@
 'use strict';
 
 const execa = require('execa');
-const path = require('path');
-const os = require('os');
 const process = require('process');
 const rimraf = require('../helpers/delete');
 const obtBinPath = require('../helpers/obtpath');
-const fs = require('fs');
-const { promisify } = require('util');
-const mkdtemp = promisify(fs.mkdtemp);
+const tmpdir = require('../helpers/tmpdir');
 const proclaim = require('proclaim');
 
 describe('obt test', function () {
@@ -21,7 +17,7 @@ describe('obt test', function () {
 
 	beforeEach(async function () {
 		obt = await obtBinPath();
-		testDirectory = await mkdtemp(path.join(os.homedir(), 'obt-test-'));
+		testDirectory = await tmpdir('obt-test-task-');
 		process.chdir(testDirectory);
 	});
 

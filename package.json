@@ -84,8 +84,7 @@
 		"nixt": "^0.5.1",
 		"node-version": "^2.0.0",
 		"npm-prepublish": "^1.2.3",
-		"rimraf": "^3.0.2",
-		"unique-temp-dir": "^1.0.0"
+		"rimraf": "^3.0.2"
 	},
 	"repository": {
 		"type": "git",

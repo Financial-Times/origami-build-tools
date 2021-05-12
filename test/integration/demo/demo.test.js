@@ -7,7 +7,7 @@ const process = require('process');
 const obtBinPath = require('../helpers/obtpath');
 const proclaim = require('proclaim');
 const fileExists = require('../helpers/fileExists');
-const uniqueTempDir = require('unique-temp-dir');
+const tmpdir = require('../helpers/tmpdir');
 const fs = require('fs-extra');
 const rimraf = require("../helpers/delete");
 
@@ -43,12 +43,14 @@ describe('obt demo', function () {
 
 
 	describe('component with multiple demos with the same name', function () {
-		const testDirectory = uniqueTempDir({ create: true });
-		const fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
+		let testDirectory;
+		let fixturesDirectory;
 
-		before(function () {
+		before(async function () {
 			// copy fixture (example component with multiple demos)
 			// to a temporary test directory
+			testDirectory = await tmpdir('obt-demo-task-');
+			fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
 			fs.copySync(fixturesDirectory, testDirectory);
 			process.chdir(testDirectory);
 			// update the demo configuration in origami.json so multiple demos
@@ -88,16 +90,20 @@ describe('obt demo', function () {
 	});
 
 	describe('component with multiple valid demos', function () {
-		const testDirectory = uniqueTempDir({ create: true });
-		const fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
-		const expectedBuiltDemoPath1 = path.resolve(testDirectory, 'demos/local/demo-1.html');
-		const expectedBuiltDemoPath2 = path.resolve(testDirectory, 'demos/local/demo-2.html');
+		let testDirectory;
+		let fixturesDirectory;
+		let expectedBuiltDemoPath1;
+		let expectedBuiltDemoPath2;
 		let builtDemoHtml1 = '';
 		let builtDemoHtml2 = '';
 
-		before(function () {
+		before(async function () {
 			// copy fixture (example component with multiple demos)
 			// to a temporary test directory
+			testDirectory = await tmpdir('obt-demo-task-');
+			fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
+			expectedBuiltDemoPath1 = path.resolve(testDirectory, 'demos/local/demo-1.html');
+			expectedBuiltDemoPath2 = path.resolve(testDirectory, 'demos/local/demo-2.html');
 			fs.copySync(fixturesDirectory, testDirectory);
 			process.chdir(testDirectory);
 			return obtBinPath()
