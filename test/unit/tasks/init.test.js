@@ -10,7 +10,7 @@ sinon.assert.expose(proclaim, {
 	prefix: ''
 });
 
-describe('Boilerplate task', function() {
+describe('Init task', function() {
 	let Listr;
 	let init;
 	let buildBoilerplate;
