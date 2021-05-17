@@ -4,12 +4,15 @@ const process = require('process');
 const path = require('path');
 const fileHelpers = require('../lib/helpers/files');
 const karmaSass = require('../lib/plugins/dart-sass-karma');
+const karmaJavaScript = require('../lib/plugins/bundle-javascript');
+const { camelCase } = require('lodash');
 
 module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 	return Promise.all([fileHelpers.getComponentName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
 		const moduleName = values[0];
 		const brands = values[1];
 		const mainScssContent = values[2];
+		const primaryMixinName = camelCase(moduleName);
 		return {
 			// enable / disable watching file and executing tests whenever any file changes
 			autoWatch: false,
@@ -48,19 +51,19 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 					pattern: 'main.js',
 					watched: true,
 					included: false,
-					served: false
+					served: true
 				},
 				{
 					pattern: 'src/**/*.js',
 					watched: true,
 					included: false,
-					served: false
+					served: true
 				},
 				{
 					pattern: 'src/**/*.scss',
 					watched: true,
 					included: false,
-					served: false
+					served: true
 				},
 			],
 
@@ -71,45 +74,21 @@ module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
 			plugins: [
 				'karma-*',
 				karmaSass,
-				'@financial-times/karma-proclaim'
+				'@financial-times/karma-proclaim',
+				karmaJavaScript
 			],
 
 			// web server port
 			port: 9876,
 
-			// preprocess matching files before serving them to the browser
-			// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-			babelPreprocessor: {
-				options: {
-					presets: [
-						[
-							require.resolve('@babel/preset-env'),
-							{
-								// https://docs.google.com/document/d/1z6kecy_o9qHYIznTmqQ-IJqre72jhfd0nVa4JMsS7Q4/
-								"targets": {
-									"safari": "11",
-									"ios": "9",
-									"ie": "11",
-									"samsung": "9"
-								}
-							}
-						]
-					],
-					configFile: false,
-					envName: 'development',
-					inputSourceMap: true,
-					sourceMaps: 'inline',
-					sourceType: 'script'
-				},
-			},
 			preprocessors: {
-				'test/**/*.js': ['esbuild', 'babel', 'sourcemap'],
+				'**/*.js': ['javascript'],
 				'main.scss': ['scss']
 			},
 			scssPreprocessor: {
 				options: {
 					file: '',
-					data: `$system-code: "origami-build-tools";${brands.length ? `$o-brand: ${brands[0]};` : ''}$${moduleName}-is-silent: false; ${mainScssContent}`,
+					data: `$system-code: "origami-build-tools";${brands.length ? `$o-brand: ${brands[0]};` : ''}${mainScssContent}@if mixin-exists('${primaryMixinName}') {@include ${primaryMixinName}();};`,
 					includePaths: fileHelpers.getSassIncludePaths(process.cwd(), opts)
 				}
 			},
