@@ -15,13 +15,13 @@
 		<script src="{{{oDemoPolyfillUrl}}}"></script>
 	{{/oDemoPolyfillUrl}}
 
-	{{#oDemoComponentScriptPath}}
-		<script src="{{{ oDemoComponentScriptPath }}}" defer></script>
-	{{/oDemoComponentScriptPath}}
-
 	{{#oDemoDependenciesScriptPath}}
 		<script src="{{{ oDemoDependenciesScriptPath }}}" defer></script>
 	{{/oDemoDependenciesScriptPath}}
+
+	{{#oDemoComponentScriptPath}}
+		<script src="{{{ oDemoComponentScriptPath }}}" defer></script>
+	{{/oDemoComponentScriptPath}}
 
 	{{#oDemoDependenciesStylePath}}
 		<link rel="stylesheet" href="{{{.}}}" />
