@@ -48,9 +48,10 @@ describe('Demo task', function () {
 				}, function (err) {
 					proclaim.equal(
 						err.message,
-						'No demos exist in origami.json file. Reference ' +
-						'https://origami.ft.com/spec to help configure demos ' +
-						'for the component.'
+						'No demos exist in the origami.json file. Reference ' +
+						'https://origami.ft.com/docs/manifests/origami-json/ ' +
+						'to configure demos in the component\'s origami.json ' +
+						'manifest file.'
 					);
 					fs.unlinkSync(path.resolve(oNoManifestPath, 'package.json'));
 					process.chdir(demoTestPath);
