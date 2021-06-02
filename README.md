@@ -90,7 +90,7 @@ Creates boilerplate for a new Origami component.
 
 ### `demo` or `d`
 
-Build demos found in the [origami.json manifest](https://origami.ft.com/spec/v1/manifest/#demos).
+Build demos found in the [origami.json manifest](https://origami.ft.com/docs/manifests/origami-json/#demos).
 
 Build a specific demo with the `--demo-filter` option.
 
@@ -98,7 +98,7 @@ Demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `dem
 
 ### `verify` or `v` or `lint` or `l`
 
-Lints JavaScript, Sass and configuration files against [Origami specification](https://origami.ft.com/spec/v1/components/).
+Lints JavaScript, Sass and configuration files ([see Origami code recommendations](https://origami.ft.com/docs/components/code/)).
 
 ### `test` or `t`
 
@@ -106,7 +106,7 @@ Runs JavaScript and Sass tests.
 
 * If `--debug` is set, the test runner will not exit automatically to allow debugging of the tests.
 
-Checks Sass [includes a primary mixin](https://origami.ft.com/spec/v2/components/sass/#primary-mixin).
+Checks Sass [includes a primary mixin](https://origami.ft.com/docs/components/code/#sass).
 If `pa11y.html` demo exists, confirms it is accessible using [Pa11y](http://pa11y.org/).
 Runs tests using [Karma](https://karma-runner.github.io) defaulting to Chrome Stable, can be configured to use BrowserStack by using the `--browserstack` flag. You will need the environment variables `BROWSER_STACK_USERNAME` and `BROWSER_STACK_ACCESS_KEY` set. This will run the tests on the minimum version for enhanced experience based on the [FT Browser Support Policy[(https://docs.google.com/document/d/1mByh6sT8zI4XRyPKqWVsC2jUfXHZvhshS5SlHErWjXU).
 
