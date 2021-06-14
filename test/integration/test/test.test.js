@@ -67,11 +67,52 @@ describe('obt test', function () {
 		});
 	});
 
+	describe('given a library with no primary Sass mixin', function () {
+
+		beforeEach(async function () {
+			const name = 'o-test-component';
+			const tag = 'v2.2.20';
+			await execa('git', ['clone', '--depth', 1, '--branch', tag, `https://github.com/Financial-Times/${name}.git`, './']);
+			await execa(obt, ['install']);
+		});
+
+		it('passes', async function () {
+			try {
+				await execa(obt, ['test']);
+			} catch (error) {
+				throw new Error(`Test command failed: ${error}`);
+			}
+		});
+	});
+
 	describe('given a component which outputs CSS by default on @import', function () {
 
 		beforeEach(async function () {
 			const name = 'o-test-component';
 			const tag = 'v2.2.18';
+			await execa('git', ['clone', '--depth', 1, '--branch', tag, `https://github.com/Financial-Times/${name}.git`, './']);
+			await execa(obt, ['install']);
+		});
+
+		it('fails', async function () {
+			try {
+				await execa(obt, ['test']);
+				throw new Error('The test command did not throw an error as expected.');
+			} catch (error) {
+				proclaim.include(
+					error.stdout,
+					'CSS was output by default',
+					'Failed but with an unexpected error message: ' + error.stdout
+				);
+			}
+		});
+	});
+
+	describe('given a library which outputs CSS by default on @import', function () {
+
+		beforeEach(async function () {
+			const name = 'o-test-component';
+			const tag = 'v2.2.21';
 			await execa('git', ['clone', '--depth', 1, '--branch', tag, `https://github.com/Financial-Times/${name}.git`, './']);
 			await execa(obt, ['install']);
 		});
