@@ -1,5 +1,3 @@
-@import 'src/scss/variables';
-
 /// Output all oMultipleDemos features
 /// @param {Map} $opts - A map of options to configure the output
 /// @access public
@@ -11,11 +9,4 @@
 	.o-multiple-demos {
 		background: #ffffff;
 	}
-}
-
-@if ($o-multiple-demos-is-silent == false) {
-	@include oMultipleDemos();
-
-	// Set to silent again to avoid being output twice
-	$o-multiple-demos-is-silent: true !global;
 }

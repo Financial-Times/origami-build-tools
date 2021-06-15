@@ -18,7 +18,7 @@ describe('build-js', function () {
 	beforeEach(function () {
 		fs.copySync(path.resolve(obtPath, oTestPath), buildTestPath);
 		process.chdir(buildTestPath);
-		fs.writeFileSync('bower.json', JSON.stringify({
+		fs.writeFileSync('package.json', JSON.stringify({
 			name: 'o-test',
 			main: 'main.js'
 		}), 'utf8');
@@ -36,17 +36,17 @@ describe('build-js', function () {
 		return build()
 			.then(function (result) {
 				proclaim.include(result, 'sourceMappingURL');
-				proclaim.include(result, `var name='test';`);
+				proclaim.include(result, `var name = "test";`);
 			});
 	});
 
 	it('should build from custom source', function () {
 		return build({
-			js: './src/js/test.js'
+			js: path.join(process.cwd(), './src/js/test.js')
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, `var name='test';`);
+				proclaim.include(builtJs, `var name = "test";`);
 			});
 	});
 
@@ -56,7 +56,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, `var name='test';`);
+				proclaim.include(builtJs, `var name = "test";`);
 			});
 	});
 
@@ -66,7 +66,7 @@ describe('build-js', function () {
 		})
 			.then(function (builtJs) {
 				proclaim.include(builtJs, 'sourceMappingURL');
-				proclaim.include(builtJs, `var name='test';`);
+				proclaim.include(builtJs, `var name = "test";`);
 			});
 	});
 

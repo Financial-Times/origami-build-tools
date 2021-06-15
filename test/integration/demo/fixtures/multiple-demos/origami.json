@@ -1,9 +1,8 @@
 {
 	"description": "a fixture to test the demo command of origami-build-tools",
 	"keywords": [],
-	"origamiType": "module",
-	"origamiCategory": "components",
-	"origamiVersion": 1,
+	"origamiType": "component",
+	"origamiVersion": "2.0",
 	"brands": ["master"],
 	"support": "https://github.com/Financial-Times/o-multiple-demos/issues",
 	"supportContact": {
@@ -20,7 +19,7 @@
         "js": "demos/src/demo.js",
         "sass": "demos/src/demo.scss",
         "dependencies": [
-            "o-fonts@^4.0.0"
+            "@financial-times/o-fonts@5.0.0-1"
         ]
     },
     "demos": [

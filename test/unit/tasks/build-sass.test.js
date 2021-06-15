@@ -26,9 +26,14 @@ describe('Build Sass', function () {
 	beforeEach(function () {
 		fs.copySync(path.resolve(obtPath, oTestPath), buildTestPath);
 		process.chdir(buildTestPath);
-		fs.writeFileSync('bower.json', JSON.stringify({
-			name: 'o-test',
-			main: 'main.scss'
+
+		let mainSassFile = fs.readFileSync('main.scss', 'utf8');
+		mainSassFile = mainSassFile + '@include oTest();';
+
+		fs.writeFileSync('main.scss', mainSassFile, 'utf8');
+
+		fs.writeFileSync('package.json', JSON.stringify({
+			name: 'o-test'
 		}), 'utf8');
 	});
 
@@ -49,7 +54,7 @@ describe('Build Sass', function () {
 
 	it('should build from custom source', function () {
 		return build({
-			sass: './src/scss/test.scss'
+			sass: path.join(process.cwd(), './src/scss/test.scss')
 		})
 			.then(function (result) {
 				const builtCss = fs.readFileSync('build/main.css', 'utf8');

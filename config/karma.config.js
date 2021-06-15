@@ -3,15 +3,16 @@
 const process = require('process');
 const path = require('path');
 const fileHelpers = require('../lib/helpers/files');
+const karmaSass = require('../lib/plugins/dart-sass-karma');
+const karmaJavaScript = require('../lib/plugins/bundle-javascript');
+const { camelCase } = require('lodash');
 
-const karmaScrumple = require('../lib/karma-scrumple');
-const karmaSwc = require('../lib/karma-swc');
-
-module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
-	return Promise.all([fileHelpers.getModuleName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
+module.exports.getBaseKarmaConfig = function (opts = { sassIncludePaths: []}) {
+	return Promise.all([fileHelpers.getComponentName(), fileHelpers.getModuleBrands(), fileHelpers.readIfExists(path.resolve('main.scss'))]).then(values => {
 		const moduleName = values[0];
 		const brands = values[1];
 		const mainScssContent = values[2];
+		const primaryMixinName = camelCase(moduleName);
 		return {
 			// enable / disable watching file and executing tests whenever any file changes
 			autoWatch: false,
@@ -50,19 +51,19 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 					pattern: 'main.js',
 					watched: true,
 					included: false,
-					served: false
+					served: true
 				},
 				{
 					pattern: 'src/**/*.js',
 					watched: true,
 					included: false,
-					served: false
+					served: true
 				},
 				{
 					pattern: 'src/**/*.scss',
 					watched: true,
 					included: false,
-					served: false
+					served: true
 				},
 			],
 
@@ -70,28 +71,24 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 			// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
 			frameworks: ['mocha', 'sinon', 'proclaim'],
 
-			ignoreBower: opts.ignoreBower,
-
 			plugins: [
 				'karma-*',
-				karmaScrumple,
-				karmaSwc,
-				'@financial-times/karma-proclaim'
+				karmaSass,
+				'@financial-times/karma-proclaim',
+				karmaJavaScript
 			],
 
 			// web server port
 			port: 9876,
 
-			// preprocess matching files before serving them to the browser
-			// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 			preprocessors: {
-				'test/**/*.js': ['swc', 'scrumple', 'sourcemap'],
+				'**/*.js': ['javascript'],
 				'main.scss': ['scss']
 			},
 			scssPreprocessor: {
 				options: {
 					file: '',
-					data: `$system-code: "origami-build-tools";${brands.length ? `$o-brand: ${brands[0]};` : ''}$${moduleName}-is-silent: false; ${mainScssContent}`,
+					data: `$system-code: "origami-build-tools";${brands.length ? `$o-brand: ${brands[0]};` : ''}${mainScssContent}@if mixin-exists('${primaryMixinName}') {@include ${primaryMixinName}();};`,
 					includePaths: fileHelpers.getSassIncludePaths(process.cwd(), opts)
 				}
 			},
@@ -102,3 +99,4 @@ module.exports.getBaseKarmaConfig = function (opts = { ignoreBower: false }) {
 		};
 	});
 };
+

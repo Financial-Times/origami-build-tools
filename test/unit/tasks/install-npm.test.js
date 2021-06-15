@@ -3,6 +3,8 @@
 
 const proclaim = require('proclaim');
 const process = require('process');
+const denodeify = require('util').promisify;
+const rimraf = denodeify(require('rimraf'));
 const fs = require('fs-extra');
 const path = require('path');
 const mockery = require('mockery');
@@ -55,31 +57,41 @@ describe('npm-install', function () {
 		mockery.disable();
 	});
 
-	it('has a default title', () => {
+	it('has a default title', function () {
 		proclaim.equal(npmInstall().title, 'Installing NPM components');
 	});
 
-	describe('skip', () => {
-		it('should return true if package.json does not exist', function () {
-			return npmInstall().skip()
-				.then(skipped => {
-					proclaim.ok(skipped);
-				});
+	describe('skip', function () {
+		context('package.json does exist', function () {
+			it('should return a falsey value if package.json does exist', function () {
+				return npmInstall()
+					.skip()
+					.then(skipped => {
+						proclaim.notOk(skipped);
+					});
+			});
 		});
 
-		it('should return a helpful message if package.json does not exist', function () {
-			return npmInstall().skip()
-				.then(skipped => {
-					proclaim.equal(skipped, 'No package.json found.');
-				});
-		});
+		context('package.json does not exist', function () {
+			beforeEach(function () {
+				return rimraf(path.resolve(verifyTestPath, 'package.json'));
+			});
 
-		it('should return a falsey value if package.json does exist', function () {
-			fs.writeFileSync('package.json', '{}');
-			return npmInstall().skip()
-				.then(skipped => {
-					proclaim.notOk(skipped);
-				});
+			it('should return true if package.json does not exist', function () {
+				return npmInstall()
+					.skip()
+					.then(skipped => {
+						proclaim.ok(skipped);
+					});
+			});
+
+			it('should return a helpful message if package.json does not exist', function () {
+				return npmInstall()
+					.skip()
+					.then(skipped => {
+						proclaim.equal(skipped, 'No package.json found.');
+					});
+			});
 		});
 	});
 

@@ -50,21 +50,25 @@ describe('run-npm-install', function() {
 			});
 	});
 
-	it('uses `npm ci` if there is a package-lock.json', () => {
+	it('uses `npm install` if there is a package-lock.json', () => {
 		files.packageLockJsonExists.resolves(true);
 		return runNpmInstall()
 			.then(() => {
 				proclaim.calledOnce(commandLine.run);
-				proclaim.calledWithExactly(commandLine.run, 'npm', ['i'], {});
+				proclaim.calledWithExactly(commandLine.run, 'npm', ['install'], {
+  					localDir: sinon.match.string
+				});
 			});
 	});
 
-	it('uses `npm install --no-shrinkwrap` if there is no package-lock.json', () => {
+	it('uses `npm install` if there is no package-lock.json', () => {
 		files.packageLockJsonExists.resolves(false);
 		return runNpmInstall()
 			.then(() => {
 				proclaim.calledOnce(commandLine.run);
-				sinon.assert.calledWithExactly(commandLine.run, 'npm', ['install', '--no-shrinkwrap'], {});
+				sinon.assert.calledWithExactly(commandLine.run, 'npm', ['install'], {
+  					localDir: sinon.match.string
+				});
 			});
 	});
 

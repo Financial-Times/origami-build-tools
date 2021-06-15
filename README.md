@@ -37,7 +37,7 @@ To preview the components demos run the `dev` command. The `dev` command will au
 
 After making your changes run the linter and check for errors:
 
-`obt verify`
+`obt lint`
 
 Also run the components tests:
 
@@ -59,12 +59,12 @@ Origami Build Tools provides boilerplate for creating up a new Origami component
 		$ obt <command> [<options>]
 
 	Commands
-		install, i    Install npm and bower dependencies required to build the component
-		develop, dev  Build demos locally every time a file changes and run a server to view them
-		demo, d       Build demos into the demos directory
-		init          Initialise a new component with a boilerplate folder structure
-		test, t       Run Origami specification tests and component specific tests
-		verify, v     Check folder and code structure follows Origami specification
+		install, i             Install npm dependencies required to build the component
+		develop, dev           Build demos locally every time a file changes and run a server to view them
+		demo, d                Build demos into the demos directory
+		init                   Initialise a new component with a boilerplate folder structure
+		test, t                Run Origami specification tests and component specific tests
+		verify, v, lint, l     Check folder and code structure follows Origami specification
 
 	Options
 		-h, --help                 Print out this message
@@ -78,7 +78,7 @@ Origami Build Tools provides boilerplate for creating up a new Origami component
 
 ### `install` or `i`
 
-Install npm and bower dependencies required to build components.
+Install npm required to build components.
 
 ### `develop` or `dev`
 
@@ -90,15 +90,15 @@ Creates boilerplate for a new Origami component.
 
 ### `demo` or `d`
 
-Build demos found in the [origami.json manifest](https://origami.ft.com/spec/v1/manifest/#demos).
+Build demos found in the [origami.json manifest](https://origami.ft.com/docs/manifests/origami-json/#demos).
 
 Build a specific demo with the `--demo-filter` option.
 
 Demos consist of HTML, CSS and JS (if Sass & JS exists), and are created in `demos/local/`. These files should not be committed. It is recommended to add _demos/local/_ to your `.gitignore`.
 
-### `verify` or `v`
+### `verify` or `v` or `lint` or `l`
 
-Lints JavaScript, Sass and configuration files against [Origami specification](https://origami.ft.com/spec/v1/components/).
+Lints JavaScript, Sass and configuration files ([see Origami code recommendations](https://origami.ft.com/docs/components/code/)).
 
 ### `test` or `t`
 
@@ -106,9 +106,8 @@ Runs JavaScript and Sass tests.
 
 * If `--debug` is set, the test runner will not exit automatically to allow debugging of the tests.
 
-Checks Sass supports [silent and non-silent compilation modes](https://origami.ft.com/spec/v1/sass/#sass-silent-mode).
+Checks Sass [includes a primary mixin](https://origami.ft.com/docs/components/code/#sass).
 If `pa11y.html` demo exists, confirms it is accessible using [Pa11y](http://pa11y.org/).
-If `package.json` contains a `test` script, confirms it exits with a 0 exit code.
 Runs tests using [Karma](https://karma-runner.github.io) defaulting to Chrome Stable, can be configured to use BrowserStack by using the `--browserstack` flag. You will need the environment variables `BROWSER_STACK_USERNAME` and `BROWSER_STACK_ACCESS_KEY` set. This will run the tests on the minimum version for enhanced experience based on the [FT Browser Support Policy[(https://docs.google.com/document/d/1mByh6sT8zI4XRyPKqWVsC2jUfXHZvhshS5SlHErWjXU).
 
 ## Migration Guides

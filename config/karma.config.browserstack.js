@@ -69,7 +69,7 @@ const customLaunchers = {
 
 const browsers = Object.keys(customLaunchers);
 
-module.exports.getBrowserStackKarmaConfig = function (opts = { ignoreBower: false }) {
+module.exports.getBrowserStackKarmaConfig = function (opts = { sassIncludePaths: [] }) {
 	return getBaseKarmaConfig(opts).then(karmaBaseConfig => {
 		const karmaConfig = Object.assign(
 			{},

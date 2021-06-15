@@ -10,13 +10,18 @@ const process = require('process');
 
 describe('base karma config', () => {
 	const mockName = 'o-karma-test';
-	const mockScss = 'boby:after{content:"hello"}';
+	const mockPrimaryMixinName = 'oKarmaTest';
+	const mockScss = `@mixin ${mockPrimaryMixinName} {
+		body {
+			background-color: hotpink;
+		}
+	};`;
 
 	beforeEach(() => {
-		const getModuleNameMock = sinon.stub(fileHelpers, 'getModuleName');
+		const getComponentNameMock = sinon.stub(fileHelpers, 'getComponentName');
 		const readIfExistsMock = sinon.stub(fileHelpers, 'readIfExists');
 
-		getModuleNameMock.returns(new Promise((resolve) => {
+		getComponentNameMock.returns(new Promise((resolve) => {
 			resolve(mockName);
 		}));
 
@@ -26,33 +31,22 @@ describe('base karma config', () => {
 	});
 
 	afterEach(() => {
-		fileHelpers.getModuleName.restore();
+		fileHelpers.getComponentName.restore();
 		fileHelpers.readIfExists.restore();
 	});
 
-	it('includes component scss with a silent mode variable set to false', () => {
+	it('includes component scss with a primary mixin include', () => {
 		return getBaseKarmaConfig().then(actualConfig => {
 			const actualScssConfig = actualConfig.scssPreprocessor.options.data;
 			proclaim.equal(
 				actualScssConfig,
-				`$system-code: "origami-build-tools";$${mockName}-is-silent: false; ${mockScss}`
+				`$system-code: "origami-build-tools";$o-brand: master;${mockScss}@if mixin-exists('${mockPrimaryMixinName}') {@include ${mockPrimaryMixinName}();};`
 			);
 		});
 	});
 
-	it('includes only bower scss paths by default', () => {
+	it('includes only npm scss paths', () => {
 		return getBaseKarmaConfig().then(actualConfig => {
-			const actual = actualConfig.scssPreprocessor.options.includePaths;
-			const expected = [
-				process.cwd(),
-				path.resolve(process.cwd(), `bower_components`)
-			];
-			proclaim.deepEqual(actual, expected);
-		});
-	});
-
-	it('includes only npm scss paths when "ignoreBower" is true', () => {
-		return getBaseKarmaConfig({ ignoreBower: true }).then(actualConfig => {
 			const actual = actualConfig.scssPreprocessor.options.includePaths;
 			const expected = [
 				process.cwd(),

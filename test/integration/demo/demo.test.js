@@ -7,7 +7,7 @@ const process = require('process');
 const obtBinPath = require('../helpers/obtpath');
 const proclaim = require('proclaim');
 const fileExists = require('../helpers/fileExists');
-const uniqueTempDir = require('unique-temp-dir');
+const tmpdir = require('../helpers/tmpdir');
 const fs = require('fs-extra');
 const rimraf = require("../helpers/delete");
 
@@ -43,12 +43,14 @@ describe('obt demo', function () {
 
 
 	describe('component with multiple demos with the same name', function () {
-		const testDirectory = uniqueTempDir({ create: true });
-		const fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
+		let testDirectory;
+		let fixturesDirectory;
 
-		before(function () {
+		before(async function () {
 			// copy fixture (example component with multiple demos)
 			// to a temporary test directory
+			testDirectory = await tmpdir('obt-demo-task-');
+			fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
 			fs.copySync(fixturesDirectory, testDirectory);
 			process.chdir(testDirectory);
 			// update the demo configuration in origami.json so multiple demos
@@ -88,16 +90,20 @@ describe('obt demo', function () {
 	});
 
 	describe('component with multiple valid demos', function () {
-		const testDirectory = uniqueTempDir({ create: true });
-		const fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
-		const expectedBuiltDemoPath1 = path.resolve(testDirectory, 'demos/local/demo-1.html');
-		const expectedBuiltDemoPath2 = path.resolve(testDirectory, 'demos/local/demo-2.html');
+		let testDirectory;
+		let fixturesDirectory;
+		let expectedBuiltDemoPath1;
+		let expectedBuiltDemoPath2;
 		let builtDemoHtml1 = '';
 		let builtDemoHtml2 = '';
 
-		before(function () {
+		before(async function () {
 			// copy fixture (example component with multiple demos)
 			// to a temporary test directory
+			testDirectory = await tmpdir('obt-demo-task-');
+			fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
+			expectedBuiltDemoPath1 = path.resolve(testDirectory, 'demos/local/demo-1.html');
+			expectedBuiltDemoPath2 = path.resolve(testDirectory, 'demos/local/demo-2.html');
 			fs.copySync(fixturesDirectory, testDirectory);
 			process.chdir(testDirectory);
 			return obtBinPath()
@@ -186,11 +192,11 @@ describe('obt demo', function () {
 
 		it('should include a request to the Origami Build Service in demo markup for demo dependencies', function () {
 			// demo dependency css
-			proclaim.include(builtDemoHtml1, '<link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v2/bundles/css?modules=o-fonts@^4.0.0" />');
-			proclaim.include(builtDemoHtml2, '<link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v2/bundles/css?modules=o-fonts@^4.0.0" />');
+			proclaim.include(builtDemoHtml1, '<link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v3/bundles/css?system_code=origami-registry-ui&components=@financial-times/o-fonts@5.0.0-1" />');
+			proclaim.include(builtDemoHtml2, '<link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v3/bundles/css?system_code=origami-registry-ui&components=@financial-times/o-fonts@5.0.0-1" />');
 			// demo dependency js
-			proclaim.include(builtDemoHtml1, 'https://www.ft.com/__origami/service/build/v2/bundles/js?modules=o-fonts@^4.0.0');
-			proclaim.include(builtDemoHtml2, 'https://www.ft.com/__origami/service/build/v2/bundles/js?modules=o-fonts@^4.0.0');
+			proclaim.include(builtDemoHtml1, 'https://www.ft.com/__origami/service/build/v3/bundles/js?system_code=origami-registry-ui&components=@financial-times/o-fonts@5.0.0-1');
+			proclaim.include(builtDemoHtml2, 'https://www.ft.com/__origami/service/build/v3/bundles/js?system_code=origami-registry-ui&components=@financial-times/o-fonts@5.0.0-1');
 		});
 
 		it('should build demo css', function () {
@@ -223,7 +229,7 @@ describe('obt demo', function () {
 		it('should build demo javascript', function () {
 			const expectedBuiltJsPath1 = path.resolve(testDirectory, 'demos/local/demo.js');
 			const expectedBuiltJsPath2 = path.resolve(testDirectory, 'demos/local/demo-2.js');
-			const expectedJsInDemo1 = 'oMultipleDemos.init()';
+			const expectedJsInDemo1 = 'oMultipleDemos';
 			const expectedJsInDemo2 = 'console.log(demoTwo)';
 			let builtDemoJs1 = '';
 			let builtDemoJs2 = '';
