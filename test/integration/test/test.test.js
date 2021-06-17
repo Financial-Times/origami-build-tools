@@ -135,6 +135,24 @@ describe('obt test', function () {
 				}
 			});
 		});
+
+		describe('with no Sass', function () {
+
+			beforeEach(async function () {
+				const name = 'o-test-component';
+				const tag = 'v2.2.22';
+				await execa('git', ['clone', '--depth', 1, '--branch', tag, `https://github.com/Financial-Times/${name}.git`, './']);
+				await execa(obt, ['install']);
+			});
+
+			it('passes', async function () {
+				try {
+					await execa(obt, ['test']);
+				} catch (error) {
+					throw new Error(`Test command failed: ${error}`);
+				}
+			});
+		});
 	});
 
 });
