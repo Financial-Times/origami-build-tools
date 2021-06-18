@@ -1,7 +1,6 @@
 'use strict';
 
-const denodeify = require('util').promisify;
-const open = denodeify(require('fs-extra').open);
+const open = require('fs/promises').open;
 
 /**
  * Node.JS no longer has an fs.exists method.

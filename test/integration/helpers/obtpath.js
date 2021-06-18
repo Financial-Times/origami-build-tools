@@ -1,10 +1,8 @@
 'use strict';
 
-const denodeify = require('util').promisify;
-const fs = require('fs-extra');
+const { readFile } = require('fs/promises');
 const path = require('path');
 
-const readFile = denodeify(fs.readFile);
 
 module.exports = function obtBin() {
 	return readFile(path.join(__dirname, '../../../package.json'))

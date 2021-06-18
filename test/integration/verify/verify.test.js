@@ -7,10 +7,10 @@ const process = require('process');
 const proclaim = require('proclaim');
 const obtBinPath = require('../helpers/obtpath');
 const rimraf = require('../helpers/delete');
-const fs = require('fs');
-const { promisify } = require('util');
-const writeFile = promisify(fs.writeFile);
+const { writeFile, open } = require('fs/promises');
 const tmpdir = require('../helpers/tmpdir');
+
+const fileExists = file => open(file, 'r').then(() => true).catch(() => false);
 
 describe('obt verify', function () {
 	let obt;
@@ -94,7 +94,7 @@ describe('obt verify', function () {
 				const folder = await tmpdir('obt-verify-task-');
 				const filePath = path.join(folder, 'testFilesystemCaseSensitivity.txt');
 				await writeFile(path.join(folder, 'testFilesystemCaseSensitivity.txt'), "hello", "utf8");
-				const caseSensitiveFileSystem = fs.existsSync(filePath.toUpperCase());
+				const caseSensitiveFileSystem = await fileExists(filePath.toUpperCase());
 				// Do not run this test on case-insensitive filesystems because it will fail.
 				if (!caseSensitiveFileSystem) {
 					return execa(obt, ['verify'])

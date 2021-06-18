@@ -12,22 +12,18 @@ describe('construct-polyfill-url', function() {
 	let globby;
 	let constructPolyfillUrl;
 	let fs;
-	let denodeify;
 	beforeEach(function() {
 		fs = {
 			readFile: sinon.stub()
 		};
 		globby = sinon.stub();
-		denodeify = sinon.stub().returnsArg(0);
 		mockery.enable({
 			useCleanCache: true,
 			warnOnReplace: false,
 			warnOnUnregistered: false
 		});
 
-		mockery.registerMock('fs-extra', fs);
-
-		mockery.registerMock('util', {promisify:denodeify});
+		mockery.registerMock('fs/promises', fs);
 
 		mockery.registerMock('globby', globby);
 
