@@ -7,10 +7,9 @@ const process = require('process');
 const proclaim = require('proclaim');
 const obtBinPath = require('../helpers/obtpath');
 const rimraf = require('../helpers/delete');
-const { writeFile, open } = require('fs/promises');
+const fileExists = require('../helpers/fileExists');
+const { writeFile } = require('fs/promises');
 const tmpdir = require('../helpers/tmpdir');
-
-const fileExists = file => open(file, 'r').then(() => true).catch(() => false);
 
 describe('obt verify', function () {
 	let obt;
