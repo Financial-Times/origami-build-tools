@@ -114,7 +114,7 @@ Runs tests using [Karma](https://karma-runner.github.io) defaulting to Chrome St
 
 State | Major Version | Last Minor Release | Migration guide |
 :---: | :---: | :---: | :---:
-✨ active | 11 | N/A | [migrate to v10](MIGRATION.md#migrating-from-v10-to-v11) |
+✨ active | 11 | N/A | [migrate to v11](MIGRATION.md#migrating-from-v10-to-v11) |
 ⚠ maintained | 10 | N/A | [migrate to v10](MIGRATION.md#migrating-from-v9-to-v10) |
 ╳ deprecated | 9 | 9.0 | [migrate to v9](MIGRATION.md#migrating-from-v8-to-v9) |
 ╳ deprecated | 8 | 8.2 | [migrate to v8](MIGRATION.md#migrating-from-v7-to-v8) |
