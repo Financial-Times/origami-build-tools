@@ -54,7 +54,7 @@
 		"regenerator-runtime": "^0.13.7",
 		"remark": "^13.0.0",
 		"remark-lint": "^8.0.0",
-		"remark-preset-lint-origami-component": "prerelease",
+		"remark-preset-lint-origami-component": "^2.0.0",
 		"root-check": "^1.0.0",
 		"sass": "^1.32.11",
 		"sass-true": "^6.0.1",
