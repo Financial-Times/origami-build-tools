@@ -132,7 +132,7 @@ describe('obt demo', function () {
 					done(new Error('No error was thrown.'));
 				}).catch(e => {
 					try {
-						proclaim.equal(
+						proclaim.include(
 							e.message,
 							`${testDirectory}/demos/src/${brokenDemoConfig.data} is not valid JSON.`
 						);
