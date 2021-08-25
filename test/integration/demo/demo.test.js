@@ -92,20 +92,12 @@ describe('obt demo', function () {
 	describe('demo with bad json', function () {
 		let testDirectory;
 		let fixturesDirectory;
-		let brokenDemoConfig;
 
 		before(async function () {
 			// copy fixture (example component with multiple demos)
 			// to a temporary test directory
 			testDirectory = await tmpdir('obt-demo-task-');
 			fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
-			brokenDemoConfig = {
-				"title": "Data broken",
-				"name": "data-broken",
-				"template": "demos/src/demo-1.mustache",
-				"description": "This demo has broken data",
-				"data": "demos/src/data-broken.json"
-			};
 			fs.copySync(fixturesDirectory, testDirectory);
 			process.chdir(testDirectory);
 			// update the demo configuration in origami.json so multiple demos
@@ -113,7 +105,13 @@ describe('obt demo', function () {
 			const testManifestPath = path.resolve(testDirectory, 'origami.json');
 			const testManifestContent = fs.readFileSync(testManifestPath);
 			const testManifest = JSON.parse(testManifestContent);
-			testManifest.demos.push(brokenDemoConfig);
+			testManifest.demos.push({
+				"title": "Data broken",
+				"name": "data-broken",
+				"template": "demos/src/demo-1.mustache",
+				"description": "This demo has broken data",
+				"data": "demos/src/data-broken.json"
+			});
 			fs.writeFileSync(testManifestPath, JSON.stringify(testManifest));
 		});
 
@@ -134,7 +132,7 @@ describe('obt demo', function () {
 					try {
 						proclaim.include(
 							e.message,
-							`${testDirectory}/demos/src/${brokenDemoConfig.data} is not valid JSON.`
+							`is not valid JSON.`
 						);
 					} catch(e) {
 						done(e);
