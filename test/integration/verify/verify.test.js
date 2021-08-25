@@ -26,6 +26,70 @@ describe('obt verify', function () {
 			.then(() => process.chdir(process.cwd()));
 	});
 
+	describe.only('npmignore', function () {
+		describe('component with no-npmignore', function () {
+			beforeEach(function () {
+				// Change the current working directory to the folder which contains the project we are testing against.
+				// We are doing this to replicate how obt is used when executed inside a terminal.
+				process.chdir(path.join(__dirname, '/fixtures/no-npmignore'));
+				// Install dependencies.
+				return obtBinPath()
+					.then(obtPath => {
+						obt = obtPath;
+						return execa(obt, ['install']);
+					});
+			});
+
+			it('should not error', function () {
+				return execa(obt, ['verify']);
+			});
+		});
+
+		describe('component with good npmignore', function () {
+			beforeEach(function () {
+				// Change the current working directory to the folder which contains the project we are testing against.
+				// We are doing this to replicate how obt is used when executed inside a terminal.
+				process.chdir(path.join(__dirname, '/fixtures/npmignore'));
+				// Install dependencies.
+				return obtBinPath()
+					.then(obtPath => {
+						obt = obtPath;
+						return execa(obt, ['install']);
+					});
+			});
+
+			it('should not error', function () {
+				return execa(obt, ['verify']);
+			});
+		});
+
+		describe('component with bad npmignore', function () {
+			beforeEach(function () {
+				// Change the current working directory to the folder which contains the project we are testing against.
+				// We are doing this to replicate how obt is used when executed inside a terminal.
+				process.chdir(path.join(__dirname, '/fixtures/npmignore-invalid'));
+				// Install dependencies.
+				return obtBinPath()
+					.then(obtPath => {
+						obt = obtPath;
+						return execa(obt, ['install']);
+					});
+			});
+
+			it('should not error', function () {
+				return execa(obt, ['verify']).then(() => {
+					throw new Error('obt verify should error.');
+				}, output => {
+					// obt verify exited with a non-zero exit code, which is what we expected.
+					proclaim.include(output.stdout, 'main.js');
+					proclaim.include(output.stdout, 'main.scss');
+					proclaim.include(output.stdout, 'demos');
+					proclaim.include(output.stdout, 'src');
+				});
+			});
+		});
+	});
+
 	describe('readme', function () {
 		describe('component with no readme', function () {
 
