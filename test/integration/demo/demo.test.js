@@ -89,6 +89,59 @@ describe('obt demo', function () {
 		});
 	});
 
+	describe('demo with bad json', function () {
+		let testDirectory;
+		let fixturesDirectory;
+
+		before(async function () {
+			// copy fixture (example component with multiple demos)
+			// to a temporary test directory
+			testDirectory = await tmpdir('obt-demo-task-');
+			fixturesDirectory = path.resolve(__dirname, 'fixtures/multiple-demos');
+			fs.copySync(fixturesDirectory, testDirectory);
+			process.chdir(testDirectory);
+			// update the demo configuration in origami.json so multiple demos
+			// have the same name
+			const testManifestPath = path.resolve(testDirectory, 'origami.json');
+			const testManifestContent = fs.readFileSync(testManifestPath);
+			const testManifest = JSON.parse(testManifestContent);
+			testManifest.demos.push({
+				"title": "Data broken",
+				"name": "data-broken",
+				"template": "demos/src/demo-1.mustache",
+				"description": "This demo has broken data",
+				"data": "demos/src/data-broken.json"
+			});
+			fs.writeFileSync(testManifestPath, JSON.stringify(testManifest));
+		});
+
+		after(function () {
+			// remove temporary test directory
+			process.chdir(process.cwd());
+			return rimraf(testDirectory);
+		});
+
+		it('should error', function (done) {
+			// Run obt demo
+			obtBinPath()
+				.then(obt => {
+					return execa(obt, ['demo']);
+				}).then(() => {
+					done(new Error('No error was thrown.'));
+				}).catch(e => {
+					try {
+						proclaim.include(
+							e.message,
+							`is not valid JSON.`
+						);
+					} catch(e) {
+						done(e);
+					}
+					done();
+				});
+		});
+	});
+
 	describe('component with multiple valid demos', function () {
 		let testDirectory;
 		let fixturesDirectory;
