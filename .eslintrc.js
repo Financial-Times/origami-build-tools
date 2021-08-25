@@ -3,7 +3,7 @@
 module.exports = {
 	"extends": "origami-component",
 	"parserOptions": {
-		"ecmaVersion": 2017,
+		"ecmaVersion": 2019,
 		"sourceType": "script"
 	},
 	"env": {
